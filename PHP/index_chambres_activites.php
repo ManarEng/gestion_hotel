@@ -32,7 +32,7 @@ if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la bas
         <!--this script is for social medio icons-->
         <script src="https://kit.fontawesome.com/fe1484d902.js" crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="/CSS/styles_chambres.css">
+        <link rel="stylesheet" href="/CSS/styles_chambres_activites.css">
 
     </head>
     <body>

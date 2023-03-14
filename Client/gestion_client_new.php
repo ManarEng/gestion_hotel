@@ -1,3 +1,23 @@
+<?php
+
+include 'db_connexion.php';
+session_start();
+$user_id = $_SESSION['id_util'];
+
+if(!isset($user_id)){
+   header('location:/PHP/form_connexion.php');
+};
+
+if(isset($_GET['logout'])){
+   unset($user_id);
+   session_destroy();
+   header('location:/PHP/form_connexion.php');
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -8,88 +28,67 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> <!--this one for connexion styles-->
     <link rel="stylesheet" href="/CSS/styles_connexion.css">
-
+    <link rel="stylesheet" href="style_profile.css">
     <!--this script is for social medio icons-->
     <script src="https://kit.fontawesome.com/fe1484d902.js" crossorigin="anonymous"></script>
-    
+
     <title>HoteLUX</title>
 
     <script src="/JS/scripts.js"></script>
-    <script>
-        function myFunction() {
-          var x = document.getElementById("form");
-          var y=document.getElementById("triangle");
-          if (x.style.display === "block" && y.style.display==="block") {
-            x.style.display = "none";
-            y.style.display="none";
-          } else {
-            x.style.display = "block";
-            y.style.display="block";
-          }
+    <style>
+        .fa-solid{
+            font-size: 15px;
+
         }
-        
-        
-
-    </script>
-
-    
-    
+    </style>
+     
 </head>
 
 <body>
     <header>
         <div class="">
             <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;">HoteLUX<span class="orange">.</span></h1>
-            <nav style="margin-top:35px; ">
+            <nav style="margin-top:35px;">
                 <ul>
-                   
-                    
                     <li><a href="#main" >Accueil</a></li>
                     <li><a href="#steps">A propos</a></li>
-                     
                     <li><a href="#possibilities">Services</a></li>
                     <li><a href="/index_contact.php">Contact</a></li>
                     <li><a href="">Réservation</a></li>
-                    <!--<li><a href="/projet_hotel2 - Copie/index.html" >connexion</a></li>-->
-                    <!--<li>  <a  href="javascript:myFunction();"> <i class="fa-solid fa-user"></i></a></li>
-                    <div class="arrow-up" id="triangle"></div>-->
-                    <li>  <a  href="/Client/gestion_client_new.php"> <i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="" >connexion</a></li>
+                    
+
                 </ul>
-                
-                <!--<div class="login-form" id="form">
-                    <form action="">
-                        <div class="bonjour" style="text-decoration: underline;">
-                        <?php
-                            /*session_start();
-                            $login = $_SESSION['login']; /* allez voir trait_insc.php et faites les changement necessaire */ 
-                           // echo 'Bonjour <b>' . $login . '</b> ! <br>';
-                        ?></div> 
-                        <br>
-                        <a href="">Mon profile</a> <br>  <br>
-                        <a href="">Mes reservations</a> <br> <br> 
-                        <a href="/pageClient/PHP/deconnexion.php">Déconnexion</a> 
-                    </form>
-                </div>-->
             </nav>
         </div>
     </header>
 
-    <!--<div class="login-form-container">
+    <div class="login-form-container">
+    
 
-        <i class="fas fa-time" id="form-close"></i>
+        <div class="profile">
+            <?php
+                $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE id_util = '$user_id'") or die('query failed');
+                if(mysqli_num_rows($select) > 0){
+                    $fetch = mysqli_fetch_assoc($select);
+                }
+                if($fetch['photo'] == ''){
+                    echo '<img src="/Img/default-avatar.png">';
+                }else{
+                    echo '<img src="/Client/uploaded_img/'.$fetch['photo'].'">';
+                }
+            ?>
+            <h3><?php echo $fetch['nom_util']; ?></h3> 
+            <a href="update_profile.php" class="btn">Mon profile</a>
+            <a href="" class="btn">Mes réservations</a>
+            <a href="gestion_client.php?logout=<?php echo $user_id; ?>" class="delete-btn">Déconnexion</a>
+            <!--<p>new <a href="login.php">login</a> or <a href="register.php">register</a></p>-->
+        </div>
 
-        <form action="">
-            <h3>Connexion</h3>
-            <input type="email" class="box" placeholder="Entrer votre addresse email ">
-            <input type="password" class="box" placeholder="Entrer votre mot de passe ">
-            <input type="submit" value="Se connecter" class="btn">
-            <input type="checkbox" id="remember">
-            <label for="remember">remember me</label>
-            <p>forget password? <a href="#">click here</a></p>
-            <p>Vous n'avez pas encore un compte? <a href="#">Inscription</a></p>
+    </div>
 
-        </form>
-    </div>-->
+    
+   
 
 
 
@@ -127,7 +126,7 @@
         <div class="wrapper">
 
 
-            <article style="background-image: url(/Img/decouvrez_nos_hebergement1.jpg);" >
+            <article style="background-image: url(Img/decouvrez_nos_hebergement1.jpg);" >
                 <div class="overlay" >
                     <h4>Nos chambres</h4>
                     <p><small>Offrez le meilleur à ceux que vous aimez et partagez des moments fabuleux !</small></p>
@@ -135,7 +134,7 @@
                 </div>
             </article>
 
-            <article style="background-image: url(/Img/envie_de.jpg);">
+            <article style="background-image: url(Img/envie_de.jpg);">
                 <div class="overlay">
                     <h4>Envie de s'amuser</h4>
                     <p><small>Parfois un peu de distraction serait le bienvenue et ferait le plus grand bien !</small>
@@ -258,9 +257,12 @@
         
      </footer>
 
+    
 
 
 
 </body>
 
 </html>
+
+

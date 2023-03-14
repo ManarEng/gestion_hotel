@@ -54,7 +54,13 @@
         {
             $emailText .= "Email: $email\n";
         }
-        if(!isPhone($phone))
+
+
+        if(empty($phone))
+        {
+
+        }
+        else if(!empty($phone) && !isPhone($phone))
         {
             $phoneError="Veuillez indiquer un numéro de téléphone valide"; $isSuccess = false;
         }
@@ -81,6 +87,7 @@
     {
         //return preg_match("/^[0-9 ]*$/",$var);
         return preg_match("/^[+]?[1-9][0-9]{9,14}$/",$var);
+        //commence par + , suivi d un chiffre de 1 a 9 , suivi de nbr de 0 a 9 , toute l expression doit contenir 10 a 15 chiffres
         //The regular expr will check if the mobile number digits are within 10-15 digits including '+' at the start and followed by a non-zero first digit.
     }
             
@@ -125,9 +132,9 @@
             <nav style="margin-top:35px;">
                 <ul>
                     <li><a href="/index.html" >Accueil</a></li>
-                    <li><a href="">A propos</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="/index.html">A propos</a></li>
+                    <li><a href="/index.html">Services</a></li>
+                    <li><a href="/PHP/index_contact.php">Contact</a></li>
                     <li><a href="">Réservation</a></li>
                     <li><a href="">connexion</a></li>
 
@@ -145,6 +152,7 @@
                 <h2>Contactez-nous</h2>
             </div>
             <form id="contact-form" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" role="form"> <!--htmlspecialchars est ajoute pour but de securite contre la faille xss -->
+            <p class="thank-you" style="display:<?php if($isSuccess) echo 'block'; else echo 'none'; ?>"> Votre message a bien été envoyé!</p>
                 <div class="row">
                     <div class="col-lg-6">
                         <label for="firstname" class="form-label">Prénom <span class="blue">*</span></label>
@@ -178,7 +186,7 @@
                         <input type="submit" class="button1" value="Envoyer">
                     </div>    
                 </div>
-                <p class="thank-you" style="display:<?php if($isSuccess) echo 'block'; else echo 'none'; ?> "> Votre message a bien été envoyé!</p>
+                
             </form>
         </div>
 
@@ -199,17 +207,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
 
 
-$connexion = mysqli_connect("localhost","root","");
-
-if( !$connexion) { echo "Desolé, connexion à localhost impossible"; exit; }
-
-if( !mysqli_select_db($connexion,'gestion_hotel')) { echo "Désolé, accès à la base gestion_hotel impossible"; exit; }  
+    include 'db_connexion.php'; 
 
 
-
+    if($isSuccess)
+    {
         $requete = "INSERT INTO messagerie VALUES('','$email','$name','$firstname','$phone','$message')";
-        $resultat = mysqli_query($connexion,$requete);
-        mysqli_close($connexion);
+        $resultat = mysqli_query($conn,$requete);
+        mysqli_close($conn);
+    }
 
 ?>
 
