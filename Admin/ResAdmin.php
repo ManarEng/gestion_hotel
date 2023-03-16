@@ -232,7 +232,7 @@
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
-            $sql="SELECT u.NOM,u.ID_UTILL, u.PRENOM,r.ID_RES,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
+            $sql="SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
             FROM UTILISATEURS u
             JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
             JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
