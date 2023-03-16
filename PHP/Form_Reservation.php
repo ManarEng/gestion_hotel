@@ -1,3 +1,46 @@
+<?php
+session_start();
+
+$conn = new mysqli("localhost", "root", "", "hotelux");
+
+if ($conn->connect_error) {
+    die("La connexion a échoué: " . $conn->connect_error);
+}
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Récupérer les données du formulaire
+    $entree = $_POST["DATE_D_ENTREE"];
+    $sortie = $_POST[" DATE_SORTIE"];
+    $nbrec = $_POST["NBRE_CHAMBRE"];
+   
+
+    // Ajouter les données à la base de données
+    $sql = "INSERT INTO reservation (DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE)
+    VALUES ('$entree', '$sortie', '$nbrec')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Réservation ajoutée avec succès.";
+    } else {
+        echo "Erreur: " . $sql . "<br>" . $conn->error;
+    }
+}
+// Récupération des informations de la réservation
+$sql = "SELECT u.NOM, u.PRENOM, u.TELE, r.NBRE_CHAMBRE, c.TYPEC,c.PRIX, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
+FROM UTILISATEURS u
+JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
+JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
+JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
+JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE;"; // Remplacez 1 par l'ID de la réservation souhaitée
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Affichage des données dans un formulaire HTML
+    $row = $result->fetch_assoc();
+
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -50,26 +93,26 @@
 
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1">
-                <form id="contact-form" method="post" action="FormRes.php" role="form" enctype="multipart/form-data">
+                <form id="contact-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" role="form" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
                             <label for="user">Nom d'Utilisateur <span class="blue"></span></label>
-                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $row['id_util']; ?>" >
+                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $row['NOM']; ?>" >
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $tele; ?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $row["TELE"]; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="type">Type de Chambre <span class="blue"></span></label>
-                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $tchambre; ?>">
+                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $row["TYPEC"]; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="prix">Prix de Chambre <span class="blue"></span></label>
-                            <input id="prix" type="text" name="prix_ch" class="form-control" value="<?php echo $pchambre; ?>">
+                            <input id="prix" type="text" name="prix_ch" class="form-control" value="<?php echo $row["PRIX"]; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
@@ -81,13 +124,11 @@
                             <label for="type_ac">Type d'activité <span class="blue"></span></label>
                             <select id="type_ac" name="type_ac" required>
                                 <option value="0">--choisisser une activité--</option>
-                                <?php while ($row = mysqli_fetch_array($resultat)):;?>
-                                <option value="<?php echo  $iactivite ;?>"><?php echo $tactivite;?></option>
-                                <option value="<?php echo $iactivite ;?>"><?php echo $row[$tactivite];?></option>
-                                <?php endwhile; ?>
+                                
                             </select>
                             <p class="comments"></p> 
                         </div>
+                        
                         <div class="col-md-6">
                             <label for="arrivee">Date d'Arrivée <span class="blue">*</span></label>
                             <input type="date" id="arrivee" type="text" name="arrivee" class="form-control" required>
@@ -137,7 +178,6 @@
                 <i class="fa-brands fa-facebook" onclick="facebook()"></i>
                 <i class="fa-brands fa-twitter" onclick="twitter()"></i>
                 <i class="fa-brands fa-instagram" onclick="instagram()"></i>
-
 
             </div>
 
