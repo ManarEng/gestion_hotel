@@ -157,16 +157,16 @@
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="">Profil</a></li>
-        <li><a href="">Les Clients</a>
+        <li><a href="">Clients</a>
 
         </li>
-        <li><a href="">Les Résérvations</a>
+        <li><a href="">Résérvations</a>
 
         </li>
-        <li><a href="">Les Chambres</a>
+        <li><a href="">Chambres</a>
 
         </li>
-        <li><a href="">Les Activités</a></li>
+        <li><a href="">Activités</a></li>
 
         <li><a href="../index.html">Déconnexion</a></li>
     </ul>
