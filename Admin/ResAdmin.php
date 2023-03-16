@@ -228,20 +228,16 @@
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            $conn = new mysqli("localhost", "root", "", "gestion_hotel");
+            $conn = new mysqli("localhost", "root", "", "hotelux");
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
-
-    
-    
-
-            $sql="SELECT reservation.date_entree,reservation.date_sortie,utilisateurs.nom_util,utilisateurs.id_util, chambre.num, activite.type_ac
-            FROM reservation
-            JOIN utilisateurs ON reservation.id_rese = utilisateurs.id_util
-            JOIN chambre ON reservation.id_rese  = chambre.id_chambre
-            JOIN activite ON reservation.id_rese  = activite.id_activite
-           ";
+            $sql="SELECT u.NOM,u.ID_UTILL, u.PRENOM,r.ID_RES,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
+            FROM UTILISATEURS u
+            JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
+            JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
+            JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
+            JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ";    
             $resultat = mysqli_query($conn, $sql);
 
 // Vérifier si des données ont été trouvées
@@ -251,20 +247,21 @@ if (mysqli_num_rows($resultat) == 0) {
     // Afficher les données dans un tableau HTML
     echo "<table class=styled-table>";
     echo "<thead>";
-    echo "<tr><th colspan=7><H2 >Reservations de vos clients</H2></th></tr>";
-    echo "<tr><th>Nom d'Utilisateur</th><th>n° de chambre</th><th> type d'activitée</th><th> date d'entrée</th><th>date de sortie</th><TH></TH><TH></TH></tr>";
+    echo "<tr><th colspan=9><H2 >Reservations de vos clients</H2></th></tr>";
+    echo "<tr><th>Nom d'Utilisateur</th><th> type de chambre</th><th>Nombre de chambre</th><th> type d'activitée</th><th> date d'entrée</th><th>date de sortie</th><TH></TH><TH></TH></tr>";
     echo "</thead>";
     echo"<tbody>";
     while ($row = mysqli_fetch_assoc($resultat)) {
         echo "<tr>";
-        echo "<td>" . $row["nom_util"] . "</td>";
-        echo "<td>" . $row["num"] . "</td>";
-        echo "<td>" . $row["type_ac"] . "</td>";
-        echo "<td>" . $row["date_entree"] . "</td>";
-        echo "<td>" . $row["date_sortie"] . "</td>";
-        echo "<td><a href='modify_res.php'><button value='modifier' onclick='supprimerLigne(" . $row["id_util"] . ")'><img src=\"icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td>" . $row["NOM"] ." ".$row["PRENOM"]. "</td>";
+        echo "<td>" . $row["TYPEC"] . "</td>";
+        echo "<td>" . $row["NBRE_CHAMBRE"] . "</td>";
+        echo "<td>" . $row["TYPE"] . "</td>";
+        echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
+        echo "<td>" . $row["DATE_SORTIE"] . "</td>";
+        echo "<td><a href='modify_res.php'><button value='modifier' onclick='supprimerLigne(" . $row["ID_RES "] . ")'><img src=\"icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
 
-        echo "<td><a href='delete_res.php'><button value='supprimer' onclick='supprimerLigne(" . $row["id_util"] . ")'><img src=\"icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='delete_res.php'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_RES "] . ")'><img src=\"icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
         echo "</tr>";
     }    
     echo"</thead>";
