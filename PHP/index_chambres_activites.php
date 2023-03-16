@@ -1,18 +1,3 @@
-<?php
-// Include the database connection file
-$conn = mysqli_connect("localhost","root","");
-
-if( !$conn) { echo "Desolé, connexion à localhost impossible"; exit; }
-
-if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la base gestion_hotel impossible"; exit; }
-
-
-?>
-
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -36,6 +21,10 @@ if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la bas
 
     </head>
     <body>
+
+    <?php
+    include 'trait_chambres_activites.php';
+?>
 
         <header>
             <div class="">
@@ -65,13 +54,13 @@ if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la bas
             <nav>
                 <ul class="nav nav-pills" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1" role="tab">Individuelle</a>
+                        <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1" role="tab"><?php echo $type1;  ?></a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2" role="tab">Double</a>
+                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2" role="tab"><?php echo $type2;  ?></a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3" role="tab">Triple</a>
+                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3" role="tab"><?php echo $type3;  ?></a>
                     </li>
                     
                 </ul>
@@ -83,33 +72,33 @@ if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la bas
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/single1.jpg" class="img-fluid" alt="...">
-                                <div class="price">590 dh</div>
+                                <img src="<?php echo $image1;  ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php echo $prix1;  ?></div>
                                 <div class="caption">
                                     
-                                    <p>Une Chambre Individuelle Confortable donnant une vue agréable.</p>
+                                    <p><?php echo $desc1;  ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/single2.jpg" class="img-fluid" alt="...">
-                                <div class="price">650 dh</div>
+                                <img src="<?php echo $image2;  ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php echo $prix2;  ?></div>
                                 <div class="caption">
                                     
-                                    <p>Une Chambre blanche Individuelle Confortable donnant un esprit de nature et verdure.</p>
+                                    <p><?php echo $desc2;  ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/single3.jpg" class="img-fluid" alt="...">
-                                <div class="price">670 dh</div>
+                                <img src="<?php echo $image3;  ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php echo $prix3;  ?></div>
                                 <div class="caption">
                                     
-                                    <p>Une Chambre moyenne taille avec une armoire.</p>
+                                    <p><?php echo $desc3;  ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
