@@ -259,8 +259,8 @@ if (mysqli_num_rows($resultat) == 0) {
         } else {
             echo "<td>" . $message . "</td>";
         }
-        echo "<td><a href='modify_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='modifier' onclick='modifierLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-        echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='modify_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='modifier' onclick='modifierLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
         
         echo "</tr>";
     }
