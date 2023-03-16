@@ -4,7 +4,7 @@
 
 
 // Récupérer l'ID de la réservation à modifier
-$id_rese  = $_GET['id_rese '];
+$id_rese  = $_GET['ID_RES'];
 
 // Se connecter à la base de données
 $conn = new mysqli("localhost", "root", "", "gestion_hotel");
