@@ -14,7 +14,7 @@
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel="stylesheet"> <!--this link is for the css of the hotelux-->
     <!--this script is for social medio icons-->
     <script src="https://kit.fontawesome.com/fe1484d902.js" crossorigin="anonymous"></script>
-    <link href="style_inscription.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/style_inscription.css" rel="stylesheet" type="text/css">
  
 </head>
 
