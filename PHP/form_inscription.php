@@ -147,12 +147,12 @@ mysqli_close($conn);
             <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"><b> HoteLUX</b><span class="orange">.</span></h1>
             <nav style="margin-top:35px;">
                 <ul>
-                    <li><a href="/index.html">Accueil</a></li>
-                    <li><a href="">A propos</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li><a href="../index.html">A propos</a></li>
+                    <li><a href="../index.html">Services</a></li>
+                    <li><a href="/contact_code/index.php">Contact</a></li>
                     <li><a href="">Réservation</a></li>
-                    <li><a href="">connexion</a></li>
+                    <li><a href="../PHP/form_connexion.php">connexion</a></li>
 
                 </ul>
             </nav>
