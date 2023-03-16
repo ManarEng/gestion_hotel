@@ -229,7 +229,7 @@
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            $conn = new mysqli("localhost", "root", "", "gestion_hotel");
+            $conn = new mysqli("localhost", "root", "", "hotelux");
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
@@ -244,23 +244,23 @@ if (mysqli_num_rows($resultat) == 0) {
     echo "<table class=styled-table>";
     echo "<thead>";
     echo "<tr><th colspan=7><H2 >Messages de vos clients</H2></th></tr>";
-    echo "<tr><th> Nom et Prenom </th><th>E-Mail</th><th>N° de Telephone</th><th> Message</th><TH></TH><th></th></tr>";
+    echo "<tr><th> Nom et Prenom </th><th>E-Mail</th><th> Message</th><TH></TH><th></th></tr>";
     echo "</thead>";
     echo"<tbody>";
     while ($row = mysqli_fetch_assoc($resultat)) {
         echo "<tr>";
-        echo "<td>" . $row["nom"] ." ". $row["prenom"]. "</td>";
-        echo "<td>" . $row["email"] . "</td>";
-        echo "<td>" . $row["tele"] . "</td>";
-        $message = $row["message"];
+        echo "<td>" . $row["NOM"] ." ". $row["PRENOM"]. "</td>";
+        echo "<td>" . $row["EMAIL"] . "</td>";
+      
+        $message = $row["MESSAGE"];
         if (strlen($message) > 20) {
             $message = substr($message, 0, 20) . '...';
-            echo "<td id=message onclick=\"this.innerHTML = '". $row["message"] ."';\">" . $message . "</td>";
+            echo "<td id=message onclick=\"this.innerHTML = '". $row["MESSAGE"] ."';\">" . $message . "</td>";
         } else {
             echo "<td>" . $message . "</td>";
         }
-        echo "<td><a href='modify_msg.php?id_msg=" . $row["id_msg"] . "'><button value='modifier' onclick='modifierLigne(" . $row["id_msg"] . ")'><img src=\"icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-        echo "<td><a href='delete_msg.php?id_msg=" . $row["id_msg"] . "'><button value='supprimer' onclick='supprimerLigne(" . $row["id_msg"] . ")'><img src=\"icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='modify_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='modifier' onclick='modifierLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
         
         echo "</tr>";
     }
