@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../db_conn.php");
 $firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";
 $firstnameError = $nameError = $emailError = $phoneError = $loginError = $mdpError = $mdppError = $imgError = "";
@@ -91,8 +92,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if ($isSuccess) {
     $sql = "INSERT INTO utilisateurs VALUES ('','3', '$name', '$firstname', '$login', '$mdp', '$cin', '$adresse', '$email', '$phone','$url')";
     mysqli_query($conn, $sql);
-}
+    $query = "SELECT * FROM utilisateurs WHERE nom_util='$login'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['id_util'] = $row['id_util'];
+        $_SESSION['id_profil'] = $row['id_profil'];
+        $_SESSION['nom_util'] = $row['nom_util'];
 
+
+        header('location:/Client/index.php');
+    }
+}
 
 
 // Fermer la connexion à la base de données
