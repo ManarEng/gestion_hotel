@@ -12,7 +12,6 @@
             $nom = $row['NOM'];
             $prenom = $row['PRENOM'];
             $email = $row['EMAIL'];
-            
             $message = $row['MESSAGE'];
         } else {
             echo "Aucune donnée trouvée pour cet ID_MESSAGE.";
@@ -27,16 +26,13 @@
 <form action="update_msg.php" method="post">
     <input type="hidden" name="ID_MESSAGE" value="<?php echo $ID_MESSAGE; ?>">
     <label for="nom">Nom :</label>
-    <input type="text" name="nom" value="<?php echo $nom; ?>">
+    <input type="text" name="nom" value="<?php echo $nom ." ".$prenom; ?>">
     <br>
-    <label for="prenom">Prénom :</label>
-    <input type="text" name="prenom" value="<?php echo $prenom; ?>">
-    <br>
+    
     <label for="email">E-mail :</label>
     <input type="email" name="email" value="<?php echo $email; ?>">
     <br>
-    <label for="tele">N° de Téléphone :</label>
-    <input type="text" name="tele" value="<?php echo $tele; ?>">
+   
     <br>
     <label for="message">Message :</label>
     <textarea name="message"><?php echo $message; ?></textarea>
@@ -62,8 +58,8 @@
 
         input[type="text"],
         input[type="email"],
-        input[type="tel"],
-        input[type="password"],
+       
+        
         textarea {
             flex-basis: 65%;
             padding: 15px;
