@@ -135,7 +135,7 @@
                     <li><a href="/index.html">A propos</a></li>
                     <li><a href="/index.html">Services</a></li>
                     <li><a href="/PHP/index_contact.php">Contact</a></li>
-                    <li><a href="">Réservation</a></li>
+                    <li><a href="/PHP/orientation.php">Réservation</a></li>
                     <li><a href="">connexion</a></li>
 
                 </ul>
