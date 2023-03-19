@@ -1,3 +1,123 @@
+<?php
+session_start();
+include("../db_conn.php");
+$firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";
+$firstnameError = $nameError = $emailError = $phoneError = $loginError = $mdpError = $mdppError = $imgError = "";
+$isSuccess = false;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $firstname = $_POST['firstname'];
+    $name = $_POST['name'];
+    $email =  $_POST['email'];
+    $login = mysqli_real_escape_string($conn, $_POST['login']);
+
+    $phone = $_POST['phone'];
+
+    $mdp = $_POST['mdp'];
+    $mdpp = $_POST['mdpp'];
+    $cin = $_POST['cin'];
+    $adresse = $_POST['adresse'];
+
+    $isSuccess = true;
+
+    if (!ctype_alpha($firstname)) {
+        $firstnameError = "Le prénom doit être une chaîne de caractères alphabétiques.";
+        $isSuccess = false;
+    }
+
+    if (!ctype_alpha($name)) {
+        $nameError = "Le nom doit être une chaîne de caractères alphabétiques.";
+        $isSuccess = false;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailError = "L'email doit être une adresse email valide.";
+        $isSuccess = false;
+    }
+
+    if (!preg_match("/^0[5-7][0-9]{8}$/", $phone)) {
+        $phoneError = "Le numéro de téléphone doit être un nombre de 10 chiffres commence par 0 suivi de 5/6/7.";
+        $isSuccess = false;
+    }
+    if (strlen($mdp) < 8) {
+        $mdpError = "Mot de passe trop court";
+        $isSuccess = false;
+    }
+    if (!preg_match('/[A-Z]/', $mdp)) {
+        $mdpError = "Mot de passe doit contenir au moins une lettre majuscule";
+        $isSuccess = false;
+    }
+    if (!preg_match('/[a-z]/', $mdp)) {
+        $mdpError = "Mot de passe doit contenir au moins une lettre miniscule";
+        $isSuccess = false;
+    }
+    if (!preg_match('/[0-9]/', $mdp)) {
+        $mdpError = "Mot de passe doit contenir au moins un chiffre";
+        $isSuccess = false;
+    }
+    if (!($mdp == $mdpp)) {
+        $mdppError = "Les mots de passe ne sont pas les memes!";
+        $isSuccess = false;
+    }
+    // Check if the  login already exist in the database
+
+    $query = "SELECT * FROM utilisateurs WHERE  nom_util='$login'";
+    $result = mysqli_query($conn, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        $loginError = "Le nom d'utilisateur est déjà utilisé.";
+        $isSuccess = false;
+    }
+    // Check if file is an image
+    if (isset($_FILES['pic'])) {
+        $file = $_FILES['pic'];
+        $allowed_extensions = ['jpg', 'jpeg', 'png'];
+        $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($file_extension, $allowed_extensions)) {
+            $imgError = "Télécharger une image valide.";
+        }
+
+        // Store the image in the upload directory
+        $upload_dir = 'uploads/';
+        $filename = uniqid("IMG-", true) . '.' . $file_extension;
+        $upload_path = $upload_dir . $filename;
+        move_uploaded_file($file['tmp_name'], $upload_path);
+
+        // Store the URL in the database
+        $url =  $filename;
+    } else {
+        $url = "profil.jpg";
+    }
+}
+if ($isSuccess) {
+    $sql = "INSERT INTO utilisateurs VALUES ('','3', '$name', '$firstname', '$login', '$mdp', '$cin', '$adresse', '$email', '$phone','$url')";
+    mysqli_query($conn, $sql);
+    $query = "SELECT * FROM utilisateurs WHERE nom_util='$login'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['id_util'] = $row['id_util'];
+        $_SESSION['id_profil'] = $row['id_profil'];
+        $_SESSION['nom_util'] = $row['nom_util'];
+
+
+        header('location:/Client/index.php');
+    }
+}
+
+
+// Fermer la connexion à la base de données
+mysqli_close($conn);
+
+
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -11,20 +131,26 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
 
+
+
+
+    <link rel="stylesheet" href="../contact_code/css/style.css">
+
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel="stylesheet"> <!--this link is for the css of the hotelux-->
     <!--this script is for social medio icons-->
     <script src="https://kit.fontawesome.com/fe1484d902.js" crossorigin="anonymous"></script>
-    <link href="/CSS/style_contact.css" rel="stylesheet" type="text/css">
     <style>
-        .error {
-            color: red;
-            margin-top: 5px;
+        .thank-you {
+            color: green;
+
         }
     </style>
+
+
 </head>
 
-<body>
 
+<body>
 
 
     <header>
@@ -37,7 +163,7 @@
                     <li><a href="../index.html">Services</a></li>
                     <li><a href="/contact_code/index.php">Contact</a></li>
                     <li><a href="">Réservation</a></li>
-                    <li><a href="">connexion</a></li>
+                    <li><a href="../PHP/form_connexion.php">connexion</a></li>
 
                 </ul>
             </nav>
@@ -46,88 +172,87 @@
 
 
 
+
     <div class="container">
         <div class="divider"></div>
         <div class="heading">
             <h2>S'inscrire à HoteLUX</h2>
         </div>
+        <form id="contact-form" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" role="form"> <!--htmlspecialchars est ajoute pour but de securite contre la faille xss -->
+            <p class="thank-you" style="display:<?php if ($isSuccess) echo 'block';
+                                                else echo 'none'; ?> "> Inscription avec succes!</p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="firstname" class="form-label">Prénom <span class="blue">*</span></label>
+                    <input id="firstname" type="text" name="firstname" class="form-control">
+                    <p class="comments"><?php echo $firstnameError; ?></p>
+                </div>
+                <div class="col-lg-6">
+                    <label for="name" class="form-label">Nom <span class="blue">*</span></label>
+                    <input id="name" type="text" name="name" class="form-control">
+                    <p class="comments"><?php echo $nameError; ?></p>
+                </div>
+                <div class="col-lg-6">
+                    <label for="cin" class="form-label">CIN <span class="blue">*</span></label>
+                    <input type="text" id="cin" name="cin" class="form-control">
 
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1">
-                <form id="contact-form" method="post" action="trait_insc.php" role="form" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="firstname">Prénom <span class="blue">*</span></label>
-                            <input id="firstname" type="text" name="firstname" class="form-control" required>
+                </div>
+                <div class="col-lg-6">
+                    <label for="email" class="form-label">Email <span class="blue">*</span></label>
+                    <input id="email" type="text" name="email" class="form-control">
+                    <p class="comments"><?php echo $emailError; ?></p>
+                </div>
+                <div class="col-lg-6">
+                    <label for="phone" class="form-label">Téléphone<span class="blue">*</span></label>
+                    <input id="phone" type="text" name="phone" class="form-control">
+                    <p class="comments"><?php echo $phoneError; ?></p>
+                </div>
+                <div class="col-lg-6">
+                    <label for="adresse" class="form-label">Adresse <span class="blue">*</span></label>
+                    <textarea id="adresse" name="adresse" class="form-control" cols="3" rows="3"></textarea>
 
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="name">Nom <span class="blue">*</span></label>
-                            <input id="name" type="text" name="name" class="form-control" required>
-
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email">Email <span class="blue">*</span></label>
-                            <input id="email" type="text" name="email" class="form-control" required>
-
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="phone">Téléphone<span class="blue">*</span></label>
-                            <input id="phone" type="tel" name="phone" class="form-control" required>
-
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="login">Login <span class="blue">*</span></label>
-                            <input id="login" type="text" name="login" class="form-control" required>
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="mdp">Mot de passe<span class="blue">*</span></label>
-                            <input id="mdp" type="password" name="mdp" class="form-control" required>
+                </div>
 
 
-                            <p class="comments"></p>
-                        </div>
+                <div class="col-lg-6">
+                    <label for="login" class="form-label">Login <span class="blue">*</span></label>
+                    <input type="text" id="login" name="login" class="form-control">
+                    <p class="comments"><?php echo $loginError; ?></p>
+                </div>
+                <div class="col-lg-6">
+                    <label for="mdp" class="form-label">Mot de passe <span class="blue">*</span></label>
+                    <input type="password" id="mdp" name="mdp" class="form-control">
+                    <p class="comments"><?php echo $mdpError; ?></p>
+                </div>
+                <div class="col-lg-6">
+                    <label for="mdpp" class="form-label">Confirmer votre mot de passe <span class="blue">*</span></label>
+                    <input type="password" id="mdpp" name="mdpp" class="form-control">
+                    <p class="comments"><?php echo $mdppError; ?></p>
+                </div>
 
-                        <div class="col-md-6">
-                            <label for="cin">CIN <span class="blue">*</span></label>
-                            <input id="cin" type="text" name="cin" class="form-control" required>
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="mdpp">Vérifier votre Mot de passe<span class="blue">*</span></label>
-                            <input id="mdpp" type="password" name="mdpp" class="form-control" required>
+                <div class="col-lg-6">
+                    <label for="pic" class="form-label">Photo </label>
+                    <input type="file" id="pic" name="pic" class="form-control">
+                    <p class="comments"><?php echo $imgError; ?></p>
+                </div>
 
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="ad">Adresse<span class="blue">*</span></label>
-                            <input id="ad" type="text" name="ad" class="form-control" required>
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="img">Photo</label>
-                            <input id="img" type="file" name="img" class="form-control">
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-12">
-                            <p class="blue"><strong>* Ces informations sont requises.</strong></p>
-                        </div>
-                        <div class="col-md-12">
-                            <input type="submit" class="button1" value="Envoyer">
-                            <p id="confirmation-message" style="display:none; color:green; font-weight:bold;">Inscription avec succes!</p>
-                        </div>
-                    </div>
-
-
-                </form>
+                <div class="col-lg-6">
+                    <p class="blue"><strong>* Ces informations sont requises.</strong></p>
+                </div>
+                <div>
+                    <input type="submit" class="button1" value="Envoyer">
+                </div>
             </div>
-        </div>
+
+        </form>
     </div>
+
+
+
+
+
+
+
 
     <br> <br><br>
     <footer>
@@ -154,7 +279,6 @@
                 <i class="fa-brands fa-twitter" onclick="twitter()"></i>
                 <i class="fa-brands fa-instagram" onclick="instagram()"></i>
 
-                
 
             </div>
 
@@ -169,6 +293,9 @@
 
 
     </footer>
+
+
+
 
 </body>
 
