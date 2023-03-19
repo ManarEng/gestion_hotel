@@ -140,7 +140,7 @@ if (!in_array($file_extension, $allowed_extensions)) {
 }
 
 // Store the image in the upload directory
-$upload_dir = 'C:\Users\PC\Downloads\PFE\hotel_projet3\connexion\Inscription\uploads';
+$upload_dir = '/PHP/uploads_inscription';
 $filename = uniqid("IMG-",true) . '.' . $file_extension;
 $upload_path = $upload_dir . $filename;
 move_uploaded_file($file['tmp_name'], $upload_path);

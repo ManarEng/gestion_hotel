@@ -53,7 +53,7 @@
                     <!--<li><a href="/projet_hotel2 - Copie/index.html" >connexion</a></li>-->
                     <!--<li>  <a  href="javascript:myFunction();"> <i class="fa-solid fa-user"></i></a></li>
                     <div class="arrow-up" id="triangle"></div>-->
-                    <li>  <a  href="/Client/gestion_client_new.php"> <i class="fa-solid fa-user"></i></a></li>
+                    <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
                 </ul>
                 
                 <!--<div class="login-form" id="form">

@@ -1,33 +1,39 @@
 <?php
 
-include 'config.php';
+include 'db_connexion.php';
 session_start();
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['id_util'];
 
 if(isset($_POST['update_profile'])){
 
-   $update_name = mysqli_real_escape_string($conn, $_POST['update_name']);
+   $update_nom = mysqli_real_escape_string($conn, $_POST['update_nom']);
    $update_email = mysqli_real_escape_string($conn, $_POST['update_email']);
+   $update_prenom = mysqli_real_escape_string($conn, $_POST['update_prenom']);
+   $update_tele = mysqli_real_escape_string($conn, $_POST['update_tele']);
+   $update_username = mysqli_real_escape_string($conn, $_POST['update_username']);
+   $update_cin = mysqli_real_escape_string($conn, $_POST['update_cin']);
+   $update_adresse = mysqli_real_escape_string($conn, $_POST['update_adresse']);
 
-   mysqli_query($conn, "UPDATE `user_form` SET name = '$update_name', email = '$update_email' WHERE id = '$user_id'") or die('query failed');
+   mysqli_query($conn, "UPDATE `utilisateurs` SET nom = '$update_nom', email = '$update_email', prenom ='$update_prenom', telephone='$update_tele', nom_util='$update_username', cin='$update_cin', adresse='$update_adresse' WHERE id_util = '$user_id'") or die('query failed');
 
    $old_pass = $_POST['old_pass'];
    $update_pass = mysqli_real_escape_string($conn, md5($_POST['update_pass']));
    $new_pass = mysqli_real_escape_string($conn, md5($_POST['new_pass']));
    $confirm_pass = mysqli_real_escape_string($conn, md5($_POST['confirm_pass']));
 
-   if(!empty($update_pass) || !empty($new_pass) || !empty($confirm_pass)){
+   if(!empty($update_pass) || !empty($new_pass) || !empty($confirm_pass))
+   {
       if($update_pass != $old_pass){
-         $message[] = 'old password not matched!';
+         $message[] = ' Ancien mot de passe ne correspond pas!';
       }elseif($new_pass != $confirm_pass){
          $message[] = 'confirm password not matched!';
       }else{
-         mysqli_query($conn, "UPDATE `user_form` SET password = '$confirm_pass' WHERE id = '$user_id'") or die('query failed');
+         mysqli_query($conn, "UPDATE `utilisateurs` SET mdp = '$confirm_pass' WHERE id_util = '$user_id'") or die('query failed');
          $message[] = 'password updated successfully!';
       }
    }
 
-   $update_image = $_FILES['update_image']['name'];
+/*$update_image = $_FILES['update_image']['name'];
    $update_image_size = $_FILES['update_image']['size'];
    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
    $update_image_folder = 'uploaded_img/'.$update_image;
@@ -42,30 +48,61 @@ if(isset($_POST['update_profile'])){
          }
          $message[] = 'image updated succssfully!';
       }
-   }
+   }*/
 
 }
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>update profile</title>
+    <meta charset="utf-8">
+    <link href="/CSS/styles.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel="stylesheet">
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> <!--this one for connexion styles-->
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/Client/style_profile.css">
+    <!--this script is for social medio icons-->
+    <script src="https://kit.fontawesome.com/fe1484d902.js" crossorigin="anonymous"></script>
 
+    <title>HoteLUX</title>
+
+    <script src="/JS/scripts.js"></script>
+    <style>
+        .fa-solid{
+            font-size: 15px;
+
+        }
+    </style>
+     
 </head>
+
 <body>
+    <header>
+        <div class="">
+            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;">HoteLUX<span class="orange">.</span></h1>
+            <nav style="margin-top:35px;">
+                <ul>
+                    <li><a href="#main" >Accueil</a></li>
+                    <li><a href="#steps">A propos</a></li>
+                    <li><a href="#possibilities">Services</a></li>
+                    <li><a href="/index_contact.php">Contact</a></li>
+                    <li><a href="">Réservation</a></li>
+                    <li><a href="" >connexion</a></li>
+                    
+
+                </ul>
+            </nav>
+        </div>
+    </header>
    
 <div class="update-profile">
 
    <?php
-      $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE id = '$user_id'") or die('query failed');
+      $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE id_util = '$user_id'") or die('query failed');
       if(mysqli_num_rows($select) > 0){
          $fetch = mysqli_fetch_assoc($select);
       }
@@ -73,10 +110,10 @@ if(isset($_POST['update_profile'])){
 
    <form action="" method="post" enctype="multipart/form-data">
       <?php
-         if($fetch['image'] == ''){
-            echo '<img src="images/default-avatar.png">';
+         if($fetch['photo'] == ''){
+            echo '<img src="/Img/default-avatar.png">';
          }else{
-            echo '<img src="uploaded_img/'.$fetch['image'].'">';
+            echo '<img src="uploaded_img/'.$fetch['photo'].'">';
          }
          if(isset($message)){
             foreach($message as $message){
@@ -86,28 +123,92 @@ if(isset($_POST['update_profile'])){
       ?>
       <div class="flex">
          <div class="inputBox">
-            <span>username :</span>
-            <input type="text" name="update_name" value="<?php echo $fetch['name']; ?>" class="box">
+            <span>Prénom :</span>
+            <input type="text" name="update_prenom" value="<?php echo $fetch['prenom']; ?>" class="box">
+
             <span>your email :</span>
             <input type="email" name="update_email" value="<?php echo $fetch['email']; ?>" class="box">
-            <span>update your pic :</span>
+
+
+            <span>Nom d'utilisateur :</span>
+            <input type="text" name="update_username" value="<?php echo $fetch['nom_util']; ?>" class="box">
+
+            <span>CIN :</span>
+            <input type="text" name="update_cin" value="<?php echo $fetch['cin']; ?>" class="box">
+
+            <span>Adresse:</span>
+            <input type="text" name="update_adresse" value="<?php echo $fetch['adresse']; ?>" class="box">
+           
+            <span>Modifier votre photo:</span>
             <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box">
          </div>
          <div class="inputBox">
-            <input type="hidden" name="old_pass" value="<?php echo $fetch['password']; ?>">
-            <span>old password :</span>
-            <input type="password" name="update_pass" placeholder="enter previous password" class="box">
-            <span>new password :</span>
-            <input type="password" name="new_pass" placeholder="enter new password" class="box">
-            <span>confirm password :</span>
-            <input type="password" name="confirm_pass" placeholder="confirm new password" class="box">
+            <span>Nom:</span>
+            <input type="text" name="update_nom" value="<?php echo $fetch['nom']; ?>" class="box">
+
+            <span>Téléphone:</span>
+            <input type="text" name="update_tele" value="<?php echo $fetch['telephone']; ?>" class="box">
+
+
+            <input type="hidden" name="old_pass" value="<?php echo $fetch['mdp']; ?>">
+            <span>Ancien mot de passe :</span>
+            <input type="password" name="update_pass"  class="box">
+            <span>Nouveau mot de passe :</span>
+            <input type="password" name="new_pass"  class="box">
+            <span>Confirmer votre mot de passe :</span>
+            <input type="password" name="confirm_pass" class="box">
          </div>
       </div>
-      <input type="submit" value="update profile" name="update_profile" class="btn">
-      <a href="home.php" class="delete-btn">go back</a>
+      <input type="submit" value="Modifier Profil" name="update_profile" class="btn">
+      <a href="gestion_client.php" class="delete-btn">Retourner</a>
    </form>
 
 </div>
 
+<footer>
+         
+    
+        
+         <div class="col-right">
+            <h3>Contact Info</h3>
+            <p>06 10 30 40 56</p>
+            <p>05 10 30 40 56</p>
+            <p>hotelux@gmail.com</p>
+         </div>
+
+         <div>
+            <h1>HoteLUX<span class="orange">.</span></h1>
+            <p class="copyright">Copyright © Tous droits réservés.</div>
+            </p> 
+        </div>
+
+         <div class="col-left">
+            <h3>Contact Info</h3>
+            <p>123,XYZ Road, BSK 3 <br>Banglore, Karnataka, IN</p>
+            <div class="social-icons">
+                <i class="fa-brands fa-facebook" onclick="facebook()"></i>
+                <i class="fa-brands fa-twitter" onclick="twitter()"></i>
+                <i class="fa-brands fa-instagram" onclick="instagram()"></i>
+
+
+            </div>
+
+
+            
+
+            
+
+            
+
+         </div>
+        
+        
+     </footer>
+
+    
+
+
+
 </body>
+
 </html>

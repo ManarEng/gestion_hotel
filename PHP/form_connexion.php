@@ -76,9 +76,6 @@
         </form>
     </div>
 
-
-
-
     <section id="main">
         <div>
             <video src="/Img/video_background.webm" autoplay muted loop></video>
