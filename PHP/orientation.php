@@ -6,7 +6,7 @@ if (!isset($_SESSION['ID_UTILL'])) {
   exit();
 }
 else{
-    header("Location: /PHP/Form_Reservation.php");
+    header("Location: /PHP/index_chambres_activites.php");
     exit();   
 }
 ?>
