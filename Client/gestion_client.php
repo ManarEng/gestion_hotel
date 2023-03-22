@@ -47,15 +47,15 @@ if(isset($_GET['logout'])){
 <body>
     <header>
         <div class="">
-            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;">HoteLUX<span class="orange">.</span></h1>
+            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/Client/index.php">  HoteLUX<span class="orange">.</span></a></h1>
             <nav style="margin-top:35px;">
                 <ul>
-                    <li><a href="#main" >Accueil</a></li>
-                    <li><a href="#steps">A propos</a></li>
-                    <li><a href="#possibilities">Services</a></li>
+                    <li><a href="/Client/index.php/#main" >Accueil</a></li>
+                    <li><a href="/Client/index.php/#steps">A propos</a></li>
+                    <li><a href="/Client/index.php/#possibilities">Services</a></li>
                     <li><a href="/index_contact.php">Contact</a></li>
                     <li><a href="">Réservation</a></li>
-                    <li><a href="" >connexion</a></li>
+                    <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
                     
 
                 </ul>
@@ -136,7 +136,7 @@ if(isset($_GET['logout'])){
          </div>
 
          <div>
-            <h1>HoteLUX<span class="orange">.</span></h1>
+            <h1> <a href="/Client/index.php">HoteLUX<span class="orange">.</span></a></h1>
             <p class="copyright">Copyright © Tous droits réservés.</div>
             </p> 
         </div>
