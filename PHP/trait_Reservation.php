@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $entree = $_POST['arrivee'];
     $sortie = $_POST['depart'];
     $nbrec = $_POST['nbre'];
-    $idutil = $_SESSION['ID_UTILL'];
    
 
     // Ajouter les données à la base de données
