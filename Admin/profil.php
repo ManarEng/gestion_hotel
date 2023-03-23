@@ -195,24 +195,13 @@
 
         <li><a href="profil.php">Profil</a></li>
         <li><a href=""> Utilisateurs</a>
-            <!--<ul class="inner-menu">
-                <li><a href="">Les Clients</a></li>
-                <li><a href="">Les Agents De Réception</a></li>
-            </ul>-->
+
         </li>
         <li><a href=""> Chambres</a>
-            <!-- <ul class="inner-menu">
-                <li><a href="">Les Chambres</a></li>
-                <li><a href="">Ajouter Une Chambre</a></li>
-                <li><a href="">Supprimer Une Chambre</a></li>
-            </ul>-->
+
         </li>
         <li><a href=""> Activités</a>
-            <!--<ul class="inner-menu">
-                <li><a href="">Les Activités</a></li>
-                <li><a href="">Ajouter Une Activité</a></li>
-                <li><a href="">Supprimer Une Activité</a></li>
-            </ul>-->
+
         </li>
         <li><a href="res_admin.php">Résérvations</a></li>
         <li><a href="messagerie.php">Messagerie</a></li>
