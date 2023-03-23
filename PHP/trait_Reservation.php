@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
 
     // Ajouter les données à la base de données
-    $sql = "INSERT INTO reservation(ID_UTILL, DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES( 1, '$entree', '$sortie', '$nbrec');";
+    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','', '$entree', '$sortie', '$nbrec');";
 
     $r = $conn->query($sql);
 
