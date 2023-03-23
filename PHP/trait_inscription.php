@@ -156,5 +156,5 @@ header("refresh:3;Location: /index.html");
 exit();
 
 
-// Fermer la connexion à la base de données
+// Fermer la connexion à la base de données uhiuhiihoi
 mysqli_close($conn);
