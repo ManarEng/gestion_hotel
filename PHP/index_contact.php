@@ -128,15 +128,20 @@
 
     <header>
         <div class="">
-            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"><b> HoteLUX</b><span class="orange">.</span></h1>
+            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <b><a href="/index.html"> HoteLUX<span class="orange">.</span></a></b></h1>
             <nav style="margin-top:35px;">
                 <ul>
-                    <li><a href="/index.html" >Accueil</a></li>
-                    <li><a href="/index.html">A propos</a></li>
-                    <li><a href="/index.html">Services</a></li>
+                    <li><a href="/index.html/#main" >Accueil</a></li>
+                    <li><a href="/index.html/#steps">A propos</a></li>
+                    <li><a href="/index.html/#possibilities">Services</a></li>
                     <li><a href="/PHP/index_contact.php">Contact</a></li>
+<<<<<<< HEAD
                     <li><a href="/PHP/orientation.php">Réservation</a></li>
                     <li><a href="">connexion</a></li>
+=======
+                    <li><a href="">Réservation</a></li>
+                    <li><a href="/PHP/form_connexion.php">connexion</a></li>
+>>>>>>> 27940cc9dc7a7f679603afaa471e8e0f3f03a6db
 
                 </ul>
             </nav>
@@ -223,42 +228,37 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
         <br> <br><br>
         <footer>
-        
+         
          <div class="col-right">
             <h3>Contact Info</h3>
-            <p>06 10 30 40 56</p>
-            <p>05 10 30 40 56</p>
-            <p>hotelux@gmail.com</p>
+            
+            <p><i class="fa-solid fa-phone"></i>  06 10 30 40 56</p>
+            <p><img src="/Img/office-phone.png" style="height: 14px;width: 14px;">   05 10 30 40 56</p>
+            <p style="margin-left: 30px;"><i class="fa-solid fa-envelope"></i>            hotelux@gmail.com</p>
          </div>
-
+ 
          <div>
-            <h1><b> HoteLUX</b><span class="orange">.</span></h1>
+            <h1><a href="/index.html"> HoteLUX<span class="orange">.</span></a></h1>
             <p class="copyright">Copyright © Tous droits réservés.</div>
             </p> 
         </div>
-
+ 
          <div class="col-left">
-            <h3>Contact Info</h3>
-            <p>123,XYZ Road, BSK 3 <br>Banglore, Karnataka, IN</p>
+            <h3>Adresse</h3>
+            <p>123,XYZ Road, BSK 3 <br>Maroc, Oujda, IN</p>
             <div class="social-icons">
                 <i class="fa-brands fa-facebook" onclick="facebook()"></i>
                 <i class="fa-brands fa-twitter" onclick="twitter()"></i>
                 <i class="fa-brands fa-instagram" onclick="instagram()"></i>
-
-
+ 
+ 
             </div>
-
-
-            
-
-            
-
-            
-
+ 
          </div>
         
         
      </footer>
+ 
 
 
     

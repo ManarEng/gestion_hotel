@@ -1,7 +1,5 @@
 
 
-
-
 <!DOCTYPE html>
 <html>
 
@@ -54,11 +52,11 @@
         <form action="trait_connexion.php" method="post">
             <h3>Connexion</h3>
             <?php
-                /*if(isset($message)){
+                if(isset($message)){
                     foreach($message as $message){
-                        echo '<div class="message">'.$message.'</div>';
+                       echo '<div class="message">'.$message.'</div>';
                     }
-                }*/
+                 }
                 ?>
             <input type="text" class="box" placeholder="Entrer votre nom d'utilisateur" name="username" required>
             <input type="password" class="box" placeholder="Entrer votre mot de passe " name="password" required> 
@@ -75,9 +73,6 @@
 
         </form>
     </div>
-
-
-
 
     <section id="main">
         <div>
@@ -112,7 +107,7 @@
         <div class="wrapper">
 
 
-            <article style="background-image: url(Img/decouvrez_nos_hebergement1.jpg);" >
+            <article style="background-image: url(/Img/decouvrez_nos_hebergement1.jpg);" >
                 <div class="overlay" >
                     <h4>Nos chambres</h4>
                     <p><small>Offrez le meilleur à ceux que vous aimez et partagez des moments fabuleux !</small></p>
@@ -120,7 +115,7 @@
                 </div>
             </article>
 
-            <article style="background-image: url(Img/envie_de.jpg);">
+            <article style="background-image: url(/Img/envie_de.jpg);">
                 <div class="overlay">
                     <h4>Envie de s'amuser</h4>
                     <p><small>Parfois un peu de distraction serait le bienvenue et ferait le plus grand bien !</small>

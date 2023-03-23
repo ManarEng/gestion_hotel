@@ -19,6 +19,7 @@
     }
 
     #td1 {
+        text-align: left;
         background-color: lightseagreen;
         color: white;
         border: 10px;
@@ -159,18 +160,18 @@
         width: 100px;
         height: 2px;
         background: #ffa500;
-        /*margin: 0 auto;*/
-        margin-left: auto;
+
+        margin-left: 680px;
         margin-right: auto;
-        margin-top: 100px;
+
 
     }
 
     .heading {
         text-align: center;
-        margin-bottom: 60px;
+
         margin-left: 115px;
-        /*margin-top: 200px;*/
+        margin-top: 10px;
     }
 
     h2 {
@@ -218,10 +219,8 @@
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div class="container">
-        <div class="divider"></div>
-        <div class="heading">
-            <h2>Bienvenue à espace administrateur</h2>
-        </div>
+
+
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
@@ -232,7 +231,7 @@
             //$user_id = $_SESSION['user_id'];
 
             // Run a SELECT query to retrieve the user information
-            $sql =  "SELECT id_util, nom, prenom, nom_util, mdp, cin, adresse, email, tele FROM utilisateurs WHERE id_profil = 1 "; //AND id_util = $user_id
+            $sql =  "SELECT id_util, nom, prenom, nom_util, mdp, cin, adresse, email, tele, image FROM utilisateurs WHERE id_profil = 1 "; //AND id_util = $user_id
             $result = mysqli_query($conn, $sql); ?>
 
 
@@ -240,7 +239,7 @@
                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                     <tr>
                         <th class="tr1" colspan="2">
-                            <h1 id="profill"><?php echo $row['prenom'] . ' ' . $row['nom']; ?></h1>
+                            <h1 id="profill"><?php echo '<img src="../inscription/uploads/' . $row['image'] . '">'; ?></h1>
                         </th>
 
                     </tr>
@@ -325,7 +324,7 @@
                 </td>
 </tr> -->
                     <tr>
-                        <td class="td1" colspan="2">
+                        <td colspan="2">
                             <a href="modify_user.php?id_util=<?php echo $row['id_util']; ?>">
                                 <img src="../Img/edit-button.png" alt="Modify User" style="width: 25px ;height:25px ; position:right">
 
@@ -341,15 +340,15 @@
             #t1 {
                 border-collapse: collapse;
                 width: 100%;
-                max-width: 800px;
+                max-width: 500px;
                 margin: 20px auto;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             }
 
             /* Style the table headings */
             .tr1 {
-                background-color: #555;
-                color: #fff;
+
+                color: wheat;
                 padding: 10px;
                 text-align: left;
                 text-transform: uppercase;
@@ -357,8 +356,11 @@
 
             /* Style the table cells */
             .td1 {
+                text-align: left;
                 border: 1px solid #ddd;
                 padding: 11px;
+                padding-left: 30px;
+                border: none;
             }
 
             /* Style the user name */
@@ -369,6 +371,12 @@
                 text-transform: uppercase;
                 margin-bottom: 20px;
 
+
+            }
+
+            img {
+                width: 150px;
+                height: 150px;
             }
 
             /* Style the labels */

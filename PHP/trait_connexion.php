@@ -42,6 +42,7 @@ if(mysqli_num_rows($result) > 0){
  {
 
     header('location:/PHP/form_connexion.php');
+    $message[] = 'erreur';
     /*echo '<script >';
     echo ' alert("JavaScript Alert Box by PHP")';  //not showing an alert box.
     echo '</script>';*/
@@ -50,5 +51,10 @@ if(mysqli_num_rows($result) > 0){
  }
 
 mysqli_close($conn); // Fermer la connexion à la base de données
+
+
+
+
+
 
 ?>
