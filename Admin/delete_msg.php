@@ -1,21 +1,21 @@
 <?php
-    $conn = new mysqli("localhost", "root", "", "gestion_hotel");
+    $conn = new mysqli("localhost", "root", "", "hotelux");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Vérifier si le paramètre id_msg a été fourni dans l'URL
-    if (isset($_GET["id_msg"])) {
-        $id_msg = $_GET["id_msg"];
+    // Vérifier si le paramètre ID_MESSAGE a été fourni dans l'URL
+    if (isset($_GET["ID_MESSAGE"])) {
+        $ID_MESSAGE = $_GET["ID_MESSAGE"];
         
-        // Supprimer la ligne correspondant à l'id_msg dans la base de données
-        $sql = "DELETE FROM messagerie WHERE id_msg=$id_msg";
+        // Supprimer la ligne correspondant à l'ID_MESSAGE dans la base de données
+        $sql = "DELETE FROM messagerie WHERE ID_MESSAGE=$ID_MESSAGE";
         $result = mysqli_query($conn, $sql);
         
         // Rediriger vers la page du tableau de messagerie
         header("Location: MsgAdmin.php");
     } else {
-        echo "L'id_msg n'a pas été fourni.";
+        echo "L'ID_MESSAGE n'a pas été fourni.";
     }
 
     // Fermer la connexion

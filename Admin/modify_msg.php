@@ -1,42 +1,38 @@
 <?php
-    $conn = new mysqli("localhost", "root", "", "gestion_hotel");
+    $conn = new mysqli("localhost", "root", "", "hotelux");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    if(isset($_GET['id_msg'])) {
-        $id_msg = $_GET['id_msg'];
-        $sql="select * from messagerie where id_msg = $id_msg";
+    if(isset($_GET['ID_MESSAGE'])) {
+        $ID_MESSAGE = $_GET['ID_MESSAGE'];
+        $sql="select * from messagerie where ID_MESSAGE = $ID_MESSAGE";
         $resultat = mysqli_query($conn, $sql);
         if (mysqli_num_rows($resultat) == 1) {
             $row = mysqli_fetch_assoc($resultat);
-            $nom = $row['nom'];
-            $prenom = $row['prenom'];
-            $email = $row['email'];
-            $tele = $row['tele'];
-            $message = $row['message'];
+            $nom = $row['NOM'];
+            $prenom = $row['PRENOM'];
+            $email = $row['EMAIL'];
+            $message = $row['MESSAGE'];
         } else {
-            echo "Aucune donnée trouvée pour cet id_msg.";
+            echo "Aucune donnée trouvée pour cet ID_MESSAGE.";
             exit();
         }
     } else {
-        echo "Id_msg non spécifié.";
+        echo "ID_MESSAGE non spécifié.";
         exit();
     }
 ?>
 <fieldset>
 <form action="update_msg.php" method="post">
-    <input type="hidden" name="id_msg" value="<?php echo $id_msg; ?>">
+    <input type="hidden" name="ID_MESSAGE" value="<?php echo $ID_MESSAGE; ?>">
     <label for="nom">Nom :</label>
-    <input type="text" name="nom" value="<?php echo $nom; ?>">
+    <input type="text" name="nom" value="<?php echo $nom ." ".$prenom; ?>">
     <br>
-    <label for="prenom">Prénom :</label>
-    <input type="text" name="prenom" value="<?php echo $prenom; ?>">
-    <br>
+    
     <label for="email">E-mail :</label>
     <input type="email" name="email" value="<?php echo $email; ?>">
     <br>
-    <label for="tele">N° de Téléphone :</label>
-    <input type="text" name="tele" value="<?php echo $tele; ?>">
+   
     <br>
     <label for="message">Message :</label>
     <textarea name="message"><?php echo $message; ?></textarea>
@@ -62,8 +58,8 @@
 
         input[type="text"],
         input[type="email"],
-        input[type="tel"],
-        input[type="password"],
+       
+        
         textarea {
             flex-basis: 65%;
             padding: 15px;

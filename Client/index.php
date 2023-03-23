@@ -39,7 +39,7 @@
 <body>
     <header>
         <div class="">
-            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;">HoteLUX<span class="orange">.</span></h1>
+            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/Client/index.php"> HoteLUX<span class="orange">.</span></a></h1>
             <nav style="margin-top:35px; ">
                 <ul>
                    
@@ -48,12 +48,12 @@
                     <li><a href="#steps">A propos</a></li>
                      
                     <li><a href="#possibilities">Services</a></li>
-                    <li><a href="/index_contact.php">Contact</a></li>
+                    <li><a href="/PHP/index_contact.php">Contact</a></li>
                     <li><a href="">Réservation</a></li>
                     <!--<li><a href="/projet_hotel2 - Copie/index.html" >connexion</a></li>-->
                     <!--<li>  <a  href="javascript:myFunction();"> <i class="fa-solid fa-user"></i></a></li>
                     <div class="arrow-up" id="triangle"></div>-->
-                    <li>  <a  href="/Client/gestion_client_new.php"> <i class="fa-solid fa-user"></i></a></li>
+                    <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
                 </ul>
                 
                 <!--<div class="login-form" id="form">
@@ -131,7 +131,7 @@
                 <div class="overlay" >
                     <h4>Nos chambres</h4>
                     <p><small>Offrez le meilleur à ceux que vous aimez et partagez des moments fabuleux !</small></p>
-                    <a href="/index_chambres.html" class="button-2">Plus d'infos</a>
+                    
                 </div>
             </article>
 
@@ -140,11 +140,13 @@
                     <h4>Envie de s'amuser</h4>
                     <p><small>Parfois un peu de distraction serait le bienvenue et ferait le plus grand bien !</small>
                     </p>
-                    <a href="#" class="button-2">Plus d'infos</a>
+                    
                 </div>
             </article>
 
             <div class="clear"></div>
+            <a href="/PHP/index_chambres_activites.php" class="button-2">Plus d'infos</a>
+        </div>
 
         </div>
     </section>
@@ -220,39 +222,31 @@
 
     <footer>
          
-    
-        
          <div class="col-right">
             <h3>Contact Info</h3>
-            <p>06 10 30 40 56</p>
-            <p>05 10 30 40 56</p>
-            <p>hotelux@gmail.com</p>
+            
+            <p><i class="fa-solid fa-phone"></i>  06 10 30 40 56</p>
+            <p><img src="/Img/office-phone.png" style="height: 14px;width: 14px;">   05 10 30 40 56</p>
+            <p style="margin-left: 30px;"><i class="fa-solid fa-envelope"></i>            hotelux@gmail.com</p>
          </div>
-
+ 
          <div>
-            <h1>HoteLUX<span class="orange">.</span></h1>
+            <h1><a href="/index.html"> HoteLUX<span class="orange">.</span></a></h1>
             <p class="copyright">Copyright © Tous droits réservés.</div>
             </p> 
         </div>
-
+ 
          <div class="col-left">
-            <h3>Contact Info</h3>
-            <p>123,XYZ Road, BSK 3 <br>Banglore, Karnataka, IN</p>
+            <h3>Adresse</h3>
+            <p>123,XYZ Road, BSK 3 <br>Maroc, Oujda, IN</p>
             <div class="social-icons">
                 <i class="fa-brands fa-facebook" onclick="facebook()"></i>
                 <i class="fa-brands fa-twitter" onclick="twitter()"></i>
                 <i class="fa-brands fa-instagram" onclick="instagram()"></i>
-
-
+ 
+ 
             </div>
-
-
-            
-
-            
-
-            
-
+ 
          </div>
         
         

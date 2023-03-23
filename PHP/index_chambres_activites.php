@@ -1,18 +1,3 @@
-<?php
-// Include the database connection file
-$conn = mysqli_connect("localhost","root","");
-
-if( !$conn) { echo "Desolé, connexion à localhost impossible"; exit; }
-
-if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la base gestion_hotel impossible"; exit; }
-
-
-?>
-
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -37,17 +22,21 @@ if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la bas
     </head>
     <body>
 
+    <?php
+    include 'trait_chambres_activites.php';
+?>
+
         <header>
             <div class="">
-                <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"><b> HoteLUX</b><span class="orange">.</span></h1>
+                <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/index.html"> <b> HoteLUX</b><span class="orange">.</span></a></h1>
                 <nav style="margin-top:35px;">
                     <ul>
-                        <li><a href="/index.html" >Accueil</a></li>
-                        <li><a href="#steps">A propos</a></li>
-                        <li><a href="#possibilities">Services</a></li>
-                        <li><a href="/contact_code/index.php">Contact</a></li>
+                        <li><a href="/index.html/#main" >Accueil</a></li>
+                        <li><a href="/index.html/#steps">A propos</a></li>
+                        <li><a href="/index.html/#possibilities">Services</a></li>
+                        <li><a href="/PHP/index_contact.php">Contact</a></li>
                         <li><a href="">Réservation</a></li>
-                        <li><a href="">connexion</a></li>
+                        <li><a href="/PHP/form_connexion.php">connexion</a></li>
     
                     </ul>
                 </nav>
@@ -65,13 +54,13 @@ if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la bas
             <nav>
                 <ul class="nav nav-pills" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1" role="tab">Individuelle</a>
+                        <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1" role="tab"><?php echo $type1;  ?></a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2" role="tab">Double</a>
+                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2" role="tab"><?php echo $type2;  ?></a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3" role="tab">Triple</a>
+                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3" role="tab"><?php echo $type3;  ?></a>
                     </li>
                     
                 </ul>
@@ -83,33 +72,33 @@ if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la bas
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/single1.jpg" class="img-fluid" alt="...">
-                                <div class="price">590 dh</div>
+                                <img src="<?php echo $image1;  ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php echo $prix1;  ?></div>
                                 <div class="caption">
                                     
-                                    <p>Une Chambre Individuelle Confortable donnant une vue agréable.</p>
+                                    <p><?php echo $desc1;  ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/single2.jpg" class="img-fluid" alt="...">
-                                <div class="price">650 dh</div>
+                                <img src="<?php echo $image2;  ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php echo $prix2;  ?></div>
                                 <div class="caption">
                                     
-                                    <p>Une Chambre blanche Individuelle Confortable donnant un esprit de nature et verdure.</p>
+                                    <p><?php echo $desc2;  ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/single3.jpg" class="img-fluid" alt="...">
-                                <div class="price">670 dh</div>
+                                <img src="<?php echo $image3;  ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php echo $prix3;  ?></div>
                                 <div class="caption">
                                     
-                                    <p>Une Chambre moyenne taille avec une armoire.</p>
+                                    <p><?php echo $desc3;  ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
@@ -447,39 +436,33 @@ if( !mysqli_select_db($conn,'gestion_hotel')) { echo "Désolé, accès à la bas
 
 
     
-        <footer>
-        
+    <footer>
+         
          <div class="col-right">
             <h3>Contact Info</h3>
-            <p>06 10 30 40 56</p>
-            <p>05 10 30 40 56</p>
-            <p>hotelux@gmail.com</p>
+            
+            <p><i class="fa-solid fa-phone"></i>  06 10 30 40 56</p>
+            <p><img src="/Img/office-phone.png" style="height: 14px;width: 14px;">   05 10 30 40 56</p>
+            <p style="margin-left: 30px;"><i class="fa-solid fa-envelope"></i>            hotelux@gmail.com</p>
          </div>
-
+ 
          <div>
-            <h1><b> HoteLUX</b><span class="orange">.</span></h1>
+            <h1><a href="/index.html"> HoteLUX<span class="orange">.</span></a></h1>
             <p class="copyright">Copyright © Tous droits réservés.</div>
             </p> 
         </div>
-
+ 
          <div class="col-left">
-            <h3>Contact Info</h3>
-            <p>123,XYZ Road, BSK 3 <br>Banglore, Karnataka, IN</p>
+            <h3>Adresse</h3>
+            <p>123,XYZ Road, BSK 3 <br>Maroc, Oujda, IN</p>
             <div class="social-icons">
                 <i class="fa-brands fa-facebook" onclick="facebook()"></i>
                 <i class="fa-brands fa-twitter" onclick="twitter()"></i>
                 <i class="fa-brands fa-instagram" onclick="instagram()"></i>
-
-
+ 
+ 
             </div>
-
-
-            
-
-            
-
-            
-
+ 
          </div>
         
         

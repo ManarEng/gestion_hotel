@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../db_conn.php");
+include 'db_connexion.php';
 $firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";
 $firstnameError = $nameError = $emailError = $phoneError = $loginError = $mdpError = $mdppError = $imgError = "";
 $isSuccess = false;
