@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connexion.php';
+include("../db_conn.php");
 $firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";
 $firstnameError = $nameError = $emailError = $phoneError = $loginError = $mdpError = $mdppError = $imgError = "";
 $isSuccess = false;
@@ -35,8 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $isSuccess = false;
     }
 
-    if (!preg_match("/^0[5-7][0-9]{8}$/", $phone)) {
-        $phoneError = "Le numéro de téléphone doit être un nombre de 10 chiffres commence par 0 suivi de 5/6/7.";
+    if (!preg_match("/^[+]?[1-9][0-9]{9,14}$/", $phone)) {
+        $phoneError = "Le numéro de téléphone doit être au format international.";
         $isSuccess = false;
     }
     if (strlen($mdp) < 8) {
