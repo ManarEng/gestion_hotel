@@ -73,7 +73,7 @@ $user_id = $_SESSION['ID_UTILL'];
 
    <div class="profile">
       <?php 
-      $query = "SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
+      $query = "SELECT u.NOM, u.PRENOM, u.IMAGE_UTIL, r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
       FROM UTILISATEURS u
       JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
       JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
@@ -94,10 +94,7 @@ $user_id = $_SESSION['ID_UTILL'];
       }
       ?>
        <?php
-                $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE ID_UTILL = '$user_id'") or die('query failed');
-                if(mysqli_num_rows($select) > 0){
-                    $fetch = mysqli_fetch_assoc($select);
-                }
+                
                 if($reservations['IMAGE_UTIL'] == ''){
                     echo '<img src="/Img/default-avatar.png">';
                 }else{
