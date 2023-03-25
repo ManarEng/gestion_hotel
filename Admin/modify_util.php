@@ -21,7 +21,7 @@ if (isset($_GET['id_util'])) {
 <html>
 
 <head>
-    <title>Modifier le profil</title>
+    <title>Modifier l'utilisateur</title>
     <style>
         /*style of admin index*/
         body {
@@ -263,9 +263,9 @@ if (isset($_GET['id_util'])) {
     </ul>
     <?php if (isset($user)) : ?>
         <fieldset>
-            <legend>Modifier votre profil</legend>
+            <legend>Modifier l'utilisateur</legend>
 
-            <form method="post" action="update_user.php" onsubmit="return validateForm()">
+            <form method="post" action="update_util.php" onsubmit="return validateForm()">
                 <input type="hidden" name="id" value="<?php echo $user['id_util']; ?>" />
 
                 <label for="prenom">Prénom :</label>
@@ -290,7 +290,7 @@ if (isset($_GET['id_util'])) {
 
                 <label for="mdp">Nouveau Mot de Passe :</label>
                 <input type="password" name="mdp" id="mdp" />
-                <label for="mdpp">Confirmer le nouveau mot de passe :</label>
+                <label for="mdpp">Confirmer votre nouveau mot de passe :</label>
                 <input type="password" name="mdpp" id="mdpp" />
 
 
@@ -314,7 +314,7 @@ if (isset($_GET['id_util'])) {
             let regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
             var emailRegex = /\S+@\S+\.\S+/;
-            const formInputs = document.querySelectorAll('input[type="text"], input[type="tel"], textarea');
+            const formInputs = document.querySelectorAll('input[type="text"], input[type="tel"],  textarea');
 
             for (let input of formInputs) {
                 if (input.value.trim() === '') {
@@ -342,7 +342,6 @@ if (isset($_GET['id_util'])) {
                 alert("Le téléphone doit être au format international.");
                 return false;
             }
-
 
             if (mdp.trim() !== '') {
                 if (!regexPassword.test(mdp)) {

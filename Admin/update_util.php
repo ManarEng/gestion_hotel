@@ -20,9 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //end of verification
     // Update user information in the database
     if (!empty($mdp)) {
-
-
-        $query = "UPDATE utilisateurs SET prenom='$prenom', nom='$nom', email='$email', tele='$tele', mdp='$mdp', cin='$cin', adresse='$adresse' WHERE id_util=$user_id";
+        $query = "UPDATE utilisateurs SET prenom='$prenom', nom='$nom', email='$email', tele='$tele',mdp='$mdp', cin='$cin', adresse='$adresse' WHERE id_util=$user_id";
         $result = mysqli_query($conn, $query);
     } else {
         $query = "UPDATE utilisateurs SET prenom='$prenom', nom='$nom', email='$email', tele='$tele', cin='$cin', adresse='$adresse' WHERE id_util=$user_id";
@@ -32,6 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_close($conn);
 
     // Redirect to user profile page
-    header("Location: profil.php?id=$user_id");
+    header("Location: ../Admin/utilisateurs.php?id=$user_id");
     exit;
 }
