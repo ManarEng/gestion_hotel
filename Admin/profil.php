@@ -8,7 +8,6 @@
     body {
         margin: 0;
         /*background: #ddd;*/
-        /*background: #ddd;*/
     }
 
     table {
@@ -77,23 +76,8 @@
         text-decoration: underline;
     }
 
-    /* Style the inner menu */
-    .inner-menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: none;
-        position: absolute;
-    }
 
-    .inner-menu li {
-        margin-right: 0;
-    }
 
-    /* Show the inner menu when the outer menu item is hovered 
-    .outer-menu li:hover .inner-menu {
-        display: inline-block;
-    }*/
 
 
 
@@ -108,23 +92,7 @@
         margin-bottom: 10px;
     }
 
-    /* Style the inner menu */
-    .inner-menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: none;
-    }
 
-    .inner-menu li {
-        size: 50px;
-        margin-bottom: 5px;
-    }
-
-    /* Show the inner menu when the outer menu item is hovered */
-    .outer-menu li:hover .inner-menu {
-        display: block;
-    }
 
     /*header*/
 
@@ -195,13 +163,13 @@
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="profil.php">Profil</a></li>
-        <li><a href=""> Utilisateurs</a>
+        <li><a href="../Admin/utilisateurs.php"> Utilisateurs</a>
 
         </li>
-        <li><a href=""> Chambres</a>
+        <li><a href="../Admin/chambre.php"> Chambres</a>
 
         </li>
-        <li><a href=""> Activités</a>
+        <li><a href="../Admin/activite.php"> Activités</a>
 
         </li>
         <li><a href="res_admin.php">Résérvations</a></li>
@@ -229,13 +197,18 @@
                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                     <tr>
                         <th class="tr1" colspan="2">
-                            <h1 id="profill"><?php echo '<img src="../inscription/uploads/' . $row['image'] . '">'; ?></h1>
+                            <h1 id="profill"><?php if ($row['image'] == '') {
+                                                    echo '<img src="/Img/profil.jpg">';
+                                                } else {
+                                                    echo '<img src="../inscription/uploads/' . $row['image'] . '">';
+                                                }
+                                                ?></h1>
                         </th>
 
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>Nom:</label>
+                            <label>Nom :</label>
 
                         </td>
 
@@ -245,7 +218,7 @@
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>Prénom:</label>
+                            <label>Prénom :</label>
 
                         </td>
 
@@ -253,10 +226,19 @@
                             <?php echo $row['prenom']; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="td1">
+                            <label>CIN :</label>
+                        </td>
+                        <td class="td1">
+                            <?php echo $row['cin']; ?>
+                        </td>
+                    </tr>
+
 
                     <tr>
                         <td class="td1">
-                            <label>Email:</label>
+                            <label>Email :</label>
 
                         </td>
 
@@ -266,7 +248,7 @@
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>Téléphone:</label>
+                            <label>Téléphone :</label>
                         </td>
                         <td class="td1">
                             <?php echo $row['tele']; ?>
@@ -274,49 +256,28 @@
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>Login:</label>
-                        </td>
-                        <td class="td1">
-                            <?php echo $row['nom_util']; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td1">
-                            <label>Mot de passe:</label>
-                        </td>
-                        <td class="td1">
-                            <?php echo $row['mdp']; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td1">
-                            <label>CIN:</label>
-                        </td>
-                        <td class="td1">
-                            <?php echo $row['cin']; ?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="td1">
-                            <label>Adresse:</label>
+                            <label>Adresse :</label>
                         </td>
                         <td class="td1">
                             <?php echo $row['adresse']; ?>
                         </td>
                     </tr>
-                    <!-- <tr>
-                <td class="td1">
-                    <label>Photo:</label>
-                </td>
-                <td class="td1">
-                    <?php echo $row['img']; ?>
-                </td>
-</tr> -->
+                    <tr>
+                        <td class="td1">
+                            <label>Login :</label>
+                        </td>
+                        <td class="td1">
+                            <?php echo $row['nom_util']; ?>
+                        </td>
+                    </tr>
+
+
+
+
                     <tr>
                         <td colspan="2">
                             <a href="modify_user.php?id_util=<?php echo $row['id_util']; ?>">
-                                <img src="../Img/edit-button.png" alt="Modify User" style="width: 25px ;height:25px ; position:right">
+                                <img src="../Img/edit-button.png" alt="Modify User" title="Modifier" style="width: 25px ;height:25px ; position:right">
 
                             </a>
                         </td>
