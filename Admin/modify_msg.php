@@ -25,7 +25,7 @@
 <fieldset>
 <form action="update_msg.php" method="post">
     <input type="hidden" name="ID_MESSAGE" value="<?php echo $ID_MESSAGE; ?>">
-    <label for="nom">Nom :</label>
+    <label for="nom">Nom et Prenom :</label>
     <input type="text" name="nom" value="<?php echo $nom ." ".$prenom; ?>">
     <br>
     
