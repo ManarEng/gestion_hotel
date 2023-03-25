@@ -18,13 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Ajouter les données à la base de données
     $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','', '$entree', '$sortie', '$nbrec');";
-
     $r = $conn->query($sql);
 
+    $msg = '';
     if ($r === TRUE) {
-        echo "Réservation ajoutée avec succès.";
+        $msg = 'Votre résérvation a été ajoutée avec succès.';
     } else {
-        echo "Erreur: " . $sql . "<br>" . $conn->error;
+        $msg = 'Votre réservation a échoué. ' . $sql . '<br>' . $conn->error;
     }
 }
 // Récupération des informations de la réservation
@@ -96,6 +96,9 @@ if ($result->num_rows > 0) {
             <div class="col-lg-10 col-lg-offset-1">
                 <form id="contact-form" method="post" action="trait_Reservation.php">
                     <div class="row">
+                    <?php if (!empty($msg)) { ?>
+    <div class="alert alert-<?php echo ($r === TRUE) ? 'success' : 'danger'; ?>"><?php echo $msg; ?></div>
+<?php } ?>
                         <div class="col-md-6">
                             <label for="user">Nom d'Utilisateur <span class="blue"></span></label>
                             <input id="user" type="text" name="user" class="form-control" value="<?php echo $row['NOM']; ?>" >
@@ -147,6 +150,8 @@ if ($result->num_rows > 0) {
                         <div class="col-md-12">
                             <input type="submit" class="button1" value="Envoyer">
                         </div>
+                       
+
                     </div>
 
 
