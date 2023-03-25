@@ -2,7 +2,7 @@
 
 include 'db_connexion.php';
 session_start();
-$user_id = $_SESSION['id_util'];
+$user_id = $_SESSION['ID_UTILL'];
 
 
 if(isset($_POST['update_profile'])){
@@ -15,7 +15,7 @@ if(isset($_POST['update_profile'])){
    $update_cin = mysqli_real_escape_string($conn, $_POST['update_cin']);
    $update_adresse = mysqli_real_escape_string($conn, $_POST['update_adresse']);
 
-   mysqli_query($conn, "UPDATE `utilisateurs` SET nom = '$update_nom', email = '$update_email', prenom ='$update_prenom', telephone='$update_tele', nom_util='$update_username', cin='$update_cin', adresse='$update_adresse' WHERE id_util = '$user_id'") or die('query failed');
+   mysqli_query($conn, "UPDATE `utilisateurs` SET NOM = '$update_nom', EMAIL = '$update_email', PRENOM ='$update_prenom', TELE='$update_tele', LOGIN ='$update_username', CIN='$update_cin', ADRESSE='$update_adresse' WHERE ID_UTILL = '$user_id'") or die('query failed');
 
    
 
@@ -37,7 +37,7 @@ if(isset($_POST['update_profile'])){
       }elseif($new_pass != $confirm_pass){
          $message[] = 'Mot de passe de confirmation ne correspond pas!';
       }else{
-         mysqli_query($conn, "UPDATE `utilisateurs` SET mdp = '$confirm_pass' WHERE id_util = '$user_id'") or die('query failed');
+         mysqli_query($conn, "UPDATE `utilisateurs` SET MDP = '$confirm_pass' WHERE ID_UTILL = '$user_id'") or die('query failed');
          $message[] = 'Mise à jour avec succés!';
       }
    }
@@ -45,16 +45,45 @@ if(isset($_POST['update_profile'])){
       $message[] = 'Mise à jour avec succés!';
    }
 
-   /*$update_image = $_FILES['update_image']['name'];
+   $file = $_FILES['pic'];
+   $allowed_extensions = ['jpg', 'jpeg', 'png'];
+   $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+   // Store the image in the upload directory
+   $upload_dir = 'C:\Users\PC\Downloads\PFE\pfe\PHP\uploads\\';
+   $filename = uniqid("IMG-", true) . '.' . $file_extension;
+   $upload_path = $upload_dir . $filename;
+   // Check if file is an image
+   if (!empty($file)) {
+     
+      if (!in_array($file_extension, $allowed_extensions)) {
+         $message[] = "Télécharger une image valide.";
+      }else{
+      // Store the URL in the database
+      $url =  $filename;
+      $image_update_query = mysqli_query($conn, "UPDATE `utilisateurs` SET IMAGE_UTIL = '$url' WHERE ID_UTILL = '$user_id'") or die('query failed');
+      
+      if($image_update_query){
+         move_uploaded_file($file['tmp_name'], $upload_path);
+      }
+   }
+  }  
+      
+      
+ 
+
+
+
+
+/* $update_image = $_FILES['update_image']['name'];
    $update_image_size = $_FILES['update_image']['size'];
    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
-   $update_image_folder = '/PHP/uploads_inscription/'.$update_image;
+   $update_image_folder = '/PHP/uploads/'.$update_image;
 
-   if(!empty($update_image)){
+  if(!empty($update_image)){
       if($update_image_size > 2000000){
          $message[] = 'Image est trop large';
       }else{
-         $image_update_query = mysqli_query($conn, "UPDATE `utilisateurs` SET photo = '$update_image' WHERE id_util = '$user_id'") or die('query failed');
+         $image_update_query = mysqli_query($conn, "UPDATE `utilisateurs` SET photo = '$url' WHERE id_util = '$user_id'") or die('query failed');
          if($image_update_query){
             move_uploaded_file($update_image_tmp_name, $update_image_folder);
          }
@@ -114,7 +143,7 @@ if(isset($_POST['update_profile'])){
 <div class="update-profile">
 
    <?php
-      $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE id_util = '$user_id'") or die('query failed');
+      $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE ID_UTILL = '$user_id'") or die('query failed');
       if(mysqli_num_rows($select) > 0){
          $fetch = mysqli_fetch_assoc($select);
       }
@@ -122,11 +151,13 @@ if(isset($_POST['update_profile'])){
 
    <form action="" method="post" enctype="multipart/form-data">
       <?php
-         if($fetch['photo'] == ''){
+         if($fetch['IMAGE_UTIL'] == ''){
             echo '<img src="/Img/default-avatar.png">';
-         }else{
-            echo '<img src="/Client/uploaded_img/'.$fetch['photo'].'">';
          }
+         else{
+            echo '<img src="/PHP/uploads/'.$fetch['IMAGE_UTIL'].'">';
+         }
+
          if(isset($message)){
             foreach($message as $message){
                echo '<div class="message">'.$message.'</div>';
@@ -136,33 +167,33 @@ if(isset($_POST['update_profile'])){
       <div class="flex">
          <div class="inputBox">
             <span>Prénom :</span>
-            <input type="text" name="update_prenom" value="<?php echo $fetch['prenom']; ?>" class="box">
+            <input type="text" name="update_prenom" value="<?php echo $fetch['PRENOM']; ?>" class="box">
 
             <span>Email :</span>
-            <input type="email" name="update_email" value="<?php echo $fetch['email']; ?>" class="box">
+            <input type="email" name="update_email" value="<?php echo $fetch['EMAIL']; ?>" class="box">
 
 
             <span>Nom d'utilisateur :</span>
-            <input type="text" name="update_username" value="<?php echo $fetch['nom_util']; ?>" class="box">
+            <input type="text" name="update_username" value="<?php echo $fetch['LOGIN']; ?>" class="box">
 
             <span>CIN :</span>
-            <input type="text" name="update_cin" value="<?php echo $fetch['cin']; ?>" class="box">
+            <input type="text" name="update_cin" value="<?php echo $fetch['CIN']; ?>" class="box">
 
             <span>Adresse:</span>
-            <input type="text" name="update_adresse" value="<?php echo $fetch['adresse']; ?>" class="box">
+            <input type="text" name="update_adresse" value="<?php echo $fetch['ADRESSE']; ?>" class="box">
            
             <span>Modifier votre photo:</span>
-            <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box">
+            <input type="file" id="pic" name="pic" class="box">
          </div>
          <div class="inputBox">
             <span>Nom:</span>
-            <input type="text" name="update_nom" value="<?php echo $fetch['nom']; ?>" class="box">
+            <input type="text" name="update_nom" value="<?php echo $fetch['NOM']; ?>" class="box">
 
             <span>Téléphone:</span>
-            <input type="text" name="update_tele" value="<?php echo $fetch['telephone']; ?>" class="box">
+            <input type="text" name="update_tele" value="<?php echo $fetch['TELE']; ?>" class="box">
 
 
-            <input type="hidden" name="old_pass" value="<?php echo $fetch['mdp']; ?>">
+            <input type="hidden" name="old_pass" value="<?php echo $fetch['MDP']; ?>">
             <span>Ancien mot de passe :</span>
             <input type="password" name="update_pass" class="box">
             <span>Nouveau mot de passe :</span>

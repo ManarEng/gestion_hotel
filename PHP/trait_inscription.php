@@ -124,7 +124,7 @@ if (!($mdp == $mdpp)) {
 
 // Check if the email and login already exist in the database
 
-$query = "SELECT * FROM utilisateurs WHERE email = '$email' OR nom_util='$login'";
+$query = "SELECT * FROM utilisateurs WHERE EMAIL = '$email' OR LOGIN ='$login'";
 $result = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($result) > 0) {
@@ -149,7 +149,7 @@ move_uploaded_file($file['tmp_name'], $upload_path);
 $url =$filename;
 
 
-$sql = "INSERT INTO utilisateurs VALUES ('','3','$firstname','$nom' , '$email', '$phone', '$login','$mdp' ,'$cin' ,'$ad' ,'$url')";
+$sql = "INSERT INTO utilisateurs VALUES ('','3','$firstname','$nom' , '$login','$mdp','$cin','$ad','$email','$phone','$url')";
 mysqli_query($conn, $sql);
 echo '<script>document.getElementById("confirmation-message").style.display = "block";</script>';
 header("refresh:3;Location: /index.html");

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../db_conn.php");
+include 'db_connexion.php';
 $firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";
 $firstnameError = $nameError = $emailError = $phoneError = $loginError = $mdpError = $mdppError = $imgError = "";
 $isSuccess = false;
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Check if the  login already exist in the database
 
-    $query = "SELECT * FROM utilisateurs WHERE  nom_util='$login'";
+    $query = "SELECT * FROM utilisateurs WHERE  LOGIN ='$login'";
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
@@ -92,13 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if ($isSuccess) {
     $sql = "INSERT INTO utilisateurs VALUES ('','3', '$name', '$firstname', '$login', '$mdp', '$cin', '$adresse', '$email', '$phone','$url')";
     mysqli_query($conn, $sql);
-    $query = "SELECT * FROM utilisateurs WHERE nom_util='$login'";
+    $query = "SELECT * FROM utilisateurs WHERE LOGIN ='$login'";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $_SESSION['id_util'] = $row['id_util'];
-        $_SESSION['id_profil'] = $row['id_profil'];
-        $_SESSION['nom_util'] = $row['nom_util'];
+        $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
+        $_SESSION['ID_PROFIL'] = $row['ID_PROFIL'];
+        $_SESSION['LOGIN'] = $row['LOGIN'];
 
 
         header('location:/Client/index.php');
@@ -134,7 +134,7 @@ mysqli_close($conn);
 
 
 
-    <link rel="stylesheet" href="../contact_code/css/style.css">
+    <link rel="stylesheet" href="/CSS/style_contact.css">
 
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel="stylesheet"> <!--this link is for the css of the hotelux-->
     <!--this script is for social medio icons-->

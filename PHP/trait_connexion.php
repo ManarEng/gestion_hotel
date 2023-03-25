@@ -10,7 +10,7 @@ $user = $_POST['username'];
 $pass = $_POST['password'];
 
 // Requête SQL pour récupérer les informations de l'utilisateur
-$sql = "SELECT * FROM utilisateurs WHERE nom_util='$user' AND mdp='$pass'";
+$sql = "SELECT * FROM utilisateurs WHERE LOGIN ='$user' AND MDP='$pass'";
 $result = mysqli_query($conn, $sql);
 
 // Vérification si les informations de connexion sont valides
@@ -29,12 +29,12 @@ $result = mysqli_query($conn, $sql);
 */
 if(mysqli_num_rows($result) > 0){
     $row = mysqli_fetch_assoc($result);
-    $_SESSION['id_util'] = $row['id_util'];
-    $_SESSION['nom_util'] = $row['nom_util'];
+    $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
+    $_SESSION['LOGIN'] = $row['LOGIN'];
 
-    if($row['id_profil']==3){header('location:/Client/index.php');}
-    else if($row['id_profil']==1){header('location:/Admin/index.php');}
-    else if($row['id_profil']==2){header('location:/Agent/index.php');}
+    if($row['ID_PROFIL']==3){header('location:/Client/index.php');}
+    else if($row['ID_PROFIL']==1){header('location:/Admin/index.php');}
+    else if($row['ID_PROFIL']==2){header('location:/Agent/index.php');}
     
  }
  

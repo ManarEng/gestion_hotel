@@ -2,7 +2,7 @@
 
 include 'db_connexion.php';
 session_start();
-$user_id = $_SESSION['id_util'];
+$user_id = $_SESSION['ID_UTILL'];
 
 if(!isset($user_id)){
    header('location:/index.html');
@@ -71,17 +71,17 @@ if(isset($_GET['logout'])){
    <div class="profile">
       
    <?php
-                $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE id_util = '$user_id'") or die('query failed');
+                $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE ID_UTILL = '$user_id'") or die('query failed');
                 if(mysqli_num_rows($select) > 0){
                     $fetch = mysqli_fetch_assoc($select);
                 }
-                if($fetch['photo'] == ''){
+                if($fetch['IMAGE_UTIL'] == ''){
                     echo '<img src="/Img/default-avatar.png">';
                 }else{
-                    echo '<img src="/Client/uploaded_img/'.$fetch['photo'].'">';
+                    echo '<img src="/PHP/uploads/'.$fetch['IMAGE_UTIL'].'">';
                 }
             ?>
-            <h3><?php echo $fetch['nom_util']; ?></h3> 
+            <h3><?php echo $fetch['LOGIN']; ?></h3> 
             <a href="modifier_profil.php" class="btn">Mon profile</a>
             <a href="" class="btn">Mes réservations</a>
             <a href="gestion_client.php?logout=<?php echo $user_id; ?>" class="delete-btn">Déconnexion</a>

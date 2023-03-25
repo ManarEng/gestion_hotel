@@ -23,7 +23,7 @@
     <body>
 
     <?php
-    include 'trait_chambres_activites.php';
+    //include 'trait_chambres_activites.php';
 ?>
 
         <header>
@@ -51,54 +51,115 @@
            
             <h1 class="text-logo">Chambres et prix </h1>
             
-            <nav>
+            <?php
+				require 'db_connexion_oop.php';
+			 
+                echo '<nav>
+                        <ul class="nav nav-pills">';
+
+                $db = Database::connect();
+                $statement = $db->query('SELECT * FROM type_chambre');
+                $categories = $statement->fetchAll();
+                foreach ($categories as $category) 
+                {
+                    if($category['id_type_chambre'] == '1')
+                        echo '<li role="presentation" class="active"><a href="#' . $category['id_type_chambre'] . '" data-toggle="tab">' .$category['type_chambre']. '</a></li>';
+                    else
+                        echo '<li role="presentation"><a href="#' . $category['id_type_chambre'] . '" data-toggle="tab">' .$category['type_chambre']. '</a></li>';
+                }
+
+                echo    '</ul>
+                      </nav>';
+
+            //    echo '<div class="tab-content">';
+
+            /*    foreach ($categories as $category) 
+                {
+                    if($category['id'] == '1')
+                        echo '<div class="tab-pane active" id="' . $category['id'] .'">';
+                    else
+                        echo '<div class="tab-pane" id="' . $category['id'] .'">';
+                    
+                    echo '<div class="row">';*/
+                    
+            /*        $statement = $db->prepare('SELECT * FROM chambre');
+                    //$statement->execute(array($category['id']));
+                    while ($item = $statement->fetch()) 
+                    {
+                        echo '<div class="col-sm-6 col-md-4">
+                                <div class="thumbnail">
+                                    <img src="Img/image_chambres/' . $item['image'] . '" alt="...">
+                                    <div class="price">' . number_format($item['prix'], 2, '.', ''). ' dh</div>
+        
+
+                                    <div class="caption">
+                                    
+                                    <p>'. $item['description'] .'</p>
+                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
+
+                                </div>
+                                </div>
+                            </div>';
+                    }
+                   
+                   echo    '</div>
+                        </div>';
+                
+                //Database::disconnect();
+                echo  '</div>';*/
+            ?>
+
+
+
+
+  <!--          <nav>
                 <ul class="nav nav-pills" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1" role="tab"><?php echo $type1;  ?></a>
+                        <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1" role="tab">individuelle</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2" role="tab"><?php echo $type2;  ?></a>
+                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2" role="tab">double</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3" role="tab"><?php echo $type3;  ?></a>
+                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3" role="tab">triple</a>
                     </li>
                     
                 </ul>
-            </nav>
+            </nav> -->
 
             <div class="tab-content">
 
-                <div class="tab-pane active" id="tab1" role="tabpanel">
+                <div class="tab-pane active" id="1" role="tabpanel">
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="<?php echo $image1;  ?>" class="img-fluid" alt="...">
-                                <div class="price"><?php echo $prix1;  ?></div>
+                                <img src="<?php /*echo $image1; */ ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php /* echo $prix1; */ ?></div>
                                 <div class="caption">
                                     
-                                    <p><?php echo $desc1;  ?></p>
+                                    <p><?php /*echo $desc1;*/  ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="<?php echo $image2;  ?>" class="img-fluid" alt="...">
-                                <div class="price"><?php echo $prix2;  ?></div>
+                                <img src="<?php /*echo $image2;*/  ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php /*echo $prix2; */ ?></div>
                                 <div class="caption">
                                     
-                                    <p><?php echo $desc2;  ?></p>
+                                    <p><?php /*echo $desc2;*/  ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="<?php echo $image3;  ?>" class="img-fluid" alt="...">
-                                <div class="price"><?php echo $prix3;  ?></div>
+                                <img src="<?php /*echo $image3;*/  ?>" class="img-fluid" alt="...">
+                                <div class="price"><?php /*echo $prix3;*/  ?></div>
                                 <div class="caption">
                                     
-                                    <p><?php echo $desc3;  ?></p>
+                                    <p><?php /*echo $desc3; */ ?></p>
                                     <a href="#" class="btn btn-order" role="button"> Réserver</a>
                                 </div>
                             </div>
@@ -129,7 +190,7 @@
                     </div>
                 </div>
 
-                <div class="tab-pane" id="tab2" role="tabpanel">
+                <div class="tab-pane" id="2" role="tabpanel">
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
@@ -200,7 +261,7 @@
                     </div>
                 </div>
 
-                <div class="tab-pane" id="tab3" role="tabpanel">
+                <div class="tab-pane" id="3" role="tabpanel">
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">

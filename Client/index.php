@@ -220,37 +220,37 @@
     </section>
 
 
-    <footer>
+     <footer>
          
-         <div class="col-right">
-            <h3>Contact Info</h3>
-            
-            <p><i class="fa-solid fa-phone"></i>  06 10 30 40 56</p>
-            <p><img src="/Img/office-phone.png" style="height: 14px;width: 14px;">   05 10 30 40 56</p>
-            <p style="margin-left: 30px;"><i class="fa-solid fa-envelope"></i>            hotelux@gmail.com</p>
-         </div>
- 
-         <div>
-            <h1><a href="/index.html"> HoteLUX<span class="orange">.</span></a></h1>
-            <p class="copyright">Copyright © Tous droits réservés.</div>
-            </p> 
+        <div class="col-right">
+           <h3>Contact Info</h3>
+           
+           <p><i class="fa-solid fa-phone"></i>  06 10 30 40 56</p>
+           <p><img src="/Img/office-phone.png" style="height: 14px;width: 14px;">   05 10 30 40 56</p>
+           <p style="margin-left: 30px;"><i class="fa-solid fa-envelope"></i>            hotelux@gmail.com</p>
         </div>
- 
-         <div class="col-left">
-            <h3>Adresse</h3>
-            <p>123,XYZ Road, BSK 3 <br>Maroc, Oujda, IN</p>
-            <div class="social-icons">
-                <i class="fa-brands fa-facebook" onclick="facebook()"></i>
-                <i class="fa-brands fa-twitter" onclick="twitter()"></i>
-                <i class="fa-brands fa-instagram" onclick="instagram()"></i>
- 
- 
-            </div>
- 
-         </div>
-        
-        
-     </footer>
+
+        <div>
+           <h1><a href="/index.html"> HoteLUX<span class="orange">.</span></a></h1>
+           <p class="copyright">Copyright © Tous droits réservés.</div>
+           </p> 
+       </div>
+
+        <div class="col-left">
+           <h3>Adresse</h3>
+           <p>123,XYZ Road, BSK 3 <br>Maroc, Oujda, IN</p>
+           <div class="social-icons">
+               <i class="fa-brands fa-facebook" onclick="facebook()"></i>
+               <i class="fa-brands fa-twitter" onclick="twitter()"></i>
+               <i class="fa-brands fa-instagram" onclick="instagram()"></i>
+
+
+           </div>
+
+        </div>
+       
+       
+    </footer>
 
 
 
