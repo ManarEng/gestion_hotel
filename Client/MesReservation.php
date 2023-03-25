@@ -1,3 +1,26 @@
+<?php
+/*
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['ID_UTILL'])) {
+    // Rediriger l'utilisateur vers la page de connexion si l'utilisateur n'est pas connecté
+    header('Location: /index.html');
+    exit;
+}*/
+
+// Connexion à la base de données avec mysqli
+$conn= mysqli_connect("localhost", "root", "", "hotelux");
+
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit;
+}
+
+// Récupérer les données de la session
+$user_id = $_SESSION['ID_UTILL'];
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -49,11 +72,50 @@
 <div class="container">
 
    <div class="profile">
+      <?php 
+      $query = "SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
+      FROM UTILISATEURS u
+      JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
+      JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
+      JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
+      JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ";
+      $result = mysqli_query($conn, $query);
       
-            <img src="/Img/default-avatar.png">
-            <h3>Nom d'utilisateur</h3> 
-            <table style="border: 1;">
+      // Vérification de la requête
+      if (!$result) {
+          echo "Error: " . mysqli_error($mysqli);
+          exit;
+      }
+      
+      // Récupération des résultats
+      $reservations = array();
+      while ($row = mysqli_fetch_assoc($result)) {
+          $reservations[] = $row;
+      }
+      ?>
+       <?php
+                $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE ID_UTILL = '$user_id'") or die('query failed');
+                if(mysqli_num_rows($select) > 0){
+                    $fetch = mysqli_fetch_assoc($select);
+                }
+                if($reservations['IMAGE_UTIL'] == ''){
+                    echo '<img src="/Img/default-avatar.png">';
+                }else{
+                    echo '<img src="/PHP/uploads/'.$reservations['IMAGE_UTIL'].'">';
+                }
+            ?>
+             <h3><?php echo $reservations['LOGIN']; ?></h3>
+            <table >
                 <tr><th>Type de chambre </th><th>Nombre de chambre</th><th>Activité</th><th>date d'arrivée</th><th>date de depart</th></tr>
+                <?php foreach ($reservations as $reservation): ?>
+          <tr>
+            <td><?php echo $reservation['TYPEC']; ?></td>
+            <td><?php echo $reservation['NBRE_CHAMBRE']; ?></td>
+            <td><?php echo $reservation['TYPE']; ?></td>
+            <td><?php echo $reservation['DATE_D_ENTREE']; ?></td>
+            <td><?php echo $reservation['DATE_SORTIE ']; ?></td>
+          </tr>
+               <?php endforeach; ?>
             </table>
         
    </div>
