@@ -228,22 +228,23 @@
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            $conn = new mysqli("localhost", "root", "", "hotelux");
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            $sql="SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
-            FROM UTILISATEURS u
-            JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
-            JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
-            JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
-            JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ";    
-            $resultat = mysqli_query($conn, $sql);
+            $conn = mysqli_connect("localhost", "root", "", "hotelux");
 
-// Vérifier si des données ont été trouvées
-if (mysqli_num_rows($resultat) == 0) {
+            if ($conn) 
+            {
+
+                $resultat = mysqli_query($conn, "SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
+                FROM UTILISATEURS u
+                JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
+                JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
+                JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
+                JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ");
+            }
+
+    // Vérifier si des données ont été trouvées
+    if (mysqli_num_rows($resultat) == 0) {
     echo "Aucune donnée trouvée.";
-} else {
+    } else {
     // Afficher les données dans un tableau HTML
     echo "<table class=styled-table>";
     echo "<thead>";
@@ -266,7 +267,7 @@ if (mysqli_num_rows($resultat) == 0) {
     }    
     echo"</thead>";
     echo "</table>";
-}
+    }
 
 // Fermer la connexion
 mysqli_close($conn);
