@@ -101,22 +101,22 @@ if ($result->num_rows > 0) {
 <?php } ?>
                         <div class="col-md-6">
                             <label for="user">Nom d'Utilisateur <span class="blue"></span></label>
-                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $row['NOM']; ?>" >
+                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $_SESSION['LOGIN']; ?>" >
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $row["TELE"]; ?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION["TELE"]; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="type">Type de Chambre <span class="blue"></span></label>
-                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $row["TYPEC"]; ?>">
+                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $_SESSION["TYPEC"]; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="prix">Prix de Chambre <span class="blue"></span></label>
-                            <input id="prix" type="text" name="prix_ch" class="form-control" value="<?php echo $row["PRIX"]; ?>">
+                            <input id="prix" type="text" name="prix_ch" class="form-control" value="<?php echo $_SESSION["PRIX"]; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
