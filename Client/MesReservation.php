@@ -1,21 +1,8 @@
 <?php
-/*
 session_start();
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['ID_UTILL'])) {
-    // Rediriger l'utilisateur vers la page de connexion si l'utilisateur n'est pas connecté
-    header('Location: /index.html');
-    exit;
-}*/
+include 'db_connexion.php';
 
-// Connexion à la base de données avec mysqli
-$conn= mysqli_connect("localhost", "root", "", "hotelux");
-
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    exit;
-}
 
 // Récupérer les données de la session
 $user_id = $_SESSION['ID_UTILL'];
@@ -82,24 +69,24 @@ $user_id = $_SESSION['ID_UTILL'];
       $result = mysqli_query($conn, $query);
       
       // Vérification de la requête
-      if (!$result) {
+      /*if (!$result) {
           echo "Error: " . mysqli_error($mysqli);
           exit;
-      }
+      }*/
       
       // Récupération des résultats
-      $reservations = array();
-      while ($row = mysqli_fetch_assoc($result)) {
-          $reservations[] = $row;
+      if(mysqli_num_rows($result)>0){
+        $row = mysqli_fetch_assoc($result);
       }
-      ?>
-       <?php
+      
+      if($row['IMAGE_UTIL'] == ''){
+        echo '<img src="/Img/default-avatar.png">';
+    }else{
+        echo '<img src="/PHP/uploads/'.$row['IMAGE_UTIL'].'">';
+    }
+      
                 
-                if($reservations['IMAGE_UTIL'] == ''){
-                    echo '<img src="/Img/default-avatar.png">';
-                }else{
-                    echo '<img src="/PHP/uploads/'.$reservations['IMAGE_UTIL'].'">';
-                }
+               
             ?>
              <h3><?php echo $reservations['LOGIN']; ?></h3>
             <table >
