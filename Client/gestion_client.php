@@ -83,7 +83,7 @@ if(isset($_GET['logout'])){
             ?>
             <h3><?php echo $fetch['LOGIN']; ?></h3> 
             <a href="modifier_profil.php" class="btn">Mon profile</a>
-            <a href="" class="btn">Mes réservations</a>
+            <a href="MesReservation.php" class="btn">Mes réservations</a>
             <a href="gestion_client.php?logout=<?php echo $user_id; ?>" class="delete-btn">Déconnexion</a>
             <!--<p>new <a href="login.php">login</a> or <a href="register.php">register</a></p>-->
    </div>
