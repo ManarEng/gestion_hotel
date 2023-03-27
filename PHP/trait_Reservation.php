@@ -33,7 +33,7 @@ FROM UTILISATEURS u
 JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
 JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
 JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
-JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE;"; // Remplacez 1 par l'ID de la réservation souhaitée
+JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE;"; 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -126,10 +126,16 @@ if ($result->num_rows > 0) {
                         </div>
                         <div class="col-md-6">
                             <label for="type_ac">Type d'activité <span class="blue"></span></label>
-                            <select id="type_ac" name="type_ac" required>
-                                <option value="0">--choisisser une activité--</option>
-                                
-                            </select>
+                            <?php
+    $result = mysqli_query($conn, "SELECT TYPE FROM activite");
+    echo "<select id='type_ac' name='type_ac' required>";
+    echo "<option value=''>--choisir une activité--</option>";
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<option value='" . $row['TYPE'] . "'>" . $row['TYPE'] . "</option>";
+    }
+    echo "</select>";
+?>
+                        
                             <p class="comments"></p> 
                         </div>
                         
