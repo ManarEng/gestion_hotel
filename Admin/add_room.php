@@ -2,7 +2,7 @@
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Connect to the database
-    include("../db_conn.php");
+    include("../PHP/db_connexion.php");
 
     // Retrieve form data
     $type = $_POST['field1'];
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // Insert new row into the database
-    $query = "INSERT INTO chambre  VALUES ('','$type', '$description','oui' ,'$prix','$url')";
+    $query = "INSERT INTO chambre  VALUES ('','','$type', '$description','oui' ,'$prix','$url')";
     mysqli_query($conn, $query);
 
     // Close database connection
