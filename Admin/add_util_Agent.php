@@ -2,7 +2,7 @@
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Connect to the database
-    include("../db_conn.php");
+    include("../PHP/db_connexion.php");
 
     // Retrieve form data
     $prenom = $_POST['prenom'];
@@ -301,7 +301,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <legend>Ajouter un agent: </legend>
 
         <form method="post" action="" onsubmit="return validateForm()" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?php echo $user['id_util']; ?>" />
+            <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
 
             <label for="prenom">Prénom :</label>
             <input type="text" name="prenom" id="prenom" />
