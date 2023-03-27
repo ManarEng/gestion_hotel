@@ -2,7 +2,7 @@
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Connect to the database
-    include("../db_conn.php");
+    include("../PHP/db_connexion.php");
 
     // Retrieve form data
     $type = $_POST['field1'];
