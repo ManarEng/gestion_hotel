@@ -184,12 +184,12 @@
             <?php
             //session_start();
             // Establish a connection to the database
-            include("../db_conn.php");
+            include("../PHP/db_connexion.php");
             // Retrieve the user ID from the session
             //$user_id = $_SESSION['user_id'];
 
             // Run a SELECT query to retrieve the user information
-            $sql =  "SELECT id_util, nom, prenom, nom_util, mdp, cin, adresse, email, tele, image FROM utilisateurs WHERE id_profil = 1 "; //AND id_util = $user_id
+            $sql =  "SELECT ID_UTILL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs WHERE ID_PROFIL = 1 "; //AND ID_UTILL = $user_id
             $result = mysqli_query($conn, $sql); ?>
 
 
@@ -197,10 +197,10 @@
                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                     <tr>
                         <th class="tr1" colspan="2">
-                            <h1 id="profill"><?php if ($row['image'] == '') {
+                            <h1 id="profill"><?php if ($row['IMAGE_UTIL'] == '') {
                                                     echo '<img src="/Img/profil.jpg">';
                                                 } else {
-                                                    echo '<img src="../inscription/uploads/' . $row['image'] . '">';
+                                                    echo '<img src="../inscription/uploads/' . $row['IMAGE_UTIL'] . '">';
                                                 }
                                                 ?></h1>
                         </th>
@@ -213,7 +213,7 @@
                         </td>
 
                         <td class="td1">
-                            <?php echo $row['nom']; ?>
+                            <?php echo $row['NOM']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -223,7 +223,7 @@
                         </td>
 
                         <td class="td1">
-                            <?php echo $row['prenom']; ?>
+                            <?php echo $row['PRENOM']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -231,7 +231,7 @@
                             <label>CIN :</label>
                         </td>
                         <td class="td1">
-                            <?php echo $row['cin']; ?>
+                            <?php echo $row['CIN']; ?>
                         </td>
                     </tr>
 
@@ -243,7 +243,7 @@
                         </td>
 
                         <td class="td1">
-                            <?php echo $row['email']; ?>
+                            <?php echo $row['E_MAIL']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -251,7 +251,7 @@
                             <label>Téléphone :</label>
                         </td>
                         <td class="td1">
-                            <?php echo $row['tele']; ?>
+                            <?php echo $row['TELE']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -259,7 +259,7 @@
                             <label>Adresse :</label>
                         </td>
                         <td class="td1">
-                            <?php echo $row['adresse']; ?>
+                            <?php echo $row['ADRESSE']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -267,7 +267,7 @@
                             <label>Login :</label>
                         </td>
                         <td class="td1">
-                            <?php echo $row['nom_util']; ?>
+                            <?php echo $row['LOGIN']; ?>
                         </td>
                     </tr>
 
@@ -276,7 +276,7 @@
 
                     <tr>
                         <td colspan="2">
-                            <a href="modify_user.php?id_util=<?php echo $row['id_util']; ?>">
+                            <a href="modify_user.php?id_util=<?php echo $row['ID_UTILL']; ?>">
                                 <img src="../Img/edit-button.png" alt="Modify User" title="Modifier" style="width: 25px ;height:25px ; position:right">
 
                             </a>
