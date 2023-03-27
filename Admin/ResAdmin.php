@@ -226,12 +226,10 @@
     <div class="container">
         
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
+            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>*/
             <?php
-            $conn = new mysqli("localhost", "root", "", "hotelux");
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+            include("../db_connexion.php") ;
+            
             $sql="SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
             FROM UTILISATEURS u
             JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL

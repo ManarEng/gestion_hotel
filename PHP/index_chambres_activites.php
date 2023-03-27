@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+
+?>
+
+
+
+
 
 
 <!DOCTYPE html>
@@ -22,9 +31,6 @@
     </head>
     <body>
 
-    <?php
-    //include 'trait_chambres_activites.php';
-?>
 
         <header>
             <div class="">
@@ -55,286 +61,147 @@
 				require 'db_connexion_oop.php';
 			 
                 echo '<nav>
-                        <ul class="nav nav-pills">';
+                        <ul class="nav nav-pills" role="tablist">';
 
                 $db = Database::connect();
                 $statement = $db->query('SELECT * FROM type_chambre');
                 $categories = $statement->fetchAll();
                 foreach ($categories as $category) 
                 {
-                    if($category['id_type_chambre'] == '1')
-                        echo '<li role="presentation" class="active"><a href="#' . $category['id_type_chambre'] . '" data-toggle="tab">' .$category['type_chambre']. '</a></li>';
+                    if($category['ID_TYPE_CHAMBRE'] == '1')
+                       { echo '<li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab'. $category['ID_TYPE_CHAMBRE'] . '" role="tab">' . $category['TYPE_CHAMBRE'] . '</a></li>';
+                        /*$_SESSION['TYPE_CHAMBRE']= $category['TYPE_CHAMBRE'];*/
+                    }
                     else
-                        echo '<li role="presentation"><a href="#' . $category['id_type_chambre'] . '" data-toggle="tab">' .$category['type_chambre']. '</a></li>';
+                    {
+                        echo '<li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab'. $category['ID_TYPE_CHAMBRE'] . '" role="tab">' . $category['TYPE_CHAMBRE'] . '</a></li>';
+                        /*$_SESSION['TYPE_CHAMBRE']= $category['TYPE_CHAMBRE'];*/
+                    }
+                    
+                
                 }
+                
 
                 echo    '</ul>
                       </nav>';
 
-            //    echo '<div class="tab-content">';
+                echo '<div class="tab-content">';
 
-            /*    foreach ($categories as $category) 
-                {
-                    if($category['id'] == '1')
-                        echo '<div class="tab-pane active" id="' . $category['id'] .'">';
-                    else
-                        echo '<div class="tab-pane" id="' . $category['id'] .'">';
+                foreach ($categories as $category) {
+                    if($category['ID_TYPE_CHAMBRE'] == '1') {
+                        echo '<div class="tab-pane active" id="tab' . $category['ID_TYPE_CHAMBRE'] .'" role="tabpanel">';
+                    } else {
+                        echo '<div class="tab-pane" id="tab' . $category['ID_TYPE_CHAMBRE'] .'" role="tabpanel">';
+                    }
                     
-                    echo '<div class="row">';*/
+                    echo '<div class="row">';
                     
-            /*        $statement = $db->prepare('SELECT * FROM chambre');
-                    //$statement->execute(array($category['id']));
-                    while ($item = $statement->fetch()) 
-                    {
-                        echo '<div class="col-sm-6 col-md-4">
-                                <div class="thumbnail">
-                                    <img src="Img/image_chambres/' . $item['image'] . '" alt="...">
-                                    <div class="price">' . number_format($item['prix'], 2, '.', ''). ' dh</div>
-        
-
+                    $statement = $db->prepare('SELECT * FROM chambre WHERE chambre.ID_TYPE_CHAMBRE = ?');
+                    $statement->execute(array($category['ID_TYPE_CHAMBRE']));
+                    while ($item = $statement->fetch()) {
+                        echo '<div class="col-md-6 col-lg-4">
+                                <div class="img-thumbnail">
+                                    <img src="/Img/image_chambres/' . $item['IMAGE'] . '" class="img-fluid" alt="...">
+                                    <div class="price">' . number_format($item['PRIX'], 2, '.', ''). ' dh</div>
                                     <div class="caption">
-                                    
-                                    <p>'. $item['description'] .'</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-
-                                </div>
+                                        
+                                        <p>' . $item['DESCRIPTION'] . '</p>
+                                        <a href="/PHP/bouton_reserver.php" class="btn btn-order" role="button"> Réserver</a>
+                                    </div>
                                 </div>
                             </div>';
                     }
                    
                    echo    '</div>
                         </div>';
+
+                    /*    $statement2 = $db->prepare('SELECT * FROM chambre WHERE ID_CHAMBRE = ?');  
+                        $result = mysqli_query($conn, $statement2);
+                        if (mysqli_num_rows($result) > 0) {
+                            $row = mysqli_fetch_assoc($result);
+                            $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
+                            $_SESSION['ID_PROFIL'] = $row['ID_PROFIL'];
+                            $_SESSION['LOGIN'] = $row['LOGIN'];
+                            $_SESSION['TELE'] = $row['TELE'];
+                    
                 
+                        }*/
+
+
+
+
+
+                }
                 //Database::disconnect();
-                echo  '</div>';*/
+                echo  '</div>';
+
+                
+            ?>
+
+
+<div class="body">
+        <div class="container site">
+           
+            <h1 class="text-logo">Activités et prix </h1>
+            
+            <?php
+				//require 'db_connexion_oop.php';
+			 
+                echo '<nav>
+                        <ul class="nav nav-pills" role="tablist">';
+
+                //$db = Database::connect();
+                $statement = $db->query('SELECT * FROM type_activite');
+                $categories = $statement->fetchAll();
+                foreach ($categories as $category) 
+                {
+                    if($category['ID_TYPE_ACTIVITE'] == '1')
+                        echo '<li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab'. $category['ID_TYPE_ACTIVITE'] . '" role="tab">' . $category['TYPE_ACTIVITE'] . '</a></li>';
+                    else
+                    echo '<li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab'. $category['ID_TYPE_ACTIVITE'] . '" role="tab">' . $category['TYPE_ACTIVITE'] . '</a></li>';
+                }
+
+                echo    '</ul>
+                      </nav>';
+
+                echo '<div class="tab-content">';
+
+                foreach ($categories as $category) {
+                    if($category['ID_TYPE_ACTIVITE'] == '1') {
+                        echo '<div class="tab-pane active" id="tab' . $category['ID_TYPE_ACTIVITE'] .'" role="tabpanel">';
+                    } else {
+                        echo '<div class="tab-pane" id="tab' . $category['ID_TYPE_ACTIVITE'] .'" role="tabpanel">';
+                    }
+                    
+                    echo '<div class="row">';
+                    
+                    $statement = $db->prepare('SELECT * FROM activite WHERE activite.ID_TYPE_ACTIVITE = ?');
+                    $statement->execute(array($category['ID_TYPE_ACTIVITE']));
+                    while ($item = $statement->fetch()) {
+                        echo '<div class="col-md-6 col-lg-4">
+                                <div class="img-thumbnail">
+                                    <img src="/Img/image_activites/' . $item['IMAGE_ACT'] . '" class="img-fluid" alt="...">
+                                    <div class="price"> A partir de ' . number_format($item['PRIX'], 2, '.', ''). ' dh</div>
+                                    <div class="caption">
+                                        
+                                    </div>
+                                </div>
+                            </div>';
+                    }
+                   
+                   echo    '</div>
+                        </div>';
+                }
+                Database::disconnect();
+                echo  '</div>';
             ?>
 
 
 
 
-  <!--          <nav>
-                <ul class="nav nav-pills" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1" role="tab">individuelle</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2" role="tab">double</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3" role="tab">triple</a>
-                    </li>
-                    
-                </ul>
-            </nav> -->
-
-            <div class="tab-content">
-
-                <div class="tab-pane active" id="1" role="tabpanel">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="<?php /*echo $image1; */ ?>" class="img-fluid" alt="...">
-                                <div class="price"><?php /* echo $prix1; */ ?></div>
-                                <div class="caption">
-                                    
-                                    <p><?php /*echo $desc1;*/  ?></p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="<?php /*echo $image2;*/  ?>" class="img-fluid" alt="...">
-                                <div class="price"><?php /*echo $prix2; */ ?></div>
-                                <div class="caption">
-                                    
-                                    <p><?php /*echo $desc2;*/  ?></p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="<?php /*echo $image3;*/  ?>" class="img-fluid" alt="...">
-                                <div class="price"><?php /*echo $prix3;*/  ?></div>
-                                <div class="caption">
-                                    
-                                    <p><?php /*echo $desc3; */ ?></p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/single4.jpg" class="img-fluid" alt="...">
-                                <div class="price">870 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Le calme conféré par l'orientation sur le jardin associé à leur grand bureau.</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/single5.jpg" class="img-fluid" alt="...">
-                                <div class="price">990 dh</div>
-                                <div class="caption">
-                                   
-                                    <p>La chambre comporte une télévision, un bureau et un petit canapé</p>
-                                    <a href="#" class="btn btn-order" role="button">Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <div class="tab-pane" id="2" role="tabpanel">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/double1.jpg" class="img-fluid" alt="...">
-                                <div class="price">1100 dh</div>
-                                <div class="caption">
-                                   
-                                    <p>Chambre pour les couples, confortable et donnant sur le bleu du ciel.</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/double2.jpg" class="img-fluid" alt="...">
-                                <div class="price">1500 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Chambre double avec canapé et une petite table.</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/double3.jpg" class="img-fluid" alt="...">
-                                <div class="price">3760 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Grand espace avec une chambre double, un bureau et une toilette.</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/double4.jpg" class="img-fluid" alt="...">
-                                <div class="price">2190 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Chambre avec des couleurs claires et un miroire.</p>
-                                    <a href="#" class="btn btn-order" role="button">Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/double5.jpg" class="img-fluid" alt="...">
-                                <div class="price">1603 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Chambre double avec un balcon donnant sur la grande piscine de HoteLUX.</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/double6.jpg" class="img-fluid" alt="...">
-                                <div class="price">1700 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Le calme conféré par l'orientation sur le jardin associé à leur grand bureau</p>
-                                    <a href="#" class="btn btn-order" role="button">Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane" id="3" role="tabpanel">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/triple1.jpg" class="img-fluid" alt="...">
-                                <div class="price">5500 dh</div>
-                                <div class="caption">
-                                   
-                                    <p>chambre à trois personnes, un bureau et une télévison</p>
-                                    <a href="#" class="btn btn-order" role="button">Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/triple2.jpg" class="img-fluid" alt="...">
-                                <div class="price">3100 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Chambre avec des couleurs claires renforcant le sentiment de douceur et confort.</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/triple3.jpg" class="img-fluid" alt="...">
-                                <div class="price">4990 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Chambre lumineuse à style moderne et jolie.</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/triple4.jpg" class="img-fluid" alt="...">
-                                <div class="price">5088 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Television, bureau et trois chambres avec un style de luxe.</p>
-                                    <a href="#" class="btn btn-order" role="button">Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_chambres/triple5.jpg" class="img-fluid" alt="...">
-                                <div class="price">2955 dh</div>
-                                <div class="caption">
-                                    
-                                    <p>Chambre à moyenne taille correspond aux familles avec les parents et un enfant.</p>
-                                    <a href="#" class="btn btn-order" role="button"> Réserver</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-  
-            </div>
-        </div>
-    </div>
-    <br> <br><br>
 
 
-
-
-
-
-
-
-    <div class="body">
+<!--   <div class="body">
         <div class="container site">
            
             <h1 class="text-logo">Activités et prix </h1>
@@ -413,7 +280,7 @@
                             </div>
                         </div>-->
                         
-                    </div>
+ <!--                   </div>
                 </div>
 
                 <div class="tab-pane" id="tabB" role="tabpanel">
@@ -489,6 +356,9 @@
             </div>
         </div>
     </div>
+
+            -->
+  
     <br> <br><br>
 
 
@@ -496,7 +366,7 @@
 
 
 
-    
+ <!--   
     <footer>
          
          <div class="col-right">
@@ -527,6 +397,6 @@
          </div>
         
         
-     </footer>
+     </footer>-->
     </body>
 </html>

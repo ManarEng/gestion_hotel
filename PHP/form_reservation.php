@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-$conn = new mysqli("localhost", "root", "", "hotelux");
-
-if ($conn->connect_error) {
-    die("La connexion a échoué: " . $conn->connect_error);
-}
+include ("../db_connexion.php");
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 // Récupération des informations de la réservation
-$sql = "SELECT u.NOM, u.PRENOM, u.TELE, r.NBRE_CHAMBRE, c.TYPEC,c.PRIX, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
+/*$sql = "SELECT u.NOM, u.PRENOM, u.TELE, r.NBRE_CHAMBRE, c.TYPEC,c.PRIX, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
 FROM UTILISATEURS u
 JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
 JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
@@ -40,7 +36,7 @@ if ($result->num_rows > 0) {
     // Affichage des données dans un formulaire HTML
     $row = $result->fetch_assoc();
 
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -101,17 +97,17 @@ if ($result->num_rows > 0) {
 <?php } ?>
                         <div class="col-md-6">
                             <label for="user">Nom d'Utilisateur <span class="blue"></span></label>
-                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $row['NOM']; ?>" >
+                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $_SESSION['LOGIN']; ?>" >
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $row["TELE"]; ?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE'] ; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="type">Type de Chambre <span class="blue"></span></label>
-                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $row["TYPEC"]; ?>">
+                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $_SESSION['TYPE_CHAMBRE'] ; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
