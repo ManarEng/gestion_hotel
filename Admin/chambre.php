@@ -210,8 +210,8 @@
     </ul>
     <div>
         <?php
-        include("../db_conn.php");
-        $query = "SELECT nom,prenom FROM utilisateurs where id_profil=1;";
+        include("../PHP/db_connexion.php");
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -219,15 +219,15 @@
         ?>
 
         <div class="heading">
-            <h2>Bienvenue <?php echo $row['nom'] . ' ' . $row['prenom']; ?></h2>
+            <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
         </div>
 
         <div class="divider"></div>
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            include("../db_conn.php");
-            $sql = "SELECT  id_chambre, type, description, etat, prix,image FROM chambre ;";
+            include("../PHP/db_connexion.php");
+            $sql = "SELECT  ID_CHAMBRE, TYPE, DESCRIPTION, ETAT, PRIX,IMAGE_CH FROM chambre ;";
             $result = mysqli_query($conn, $sql);
             ?>
 
@@ -256,12 +256,12 @@
                     <tbody>
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $message = htmlspecialchars($row['description']); ?>
+                            $message = htmlspecialchars($row['DESCRIPTION']); ?>
                             <tr>
 
-                                <td><?php echo $row['type']; ?></td>
+                                <td><?php echo $row['TYPE']; ?></td>
                                 <?php
-                                $message = htmlspecialchars($row['description']);
+                                $message = htmlspecialchars($row['DESCRIPTION']);
                                 if (strlen($message) > 20) {
                                     $messageShort = substr($message, 0, 20) . '...';
                                     echo "<td onclick=\"this.innerHTML = '" . $message . "';\"><span title='" . $message . "'>" . $messageShort . "</span></td>";
@@ -271,12 +271,12 @@
                                 ?>
 
 
-                                <td><?php echo $row['etat']; ?></td>
-                                <td><?php echo $row['prix']; ?></td>
-                                <td><?php if ($row['image'] == '') {
+                                <td><?php echo $row['ETAT']; ?></td>
+                                <td><?php echo $row['PRIX']; ?></td>
+                                <td><?php if ($row['IMAGE_CH'] == '') {
                                         echo '<img src="../Img/default_room.png">';
                                     } else {
-                                        echo '<img src="/Admin/rooms/' . $row['image'] . '">';
+                                        echo '<img src="/Admin/rooms/' . $row['IMAGE_CH'] . '">';
                                     }
                                     ?></td>
 
@@ -292,8 +292,8 @@
                                 </script>
                                 <td>
                                     <div style="display: flex; ">
-                                        <a href="modify_room.php?id_chambre=<?php echo $row['id_chambre']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
-                                        <a href="delete_room.php?id_chambre=<?php echo $row['id_chambre']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chambre ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
+                                        <a href="modify_room.php?id_chambre=<?php echo $row['ID_CHAMBRE']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
+                                        <a href="delete_room.php?id_chambre=<?php echo $row['ID_CHAMBRE']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chambre ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
                                     </div>
                                 </td>
 
