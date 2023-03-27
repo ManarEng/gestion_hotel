@@ -5,10 +5,10 @@ if (isset($_GET['id_util'])) {
 
 
     // Connect to the database
-    include("../db_conn.php");
+    include("../PHP/db_connexion.php");
 
     // Retrieve user information from the database
-    $query = "SELECT * FROM utilisateurs WHERE id_util = $user_id";
+    $query = "SELECT * FROM utilisateurs WHERE ID_UTILL = $user_id";
     $result = mysqli_query($conn, $query);
     $user = mysqli_fetch_assoc($result);
 
@@ -266,25 +266,25 @@ if (isset($_GET['id_util'])) {
             <legend>Modifier votre profil</legend>
 
             <form method="post" action="update_user.php" onsubmit="return validateForm()">
-                <input type="hidden" name="id" value="<?php echo $user['id_util']; ?>" />
+                <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
 
                 <label for="prenom">Prénom :</label>
-                <input type="text" name="prenom" id="prenom" value="<?php echo $user['prenom']; ?>" />
+                <input type="text" name="prenom" id="prenom" value="<?php echo $user['PRENOM']; ?>" />
 
                 <label for="nom">Nom :</label>
-                <input type="text" name="nom" id="nom" value="<?php echo $user['nom']; ?>" />
+                <input type="text" name="nom" id="nom" value="<?php echo $user['NOM']; ?>" />
                 <label for="cin">CIN :</label>
-                <input type="text" name="cin" id="cin" value="<?php echo $user['cin']; ?>" />
+                <input type="text" name="cin" id="cin" value="<?php echo $user['CIN']; ?>" />
 
 
 
                 <label for="email">Email :</label>
-                <input type="text" name="email" id="email" value="<?php echo $user['email']; ?>" />
+                <input type="text" name="email" id="email" value="<?php echo $user['E_MAIL']; ?>" />
 
                 <label for="tele">Téléphone :</label>
-                <input type="tel" name="tele" id="tele" value="<?php echo $user['tele']; ?>" />
+                <input type="tel" name="tele" id="tele" value="<?php echo $user['TELE']; ?>" />
                 <label for="adresse">Addresse:</label>
-                <textarea name="adresse" id="adresse"><?php echo $user['adresse']; ?></textarea>
+                <textarea name="adresse" id="adresse"><?php echo $user['ADRESSE']; ?></textarea>
 
 
 
