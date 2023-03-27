@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_POST['id'];
 
     // Connect to the database
-    include("../db_conn.php");
+    include("../PHP/db_connexion.php");
     // Get updated user information from the form
     $prenom = $_POST['prenom'];
     $nom = $_POST['nom'];
@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($mdp)) {
 
 
-        $query = "UPDATE utilisateurs SET prenom='$prenom', nom='$nom', email='$email', tele='$tele', mdp='$mdp', cin='$cin', adresse='$adresse' WHERE id_util=$user_id";
+        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele', MDP='$mdp', CIN='$cin', ADRESSE='$adresse' WHERE ID_UTILL=$user_id";
         $result = mysqli_query($conn, $query);
     } else {
-        $query = "UPDATE utilisateurs SET prenom='$prenom', nom='$nom', email='$email', tele='$tele', cin='$cin', adresse='$adresse' WHERE id_util=$user_id";
+        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele',  CIN='$cin', ADRESSE='$adresse' WHERE ID_UTILL=$user_id";
         $result = mysqli_query($conn, $query);
     }
     // Close database connection
