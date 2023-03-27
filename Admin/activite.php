@@ -210,8 +210,8 @@
     </ul>
     <div>
         <?php
-        include("../db_conn.php");
-        $query = "SELECT nom,prenom FROM utilisateurs where id_profil=1;";
+        include("../PHP/db_connexion.php");
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -219,14 +219,14 @@
         ?>
 
         <div class="heading">
-            <h2>Bienvenue <?php echo $row['nom'] . ' ' . $row['prenom']; ?></h2>
+            <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
         </div>
         <div class="divider"></div>
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            include("../db_conn.php");
-            $sql = "SELECT id_activite, type, prix, etat,image  FROM activite ";
+            include("../PHP/db_connexion.php");
+            $sql = "SELECT ID_ACTIVITE, TYPE, PRIX, ETAT,IMAGE_ACT  FROM activite ";
             $result = mysqli_query($conn, $sql);
             ?>
             <div class="container">
@@ -257,15 +257,15 @@
                         while ($row = mysqli_fetch_assoc($result)) { ?>
                             <tr>
 
-                                <td><?php echo $row['type']; ?></td>
-                                <td><?php echo $row['prix']; ?></td>
+                                <td><?php echo $row['TYPE']; ?></td>
+                                <td><?php echo $row['PRIX']; ?></td>
 
 
-                                <td><?php echo $row['etat']; ?></td>
-                                <td><?php if ($row['image'] == '') {
+                                <td><?php echo $row['ETAT']; ?></td>
+                                <td><?php if ($row['IMAGE_ACT'] == '') {
                                         echo '<img src="../Img/default_ac.png">';
                                     } else {
-                                        echo '<img src="/Admin/activity/' . $row['image'] . '">';
+                                        echo '<img src="/Admin/activity/' . $row['IMAGE_ACT'] . '">';
                                     }
                                     ?></td>
                                 <script>
@@ -279,8 +279,8 @@
                                 </script>
                                 <td>
                                     <div style="display: flex; ">
-                                        <a href="modify_activite.php?id_activite=<?php echo $row['id_activite']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
-                                        <a href="delete_activite.php?id_activite=<?php echo $row['id_activite']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette activité ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
+                                        <a href="modify_activite.php?id_activite=<?php echo $row['ID_ACTIVITE']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
+                                        <a href="delete_activite.php?id_activite=<?php echo $row['ID_ACTIVITE']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette activité ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
                                     </div>
                                 </td>
 
