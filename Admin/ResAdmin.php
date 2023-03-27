@@ -226,9 +226,21 @@
     <div class="container">
         
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
+            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>*/
             <?php
+
+            include("../db_connexion.php") ;
+            
+            $sql="SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
+            FROM UTILISATEURS u
+            JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
+            JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
+            JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
+            JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ";    
+            $resultat = mysqli_query($conn, $sql);
+
             $conn = mysqli_connect("localhost", "root", "", "hotelux");
+
 
             if ($conn) 
             {
