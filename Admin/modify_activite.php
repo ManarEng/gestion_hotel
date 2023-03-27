@@ -4,10 +4,10 @@ if (isset($_GET['id_activite'])) {
     $row_id = $_GET['id_activite'];
 
     // Connect to the database
-    include("../db_conn.php");
+    include("../PHP/db_connexion.php");
 
     // Retrieve row information from the database
-    $query = "SELECT * FROM activite WHERE id_activite = $row_id";
+    $query = "SELECT * FROM activite WHERE ID_ACTIVITE = $row_id";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
 
@@ -266,11 +266,11 @@ if (isset($_GET['id_activite'])) {
             <legend>Modifier activité</legend>
 
             <form method="post" action="update_activite.php" onsubmit="return validateForm()">
-                <input type="hidden" name="id" value="<?php echo $row['id_activite']; ?>" />
+                <input type="hidden" name="id" value="<?php echo $row['ID_ACTIVITE']; ?>" />
 
                 <label for="field1">Type :</label>
                 <select name="field1" id="field1">
-                    <option value="<?php echo $row['type']; ?>"><?php echo $row['type']; ?></option>
+                    <option value="<?php echo $row['TYPE']; ?>"><?php echo $row['TYPE']; ?></option>
                     <option>Spa</option>
                     <option>Restaurant</option>
                     <option>Piscine</option>
@@ -278,10 +278,10 @@ if (isset($_GET['id_activite'])) {
                 </select>
 
                 <label for="field2">Prix (Dhs) :</label>
-                <input type="text" name="field2" id="field2" value="<?php echo $row['prix']; ?>" />
+                <input type="text" name="field2" id="field2" value="<?php echo $row['PRIX']; ?>" />
 
                 <label for="field3">Disponibilité :</label>
-                <input type="text" name="field3" id="field3" value="<?php echo $row['etat']; ?>" />
+                <input type="text" name="field3" id="field3" value="<?php echo $row['ETAT']; ?>" />
 
                 <input type="submit" value="Enregister" />
             </form>
