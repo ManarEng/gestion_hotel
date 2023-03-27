@@ -167,8 +167,8 @@
     </ul>
     <div>
         <?php
-        include("../db_conn.php");
-        $query = "SELECT nom,prenom FROM utilisateurs where id_profil=1;";
+        include("../PHP/db_connexion.php");
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -176,7 +176,7 @@
         ?>
 
         <div class="heading">
-            <h2>Bienvenue <?php echo $row['nom'] . ' ' . $row['prenom']; ?></h2>
+            <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
         </div>
 
         <div class="divider"></div>
@@ -185,8 +185,8 @@
 
             <div class="container">
                 <?php
-                include("../db_conn.php");
-                $sql = "SELECT id_util, id_profil, nom, prenom, nom_util, mdp, cin, adresse, email, tele, image FROM utilisateurs where id_profil=2";
+                include("../PHP/db_connexion.php");
+                $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=2";
                 $result = mysqli_query($conn, $sql);
                 ?>
                 <h2 class="title"> Agents : </h2>
@@ -221,18 +221,18 @@
                         while ($row = mysqli_fetch_assoc($result)) { ?>
                             <tr>
 
-                                <td><?php echo $row['nom']; ?></td>
-                                <td><?php echo $row['prenom']; ?></td>
-                                <td><?php echo $row['nom_util']; ?></td>
+                                <td><?php echo $row['NOM']; ?></td>
+                                <td><?php echo $row['PRENOM']; ?></td>
+                                <td><?php echo $row['LOGIN']; ?></td>
 
-                                <td><?php echo $row['cin']; ?></td>
-                                <td><?php echo $row['adresse']; ?></td>
-                                <td><?php echo $row['email']; ?></td>
-                                <td><?php echo $row['tele']; ?></td>
-                                <td><?php if ($row['image'] == '') {
+                                <td><?php echo $row['CIN']; ?></td>
+                                <td><?php echo $row['ADRESSE']; ?></td>
+                                <td><?php echo $row['E_MAIL']; ?></td>
+                                <td><?php echo $row['TELE']; ?></td>
+                                <td><?php if ($row['IMAGE_UTIL'] == '') {
                                         echo '<img src="../Img/profil.jpg">';
                                     } else {
-                                        echo '<img src="../Admin/agents/' . $row['image'] . '">';
+                                        echo '<img src="../Admin/agents/' . $row['IMAGE_UTIL'] . '">';
                                     }
                                     ?></td>
 
@@ -248,8 +248,8 @@
                                 </script>
                                 <td>
                                     <div style="display: flex; ">
-                                        <a href="modify_util.php?id_util=<?php echo $row['id_util']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
-                                        <a href="delete_user.php?id_util=<?php echo $row['id_util']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
+                                        <a href="modify_util.php?id_util=<?php echo $row['ID_UTILL']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
+                                        <a href="delete_user.php?id_util=<?php echo $row['ID_UTILL']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
                                     </div>
                                 </td>
 
@@ -263,8 +263,8 @@
             <br>
             <div class="container">
                 <?php
-                include("../db_conn.php");
-                $sql = "SELECT id_util, id_profil, nom, prenom, nom_util, mdp, cin, adresse, email, tele, image FROM utilisateurs where id_profil=3";
+                include("../PHP/db_connexion.php");
+                $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=3";
                 $result = mysqli_query($conn, $sql);
                 ?>
                 <h2 class="title"> Clients : </h2>
@@ -299,18 +299,18 @@
                         while ($row = mysqli_fetch_assoc($result)) { ?>
                             <tr>
 
-                                <td><?php echo $row['nom']; ?></td>
-                                <td><?php echo $row['prenom']; ?></td>
-                                <td><?php echo $row['nom_util']; ?></td>
+                                <td><?php echo $row['NOM']; ?></td>
+                                <td><?php echo $row['PRENOM']; ?></td>
+                                <td><?php echo $row['LOGIN']; ?></td>
 
-                                <td><?php echo $row['cin']; ?></td>
-                                <td><?php echo $row['adresse']; ?></td>
-                                <td><?php echo $row['email']; ?></td>
-                                <td><?php echo $row['tele']; ?></td>
-                                <td><?php if ($row['image'] == '') {
+                                <td><?php echo $row['CIN']; ?></td>
+                                <td><?php echo $row['ADRESSE']; ?></td>
+                                <td><?php echo $row['E_MAIL']; ?></td>
+                                <td><?php echo $row['TELE']; ?></td>
+                                <td><?php if ($row['IMAGE_UTIL'] == '') {
                                         echo '<img src="../Img/profil.jpg">';
                                     } else {
-                                        echo '<img src="../Admin/clients/' . $row['image'] . '">';
+                                        echo '<img src="../Admin/clients/' . $row['IMAGE_UTIL'] . '">';
                                     }
                                     ?></td>
 
@@ -326,8 +326,8 @@
                                 </script>
                                 <td>
                                     <div style="display: flex; ">
-                                        <a href="modify_util.php?id_util=<?php echo $row['id_util']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
-                                        <a href="delete_user.php?id_util=<?php echo $row['id_util']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
+                                        <a href="modify_util.php?id_util=<?php echo $row['ID_UTILL']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
+                                        <a href="delete_user.php?id_util=<?php echo $row['ID_UTILL']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
                                     </div>
                                 </td>
 
