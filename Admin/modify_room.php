@@ -4,10 +4,10 @@ if (isset($_GET['id_chambre'])) {
     $row_id = $_GET['id_chambre'];
 
     // Connect to the database
-    include("../db_conn.php");
+    include("../PHP/db_connexion.php");
 
     // Retrieve row information from the database
-    $query = "SELECT * FROM chambre WHERE id_chambre = $row_id";
+    $query = "SELECT * FROM chambre WHERE ID_CHAMBRE = $row_id";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
 
@@ -266,11 +266,11 @@ if (isset($_GET['id_chambre'])) {
             <legend>Modifier chambre</legend>
 
             <form method="post" action="update_chambre.php" onsubmit="return validateForm()">
-                <input type="hidden" name="id" value="<?php echo $row['id_chambre']; ?>" />
+                <input type="hidden" name="id" value="<?php echo $row['ID_CHAMBRE']; ?>" />
 
                 <label for="field1">Type :</label>
                 <select name="field1" id="field1">
-                    <option value="<?php echo $row['type']; ?>"><?php echo $row['type']; ?></option>
+                    <option value="<?php echo $row['TYPE']; ?>"><?php echo $row['TYPE']; ?></option>
                     <option>Individuelle</option>
                     <option>Double</option>
                     <option>Suite</option>
@@ -280,10 +280,10 @@ if (isset($_GET['id_chambre'])) {
 
 
                 <label for="field2">Description :</label>
-                <textarea name="field2" id="field2" rows="6"><?php echo $row['description']; ?></textarea>
+                <textarea name="field2" id="field2" rows="6"><?php echo $row['DESCRIPTION']; ?></textarea>
 
                 <label for="field3">Prix (Dhs) :</label>
-                <input type="text" name="field3" id="field3" value="<?php echo $row['prix']; ?>" />
+                <input type="text" name="field3" id="field3" value="<?php echo $row['PRIX']; ?>" />
 
                 <input type="submit" value="Enregister" />
             </form>
