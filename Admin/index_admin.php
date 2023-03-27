@@ -209,8 +209,8 @@
     </ul>
     <div class="container">
         <?php
-        include("../db_conn.php");
-        $query = "SELECT nom,prenom FROM utilisateurs where id_profil=1;";
+        include("../PHP/db_connexion.php");
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -218,14 +218,14 @@
         ?>
 
         <div class="heading">
-            <h2>Bienvenue <?php echo $row['nom'] . ' ' . $row['prenom']; ?></h2>
+            <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
         </div>
         <div class="divider"></div>
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
 
             <?php
             // Connect to the database
-            include("../db_conn.php");
+            include("../PHP/db_connexion.php");
 
             // Count the number of rows in the "chambre" table
             $sql = "SELECT COUNT(*) as count FROM chambre";
@@ -239,13 +239,13 @@
             $row2 = mysqli_fetch_assoc($result2);
             $count2 = $row2["count"];
             //Count the number of rows in the utilisateurs table (clients)
-            $sql3 = "SELECT COUNT(*) as count FROM utilisateurs where id_profil=3;";
+            $sql3 = "SELECT COUNT(*) as count FROM utilisateurs where ID_PROFIL=3;";
             $result3 = mysqli_query($conn, $sql3);
             $row3 = mysqli_fetch_assoc($result3);
             $count3 = $row3["count"];
 
             //Count the number of rows in the utilisateurs table (agents)
-            $sql4 = "SELECT COUNT(*) as count FROM utilisateurs where id_profil=2;";
+            $sql4 = "SELECT COUNT(*) as count FROM utilisateurs where ID_PROFIL=2;";
             $result4 = mysqli_query($conn, $sql4);
             $row4 = mysqli_fetch_assoc($result4);
             $count4 = $row4["count"];
