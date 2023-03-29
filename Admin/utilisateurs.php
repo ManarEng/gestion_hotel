@@ -167,7 +167,7 @@
     </ul>
     <div>
         <?php
-        include("../PHP/db_connexion.php");
+        include("../db_connexion.php");
         $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
