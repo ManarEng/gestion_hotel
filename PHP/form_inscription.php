@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connexion.php';
+include '../db_connexion.php';
 $firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";
 $firstnameError = $nameError = $emailError = $phoneError = $loginError = $mdpError = $mdppError = $imgError = "";
 $isSuccess = false;
@@ -99,8 +99,8 @@ if ($isSuccess) {
         $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
         $_SESSION['ID_PROFIL'] = $row['ID_PROFIL'];
         $_SESSION['LOGIN'] = $row['LOGIN'];
-        $_SESSION['TELE']=$row['TELE'];
-        
+        $_SESSION['TELE'] = $row['TELE'];
+
 
         header('location:/Client/index.php');
     }
