@@ -185,7 +185,7 @@
 
             <div class="container">
                 <?php
-                include("../PHP/db_connexion.php");
+                include("../db_connexion.php");
                 $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=2";
                 $result = mysqli_query($conn, $sql);
                 ?>
@@ -263,7 +263,7 @@
             <br>
             <div class="container">
                 <?php
-                include("../PHP/db_connexion.php");
+                include("../db_connexion.php");
                 $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=3";
                 $result = mysqli_query($conn, $sql);
                 ?>
