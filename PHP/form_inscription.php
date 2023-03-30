@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Store the URL in the database
         $url =  $filename;
     } else {
-        $url = "profil.jpg";
+        $url = "default-avatar.png";
     }
 }
 if ($isSuccess) {
