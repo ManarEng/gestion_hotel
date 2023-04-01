@@ -6,8 +6,8 @@ include("../db_connexion.php");
 $activite = $_POST["activite"];
 
 // Requête SQL pour récupérer l'ID de l'activité correspondant à la valeur sélectionnée dans la liste déroulante
-$sql = "SELECT ID_TYPE_ACTIVITE FROM type_activite WHERE TYPE_ACTIVITE = '$activite'";
-
+$sql = "SELECT activite.ID_ACTIVITE FROM activite JOIN type_activite ON activite.ID_TYPE_ACTIVITE = type_activite.ID_TYPE_ACTIVITE WHERE type_activite.TYPE_ACTIVITE = '$activite'";
+/*$sql = "SELECT ID_TYPE_ACTIVITE FROM type_activite WHERE TYPE_ACTIVITE = '$activite'";*/
 // Exécution de la requête
 $resultat = mysqli_query($conn, $sql);
 
