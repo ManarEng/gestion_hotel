@@ -10,10 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $entree = $_POST['arrivee'];
     $sortie = $_POST['depart'];
     $nbrec = $_POST['nbre'];
-   
+   $type_ac=$_POST['type_ac'];
 
     // Ajouter les données à la base de données
-    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, ID_CHAMBRE , ID_ACTIVITE ,DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','$_SESSION[ID_UTILL]',$_SESSION[ID_CHAMBRE],$_SESSION[ID_ACTIVITE], '$entree', '$sortie', '$nbrec');";
+    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, ID_CHAMBRE , ID_ACTIVITE ,DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','$_SESSION[ID_UTILL]','$_SESSION[ID_CHAMBRE]','$type_ac', '$entree', '$sortie', '$nbrec');";
     $r = $conn->query($sql);
 
     $msg = '';
@@ -117,6 +117,7 @@ if ($result->num_rows > 0) {
     $result = mysqli_query($conn, "SELECT ID_TYPE_ACTIVITE FROM activite                   ");
     echo "<select id='type_ac' name='type_ac' required>";
     echo "<option value=''>--choisir une activité--</option>";
+    echo "<option value=''>piscine</option>";
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<option value='" . $row['TYPE'] . "'>" . $row['TYPE'] . "</option>";
     }
