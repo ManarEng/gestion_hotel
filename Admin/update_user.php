@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_POST['id'];
 
     // Connect to the database
-    include("../PHP/db_connexion.php");
+    include("../db_connexion.php");
     // Get updated user information from the form
     $prenom = $_POST['prenom'];
     $nom = $_POST['nom'];

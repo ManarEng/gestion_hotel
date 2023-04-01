@@ -167,7 +167,7 @@
     </ul>
     <div>
         <?php
-        include("../PHP/db_connexion.php");
+        include("../db_connexion.php");
         $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
@@ -185,7 +185,7 @@
 
             <div class="container">
                 <?php
-                include("../PHP/db_connexion.php");
+                include("../db_connexion.php");
                 $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=2";
                 $result = mysqli_query($conn, $sql);
                 ?>
@@ -230,7 +230,7 @@
                                 <td><?php echo $row['E_MAIL']; ?></td>
                                 <td><?php echo $row['TELE']; ?></td>
                                 <td><?php if ($row['IMAGE_UTIL'] == '') {
-                                        echo '<img src="../Img/profil.jpg">';
+                                        echo '<img src="../Img/default-avatar.png">';
                                     } else {
                                         echo '<img src="../Admin/agents/' . $row['IMAGE_UTIL'] . '">';
                                     }
@@ -263,7 +263,7 @@
             <br>
             <div class="container">
                 <?php
-                include("../PHP/db_connexion.php");
+                include("../db_connexion.php");
                 $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=3";
                 $result = mysqli_query($conn, $sql);
                 ?>
@@ -308,7 +308,7 @@
                                 <td><?php echo $row['E_MAIL']; ?></td>
                                 <td><?php echo $row['TELE']; ?></td>
                                 <td><?php if ($row['IMAGE_UTIL'] == '') {
-                                        echo '<img src="../Img/profil.jpg">';
+                                        echo '<img src="../Img/default-avatar.png">';
                                     } else {
                                         echo '<img src="../Admin/clients/' . $row['IMAGE_UTIL'] . '">';
                                     }

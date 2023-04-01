@@ -184,7 +184,7 @@
             <?php
             //session_start();
             // Establish a connection to the database
-            include("../PHP/db_connexion.php");
+            include("../db_connexion.php");
             // Retrieve the user ID from the session
             //$user_id = $_SESSION['user_id'];
 
