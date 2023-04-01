@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-$conn = new mysqli("localhost", "root", "", "hotelux");
-
-if ($conn->connect_error) {
-    die("La connexion a échoué: " . $conn->connect_error);
-}
+include("../db_connexion.php");
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
 
     // Ajouter les données à la base de données
-    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','', '$entree', '$sortie', '$nbrec');";
+    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, ID_CHAMBRE , ID_ACTIVITE ,DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','$_SESSION[ID_UTILL]',$_SESSION[ID_CHAMBRE],$_SESSION[ID_ACTIVITE], '$entree', '$sortie', '$nbrec');";
     $r = $conn->query($sql);
 
     $msg = '';
@@ -28,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 // Récupération des informations de la réservation
-$sql = "SELECT u.NOM, u.PRENOM, u.TELE, r.NBRE_CHAMBRE, c.TYPEC,c.PRIX, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
+/*$sql = "SELECT u.NOM, u.PRENOM, u.TELE, r.NBRE_CHAMBRE,c.PRIX, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
 FROM UTILISATEURS u
 JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
 JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
@@ -40,7 +36,7 @@ if ($result->num_rows > 0) {
     // Affichage des données dans un formulaire HTML
     $row = $result->fetch_assoc();
 
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -127,7 +123,7 @@ if ($result->num_rows > 0) {
                         <div class="col-md-6">
                             <label for="type_ac">Type d'activité <span class="blue"></span></label>
                             <?php
-    $result = mysqli_query($conn, "SELECT TYPE FROM activite");
+    $result = mysqli_query($conn, "SELECT ID_TYPE_ACTIVITE FROM activite                   ");
     echo "<select id='type_ac' name='type_ac' required>";
     echo "<option value=''>--choisir une activité--</option>";
     while ($row = mysqli_fetch_assoc($result)) {
