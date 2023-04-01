@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $entree = $_POST['arrivee'];
     $sortie = $_POST['depart'];
     $nbrec = $_POST['nbre'];
-   $type_ac=$_POST['type_ac'];
+   $type_ac=$_POST['activite'];
 
     // Ajouter les données à la base de données
     $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, ID_CHAMBRE , ID_ACTIVITE ,DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','$_SESSION[ID_UTILL]','$_SESSION[ID_CHAMBRE]','$type_ac', '$entree', '$sortie', '$nbrec');";
@@ -23,20 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $msg = 'Votre réservation a échoué. ' . $sql . '<br>' . $conn->error;
     }
 }
-// Récupération des informations de la réservation
-/*$sql = "SELECT u.NOM, u.PRENOM, u.TELE, r.NBRE_CHAMBRE,c.PRIX, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
-FROM UTILISATEURS u
-JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
-JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
-JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
-JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE;"; 
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    // Affichage des données dans un formulaire HTML
-    $row = $result->fetch_assoc();
-
-}*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,11 +77,11 @@ if ($result->num_rows > 0) {
 
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1">
-                <form id="contact-form" method="post" action="trait_Reservation.php">
+                <form id="contact-form" method="post" >
                     <div class="row">
                     <?php if (!empty($msg)) { ?>
-    <div class="alert alert-<?php echo ($r === TRUE) ? 'success' : 'danger'; ?>"><?php echo $msg; ?></div>
-<?php } ?>
+                   <div class="alert alert-<?php echo ($r === TRUE) ? 'success' : 'danger'; ?>"><?php echo $msg; ?></div>
+                    <?php } ?>
                         <div class="col-md-6">
                             <label for="user">Nom d'Utilisateur <span class="blue"></span></label>
                             <input id="user" type="text" name="user" class="form-control" value="<?php echo $_SESSION['LOGIN']; ?>" >
@@ -112,18 +99,11 @@ if ($result->num_rows > 0) {
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
-                            <label for="type_ac">Type d'activité <span class="blue"></span></label>
-                            <?php
-    $result = mysqli_query($conn, "SELECT ID_TYPE_ACTIVITE FROM activite                   ");
-    echo "<select id='type_ac' name='type_ac' required>";
-    echo "<option value=''>--choisir une activité--</option>";
-    echo "<option value=''>piscine</option>";
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<option value='" . $row['TYPE'] . "'>" . $row['TYPE'] . "</option>";
-    }
-    echo "</select>";
-?>
-                        
+                            <label for="activite">Type d'activité <span class="blue"></span></label>
+                                  <select id='activite' name='activite' required>
+                                     <option value=''>--choisir une activité--</option>";
+                                     <option value=''>piscine</option>";
+                                    </select>
                             <p class="comments"></p> 
                         </div>
                         
@@ -147,6 +127,26 @@ if ($result->num_rows > 0) {
                        
 
                     </div>
+                    <script>
+                    // Récupération de la liste déroulante et de la valeur sélectionnée
+var activite = document.getElementById("activite");
+var id_activite = activite.options[activite.selectedIndex].value;
+
+// Envoi de la valeur sélectionnée au serveur via une requête AJAX
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "recuperer_id_activite.php", true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xhr.onreadystatechange = function() {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        // Traitement de la réponse du serveur
+        var id_activite = parseInt(this.responseText);
+        // Insertion de la réservation dans la base de données avec l'ID de l'activité récupéré
+        
+    }
+};
+xhr.send("activite=" + id_activite);
+</script>
+
 
 
                 </form>
