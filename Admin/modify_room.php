@@ -270,7 +270,7 @@ if (isset($_GET['id_chambre'])) {
 
                 <label for="field1">Type :</label>
                 <select name="field1" id="field1">
-                    <option value="<?php echo $row['TYPE']; ?>"><?php echo $row['TYPE']; ?></option>
+                    <option value="<?php echo $row['ID_TYPE_CHAMBRE']; ?>"><?php echo $row['ID_TYPE_CHAMBRE']; ?></option>
                     <option>Individuelle</option>
                     <option>Double</option>
                     <option>Suite</option>
