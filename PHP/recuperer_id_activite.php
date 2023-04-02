@@ -25,3 +25,4 @@ if (mysqli_num_rows($resultat) > 0) {
 
 // Fermeture de la connexion à la base de données
 mysqli_close($conn);
+?>
