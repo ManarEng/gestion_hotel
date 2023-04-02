@@ -10,10 +10,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $entree = $_POST['arrivee'];
     $sortie = $_POST['depart'];
     $nbrec = $_POST['nbre'];
-   $type_ac=$_POST['activite'];
-
+   $activite=$_POST['activite'];
+    if($activite=='Piscine'){
+        $type_ac=1;
+    }
+    elseif($activite=='Restaurant'){
+        $type_ac=2;
+    }
+    elseif($activite=='Spa'){
+        $type_ac=3;
+    }
     // Ajouter les données à la base de données
-    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, ID_CHAMBRE , ID_ACTIVITE ,DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','$_SESSION[ID_UTILL]','$_SESSION[ID_CHAMBRE]','$type_ac', '$entree', '$sortie', '$nbrec');";
+    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, ID_CHAMBRE , ID_TYPE_ACTIVITE ,DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','$_SESSION[ID_UTILL]','$_SESSION[ID_CHAMBRE]','$type_ac', '$entree', '$sortie', '$nbrec')";
     $r = $conn->query($sql);
 
     $msg = '';
@@ -121,8 +129,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-6">
                             <label for="activite">Type d'activité <span class="blue"></span></label>
                                   <select id='activite' name='activite' required>
-                                     <option value=''>--choisir une activité--</option>";
-                                     <option value=''>piscine</option>";
+                                  <option value=''>--choisir une activité--</option>;
+                                     <option value=''>Piscine</option>;
+                                     <option value=''>Restaurant</option>;
+                                     <option value=''>Spa</option>";
                                     </select>
                             <p class="comments"></p> 
                         </div>
@@ -147,25 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                        
 
                     </div>
-                    <script>
-                    // Récupération de la liste déroulante et de la valeur sélectionnée
-var activite = document.getElementById("activite");
-var id_activite = activite.options[activite.selectedIndex].value;
-
-// Envoi de la valeur sélectionnée au serveur via une requête AJAX
-var xhr = new XMLHttpRequest();
-xhr.open("POST", "recuperer_id_activite.php", true);
-xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-xhr.onreadystatechange = function() {
-    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        // Traitement de la réponse du serveur
-        var id_activite = parseInt(this.responseText);
-        // Insertion de la réservation dans la base de données avec l'ID de l'activité récupéré
-        
-    }
-};
-xhr.send("activite=" + id_activite);
-</script>
+                    
 
 
 
