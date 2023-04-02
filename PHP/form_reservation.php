@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $type_ac=3;
     }
     // Ajouter les données à la base de données
-    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, ID_CHAMBRE , ID_TYPE_ACTIVITE ,DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','$_SESSION[ID_UTILL]','$_SESSION[ID_CHAMBRE]','$type_ac', '$entree', '$sortie', '$nbrec')";
+    $sql = "INSERT INTO reservation VALUES('','$_SESSION[ID_UTILL]','$_SESSION[ID_CHAMBRE]','$type_ac', '$entree', '$sortie', '$nbrec')";
     $r = $conn->query($sql);
 
     $msg = '';
