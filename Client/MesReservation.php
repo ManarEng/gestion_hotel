@@ -66,7 +66,8 @@ $user_id = $_SESSION['ID_UTILL'];
       JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
       JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
       JOIN activite A ON R.ID_ACTIVITE = A.ID_ACTIVITE
-      JOIN type_activite TA ON A.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE; ";
+      JOIN type_activite TA ON A.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE
+      WHERE R.ID_UTILL = $user_id; ";
       $result = mysqli_query($conn, $query);
       
       // Vérification de la requête
@@ -82,25 +83,26 @@ $user_id = $_SESSION['ID_UTILL'];
       
       if($row['IMAGE_UTIL'] == ''){
         echo '<img src="/Img/default-avatar.png">';
-    }else{
+     }
+     else{
         echo '<img src="/PHP/uploads/'.$row['IMAGE_UTIL'].'">';
-    }
+     }
       
                 
                
             ?>
-             <h3><?php echo $reservations['LOGIN']; ?></h3>
+             <h3><?php echo $row['LOGIN']; ?></h3>
             <table >
                 <tr><th>Type de chambre </th><th>Nombre de chambre</th><th>Activité</th><th>date d'arrivée</th><th>date de depart</th></tr>
-                <?php foreach ($reservations as $reservation): ?>
-          <tr>
-            <td><?php echo $reservation['TYPEC']; ?></td>
-            <td><?php echo $reservation['NBRE_CHAMBRE']; ?></td>
-            <td><?php echo $reservation['TYPE']; ?></td>
-            <td><?php echo $reservation['DATE_D_ENTREE']; ?></td>
-            <td><?php echo $reservation['DATE_SORTIE ']; ?></td>
-          </tr>
-               <?php endforeach; ?>
+                <?php foreach ($result as $row) : ?>
+<tr>
+    <td><?php echo $row['TYPE_CHAMBRE']; ?></td>
+    <td><?php echo $row['NBRE_CHAMBRE']; ?></td>
+    <td><?php echo $row['TYPE_ACTIVITE']; ?></td>
+    <td><?php echo $row['DATE_D_ENTREE']; ?></td>
+    <td><?php echo $row['DATE_SORTIE']; ?></td>
+</tr>
+<?php endforeach; ?>
             </table>
         
    </div>
