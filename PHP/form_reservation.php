@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sortie = $_POST['depart'];
     $nbrec = $_POST['nbre'];
    $activite=$_POST['activite'];
+   $type_ac=NULL;
     if($activite=='Piscine'){
         $type_ac=1;
     }
@@ -129,10 +130,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-6">
                             <label for="activite">Type d'activité <span class="blue"></span></label>
                                   <select id='activite' name='activite' required>
-                                  <option value=''>--choisir une activité--</option>;
-                                     <option value=''>Piscine</option>;
-                                     <option value=''>Restaurant</option>;
-                                     <option value=''>Spa</option>";
+                                  <option >--choisir une activité--</option>;
+                                     <option >Piscine</option>;
+                                     <option >Restaurant</option>;
+                                     <option >Spa</option>";
                                     </select>
                             <p class="comments"></p> 
                         </div>
