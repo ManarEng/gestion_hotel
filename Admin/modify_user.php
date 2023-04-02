@@ -292,6 +292,9 @@ if (isset($_GET['id_util'])) {
                 <input type="password" name="mdp" id="mdp" />
                 <label for="mdpp">Confirmer le nouveau mot de passe :</label>
                 <input type="password" name="mdpp" id="mdpp" />
+                <label for="img">Modifier la photo :</label>
+                <input type="file" id="img" name="img">
+
 
 
 
