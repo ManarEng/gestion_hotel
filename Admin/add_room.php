@@ -31,10 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Veuillez choisir une image à télécharger.";
     }
 
+    if ($type == 'Individuelle') {
+        $id_ch = 1;
+    } elseif ($type == 'Double') {
+        $id_ch = 2;
+    } elseif ($type == 'Triple') {
+        $id_ch = 3;
+    }
 
 
     // Insert new row into the database
-    $query = "INSERT INTO chambre  VALUES ('','','$type', '$description','oui' ,'$prix','$url')";
+    $query = "INSERT INTO chambre  VALUES ('', '$description','oui' ,'$prix','$url','$id_ch')";
     mysqli_query($conn, $query);
 
     // Close database connection
@@ -237,7 +244,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         input[type="tel"],
         input[type="password"],
         input[type="file"],
-        textarea {
+        textarea,
+        select {
             padding: 15px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -294,8 +302,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <form method="post" action="" enctype="multipart/form-data" onsubmit="return validateForm()">
             <label for="field1">Type :</label>
-            <input type="text" name="field1" id="field1" />
+            <select name="field1" id="field1">
 
+                <option>Individuelle</option>
+                <option>Double</option>
+                <option>Triple</option>
+
+            </select>
             <label for="field2">Description :</label>
             <input type="text" name="field2" id="field2" />
 

@@ -1,6 +1,6 @@
 <?php
 
-include ("../db_connexion.php");
+include 'db_connexion.php';
 session_start();
 $user_id = $_SESSION['ID_UTILL'];
 
