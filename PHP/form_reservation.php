@@ -50,18 +50,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     <header>
-        <div class="">
-            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"><b> HoteLUX</b><span class="orange">.</span></h1>
-            <nav style="margin-top:35px;">
+    <div class="">
+            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/Client/index.php"> HoteLUX<span class="orange">.</span></a></h1>
+            <nav style="margin-top:35px; ">
                 <ul>
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="../index.html">A propos</a></li>
-                    <li><a href="../index.html">Services</a></li>
-                    <li><a href="/contact_code/index.php">Contact</a></li>
-                    <li><a href="">Réservation</a></li>
-                    <li><a href="">connexion</a></li>
-
+                   
+                    
+                    <li><a href="#main" >Accueil</a></li>
+                    <li><a href="#steps">A propos</a></li>
+                     
+                    <li><a href="#possibilities">Services</a></li>
+                    <li><a href="/PHP/index_contact.php">Contact</a></li>
+                    <li><a href="/php/lien_reservation_header.php">Réservation</a></li>
+                    <!--<li><a href="/projet_hotel2 - Copie/index.html" >connexion</a></li>-->
+                    <!--<li>  <a  href="javascript:myFunction();"> <i class="fa-solid fa-user"></i></a></li>
+                    <div class="arrow-up" id="triangle"></div>-->
+                    <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
                 </ul>
+                
+                <!--<div class="login-form" id="form">
+                    <form action="">
+                        <div class="bonjour" style="text-decoration: underline;">
+                        <?php
+                            /*session_start();
+                            $login = $_SESSION['login']; /* allez voir trait_insc.php et faites les changement necessaire */ 
+                           // echo 'Bonjour <b>' . $login . '</b> ! <br>';
+                        ?></div> 
+                        <br>
+                        <a href="">Mon profile</a> <br>  <br>
+                        <a href="">Mes reservations</a> <br> <br> 
+                        <a href="/pageClient/PHP/deconnexion.php">Déconnexion</a> 
+                    </form>
+                </div>-->
             </nav>
         </div>
        
