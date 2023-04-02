@@ -209,6 +209,7 @@ if (isset($_GET['id_util'])) {
         input[type="email"],
         input[type="tel"],
         input[type="password"],
+        input[type="file"],
         textarea {
             padding: 15px;
             border-radius: 5px;
@@ -292,6 +293,8 @@ if (isset($_GET['id_util'])) {
                 <input type="password" name="mdp" id="mdp" />
                 <label for="mdpp">Confirmer votre nouveau mot de passe :</label>
                 <input type="password" name="mdpp" id="mdpp" />
+                <label for="img">Modifier la photo :</label>
+                <input type="file" id="img" name="img">
 
 
 
