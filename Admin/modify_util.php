@@ -1,27 +1,27 @@
 <?php
-// Check if row ID is provided in the query string
-if (isset($_GET['id_activite'])) {
-    $row_id = $_GET['id_activite'];
+// Check if user ID is provided in the query string
+if (isset($_GET['id_util'])) {
+    $user_id = $_GET['id_util'];
+
 
     // Connect to the database
     include("../PHP/db_connexion.php");
 
-    // Retrieve row information from the database
-    $query = "SELECT * FROM activite WHERE ID_ACTIVITE = $row_id";
+    // Retrieve user information from the database
+    $query = "SELECT * FROM utilisateurs WHERE ID_UTILL = $user_id";
     $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
+    $user = mysqli_fetch_assoc($result);
 
     // Close database connection
     mysqli_close($conn);
 }
-
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Modifier activité</title>
+    <title>Modifier l'utilisateur</title>
     <style>
         /*style of admin index*/
         body {
@@ -169,6 +169,7 @@ if (isset($_GET['id_activite'])) {
         }
 
         /*end of style index  */
+
         form {
             display: flex;
             flex-wrap: wrap;
@@ -208,8 +209,7 @@ if (isset($_GET['id_activite'])) {
         input[type="email"],
         input[type="tel"],
         input[type="password"],
-        textarea,
-        select {
+        textarea {
             padding: 15px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -261,37 +261,60 @@ if (isset($_GET['id_activite'])) {
         <li><a href="messagerie.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
-    <?php if (isset($row)) : ?>
+    <?php if (isset($user)) : ?>
         <fieldset>
-            <legend>Modifier activité</legend>
+            <legend>Modifier l'utilisateur</legend>
 
-            <form method="post" action="update_activite.php" onsubmit="return validateForm()">
-                <input type="hidden" name="id" value="<?php echo $row['ID_ACTIVITE']; ?>" />
+            <form method="post" action="update_util.php" onsubmit="return validateForm()">
+                <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
 
-                <label for="field1">Type :</label>
-                <select name="field1" id="field1">
-                    <option value="<?php echo $row['TYPE']; ?>"><?php echo $row['TYPE']; ?></option>
-                    <option>Spa</option>
-                    <option>Restaurant</option>
-                    <option>Piscine</option>
+                <label for="prenom">Prénom :</label>
+                <input type="text" name="prenom" id="prenom" value="<?php echo $user['PRENOM']; ?>" />
 
-                </select>
+                <label for="nom">Nom :</label>
+                <input type="text" name="nom" id="nom" value="<?php echo $user['NOM']; ?>" />
+                <label for="cin">CIN :</label>
+                <input type="text" name="cin" id="cin" value="<?php echo $user['CIN']; ?>" />
 
-                <label for="field2">Prix (Dhs) :</label>
-                <input type="text" name="field2" id="field2" value="<?php echo $row['PRIX']; ?>" />
 
-                <label for="field3">Disponibilité :</label>
-                <input type="text" name="field3" id="field3" value="<?php echo $row['ETAT']; ?>" />
 
-                <input type="submit" value="Enregister" />
+                <label for="email">Email :</label>
+                <input type="text" name="email" id="email" value="<?php echo $user['E_MAIL']; ?>" />
+
+                <label for="tele">Téléphone :</label>
+                <input type="tel" name="tele" id="tele" value="<?php echo $user['TELE']; ?>" />
+                <label for="adresse">Addresse:</label>
+                <textarea name="adresse" id="adresse"><?php echo $user['ADRESSE']; ?></textarea>
+
+
+
+                <label for="mdp">Nouveau Mot de Passe :</label>
+                <input type="password" name="mdp" id="mdp" />
+                <label for="mdpp">Confirmer votre nouveau mot de passe :</label>
+                <input type="password" name="mdpp" id="mdpp" />
+
+
+
+                <input type="submit" value="Enregistrer" />
             </form>
         </fieldset>
     <?php else : ?>
-        <p>Activité inexistante.</p>
+        <p>Utilisateur n'existe pas.</p>
     <?php endif; ?>
     <script>
         function validateForm() {
-            const formInputs = document.querySelectorAll('input[type="text"], textarea');
+            var prenom = document.getElementById("prenom").value;
+            var nom = document.getElementById("nom").value;
+            var email = document.getElementById("email").value;
+            var tele = document.getElementById("tele").value;
+            var mdp = document.getElementById("mdp").value;
+            var mdpp = document.getElementById("mdpp").value;
+            let lettersRegex = /^[A-Za-z]+$/;
+            let teleRegex = /^[+]?[1-9][0-9]{9,14}$/;
+            let regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+            var emailRegex = /\S+@\S+\.\S+/;
+            const formInputs = document.querySelectorAll('input[type="text"], input[type="tel"],  textarea');
 
             for (let input of formInputs) {
                 if (input.value.trim() === '') {
@@ -299,17 +322,44 @@ if (isset($_GET['id_activite'])) {
                     return false;
                 }
             }
-            var prix = document.getElementById("field2").value;
-            if (isNaN(prix)) {
-                alert("Le prix doit être un nombre ! ");
+
+            if ((!lettersRegex.test(prenom))) {
+                alert("Le prénom doit contenir seulement des lettres.");
                 return false;
+            }
+
+            if (!lettersRegex.test(nom)) {
+                alert("Le nom doit contenir seulement des lettres.");
+                return false;
+            }
+
+            if (!emailRegex.test(email)) {
+                alert("L'email n'est pas valide.");
+                return false;
+            }
+
+            if (!teleRegex.test(tele)) {
+                alert("Le téléphone doit être au format international.");
+                return false;
+            }
+
+            if (mdp.trim() !== '') {
+                if (!regexPassword.test(mdp)) {
+                    alert("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une miniscule et un chiffre.");
+                    return false;
+                }
 
 
+                if (mdp != mdpp) {
+                    alert("Les mots de passe ne sont pas identiques.");
+                    return false;
+                }
             }
             alert("Modification avec succes!"); // Display a validation message
             return true;
         }
     </script>
+
 </body>
 
 </html>

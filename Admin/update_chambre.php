@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $row_id = $_POST['id'];
     // Connect to the database
 
-    include("../db_conn.php");
+    include("../PHP/db_connexion.php");
 
     // Get form data
     $id = $_POST['id'];
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // Update row in the database
-    $query = "UPDATE chambre SET type='$type', description='$description', prix='$prix' WHERE id_chambre=$id";
+    $query = "UPDATE chambre SET TYPE='$type', DESCRIPTION='$description', PRIX='$prix' WHERE ID_CHAMBRE=$id";
     $result = mysqli_query($conn, $query);
 
     // Close database connection

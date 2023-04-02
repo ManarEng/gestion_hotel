@@ -24,6 +24,7 @@
         border: 10px;
         margin-top: -10px;
         padding: 10px;
+        text-align: left;
     }
 
     .basic_box {
@@ -160,17 +161,18 @@
         height: 2px;
         background: #ffa500;
         /*margin: 0 auto;*/
-        margin-left: auto;
+        margin-left: 680px;
         margin-right: auto;
-        margin-top: 100px;
+
 
     }
 
     .heading {
         text-align: center;
-        margin-bottom: 60px;
+
         margin-left: 115px;
-        /*margin-top: 200px;*/
+        margin-top: 10px;
+
     }
 
     h2 {
@@ -193,116 +195,148 @@
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="profil.php">Profil</a></li>
-        <li><a href=""> Utilisateurs</a>
-            <!--<ul class="inner-menu">
-                <li><a href="">Les Clients</a></li>
-                <li><a href="">Les Agents De Réception</a></li>
-            </ul>-->
+        <li><a href="utilisateurs.php"> Utilisateurs</a>
+
         </li>
         <li><a href="chambre.php"> Chambres</a>
-            <!-- <ul class="inner-menu">
-                <li><a href="">Les Chambres</a></li>
-                <li><a href="">Ajouter Une Chambre</a></li>
-                <li><a href="">Supprimer Une Chambre</a></li>
-            </ul>-->
+
         </li>
         <li><a href="activite.php">Activités</a>
-            <!--<ul class="inner-menu">
-                <li><a href="">Les Activités</a></li>
-                <li><a href="">Ajouter Une Activité</a></li>
-                <li><a href="">Supprimer Une Activité</a></li>
-            </ul>-->
+
         </li>
         <li><a href="res_admin.php"> Résérvations</a></li>
         <li><a href="messagerie.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
-    <div class="container">
-        <div class="divider"></div>
+    <div>
+        <?php
+        include("../PHP/db_connexion.php");
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+
+
+        ?>
+
         <div class="heading">
-            <h2>Bienvenue à espace administrateur</h2>
+            <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
         </div>
+
+        <div class="divider"></div>
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            include("../db_conn.php");
-            $sql = "SELECT  id_chambre, type, description, etat, prix FROM chambre ;";
+            include("../PHP/db_connexion.php");
+            $sql = "SELECT  ID_CHAMBRE, TYPE, DESCRIPTION, ETAT, PRIX,IMAGE_CH FROM chambre ;";
             $result = mysqli_query($conn, $sql);
             ?>
-            <a href="add_room.php"><img src="../Img/icons8-add-new-50.png" alt="Ajouter une chambre" style="width: 25px; height: 25px;"></a>
-            <table class="styled-table">
-                <thead>
 
-                    <tr>
-                        <th colspan="7">
-                            <p style="font-size: 28px; text-align: center; text-decoration: underline;">Informations des Chambres</p>
-                        </th>
-                    </tr>
+            <div class="container">
+                <h2 class="title"> Chambres : </h2>
 
-                    <tr>
+                <a href="add_room.php" class="add-icon" title="Nouvelle chambre"><img src="../Img/icons8-add-new-50.png" alt="Ajouter une chambre" style="width: 25px; height: 25px;"></a>
+                <table class="styled-table">
+                    <thead>
 
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Disponibilité</th>
-                        <th>Prix (Dhs)</th>
 
-                        <th></th>
-                        <th></th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
 
-                            <td><?php echo $row['type']; ?></td>
-                            <?php
-                            $message = htmlspecialchars($row['description']);
-                            if (strlen($message) > 20) {
-                                $messageShort = substr($message, 0, 20) . '...';
-                                echo "<td onclick=\"this.innerHTML = '" . $message . "';\"><span title='" . $message . "'>" . $messageShort . "</span></td>";
-                            } else {
-                                echo "<td>" . $message . "</td>";
-                            }
+                            <td>Type</td>
+                            <td>Description</td>
+                            <td>Disponibilité</td>
+                            <td>Prix (Dhs)</td>
+                            <td>Photo</td>
 
-                            ?>
+                            <td></td>
 
-
-                            <td><?php echo $row['etat']; ?></td>
-                            <td><?php echo $row['prix']; ?></td>
-
-                            <td><a href="modify_room.php?id_chambre=<?php echo $row['id_chambre']; ?>"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a></td>
-                            <script>
-                                function confirmDelete() {
-                                    var result = confirm("Êtes-vous sûr de vouloir supprimer cette chambre ?");
-                                    if (result) {
-                                        // If the user confirms, redirect to the PHP script to delete the row
-                                        window.location.href = "delete.php?id_chambre=<?php echo $id_chambre; ?>";
-                                    }
-                                }
-                            </script>
-                            <td><a href="delete_room.php?id_chambre=<?php echo $row['id_chambre']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chambre ?')"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a></td>
 
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $message = htmlspecialchars($row['DESCRIPTION']); ?>
+                            <tr>
 
+                                <td><?php echo $row['TYPE']; ?></td>
+                                <?php
+                                $message = htmlspecialchars($row['DESCRIPTION']);
+                                if (strlen($message) > 20) {
+                                    $messageShort = substr($message, 0, 20) . '...';
+                                    echo "<td onclick=\"this.innerHTML = '" . $message . "';\"><span title='" . $message . "'>" . $messageShort . "</span></td>";
+                                } else {
+                                    echo "<td onclick=\"\"><span title='" . $message . "'>" . $message . "</span></td>";
+                                }
+                                ?>
+
+
+                                <td><?php echo $row['ETAT']; ?></td>
+                                <td><?php echo $row['PRIX']; ?></td>
+                                <td><?php if ($row['IMAGE_CH'] == '') {
+                                        echo '<img src="../Img/default_room.png">';
+                                    } else {
+                                        echo '<img src="/Admin/rooms/' . $row['IMAGE_CH'] . '">';
+                                    }
+                                    ?></td>
+
+
+                                <script>
+                                    function confirmDelete() {
+                                        var result = confirm("Êtes-vous sûr de vouloir supprimer cette chambre ?");
+                                        if (result) {
+                                            // If the user confirms, redirect to the PHP script to delete the row
+                                            window.location.href = "delete.php?id_chambre=<?php echo $id_chambre; ?>";
+                                        }
+                                    }
+                                </script>
+                                <td>
+                                    <div style="display: flex; ">
+                                        <a href="modify_room.php?id_chambre=<?php echo $row['ID_CHAMBRE']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
+                                        <a href="delete_room.php?id_chambre=<?php echo $row['ID_CHAMBRE']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chambre ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
+                                    </div>
+                                </td>
+
+
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
 
         <style>
+            .container {
+                margin: auto;
+                max-width: 750px;
+
+            }
+
+            .add-icon {
+
+                margin-bottom: 1px;
+            }
+
+            .title {
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                font-weight: bold;
+                color: black;
+
+            }
+
             .styled-table {
                 border-collapse: collapse;
-                margin: 25px 0;
-                font-size: 0.9em;
+                margin: 0 auto 25px auto;
+                font-size: 1.2em;
                 font-family: sans-serif;
-                min-width: 800px;
+                width: 100%;
                 box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
             }
 
             .styled-table thead tr {
-                background-color: #444;
+                background-color: grey;
                 color: #ffffff;
                 text-align: left;
             }
@@ -334,6 +368,19 @@
 
             .styled-table tbody tr:hover {
                 background-color: #b3d9ff;
+            }
+
+            .styled-table td:last-child {
+                text-align: center;
+            }
+
+            .styled-table td:last-child img {
+                margin-left: 10px;
+            }
+
+            img {
+                width: 150px;
+                height: 150px;
             }
         </style>
 

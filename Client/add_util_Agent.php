@@ -1,27 +1,61 @@
 <?php
-// Check if row ID is provided in the query string
-if (isset($_GET['id_activite'])) {
-    $row_id = $_GET['id_activite'];
-
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Connect to the database
-    include("../PHP/db_connexion.php");
+    include("../db_conn.php");
 
-    // Retrieve row information from the database
-    $query = "SELECT * FROM activite WHERE ID_ACTIVITE = $row_id";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
+    // Retrieve form data
+    $prenom = $_POST['prenom'];
+    $nom = $_POST['nom'];
+    $E_MAIL = $_POST['E_MAIL'];
+    $tele = $_POST['tele'];
+    $nom_util = $_POST['nom_util'];
+    $mdp = $_POST['mdp'];
+    $cin = $_POST['cin'];
+    $adresse = $_POST['adresse'];
+
+    // Check if file is an image
+    $file = $_FILES['img'];
+    if (isset($_FILES['img']) && !empty($_FILES['img']['name'])) {
+        // file upload and processing code goes here
+        $allowed_extensions = ['jpg', 'jpeg', 'png'];
+        $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($file_extension, $allowed_extensions)) {
+            echo "Télécharger une image valide.";
+        }
+
+        // Store the image in the upload directory
+        $upload_dir = 'agents/';
+        $filename = uniqid("IMG-", true) . '.' . $file_extension;
+        $upload_path = $upload_dir . $filename;
+        move_uploaded_file($file['tmp_name'], $upload_path);
+
+        // Store the URL in the database
+        $url =  $filename;
+    } else {
+        echo "Veuillez choisir une image à télécharger.";
+    }
+
+
+
+    // Insert new row into the database
+    $query = "INSERT INTO utilisateurs  VALUES ('','2', '$nom','$prenom' ,'$nom_util','$mdp','$cin','$adresse','$E_MAIL','$tele','$url')";
+    mysqli_query($conn, $query);
 
     // Close database connection
     mysqli_close($conn);
+    header("Location: utilisateurs.php");
+    exit;
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Modifier activité</title>
+    <title>Ajouter utilisateur</title>
     <style>
         /*style of admin index*/
         body {
@@ -169,6 +203,7 @@ if (isset($_GET['id_activite'])) {
         }
 
         /*end of style index  */
+
         form {
             display: flex;
             flex-wrap: wrap;
@@ -205,11 +240,11 @@ if (isset($_GET['id_activite'])) {
         }
 
         input[type="text"],
-        input[type="email"],
+        input[type="E_MAIL"],
         input[type="tel"],
         input[type="password"],
-        textarea,
-        select {
+        input[type="file"],
+        textarea {
             padding: 15px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -261,37 +296,61 @@ if (isset($_GET['id_activite'])) {
         <li><a href="messagerie.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
-    <?php if (isset($row)) : ?>
-        <fieldset>
-            <legend>Modifier activité</legend>
 
-            <form method="post" action="update_activite.php" onsubmit="return validateForm()">
-                <input type="hidden" name="id" value="<?php echo $row['ID_ACTIVITE']; ?>" />
+    <fieldset>
+        <legend>Ajouter un agent: </legend>
 
-                <label for="field1">Type :</label>
-                <select name="field1" id="field1">
-                    <option value="<?php echo $row['TYPE']; ?>"><?php echo $row['TYPE']; ?></option>
-                    <option>Spa</option>
-                    <option>Restaurant</option>
-                    <option>Piscine</option>
+        <form method="post" action="" onsubmit="return validateForm()" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?php echo $user['id_util']; ?>" />
 
-                </select>
+            <label for="prenom">Prénom :</label>
+            <input type="text" name="prenom" id="prenom" />
 
-                <label for="field2">Prix (Dhs) :</label>
-                <input type="text" name="field2" id="field2" value="<?php echo $row['PRIX']; ?>" />
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" id="nom" />
+            <label for="cin">CIN :</label>
+            <input type="text" name="cin" id="cin" />
 
-                <label for="field3">Disponibilité :</label>
-                <input type="text" name="field3" id="field3" value="<?php echo $row['ETAT']; ?>" />
 
-                <input type="submit" value="Enregister" />
-            </form>
-        </fieldset>
-    <?php else : ?>
-        <p>Activité inexistante.</p>
-    <?php endif; ?>
+
+            <label for="E_MAIL">E_MAIL :</label>
+            <input type="text" name="E_MAIL" id="E_MAIL" />
+
+            <label for="tele">Téléphone :</label>
+            <input type="tel" name="tele" id="tele" />
+            <label for="adresse">Addresse :</label>
+            <textarea name="adresse" id="adresse"></textarea>
+
+            <label for="nom_util">Login :</label>
+            <input type="text" name="nom_util" id="nom_util" />
+
+            <label for="mdp">Mot de Passe :</label>
+            <input type="password" name="mdp" id="mdp" />
+            <label for="mdpp">Confirmer votre mot de passe :</label>
+            <input type="password" name="mdpp" id="mdpp" />
+            <label for="img">Photo :</label>
+            <input type="file" id="img" name="img">
+
+
+
+            <input type="submit" value="Enregistrer" />
+        </form>
+    </fieldset>
+
     <script>
         function validateForm() {
-            const formInputs = document.querySelectorAll('input[type="text"], textarea');
+            var prenom = document.getElementById("prenom").value;
+            var nom = document.getElementById("nom").value;
+            var E_MAIL = document.getElementById("E_MAIL").value;
+            var tele = document.getElementById("tele").value;
+            var mdp = document.getElementById("mdp").value;
+            var mdpp = document.getElementById("mdpp").value;
+            let lettersRegex = /^[A-Za-z]+$/;
+            let teleRegex = /^[+]?[1-9][0-9]{9,14}$/;
+            let regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+            var E_MAILRegex = /\S+@\S+\.\S+/;
+            const formInputs = document.querySelectorAll('input[type="text"], input[type="tel"], input[type="password"], textarea');
 
             for (let input of formInputs) {
                 if (input.value.trim() === '') {
@@ -299,17 +358,41 @@ if (isset($_GET['id_activite'])) {
                     return false;
                 }
             }
-            var prix = document.getElementById("field2").value;
-            if (isNaN(prix)) {
-                alert("Le prix doit être un nombre ! ");
+
+            if ((!lettersRegex.test(prenom))) {
+                alert("Le prénom doit contenir seulement des lettres.");
                 return false;
-
-
             }
-            alert("Modification avec succes!"); // Display a validation message
+
+            if (!lettersRegex.test(nom)) {
+                alert("Le nom doit contenir seulement des lettres.");
+                return false;
+            }
+
+            if (!E_MAILRegex.test(E_MAIL)) {
+                alert("L'E_MAIL n'est pas valide.");
+                return false;
+            }
+
+            if (!teleRegex.test(tele)) {
+                alert("Le téléphone doit être au format international.");
+                return false;
+            }
+
+            if (!regexPassword.test(mdp)) {
+                alert("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une miniscule et un chiffre.");
+                return false;
+            }
+
+            if (mdp != mdpp) {
+                alert("Les mots de passe ne sont pas identiques.");
+                return false;
+            }
+            alert("Ajout avec succes!"); // Display a validation message
             return true;
         }
     </script>
+
 </body>
 
 </html>

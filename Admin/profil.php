@@ -8,7 +8,6 @@
     body {
         margin: 0;
         /*background: #ddd;*/
-        /*background: #ddd;*/
     }
 
     table {
@@ -77,23 +76,8 @@
         text-decoration: underline;
     }
 
-    /* Style the inner menu */
-    .inner-menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: none;
-        position: absolute;
-    }
 
-    .inner-menu li {
-        margin-right: 0;
-    }
 
-    /* Show the inner menu when the outer menu item is hovered 
-    .outer-menu li:hover .inner-menu {
-        display: inline-block;
-    }*/
 
 
 
@@ -108,23 +92,7 @@
         margin-bottom: 10px;
     }
 
-    /* Style the inner menu */
-    .inner-menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: none;
-    }
 
-    .inner-menu li {
-        size: 50px;
-        margin-bottom: 5px;
-    }
-
-    /* Show the inner menu when the outer menu item is hovered */
-    .outer-menu li:hover .inner-menu {
-        display: block;
-    }
 
     /*header*/
 
@@ -195,13 +163,13 @@
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="profil.php">Profil</a></li>
-        <li><a href=""> Utilisateurs</a>
+        <li><a href="../Admin/utilisateurs.php"> Utilisateurs</a>
 
         </li>
-        <li><a href=""> Chambres</a>
+        <li><a href="../Admin/chambre.php"> Chambres</a>
 
         </li>
-        <li><a href=""> Activités</a>
+        <li><a href="../Admin/activite.php"> Activités</a>
 
         </li>
         <li><a href="res_admin.php">Résérvations</a></li>
@@ -216,12 +184,12 @@
             <?php
             //session_start();
             // Establish a connection to the database
-            include("../db_conn.php");
+            include("../PHP/db_connexion.php");
             // Retrieve the user ID from the session
             //$user_id = $_SESSION['user_id'];
 
             // Run a SELECT query to retrieve the user information
-            $sql =  "SELECT id_util, nom, prenom, nom_util, mdp, cin, adresse, email, tele, image FROM utilisateurs WHERE id_profil = 1 "; //AND id_util = $user_id
+            $sql =  "SELECT ID_UTILL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs WHERE ID_PROFIL = 1 "; //AND ID_UTILL = $user_id
             $result = mysqli_query($conn, $sql); ?>
 
 
@@ -229,94 +197,87 @@
                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                     <tr>
                         <th class="tr1" colspan="2">
-                            <h1 id="profill"><?php echo '<img src="../inscription/uploads/' . $row['image'] . '">'; ?></h1>
+                            <h1 id="profill"><?php if ($row['IMAGE_UTIL'] == '') {
+                                                    echo '<img src="/Img/profil.jpg">';
+                                                } else {
+                                                    echo '<img src="../inscription/uploads/' . $row['IMAGE_UTIL'] . '">';
+                                                }
+                                                ?></h1>
                         </th>
 
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>Nom:</label>
+                            <label>Nom :</label>
 
                         </td>
 
                         <td class="td1">
-                            <?php echo $row['nom']; ?>
+                            <?php echo $row['NOM']; ?>
                         </td>
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>Prénom:</label>
+                            <label>Prénom :</label>
 
                         </td>
 
                         <td class="td1">
-                            <?php echo $row['prenom']; ?>
+                            <?php echo $row['PRENOM']; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td1">
+                            <label>CIN :</label>
+                        </td>
+                        <td class="td1">
+                            <?php echo $row['CIN']; ?>
                         </td>
                     </tr>
 
+
                     <tr>
                         <td class="td1">
-                            <label>Email:</label>
+                            <label>Email :</label>
 
                         </td>
 
                         <td class="td1">
-                            <?php echo $row['email']; ?>
+                            <?php echo $row['E_MAIL']; ?>
                         </td>
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>Téléphone:</label>
+                            <label>Téléphone :</label>
                         </td>
                         <td class="td1">
-                            <?php echo $row['tele']; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td1">
-                            <label>Login:</label>
-                        </td>
-                        <td class="td1">
-                            <?php echo $row['nom_util']; ?>
+                            <?php echo $row['TELE']; ?>
                         </td>
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>Mot de passe:</label>
+                            <label>Adresse :</label>
                         </td>
                         <td class="td1">
-                            <?php echo $row['mdp']; ?>
+                            <?php echo $row['ADRESSE']; ?>
                         </td>
                     </tr>
                     <tr>
                         <td class="td1">
-                            <label>CIN:</label>
+                            <label>Login :</label>
                         </td>
                         <td class="td1">
-                            <?php echo $row['cin']; ?>
+                            <?php echo $row['LOGIN']; ?>
                         </td>
                     </tr>
 
-                    <tr>
-                        <td class="td1">
-                            <label>Adresse:</label>
-                        </td>
-                        <td class="td1">
-                            <?php echo $row['adresse']; ?>
-                        </td>
-                    </tr>
-                    <!-- <tr>
-                <td class="td1">
-                    <label>Photo:</label>
-                </td>
-                <td class="td1">
-                    <?php echo $row['img']; ?>
-                </td>
-</tr> -->
+
+
+
                     <tr>
                         <td colspan="2">
-                            <a href="modify_user.php?id_util=<?php echo $row['id_util']; ?>">
-                                <img src="../Img/edit-button.png" alt="Modify User" style="width: 25px ;height:25px ; position:right">
+                            <a href="modify_user.php?id_util=<?php echo $row['ID_UTILL']; ?>">
+                                <img src="../Img/edit-button.png" alt="Modify User" title="Modifier" style="width: 25px ;height:25px ; position:right">
 
                             </a>
                         </td>

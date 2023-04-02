@@ -238,10 +238,21 @@
             JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ";    
             $resultat = mysqli_query($conn, $sql);
 
-// Vérifier si des données ont été trouvées
-if (mysqli_num_rows($resultat) == 0) {
+            if ($conn) 
+            {
+
+                $resultat = mysqli_query($conn, "SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
+                FROM UTILISATEURS u
+                JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
+                JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
+                JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
+                JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ");
+            }
+
+    // Vérifier si des données ont été trouvées
+    if (mysqli_num_rows($resultat) == 0) {
     echo "Aucune donnée trouvée.";
-} else {
+    } else {
     // Afficher les données dans un tableau HTML
     echo "<table class=styled-table>";
     echo "<thead>";
@@ -264,7 +275,7 @@ if (mysqli_num_rows($resultat) == 0) {
     }    
     echo"</thead>";
     echo "</table>";
-}
+    }
 
 // Fermer la connexion
 mysqli_close($conn);

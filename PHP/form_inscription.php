@@ -99,8 +99,13 @@ if ($isSuccess) {
         $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
         $_SESSION['ID_PROFIL'] = $row['ID_PROFIL'];
         $_SESSION['LOGIN'] = $row['LOGIN'];
+<<<<<<< HEAD
         $_SESSION['TELE'] = $row['TELE'];
 
+=======
+        $_SESSION['TELE']=$row['TELE'];
+        
+>>>>>>> ba33705b0d7fafa6c167080106bf951b904f8ef1
 
         header('location:/Client/index.php');
     }

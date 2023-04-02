@@ -29,7 +29,7 @@ FROM UTILISATEURS u
 JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
 JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
 JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
-JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE;"; // Remplacez 1 par l'ID de la réservation souhaitée
+JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE;"; 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -102,17 +102,25 @@ if ($result->num_rows > 0) {
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
+<<<<<<< HEAD:PHP/form_reservation.php
                             <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE'] ; ?>">
+=======
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION["TELE"]; ?>">
+>>>>>>> ba33705b0d7fafa6c167080106bf951b904f8ef1:PHP/trait_Reservation.php
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="type">Type de Chambre <span class="blue"></span></label>
+<<<<<<< HEAD:PHP/form_reservation.php
                             <input id="type" type="text" name="type" class="form-control" value="<?php echo $_SESSION['TYPE_CHAMBRE'] ; ?>">
+=======
+                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $_SESSION["TYPEC"]; ?>">
+>>>>>>> ba33705b0d7fafa6c167080106bf951b904f8ef1:PHP/trait_Reservation.php
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="prix">Prix de Chambre <span class="blue"></span></label>
-                            <input id="prix" type="text" name="prix_ch" class="form-control" value="<?php echo $row["PRIX"]; ?>">
+                            <input id="prix" type="text" name="prix_ch" class="form-control" value="<?php echo $_SESSION["PRIX"]; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
@@ -122,10 +130,16 @@ if ($result->num_rows > 0) {
                         </div>
                         <div class="col-md-6">
                             <label for="type_ac">Type d'activité <span class="blue"></span></label>
-                            <select id="type_ac" name="type_ac" required>
-                                <option value="0">--choisisser une activité--</option>
-                                
-                            </select>
+                            <?php
+    $result = mysqli_query($conn, "SELECT TYPE FROM activite");
+    echo "<select id='type_ac' name='type_ac' required>";
+    echo "<option value=''>--choisir une activité--</option>";
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<option value='" . $row['TYPE'] . "'>" . $row['TYPE'] . "</option>";
+    }
+    echo "</select>";
+?>
+                        
                             <p class="comments"></p> 
                         </div>
                         

@@ -1,12 +1,12 @@
 <?php
 // Connect to the database
-include("../db_conn.php");
+include("../PHP/db_connexion.php");
 
 // Get the ID of the room to delete
 $id_chambre = $_GET['id_chambre'];
 
 // Delete the row from the database
-$sql = "DELETE FROM chambre WHERE id_chambre = $id_chambre";
+$sql = "DELETE FROM chambre WHERE ID_CHAMBRE = $id_chambre";
 
 if (mysqli_query($conn, $sql)) {
     // If the query was successful, redirect back to the main page

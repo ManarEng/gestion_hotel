@@ -1,18 +1,45 @@
 <?php
-// Check if row ID is provided in the query string
-if (isset($_GET['id_activite'])) {
-    $row_id = $_GET['id_activite'];
-
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Connect to the database
-    include("../PHP/db_connexion.php");
+    include("../db_conn.php");
 
-    // Retrieve row information from the database
-    $query = "SELECT * FROM activite WHERE ID_ACTIVITE = $row_id";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
+    // Retrieve form data
+    $type = $_POST['field1'];
+    $prix = $_POST['field2'];
+
+    // Check if file is an image
+    $file = $_FILES['img'];
+    if (isset($_FILES['img']) && !empty($_FILES['img']['name'])) {
+        // file upload and processing code goes here
+        $allowed_extensions = ['jpg', 'jpeg', 'png'];
+        $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($file_extension, $allowed_extensions)) {
+            echo "Télécharger une image valide.";
+        }
+
+        // Store the image in the upload directory
+        $upload_dir = 'activity/';
+        $filename = uniqid("IMG-", true) . '.' . $file_extension;
+        $upload_path = $upload_dir . $filename;
+        move_uploaded_file($file['tmp_name'], $upload_path);
+
+        // Store the URL in the database
+        $url =  $filename;
+    } else {
+        echo "Veuillez choisir une image à télécharger.";
+    }
+
+
+
+    // Insert new row into the database
+    $query = "INSERT INTO activite  VALUES ('','$type', '$prix','oui' ,'$url')";
+    mysqli_query($conn, $query);
 
     // Close database connection
     mysqli_close($conn);
+    header("Location: activite.php");
+    exit;
 }
 
 ?>
@@ -21,7 +48,7 @@ if (isset($_GET['id_activite'])) {
 <html>
 
 <head>
-    <title>Modifier activité</title>
+    <title>Ajouter une activité</title>
     <style>
         /*style of admin index*/
         body {
@@ -205,11 +232,11 @@ if (isset($_GET['id_activite'])) {
         }
 
         input[type="text"],
-        input[type="email"],
+        input[type="E_MAIL"],
         input[type="tel"],
         input[type="password"],
-        textarea,
-        select {
+        input[type="file"],
+        textarea {
             padding: 15px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -261,34 +288,25 @@ if (isset($_GET['id_activite'])) {
         <li><a href="messagerie.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
-    <?php if (isset($row)) : ?>
-        <fieldset>
-            <legend>Modifier activité</legend>
+    <fieldset>
+        <legend>Ajouter une activité</legend>
 
-            <form method="post" action="update_activite.php" onsubmit="return validateForm()">
-                <input type="hidden" name="id" value="<?php echo $row['ID_ACTIVITE']; ?>" />
+        <form method="post" action="" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <label for="field1">Type :</label>
+            <input type="text" name="field1" id="field1" />
 
-                <label for="field1">Type :</label>
-                <select name="field1" id="field1">
-                    <option value="<?php echo $row['TYPE']; ?>"><?php echo $row['TYPE']; ?></option>
-                    <option>Spa</option>
-                    <option>Restaurant</option>
-                    <option>Piscine</option>
+            <label for="field2">Prix(Dhs) :</label>
+            <input type="text" name="field2" id="field2" />
 
-                </select>
 
-                <label for="field2">Prix (Dhs) :</label>
-                <input type="text" name="field2" id="field2" value="<?php echo $row['PRIX']; ?>" />
 
-                <label for="field3">Disponibilité :</label>
-                <input type="text" name="field3" id="field3" value="<?php echo $row['ETAT']; ?>" />
 
-                <input type="submit" value="Enregister" />
-            </form>
-        </fieldset>
-    <?php else : ?>
-        <p>Activité inexistante.</p>
-    <?php endif; ?>
+            <label for="img">Photo :</label>
+            <input type="file" id="img" name="img">
+
+            <input type="submit" value="Enregister" />
+        </form>
+    </fieldset>
     <script>
         function validateForm() {
             const formInputs = document.querySelectorAll('input[type="text"], textarea');
@@ -306,7 +324,7 @@ if (isset($_GET['id_activite'])) {
 
 
             }
-            alert("Modification avec succes!"); // Display a validation message
+            alert("Activité ajoutée avec succes!"); // Display a validation message
             return true;
         }
     </script>
