@@ -7,7 +7,7 @@
 <style>
     body {
         margin: 0;
-        background: #ddd;
+        /*background: #ddd;*/
     }
 
     table {
@@ -24,6 +24,8 @@
         border: 10px;
         margin-top: -10px;
         padding: 10px;
+
+        text-align: left;
     }
 
     .basic_box {
@@ -44,7 +46,7 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        width: 22%;
+        width: 15%;
         font-size: 24px;
         background-color: lightseagreen;
         text-decoration: none;
@@ -74,6 +76,25 @@
         color: white;
         text-decoration: underline;
     }
+
+    /* Style the inner menu */
+    .inner-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: none;
+        position: absolute;
+    }
+
+    .inner-menu li {
+        margin-right: 0;
+    }
+
+    /* Show the inner menu when the outer menu item is hovered 
+    .outer-menu li:hover .inner-menu {
+        display: inline-block;
+    }*/
+
 
 
     /* Style the outer menu */
@@ -105,6 +126,25 @@
         display: block;
     }
 
+    /*header*/
+
+    header {
+        position: fixed;
+        height: 90px;
+        width: 100%;
+        background-color: lightskyblue;
+        /*filter: blur(20px);
+        backdrop-filter: blur(20px);
+        /*background: transparent;*/
+
+        height: 50px;
+        width: 100%;
+        clip: rect(top, offset of right clip from left side, offset of bottom from top, left);
+
+        filter: blur(20px);
+        filter: url(blur.svg#blur);
+
+    }
 
     #e1 {
         float: center;
@@ -118,26 +158,23 @@
     }
 
     .divider {
-
         width: 100px;
         height: 2px;
         background: #ffa500;
         /*margin: 0 auto;*/
-        margin-left: auto;
+        margin-left: 680px;
         margin-right: auto;
-        margin-top: 100px;
 
     }
 
     .heading {
         text-align: center;
-        margin-bottom: 60px;
+
         margin-left: 115px;
-        /*margin-top: 200px;*/
+        margin-top: 10px;
     }
 
     h2 {
-
         text-transform: uppercase;
         font-weight: bold;
         color: black;
@@ -149,32 +186,42 @@
 
     <table style="width: 100%;">
         <tr>
-            <td id="td1" style="padding: 10px; font-size: 48px;"><b> HoteLUX</b><span style="color: #ffa500;">.</span></td>
+            <td id="td1" style="padding: 10px; font-size: 48px;"><a href="index.php" style="text-decoration: none; color:inherit"><b> HoteLUX</b></a><span style="color: #ffa500;">.</span></td>
         </tr>
     </table>
 
 
     <ul class="outer-menu" style="position: fixed;">
 
-        <li><a href="">Profil</a></li>
-        <li><a href="">Clients</a>
+        <li><a href="profil.php">Profil</a></li>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
-        <li><a href="">Résérvations</a>
+        <li><a href="chambre.php"> Chambres</a>
 
         </li>
-        <li><a href="">Chambres</a>
+        <li><a href="activite.php">Activités</a>
 
         </li>
-        <li><a href="">Activités</a></li>
+        <li><a href="ResAdmin.php"> Résérvations</a></li>
 
-        <li><a href="../index.html">Déconnexion</a></li>
+        <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div class="container">
-        <div class="divider"></div>
+        <?php
+        include("../db_connexion.php");
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2;";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+
+
+        ?>
+
         <div class="heading">
-            <h2>Bienvenue à espace agent de réception</h2>
+            <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
         </div>
+        <div class="divider"></div>
+        <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
 
 </body>
 
