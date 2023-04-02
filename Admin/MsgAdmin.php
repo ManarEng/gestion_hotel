@@ -229,10 +229,7 @@
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            $conn = new mysqli("localhost", "root", "", "hotelux");
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+              include("../db_connexion.php") ;
             $sql="select * from messagerie";
             $resultat = mysqli_query($conn, $sql);
 
