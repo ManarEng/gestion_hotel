@@ -285,6 +285,7 @@ if (isset($_GET['id_chambre'])) {
                 <label for="field3">Prix (Dhs) :</label>
                 <input type="text" name="field3" id="field3" value="<?php echo $row['PRIX']; ?>" />
 
+
                 <input type="submit" value="Enregister" />
             </form>
         </fieldset>
