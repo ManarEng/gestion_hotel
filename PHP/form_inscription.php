@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../db_connexion.php';
+include ("../db_connexion.php");
 $firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";
 $firstnameError = $nameError = $emailError = $phoneError = $loginError = $mdpError = $mdppError = $imgError = "";
 $isSuccess = false;
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Store the URL in the database
         $url =  $filename;
     } else {
-        $url = "default-avatar.png";
+        $url = "profil.jpg";
     }
 }
 if ($isSuccess) {

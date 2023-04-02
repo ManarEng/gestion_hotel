@@ -207,7 +207,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
 
 
-    include 'db_connexion.php'; 
+    include ("../db_connexion.php");
 
 
     if($isSuccess)

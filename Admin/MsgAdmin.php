@@ -227,7 +227,7 @@
     <div class="container">
         
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
+            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>*/
             <?php
               include("../db_connexion.php") ;
             $sql="select * from messagerie";

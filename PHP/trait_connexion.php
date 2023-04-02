@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-include '../db_connexion.php';
+include 'db_connexion.php';
 
 // Récupération des informations de connexion de l'utilisateur
 $user = $_POST['username'];
@@ -33,7 +33,7 @@ if(mysqli_num_rows($result) > 0){
     $_SESSION['LOGIN'] = $row['LOGIN'];
 
     if($row['ID_PROFIL']==3){header('location:/Client/index.php');}
-    else if($row['ID_PROFIL']==1){header('location:/Admin/index.php');}
+    else if($row['ID_PROFIL']==1){header('location:/Admin/index_admin.php');}
     else if($row['ID_PROFIL']==2){header('location:/Agent/index.php');}
     
  }
