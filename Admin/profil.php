@@ -199,8 +199,10 @@
                         <th class="tr1" colspan="2">
                             <h1 id="profill"><?php if ($row['IMAGE_UTIL'] == '') {
                                                     echo '<img src="/Img/profil.jpg">';
+                                                    echo '<img src="/Img/default-avatar.png">';
                                                 } else {
                                                     echo '<img src="../PHP/uploads/' . $row['IMAGE_UTIL'] . '">';
+                                                    echo '<img src="/PHP/uploads/' . $row['IMAGE_UTIL'] . '">';
                                                 }
                                                 ?></h1>
                         </th>
