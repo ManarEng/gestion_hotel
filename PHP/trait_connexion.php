@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-include 'db_connexion.php';
+include '../db_connexion.php';
 
 // Récupération des informations de connexion de l'utilisateur
 $user = $_POST['username'];
