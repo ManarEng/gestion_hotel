@@ -1,8 +1,5 @@
 <?php
-    $conn = new mysqli("localhost", "root", "", "hotelux");
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+     include("../db_connexion.php") ;
     if(isset($_POST['ID_MESSAGE'])) {
         $ID_MESSAGE = $_POST['ID_MESSAGE'];
         $nom = $_POST['nom'];
