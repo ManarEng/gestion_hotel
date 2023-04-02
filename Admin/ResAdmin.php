@@ -228,25 +228,24 @@
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>*/
             <?php
+
             include("../db_connexion.php") ;
             
-            $sql="SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, c.TYPEC, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
-            FROM UTILISATEURS u
-            JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
-            JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
-            JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
-            JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ";    
+            $sql="SELECT U.NOM, U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE
+            FROM reservation R
+            JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
+            JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
+            JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
+            JOIN activite A ON R.ID_ACTIVITE = A.ID_ACTIVITE
+            JOIN type_activite TA ON A.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE; ";    
             $resultat = mysqli_query($conn, $sql);
+
+           
 
             if ($conn) 
             {
 
-                $resultat = mysqli_query($conn, "SELECT u.NOM, u.PRENOM,  r.NBRE_CHAMBRE, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE 
-                FROM UTILISATEURS u
-                JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
-                JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
-                JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
-                JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE; ");
+                $resultat = mysqli_query($conn, $sql);
             }
 
     // Vérifier si des données ont été trouvées
@@ -263,9 +262,9 @@
     while ($row = mysqli_fetch_assoc($resultat)) {
         echo "<tr>";
         echo "<td>" . $row["NOM"] ." ".$row["PRENOM"]. "</td>";
-        echo "<td>" . $row["TYPEC"] . "</td>";
+        echo "<td>" . $row["TYPE_CHAMBRE"] . "</td>";
         echo "<td>" . $row["NBRE_CHAMBRE"] . "</td>";
-        echo "<td>" . $row["TYPE"] . "</td>";
+        echo "<td>" . $row["TYPE_ACTIVITE"] . "</td>";
         echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
         echo "<td>" . $row["DATE_SORTIE"] . "</td>";
         echo "<td><a href='modify_res.php'><button value='modifier' onclick='supprimerLigne(" . $row["ID_RES "] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";

@@ -4,7 +4,7 @@ if (isset($_GET['id_chambre'])) {
     $row_id = $_GET['id_chambre'];
 
     // Connect to the database
-    include("../PHP/db_connexion.php");
+    include("../db_connexion.php");
 
     // Retrieve row information from the database
     $query = "SELECT * FROM chambre WHERE ID_CHAMBRE = $row_id";

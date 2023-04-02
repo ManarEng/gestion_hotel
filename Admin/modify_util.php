@@ -5,7 +5,7 @@ if (isset($_GET['id_util'])) {
 
 
     // Connect to the database
-    include("../PHP/db_connexion.php");
+    include("../db_connexion.php");
 
     // Retrieve user information from the database
     $query = "SELECT * FROM utilisateurs WHERE ID_UTILL = $user_id";

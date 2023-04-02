@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $row_id = $_POST['id'];
     // Connect to the database
 
-    include("../PHP/db_connexion.php");
+    include("../db_connexion.php");
 
     // Get form data
     $id = $_POST['id'];

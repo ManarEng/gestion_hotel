@@ -210,7 +210,7 @@
     </ul>
     <div>
         <?php
-        include("../PHP/db_connexion.php");
+        include("../db_connexion.php");
         $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
@@ -225,7 +225,7 @@
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            include("../PHP/db_connexion.php");
+            include("../db_connexion.php");
             $sql = "SELECT ID_ACTIVITE, TYPE, PRIX, ETAT,IMAGE_ACT  FROM activite ";
             $result = mysqli_query($conn, $sql);
             ?>

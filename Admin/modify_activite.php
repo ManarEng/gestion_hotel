@@ -4,7 +4,7 @@ if (isset($_GET['id_activite'])) {
     $row_id = $_GET['id_activite'];
 
     // Connect to the database
-    include("../PHP/db_connexion.php");
+    include("../db_connexion.php");
 
     // Retrieve row information from the database
     $query = "SELECT * FROM activite WHERE ID_ACTIVITE = $row_id";

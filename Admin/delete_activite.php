@@ -1,6 +1,6 @@
 <?php
 // Connect to the database
-include("../PHP/db_connexion.php");
+include("../db_connexion.php");
 
 // Get the ID of the room to delete
 $id_ac = $_GET['id_activite'];
