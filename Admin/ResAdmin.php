@@ -226,7 +226,7 @@
     <div class="container">
         
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>*/
+           
             <?php
 
             include("../db_connexion.php") ;
@@ -237,7 +237,7 @@
             JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
             JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
             JOIN activite A ON R.ID_ACTIVITE = A.ID_ACTIVITE
-            JOIN type_activite TA ON A.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE; ";    
+            JOIN type_activite TA ON A.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE; ";    //IL faut que j'ajoute where pour sortir ces informations de la session
             $resultat = mysqli_query($conn, $sql);
 
            
