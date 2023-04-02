@@ -227,8 +227,10 @@
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
             include("../db_connexion.php");
-            $sql = "SELECT  ID_CHAMBRE, TYPE, DESCRIPTION, ETAT, PRIX,IMAGE_CH FROM chambre ;";
+            $sql = "SELECT  ID_CHAMBRE,  DESCRIPTION, ETAT, PRIX,IMAGE_CH, ID_TYPE_CHAMBRE FROM chambre ;";
+
             $result = mysqli_query($conn, $sql);
+
             ?>
 
             <div class="container">
@@ -259,7 +261,14 @@
                             $message = htmlspecialchars($row['DESCRIPTION']); ?>
                             <tr>
 
-                                <td><?php echo $row['TYPE']; ?></td>
+                                <td><?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
+                                        echo "Individuelle";
+                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
+                                        echo "Double";
+                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
+                                        echo "Triple";
+                                    }
+                                    ?></td>
                                 <?php
                                 $message = htmlspecialchars($row['DESCRIPTION']);
                                 if (strlen($message) > 20) {
