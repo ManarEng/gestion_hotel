@@ -1,8 +1,5 @@
 <?php
-    $conn = new mysqli("localhost", "root", "", "hotelux");
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include("../db_connexion.php") ;
     if(isset($_GET['ID_MESSAGE'])) {
         $ID_MESSAGE = $_GET['ID_MESSAGE'];
         $sql="select * from messagerie where ID_MESSAGE = $ID_MESSAGE";

@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-<<<<<<< HEAD:PHP/form_reservation.php
-include ("../db_connexion.php");
-=======
 include("../db_connexion.php");
->>>>>>> 1f0698d7b3ab0c7763e9f4061d03eebc118ece14:PHP/trait_Reservation.php
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -27,24 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $msg = 'Votre réservation a échoué. ' . $sql . '<br>' . $conn->error;
     }
 }
-<<<<<<< HEAD:PHP/form_reservation.php
-// Récupération des informations de la réservation
-/*$sql = "SELECT u.NOM, u.PRENOM, u.TELE, r.NBRE_CHAMBRE, c.TYPEC,c.PRIX, a.TYPE, r.DATE_D_ENTREE, r.DATE_SORTIE
-FROM UTILISATEURS u
-JOIN RESERVATION r ON u.ID_UTILL = r.ID_UTILL
-JOIN CHAMBRE c ON r.ID_RES = c.ID_RES
-JOIN CONTENIR ca ON r.ID_RES = ca.ID_RES
-JOIN ACTIVITE a ON ca.ID_ACTIVITE = a.ID_ACTIVITE;"; 
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    // Affichage des données dans un formulaire HTML
-    $row = $result->fetch_assoc();
-
-}*/
-=======
-
->>>>>>> 1f0698d7b3ab0c7763e9f4061d03eebc118ece14:PHP/trait_Reservation.php
 ?>
 <!DOCTYPE html>
 <html>
@@ -110,31 +89,10 @@ if ($result->num_rows > 0) {
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-<<<<<<< HEAD:PHP/form_reservation.php
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE'] ; ?>">
-=======
                             <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION["TELE"]; ?>">
->>>>>>> ba33705b0d7fafa6c167080106bf951b904f8ef1:PHP/trait_Reservation.php
                             <p class="comments"></p>
                         </div>
-<<<<<<< HEAD:PHP/form_reservation.php
-                        <div class="col-md-6">
-                            <label for="type">Type de Chambre <span class="blue"></span></label>
-<<<<<<< HEAD:PHP/form_reservation.php
-                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $_SESSION['TYPE_CHAMBRE'] ; ?>">
-=======
-                            <input id="type" type="text" name="type" class="form-control" value="<?php echo $_SESSION["TYPEC"]; ?>">
->>>>>>> ba33705b0d7fafa6c167080106bf951b904f8ef1:PHP/trait_Reservation.php
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="prix">Prix de Chambre <span class="blue"></span></label>
-                            <input id="prix" type="text" name="prix_ch" class="form-control" value="<?php echo $_SESSION["PRIX"]; ?>">
-                            <p class="comments"></p>
-                        </div>
-=======
                        
->>>>>>> 1f0698d7b3ab0c7763e9f4061d03eebc118ece14:PHP/trait_Reservation.php
                         <div class="col-md-6">
                             <label for="nbre">Nombre de Chambre<span class="blue">*</span></label>
                             <input type="number" id="nbre" name="nbre" min="1" max="100" value="0">

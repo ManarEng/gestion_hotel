@@ -58,7 +58,7 @@ session_start();
             <h1 class="text-logo">Chambres et prix </h1>
             
             <?php
-				require 'db_connexion_oop.php';
+				require ("../db_connexion_oop.php");
 			 
                 echo '<nav>
                         <ul class="nav nav-pills" role="tablist">';

@@ -1,10 +1,6 @@
 <?php
 session_start();
-<<<<<<< HEAD
 include ("../db_connexion.php");
-=======
-include '../db_connexion.php';
->>>>>>> 1f0698d7b3ab0c7763e9f4061d03eebc118ece14
 $firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";
 $firstnameError = $nameError = $emailError = $phoneError = $loginError = $mdpError = $mdppError = $imgError = "";
 $isSuccess = false;
@@ -90,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Store the URL in the database
         $url =  $filename;
     } else {
-        $url = "default-avatar.png";
+        $url = "profil.jpg";
     }
 }
 if ($isSuccess) {
@@ -103,18 +99,8 @@ if ($isSuccess) {
         $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
         $_SESSION['ID_PROFIL'] = $row['ID_PROFIL'];
         $_SESSION['LOGIN'] = $row['LOGIN'];
-<<<<<<< HEAD
-<<<<<<< HEAD
         $_SESSION['TELE'] = $row['TELE'];
 
-=======
-        $_SESSION['TELE']=$row['TELE'];
-        
->>>>>>> ba33705b0d7fafa6c167080106bf951b904f8ef1
-=======
-        $_SESSION['TELE'] = $row['TELE'];
-
->>>>>>> 1f0698d7b3ab0c7763e9f4061d03eebc118ece14
 
         header('location:/Client/index.php');
     }

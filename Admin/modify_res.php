@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Récupérer les données de la réservation à modifier
-$sql = "SELECT * FROM reservation WHERE id_rese  = $id_rese ";
+$sql = "SELECT * FROM reservation WHERE ID_RES  = $id_rese ";
 $result = mysqli_query($conn, $sql);
 $reservation = mysqli_fetch_assoc($result);
 
