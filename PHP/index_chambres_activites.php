@@ -139,15 +139,15 @@ session_start();
             ?>
 
 
-<div class="body">
+<!--<div class="body">
         <div class="container site">
            
-            <h1 class="text-logo">Activités et prix </h1>
+            <h1 class="text-logo">Activités et prix </h1>-->
             
             <?php
 				//require 'db_connexion_oop.php';
 			 
-                echo '<nav>
+                /*echo '<nav>
                         <ul class="nav nav-pills" role="tablist">';
 
                 //$db = Database::connect();
@@ -193,7 +193,7 @@ session_start();
                         </div>';
                 }
                 Database::disconnect();
-                echo  '</div>';
+                echo  '</div>';*/
             ?>
 
 
@@ -201,7 +201,7 @@ session_start();
 
 
 
-<!--   <div class="body">
+   <div class="body">
         <div class="container site">
            
             <h1 class="text-logo">Activités et prix </h1>
@@ -257,7 +257,7 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
                                 <img src="/Img/image_chambres/single4.jpg" class="img-fluid" alt="...">
                                 <div class="price">870 dh</div>
@@ -278,9 +278,9 @@ session_start();
                                     <a href="#" class="btn btn-order" role="button">Réserver</a>
                                 </div>
                             </div>
-                        </div>-->
+                        </div>
                         
- <!--                   </div>
+                    </div>
                 </div>
 
                 <div class="tab-pane" id="tabB" role="tabpanel">
@@ -321,7 +321,7 @@ session_start();
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="img-thumbnail">
-                                <img src="/Img/image_activites/spa.jpg" class="img-fluid" alt="...">
+                                <img src="/Img/image_activites/spa1.jpg" class="img-fluid" alt="...">
                                 <div class="caption">
                                     <div class="price">A partir de 500dh</div>
                                    
@@ -357,7 +357,7 @@ session_start();
         </div>
     </div>
 
-            -->
+        
   
     <br> <br><br>
 
@@ -366,8 +366,8 @@ session_start();
 
 
 
- <!--   
-    <footer>
+    
+<!--    <footer>
          
          <div class="col-right">
             <h3>Contact Info</h3>
