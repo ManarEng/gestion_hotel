@@ -97,17 +97,8 @@ $user_id = $_SESSION['ID_UTILL'];
             ?>
              <h3><?php echo $fetch['LOGIN']; ?></h3> 
             <table >
-            <?php foreach ($result as $row) : ?>
-<tr>
-    <td colspan="5"><?php if($row['IMAGE_UTIL'] == ''){
-        echo '<img src="/Img/default-avatar.png">';
-     }
-     else{
-        echo '<img src="/PHP/uploads/'.$row['IMAGE_UTIL'].'">'; } ?></td>
-    <td colspan="5"><h3><?php echo $row['LOGIN']; ?></h3></td>
-    
-</tr>
-<?php endforeach; ?>
+            
+
                 <tr><th>Type de chambre </th><th>Nombre de chambre</th><th>Activité</th><th>date d'arrivée</th><th>date de depart</th></tr>
                 <?php foreach ($result as $row) : ?>
 <tr>
