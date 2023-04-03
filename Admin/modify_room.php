@@ -265,7 +265,7 @@ if (isset($_GET['id_chambre'])) {
         <fieldset>
             <legend>Modifier chambre</legend>
 
-            <form method="post" action="update_chambre.php" onsubmit="return validateForm()">
+            <form method="post" action="update_chambre.php" onsubmit="return validateForm()" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $row['ID_CHAMBRE']; ?>" />
 
                 <label for="field1">Type :</label>
