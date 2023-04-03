@@ -231,13 +231,12 @@
 
             include("../db_connexion.php") ;
             
-            $sql="SELECT U.NOM, U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
+            $sql="sELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
             FROM reservation R
             JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
             JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
             JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
-            JOIN activite A ON R.ID_ACTIVITE = A.ID_ACTIVITE
-            JOIN type_activite TA ON A.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE; ";    //IL faut que j'ajoute where pour sortir ces informations de la session
+            JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE";    //IL faut que j'ajoute where pour sortir ces informations de la session
             $resultat = mysqli_query($conn, $sql);
 
            
