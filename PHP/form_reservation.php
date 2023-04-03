@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo  "+2121163738" ;?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo  $_SESSION['TELE'] ;?>">
                             <p class="comments"></p>
                         </div>
                        <div class="col-md-6">
