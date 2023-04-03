@@ -15,7 +15,7 @@ if(isset($_POST['update_profile'])){
    $update_cin = mysqli_real_escape_string($conn, $_POST['update_cin']);
    $update_adresse = mysqli_real_escape_string($conn, $_POST['update_adresse']);
 
-   mysqli_query($conn, "UPDATE `utilisateurs` SET NOM = '$update_nom', EMAIL = '$update_email', PRENOM ='$update_prenom', TELE='$update_tele', LOGIN ='$update_username', CIN='$update_cin', ADRESSE='$update_adresse' WHERE ID_UTILL = '$user_id'") or die('query failed');
+   mysqli_query($conn, "UPDATE `utilisateurs` SET NOM = '$update_nom', E_MAIL = '$update_email', PRENOM ='$update_prenom', TELE='$update_tele', LOGIN ='$update_username', CIN='$update_cin', ADRESSE='$update_adresse' WHERE ID_UTILL = '$user_id'") or die('query failed');
 
    
 
@@ -170,7 +170,7 @@ if(isset($_POST['update_profile'])){
             <input type="text" name="update_prenom" value="<?php echo $fetch['PRENOM']; ?>" class="box">
 
             <span>Email :</span>
-            <input type="email" name="update_email" value="<?php echo $fetch['EMAIL']; ?>" class="box">
+            <input type="email" name="update_email" value="<?php echo $fetch['E_MAIL']; ?>" class="box">
 
 
             <span>Nom d'utilisateur :</span>

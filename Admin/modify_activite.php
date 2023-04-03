@@ -270,10 +270,22 @@ if (isset($_GET['id_activite'])) {
 
                 <label for="field1">Type :</label>
                 <select name="field1" id="field1">
-                    <option value="<?php echo $row['TYPE']; ?>"><?php echo $row['TYPE']; ?></option>
-                    <option>Spa</option>
-                    <option>Restaurant</option>
+                    <option value="<?php if ($row['ID_TYPE_ACTIVITE'] == 1) {
+                                        echo "Piscine";
+                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 2) {
+                                        echo "Restaurant";
+                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
+                                        echo "Spa";
+                                    } ?>"><?php if ($row['ID_TYPE_ACTIVITE'] == 1) {
+                                                echo "Individuelle";
+                                            } elseif ($row['ID_TYPE_ACTIVITE'] == 2) {
+                                                echo "Restaurant";
+                                            } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
+                                                echo "Spa";
+                                            } ?></option>
                     <option>Piscine</option>
+                    <option>Restaurant</option>
+                    <option>Spa</option>
 
                 </select>
 

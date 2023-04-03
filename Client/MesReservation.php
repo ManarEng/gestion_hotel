@@ -65,8 +65,8 @@ $user_id = $_SESSION['ID_UTILL'];
       JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
       JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
       JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
-      JOIN activite A ON R.ID_ACTIVITE = A.ID_ACTIVITE
-      JOIN type_activite TA ON A.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE
+
+      JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE
       WHERE R.ID_UTILL = $user_id; ";
       $result = mysqli_query($conn, $query);
       
@@ -75,12 +75,14 @@ $user_id = $_SESSION['ID_UTILL'];
           echo "Error: " . mysqli_error($mysqli);
           exit;
       }*/
-      
+      $row = 0; 
       // Récupération des résultats
       if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_assoc($result);
       }
-      
+   
+        
+    
       if($row['IMAGE_UTIL'] == ''){
         echo '<img src="/Img/default-avatar.png">';
      }

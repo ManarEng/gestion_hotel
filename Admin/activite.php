@@ -226,7 +226,7 @@
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
             include("../db_connexion.php");
-            $sql = "SELECT ID_ACTIVITE, TYPE, PRIX, ETAT,IMAGE_ACT  FROM activite ";
+            $sql = "SELECT ID_ACTIVITE,  PRIX, ETAT,IMAGE_ACT, ID_TYPE_ACTIVITE  FROM activite ";
             $result = mysqli_query($conn, $sql);
             ?>
             <div class="container">
@@ -257,7 +257,14 @@
                         while ($row = mysqli_fetch_assoc($result)) { ?>
                             <tr>
 
-                                <td><?php echo $row['TYPE']; ?></td>
+                                <td><?php if ($row['ID_TYPE_ACTIVITE'] == 1) {
+                                        echo "Piscine";
+                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 2) {
+                                        echo "Restaurant";
+                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
+                                        echo "Spa";
+                                    } ?></td>
+
                                 <td><?php echo $row['PRIX']; ?></td>
 
 

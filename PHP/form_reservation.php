@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sortie = $_POST['depart'];
     $nbrec = $_POST['nbre'];
    $activite=$_POST['activite'];
+   $type_ac=NULL;
     if($activite=='Piscine'){
         $type_ac=1;
     }
