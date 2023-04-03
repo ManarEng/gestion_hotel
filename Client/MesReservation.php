@@ -75,12 +75,14 @@ $user_id = $_SESSION['ID_UTILL'];
           echo "Error: " . mysqli_error($mysqli);
           exit;
       }*/
-      
+      $row = 0; 
       // Récupération des résultats
       if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_assoc($result);
       }
-      
+   
+        
+    
       if($row['IMAGE_UTIL'] == ''){
         echo '<img src="/Img/default-avatar.png">';
      }
