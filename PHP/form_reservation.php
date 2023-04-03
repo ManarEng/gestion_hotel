@@ -129,10 +129,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION["TELE"]; ?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo  "+2121163738" ;?>">
                             <p class="comments"></p>
                         </div>
-                       
+                       <div class="col-md-6">
+                            <label for="arrivee">Date d'Arrivée <span class="blue">*</span></label>
+                            <input type="date" id="arrivee" type="text" name="arrivee" class="form-control" required>
+                            <p class="comments"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="depart">Date de Depart<span class="blue">*</span></label>
+                            <input type="date" id="depart" type="password" name="depart" class="form-control" required>
+                            <p class="comments"></p>
+                        </div>
                         <div class="col-md-6">
                             <label for="nbre">Nombre de Chambre<span class="blue">*</span></label>
                             <input type="number" id="nbre" name="nbre" min="1" max="100" value="0">
@@ -149,16 +158,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <p class="comments"></p> 
                         </div>
                         
-                        <div class="col-md-6">
-                            <label for="arrivee">Date d'Arrivée <span class="blue">*</span></label>
-                            <input type="date" id="arrivee" type="text" name="arrivee" class="form-control" required>
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="depart">Date de Depart<span class="blue">*</span></label>
-                            <input type="date" id="depart" type="password" name="depart" class="form-control" required>
-                            <p class="comments"></p>
-                        </div>
+                        
+                      
                         <div class="col-md-12">
                             <p class="blue"><strong>* Ces informations sont requises.</strong>
         
