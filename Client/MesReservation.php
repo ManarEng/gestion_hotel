@@ -75,25 +75,26 @@ $user_id = $_SESSION['ID_UTILL'];
           echo "Error: " . mysqli_error($mysqli);
           exit;
       }*/
-      $row = 0; 
+     /* $row = 0; 
       // Récupération des résultats
       if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_assoc($result);
       }
-   
+   */
         
-    
-      if($row['IMAGE_UTIL'] == ''){
-        echo '<img src="/Img/default-avatar.png">';
-     }
-     else{
-        echo '<img src="/PHP/uploads/'.$row['IMAGE_UTIL'].'">';
-     }
-      
+      $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE ID_UTILL = '$user_id'") or die('query failed');
+      if(mysqli_num_rows($select) > 0){
+          $fetch = mysqli_fetch_assoc($select);
+      }
+      if($fetch['IMAGE_UTIL'] == ''){
+          echo '<img src="/Img/default-avatar.png">';
+      }else{
+          echo '<img src="/PHP/uploads/'.$fetch['IMAGE_UTIL'].'">';
+      }
                 
                
             ?>
-             <h3><?php echo $row['LOGIN']; ?></h3>
+             <h3><?php echo $fetch['LOGIN']; ?></h3> 
             <table >
                 <tr><th>Type de chambre </th><th>Nombre de chambre</th><th>Activité</th><th>date d'arrivée</th><th>date de depart</th></tr>
                 <?php foreach ($result as $row) : ?>
