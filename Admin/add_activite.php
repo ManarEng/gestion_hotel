@@ -29,11 +29,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "Veuillez choisir une image à télécharger.";
     }
+    if ($type == 'Piscine') {
+        $id_a = 1;
+    } elseif ($type == 'Restaurant') {
+        $id_a = 2;
+    } elseif ($type == 'Spa') {
+        $id_a = 3;
+    }
 
 
 
     // Insert new row into the database
-    $query = "INSERT INTO activite  VALUES ('','$type', '$prix','oui' ,'$url')";
+    $query = "INSERT INTO activite  VALUES ('', '$prix','oui' ,'$url','$id_a')";
     mysqli_query($conn, $query);
 
     // Close database connection
@@ -236,7 +243,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         input[type="tel"],
         input[type="password"],
         input[type="file"],
-        textarea {
+        textarea,
+        select {
             padding: 15px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -293,7 +301,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <form method="post" action="" enctype="multipart/form-data" onsubmit="return validateForm()">
             <label for="field1">Type :</label>
-            <input type="text" name="field1" id="field1" />
+            <select name="field1" id="field1">
+
+                <option>Piscine</option>
+                <option>Restaurant</option>
+                <option>Spa</option>
+
+            </select>
 
             <label for="field2">Prix(Dhs) :</label>
             <input type="text" name="field2" id="field2" />
