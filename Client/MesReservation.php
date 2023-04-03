@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 include '../db_connexion.php';
@@ -65,8 +66,9 @@ $user_id = $_SESSION['ID_UTILL'];
       JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
       JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
       JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
-
       JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE
+      WHERE R.ID_UTILL = '$user_id'; ";
+      
       $result = mysqli_query($conn, $query);
       
       // Vérification de la requête
@@ -82,18 +84,24 @@ $user_id = $_SESSION['ID_UTILL'];
    
         
     
-      if($row['IMAGE_UTIL'] == ''){
-        echo '<img src="/Img/default-avatar.png">';
-     }
-     else{
-        echo '<img src="/PHP/uploads/'.$row['IMAGE_UTIL'].'">';
-     }
+      
       
                 
                
             ?>
-             <h3><?php echo $row['LOGIN']; ?></h3>
+            
             <table >
+            <?php foreach ($result as $row) : ?>
+<tr>
+    <td colspan="5"><?php if($row['IMAGE_UTIL'] == ''){
+        echo '<img src="/Img/default-avatar.png">';
+     }
+     else{
+        echo '<img src="/PHP/uploads/'.$row['IMAGE_UTIL'].'">'; } ?></td>
+    <td colspan="5"><h3><?php echo $row['LOGIN']; ?></h3></td>
+    
+</tr>
+<?php endforeach; ?>
                 <tr><th>Type de chambre </th><th>Nombre de chambre</th><th>Activité</th><th>date d'arrivée</th><th>date de depart</th></tr>
                 <?php foreach ($result as $row) : ?>
 <tr>
