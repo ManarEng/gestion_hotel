@@ -175,7 +175,7 @@ if (isset($_GET['id_util'])) {
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            width: 90%;
+            width: 110%;
             /* reduce form width */
 
         }
@@ -188,7 +188,7 @@ if (isset($_GET['id_util'])) {
             font-family: Arial, sans-serif;
             font-size: 16px;
             color: #333;
-            max-width: 600px;
+            max-width: 615px;
             margin: 20px auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -209,12 +209,13 @@ if (isset($_GET['id_util'])) {
         input[type="email"],
         input[type="tel"],
         input[type="password"],
+        input[type="file"],
         textarea {
             padding: 15px;
             border-radius: 5px;
             border: 1px solid #ccc;
             margin-bottom: 10px;
-            width: 50%;
+            width: 40%;
             /* reduce input width */
         }
 
