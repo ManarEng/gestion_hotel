@@ -265,7 +265,7 @@ if (isset($_GET['id_activite'])) {
         <fieldset>
             <legend>Modifier activité</legend>
 
-            <form method="post" action="update_activite.php" onsubmit="return validateForm()">
+            <form method="post" action="update_activite.php" onsubmit="return validateForm()" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $row['ID_ACTIVITE']; ?>" />
 
                 <label for="field1">Type :</label>

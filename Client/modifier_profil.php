@@ -170,7 +170,7 @@ if(isset($_POST['update_profile'])){
             <input type="text" name="update_prenom" value="<?php echo $fetch['PRENOM']; ?>" class="box">
 
             <span>Email :</span>
-            <input type="email" name="update_email" value="<?php echo $fetch['E_MAIL']; ?>" class="box">
+            <input type="email" name="update_email" value="<?php echo $fetch['E_ MAIL']; ?>" class="box">
 
 
             <span>Nom d'utilisateur :</span>

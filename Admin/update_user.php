@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Store the image in the upload directory
-        $upload_dir = '../PHP/uploads/';
+        $upload_dir = '../PHP/uploads';
         $filename = uniqid("IMG-", true) . '.' . $file_extension;
         $upload_path = $upload_dir . $filename;
         move_uploaded_file($file['tmp_name'], $upload_path);
@@ -42,10 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($mdp)) {
 
 
-        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele', MDP='$mdp', CIN='$cin', ADRESSE='$adresse',IMAGE_UTIL='$url' WHERE ID_UTILL=$user_id";
+        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele', MDP='$mdp', CIN='$cin', ADRESSE='$adresse' WHERE ID_UTILL=$user_id";
+        $result = mysqli_query($conn, $query);
+    } elseif (!empty($_FILES['img']['name'])) {
+        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele',  CIN='$cin', ADRESSE='$adresse',IMAGE_UTIL='$url' WHERE ID_UTILL=$user_id";
         $result = mysqli_query($conn, $query);
     } else {
-        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele',  CIN='$cin', ADRESSE='$adresse',IMAGE_UTIL='$url' WHERE ID_UTILL=$user_id";
+        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele',  CIN='$cin', ADRESSE='$adresse' WHERE ID_UTILL=$user_id";
         $result = mysqli_query($conn, $query);
     }
     // Close database connection
