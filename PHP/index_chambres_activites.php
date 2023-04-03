@@ -106,7 +106,8 @@ session_start();
                                     <div class="caption">
                                         
                                         <p>' . $item['DESCRIPTION'] . '</p>
-                                        <a href="/PHP/bouton_reserver.php" class="btn btn-order" role="button"> Réserver</a>
+                                       
+                                        <a href="/PHP/bouton_reserver.php?ID_CHAMBRE=' . $item['ID_CHAMBRE'] . '" class="btn btn-order" role="button"> Réserver</a>
                                     </div>
                                 </div>
                             </div>';
@@ -115,17 +116,7 @@ session_start();
                    echo    '</div>
                         </div>';
 
-                    /*    $statement2 = $db->prepare('SELECT * FROM chambre WHERE ID_CHAMBRE = ?');  
-                        $result = mysqli_query($conn, $statement2);
-                        if (mysqli_num_rows($result) > 0) {
-                            $row = mysqli_fetch_assoc($result);
-                            $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
-                            $_SESSION['ID_PROFIL'] = $row['ID_PROFIL'];
-                            $_SESSION['LOGIN'] = $row['LOGIN'];
-                            $_SESSION['TELE'] = $row['TELE'];
                     
-                
-                        }*/
 
 
 
@@ -135,6 +126,7 @@ session_start();
                 //Database::disconnect();
                 echo  '</div>';
 
+                
                 
             ?>
 

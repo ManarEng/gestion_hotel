@@ -1,5 +1,16 @@
 <?php
 session_start();
+if(isset($_SESSION['ID_CHAMBRE'])) {
+    $chambre_id = $_SESSION['ID_CHAMBRE'];
+    // faire quelque chose avec l'id de la chambre, par exemple, récupérer les informations de la chambre depuis la base de données et les afficher
+} else {
+    // l'id de la chambre n'a pas été défini dans la session, rediriger l'utilisateur vers la page d'accueil
+    die("erreur session!");
+    
+}
+//$id_chambre=$_SESSION['ID_CHAMBRE'];
+
+
 
 include("../db_connexion.php");
 
@@ -21,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $type_ac=3;
     }
     // Ajouter les données à la base de données
-    $sql = "INSERT INTO reservation(ID_RES ,ID_UTILL, ID_CHAMBRE , ID_TYPE_ACTIVITE ,DATE_D_ENTREE, DATE_SORTIE, NBRE_CHAMBRE) VALUES('','$_SESSION[ID_UTILL]','$_SESSION[ID_CHAMBRE]','$type_ac', '$entree', '$sortie', '$nbrec')";
+    $sql = "INSERT INTO reservation VALUES('','$_SESSION[ID_UTILL]','$chambre_id','$type_ac', '$entree', '$sortie', '$nbrec')";
     $r = $conn->query($sql);
 
     $msg = '';
@@ -129,10 +140,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-6">
                             <label for="activite">Type d'activité <span class="blue"></span></label>
                                   <select id='activite' name='activite' required>
-                                  <option value=''>--choisir une activité--</option>;
-                                     <option value=''>Piscine</option>;
-                                     <option value=''>Restaurant</option>;
-                                     <option value=''>Spa</option>";
+                                  <option >--choisir une activité--</option>;
+                                     <option>Piscine</option>;
+                                     <option>Restaurant</option>;
+                                     <option>Spa</option>";
                                     </select>
                             <p class="comments"></p> 
                         </div>
