@@ -1,46 +1,51 @@
 <?php
 session_start();
-if(isset($_SESSION['ID_CHAMBRE'])) {
+$error = "";
+$isSuccess = false;
+$activite=$entree=$nbrec= "";
+
+if (isset($_SESSION['ID_CHAMBRE'])) {
     $chambre_id = $_SESSION['ID_CHAMBRE'];
-    // faire quelque chose avec l'id de la chambre, par exemple, récupérer les informations de la chambre depuis la base de données et les afficher
 } else {
-    // l'id de la chambre n'a pas été défini dans la session, rediriger l'utilisateur vers la page d'accueil
     die("erreur session!");
-    
 }
-//$id_chambre=$_SESSION['ID_CHAMBRE'];
-
-
 
 include("../db_connexion.php");
 
-// Vérifier si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Récupérer les données du formulaire
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
     $entree = $_POST['arrivee'];
     $sortie = $_POST['depart'];
     $nbrec = $_POST['nbre'];
-   $activite=$_POST['activite'];
-   $type_ac=NULL;
-    if($activite=='Piscine'){
-        $type_ac=1;
+    $activite = $_POST['activite'];
+    $type_ac = null;
+    
+    if ($activite == 'Piscine') {
+        $type_ac = 1;
+    } elseif ($activite == 'Restaurant') {
+        $type_ac = 2;
+    } elseif ($activite == 'Spa') {
+        $type_ac = 3;
     }
-    elseif($activite=='Restaurant'){
-        $type_ac=2;
-    }
-    elseif($activite=='Spa'){
-        $type_ac=3;
-    }
-    // Ajouter les données à la base de données
-    $sql = "INSERT INTO reservation VALUES('','$_SESSION[ID_UTILL]','$chambre_id','$type_ac', '$entree', '$sortie', '$nbrec')";
-    $r = $conn->query($sql);
-
-    $msg = '';
-    if ($r === TRUE) {
-        $msg = 'Votre résérvation a été ajoutée avec succès.';
+    
+    $arrivee = strtotime($_POST['arrivee']);
+    $depart = strtotime($_POST['depart']);
+    
+    if ($depart <= $arrivee) {
+        $error = "La date de départ est antérieure à la date d'arrivée.";
+    } elseif (empty($nbrec) || !is_numeric($nbrec) || $nbrec <= 0) {
+        $error = "Le nombre de personnes doit être supérieur à zéro.";
     } else {
-        $msg = 'Votre réservation a échoué. ' . $sql . '<br>' . $conn->error;
+        $sql = "INSERT INTO reservation VALUES('', '$_SESSION[ID_UTILL]', '$chambre_id', '$type_ac', '$entree', '$sortie', '$nbrec')";
+        $r = $conn->query($sql);
+        if ($r === true) {
+            $isSuccess = true;
+            $msg = 'Votre réservation a été ajoutée avec succès.';
+        } else {
+            $isSuccess = false;
+            $msg = 'Votre réservation a échoué. ' . $sql . '<br>' . $conn->error;
+        }
     }
 }
 
@@ -132,31 +137,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input id="tele" type="text" name="tele" class="form-control" value="<?php echo  $_SESSION['TELE'] ;?>">
                             <p class="comments"></p>
                         </div>
-                       <div class="col-md-6">
-                            <label for="arrivee">Date d'Arrivée <span class="blue">*</span></label>
-                            <input type="date" id="arrivee" type="text" name="arrivee" class="form-control" required>
-                            <p class="comments"></p>
-                        </div>
                         <div class="col-md-6">
-                            <label for="depart">Date de Depart<span class="blue">*</span></label>
-                            <input type="date" id="depart" type="password" name="depart" class="form-control" required>
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nbre">Nombre de Chambre<span class="blue">*</span></label>
-                            <input type="number" id="nbre" name="nbre" min="1" max="100" value="0">
-                            <p class="comments"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="activite">Type d'activité <span class="blue"></span></label>
-                                  <select id='activite' name='activite' required>
-                                  <option >--choisir une activité--</option>;
-                                     <option>Piscine</option>;
-                                     <option>Restaurant</option>;
-                                     <option>Spa</option>";
-                                    </select>
-                            <p class="comments"></p> 
-                        </div>
+   <label for="arrivee">Date d'Arrivée <span class="blue">*</span></label>
+   <input type="date" id="arrivee" name="arrivee" class="form-control" required min="<?php echo date('Y-m-d'); ?>" value="<?php echo $entree; ?>">
+   <p class="comments"></p>
+</div>
+<div class="col-md-6">
+   <label for="depart">Date de Depart<span class="blue">*</span></label>
+   <input type="date" id="depart" type="depart" name="depart" class="form-control" required min="<?php echo date('Y-m-d'); ?>" >
+   <p class="comments"><?php echo $error; ?></p>
+</div>
+<div class="col-md-6">
+   <label for="nbre">Nombre de Chambre<span class="blue">*</span></label>
+   <input type="number" id="nbre" name="nbre" min="1" max="100" value="<?php echo $nbrec; ?>">
+   <p class="comments"></p>
+</div>
+<div class="col-md-6">
+   <label for="activite">Type d'activité <span class="blue"></span></label>
+   <select id='activite' name='activite' required>
+      <option >--choisir une activité--</option>
+      <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Piscine</option>
+      <option <?php if ($activite == "Restaurant") echo 'selected="selected"'; ?>>Restaurant</option>
+      <option <?php if ($activite == "Spa") echo 'selected="selected"'; ?>>Spa</option>
+   </select>
+   <p class="comments"></p> 
+</div>
+
                         
                         
                       

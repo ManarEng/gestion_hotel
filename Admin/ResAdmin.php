@@ -230,7 +230,7 @@
             <?php
 
             include("../db_connexion.php") ;
-            
+           
             $sql="sELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
             FROM reservation R
             JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
@@ -259,6 +259,7 @@
     echo "</thead>";
     echo"<tbody>";
     while ($row = mysqli_fetch_assoc($resultat)) {
+        
         echo "<tr>";
         echo "<td>" . $row["NOM"] ." ".$row["PRENOM"]. "</td>";
         echo "<td>" . $row["TYPE_CHAMBRE"] . "</td>";
