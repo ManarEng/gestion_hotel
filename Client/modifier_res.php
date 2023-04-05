@@ -1,27 +1,24 @@
 <?php
+// Check if user ID is provided in the query string
+if (isset($_GET['ID_RES'])) {
+    $res_id = $_GET['ID_RES'];
+    // Connect to the database
+    include("../db_connexion.php");
 
-// ...
+    // Retrieve user information from the database
+    $query = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
+    FROM reservation R
+    JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
+    JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
+    JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
+    JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE where ID_RES= '$res_id'";
+    $result = mysqli_query($conn, $query);
+    $res = mysqli_fetch_assoc($result);
 
-// Vérifier si le formulaire de modification a été soumis
-if (isset($_POST['modifier'])) {
-  // Récupérer les données soumises
-  $id_res = $_POST['ID_RES'];
-  $nbre_chambre = $_POST['NBRE_CHAMBRE'];
-  $date_d_entree = $_POST['DATE_D_ENTREE'];
-  $date_sortie = $_POST['DATE_SORTIE'];
-  $id_type_activite = $_POST['ID_TYPE_ACTIVITE'];
-  // Mettre à jour la réservation dans la base de données
-  $query = "UPDATE reservation SET NBRE_CHAMBRE = '$nbre_chambre', DATE_D_ENTREE = '$date_d_entree', DATE_SORTIE = '$date_sortie', ID_TYPE_ACTIVITE = '$id_type_activite' WHERE ID_RES = '$id_res';";
-  mysqli_query($conn, $query);
-  // Rediriger l'utilisateur vers la page de profil
-  header("Location: /Client/profile.php");
-  exit();
+    // Close database connection
+    mysqli_close($conn);
 }
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -66,72 +63,41 @@ if (isset($_POST['modifier'])) {
             </nav>
         </div>
     </header>
-   
-<div class="update-profile">
+    <div class="update-profile">
+    
+    
 
-   <form action="" method="post" enctype="multipart/form-data">
-      <?php
-      // Vérifier si l'utilisateur a cliqué sur le bouton "modifier"
-if (isset($_POST['modifier'])) {
-    // Récupérer l'identifiant de la réservation à modifier
-    $id_res = $_POST['id_res'];
-    // Récupérer les données de la réservation à modifier
-    $query = "SELECT R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE, R.ID_TYPE_ACTIVITE, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE FROM reservation R JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE WHERE R.ID_RES = '$id_res';";
-    $result = mysqli_query($conn, $query);
-     $fetch = mysqli_fetch_assoc($result);}
-         if($fetch['IMAGE_UTIL'] == ''){
-            echo '<img src="/Img/default-avatar.png">';
-         }
-         else{
-            echo '<img src="/PHP/uploads/'.$fetch['IMAGE_UTIL'].'">';
-         }
-
-         if(isset($message)){
-            foreach($message as $message){
-               echo '<div class="message">'.$message.'</div>';
-            }
-         }
-      ?>
+    <form action="" method="post" enctype="multipart/form-data">
+      <H1 style="font-size: 40px; color:black"> Modifier votre reservation <span style="color:#ff7a00"> :</span> </h1>
       <div class="flex">
          <div class="inputBox">
-            <span>Type de chambre</span>
-            <input type="text" name="update_prenom" value="<?php echo $fetch['TYPE_CHAMBRE']; ?>" class="box">
+            <span>Type de chambre </span>
+            <input type="text" name="update_prenom" value="<?php echo $res['TYPE_CHAMBRE']; ?>" class="box">
+ 
+            <span>Date d'arrivée</span>
+            <input type="text" name="update_cin" value="<?php echo $res['CIN']; ?>" class="box">
 
-            <span>Email :</span>
-            <input type="email" name="update_email" value="<?php echo $fetch['E_ MAIL']; ?>" class="box">
-
-
-            <span>Nom d'utilisateur :</span>
-            <input type="text" name="update_username" value="<?php echo $fetch['LOGIN']; ?>" class="box">
-
-            <span>CIN :</span>
-            <input type="text" name="update_cin" value="<?php echo $fetch['CIN']; ?>" class="box">
-
-            <span>Adresse:</span>
-            <input type="text" name="update_adresse" value="<?php echo $fetch['ADRESSE']; ?>" class="box">
-           
-            <span>Modifier votre photo:</span>
-            <input type="file" id="pic" name="pic" class="box">
+            <span>Activite</span>
+            <input type="text" name="update_username" value="<?php echo $res['LOGIN']; ?>" class="box">
+         
          </div>
          <div class="inputBox">
-            <span>Nom:</span>
-            <input type="text" name="update_nom" value="<?php echo $fetch['NOM']; ?>" class="box">
-
-            <span>Téléphone:</span>
-            <input type="text" name="update_tele" value="<?php echo $fetch['TELE']; ?>" class="box">
-
-
-            <input type="hidden" name="old_pass" value="<?php echo $fetch['MDP']; ?>">
-            <span>Ancien mot de passe :</span>
-            <input type="password" name="update_pass" class="box">
-            <span>Nouveau mot de passe :</span>
-            <input type="password" name="new_pass" class="box">
-            <span>Confirmer votre mot de passe :</span>
-            <input type="password" name="confirm_pass" class="box">
+         <span>Nombre de chambre :</span>
+            <input type="text" name="update_email" value="<?php echo $res['NBRE_CHAMBRE']; ?>" class="box">
+             
+            <span>Date de depart</span>
+            <input type="text" name="update_adresse" value="<?php echo $res['ADRESSE']; ?>" class="box">
+            <span><br></span>
+            <input type="submit" value="Modifier Profil" name="update_profile" class="btn">
          </div>
+         
+
+      </div>     
+      <a href="../Client/MesReservation.php" class="back-btn"><i style="font-size:larger" class="fas fa-arrow-left"></i> </a>
+
       </div>
-      <input type="submit" value="Modifier Profil" name="update_profile" class="btn">
-      <a href="gestion_client.php" class="delete-btn">Retourner</a>
+      
+      
    </form>
 
 </div>
@@ -183,3 +149,4 @@ if (isset($_POST['modifier'])) {
 </body>
 
 </html>
+
