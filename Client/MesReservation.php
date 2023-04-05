@@ -116,15 +116,14 @@ $user_id = $_SESSION['ID_UTILL'];
         <td ><?php echo $row['DATE_D_ENTREE']; ?></td>
         <td><?php echo $row['DATE_SORTIE']; ?></td>
         <td>
-           <a href='/Client/modifier_res.php'>
-                <button value='modifier'>
+           <a href='/Client/modifier_res.php?ID_RES=". $row["ID_RES"]."'>
                  <img src='/Img/icons8-modify-50.png' alt='modifier' style='width: 25px; height: 25px;'>
                 </button>
             </a>
         </td>
         <td>
-          <a href=''>
-               <button value='supprimer'>
+          <a href='/Client/supprimer_res.php?ID_RES=". $row["ID_RES"]."'>
+               
                 <img src='/Img/icons8-delete-trash-50.png' alt='Supprimer' style='width: 25px; height: 25px;'>
                </button>
           </a>
