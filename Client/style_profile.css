@@ -195,7 +195,12 @@
 }
 
 .update-profile form .flex .inputBox{
-   width: 49%;
+   
+   width: 300px;
+			margin: 10px;
+			text-align: left;
+
+
 }
 
 .update-profile form .flex .inputBox span{
