@@ -59,7 +59,7 @@ $user_id = $_SESSION['ID_UTILL'];
 
 <div class="container">
 
-   <div class="profile">
+   <div class="profile" >
       <?php 
       $query =  "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
       FROM reservation R
@@ -96,21 +96,46 @@ $user_id = $_SESSION['ID_UTILL'];
                
             ?>
              <h3><?php echo $fetch['LOGIN']; ?></h3> 
-            <table >
-            
+             <table >
+  <thead>
+    <tr>
+      <th>Type de chambre</th>
+      <th>Nombre de chambre</th>
+      <th>Activité</th>
+      <th>Date d'arrivée</th>
+      <th>Date de départ</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($result as $row): ?>
+      <tr>
+        <td><?php echo $row['TYPE_CHAMBRE']; ?></td>
+        <td><?php echo $row['NBRE_CHAMBRE']; ?></td>
+        <td><?php echo $row['TYPE_ACTIVITE']; ?></td>
+        <td ><?php echo $row['DATE_D_ENTREE']; ?></td>
+        <td><?php echo $row['DATE_SORTIE']; ?></td>
+        <td>
+           <a href='/Client/modifier_res.php'>
+                <button value='modifier'>
+                 <img src='/Img/icons8-modify-50.png' alt='modifier' style='width: 25px; height: 25px;'>
+                </button>
+            </a>
+        </td>
+        <td>
+          <a href=''>
+               <button value='supprimer'>
+                <img src='/Img/icons8-delete-trash-50.png' alt='Supprimer' style='width: 25px; height: 25px;'>
+               </button>
+          </a>
+        </td>
 
-                <tr><th>Type de chambre </th><th>Nombre de chambre</th><th>Activité</th><th>date d'arrivée</th><th>date de depart</th></tr>
-                <?php foreach ($result as $row) : ?>
-<tr>
-    <td><?php echo $row['TYPE_CHAMBRE']; ?></td>
-    <td><?php echo $row['NBRE_CHAMBRE']; ?></td>
-    <td><?php echo $row['TYPE_ACTIVITE']; ?></td>
-    <td><?php echo $row['DATE_D_ENTREE']; ?></td>
-    <td><?php echo $row['DATE_SORTIE']; ?></td>
-</tr>
-<?php endforeach; ?>
-            </table>
-        
+
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
    </div>
 
 </div>
@@ -143,4 +168,30 @@ $user_id = $_SESSION['ID_UTILL'];
 </body>
 
 </html>
- 
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 30px 0;
+    }
+    th, td {
+        text-align: center;
+        padding: 10px;
+    }
+    th {
+        background-color: #FFA500;
+        color: white;
+        font-weight: bold;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    tr:hover {
+        background-color: #ddd;
+    }
+    .profile table td:first-child {
+        font-weight: bold;
+        width: 20%;
+    }
+    
+</style>
