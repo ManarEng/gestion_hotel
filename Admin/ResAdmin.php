@@ -267,8 +267,8 @@
         echo "<td>" . $row["TYPE_ACTIVITE"] . "</td>";
         echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
         echo "<td>" . $row["DATE_SORTIE"] . "</td>";
-        echo "<td><a href='modify_res.php'><button value='modifier' onclick='modifierLigne(" . $row["ID_RES "] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-        echo "<td><a href='delete_res.php'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_RES "] . ")'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='modify_res.php?ID_RES=". $row["ID_RES"]."'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='delete_res.php?ID_RES=". $row["ID_RES"]."'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
         echo "</tr>";
     }    
     echo"</thead>";
