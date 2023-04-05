@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $imgError = "Télécharger une image valide.";
             $isSuccess = false;
         }
-        $isSuccess = true;
+        // $isSuccess = true;
         // Store the image in the upload directory
         $upload_dir = 'uploads/';
         $filename = uniqid("IMG-", true) . '.' . $file_extension;
@@ -88,6 +88,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $url =  $filename;
     } else {
         $url = "default-avatar.png";
+    }
+}
+if ($isSuccess) {
+
+    $sql = "INSERT INTO utilisateurs VALUES ('','3', '$name', '$firstname', '$login', '$mdp', '$cin', '$adresse', '$email', '$phone','$url')";
+    mysqli_query($conn, $sql);
+    $query = "SELECT * FROM utilisateurs WHERE LOGIN ='$login'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
+        $_SESSION['ID_PROFIL'] = $row['ID_PROFIL'];
+        $_SESSION['LOGIN'] = $row['LOGIN'];
+        $_SESSION['TELE'] = $row['TELE'];
+
+
+        header('location:/Client/index.php');
     }
 }
 
@@ -166,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <form id="contact-form" method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" role="form"> <!--htmlspecialchars est ajoute pour but de securite contre la faille xss -->
             <p class="thank-you" style="display:<?php if ($isSuccess) echo 'block';
-                                                else echo 'none'; ?> "> Inscription avec succes!</p>
+                                                else echo 'none'; ?> "> Inscription avec succès!</p>
             <div class="row">
                 <div class="col-lg-6">
                     <label for="firstname" class="form-label">Prénom <span class="blue">*</span></label>
@@ -234,27 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
-    <?php
-    if ($isSuccess) {
 
-        $sql = "INSERT INTO utilisateurs VALUES ('','3', '$name', '$firstname', '$login', '$mdp', '$cin', '$adresse', '$email', '$phone','$url')";
-        mysqli_query($conn, $sql);
-        $query = "SELECT * FROM utilisateurs WHERE LOGIN ='$login'";
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
-            $_SESSION['ID_PROFIL'] = $row['ID_PROFIL'];
-            $_SESSION['LOGIN'] = $row['LOGIN'];
-            $_SESSION['TELE'] = $row['TELE'];
-
-
-            header('location:/Client/index.php');
-        }
-        // Fermer la connexion à la base de données
-        mysqli_close($conn);
-    }
-    ?>
 
 
 
