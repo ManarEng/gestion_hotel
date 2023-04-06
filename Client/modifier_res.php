@@ -1,10 +1,11 @@
 <?php
+$error='';
 // Check if user ID is provided in the query string
 if (isset($_GET['ID_RES'])) {
     $res_id = $_GET['ID_RES'];
     // Connect to the database
     include("../db_connexion.php");
-
+   
     // Retrieve user information from the database
     $query = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
     FROM reservation R
@@ -13,8 +14,32 @@ if (isset($_GET['ID_RES'])) {
     JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
     JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE where ID_RES= '$res_id'";
     $result = mysqli_query($conn, $query);
-    $res = mysqli_fetch_assoc($result);
-
+    $row = mysqli_fetch_assoc($result);
+    
+    // Check if form was submitted
+    if (isset($_POST['update_profile'])) {
+        // Retrieve form data
+        $type_chambre = $_POST['update_prenom'];
+        $date_arrivee = $_POST['arrivee'];
+        $type_activite = $_POST['update_username'];
+        $nbre_chambre = $_POST['update_email'];
+        $date_depart = $_POST['depart'];
+        
+        // Check that the departure date is after the arrival date
+        if ($date_depart <= $date_arrivee) {
+            $error = "La date de départ est antérieure à la date d'arrivée.";
+            
+        }
+        
+        // Update reservation in database
+        $query = "UPDATE reservation SET ID_TYPE_ACTIVITE='$type_activite', NBRE_CHAMBRE='$nbre_chambre', DATE_D_ENTREE='$date_arrivee', DATE_SORTIE='$date_depart' WHERE ID_RES='$res_id'";
+        mysqli_query($conn, $query);
+        
+        // Redirect to reservation page
+        header("Location: ../Client/MesReservation.php");
+        exit();
+    }
+   
     // Close database connection
     mysqli_close($conn);
 }
@@ -72,21 +97,22 @@ if (isset($_GET['ID_RES'])) {
       <div class="flex">
          <div class="inputBox">
             <span>Type de chambre </span>
-            <input type="text" name="update_prenom" value="<?php echo $res['TYPE_CHAMBRE']; ?>" class="box">
+            <input type="text" name="update_prenom" value="<?php echo $row['TYPE_CHAMBRE']; ?>" class="box">
  
             <span>Date d'arrivée</span>
-            <input type="text" name="update_cin" value="<?php echo $res['CIN']; ?>" class="box">
-
+            <input type="date" id="arrivee" name="arrivee" class="box" required min="<?php echo date('Y-m-d'); ?>" value="<?php echo $row['DATE_D_ENTREE']; ?>">
             <span>Activite</span>
-            <input type="text" name="update_username" value="<?php echo $res['LOGIN']; ?>" class="box">
+            <input type="text" name="update_username" value="<?php echo $row['TYPE_ACTIVITE']; ?>" class="box">
          
          </div>
          <div class="inputBox">
          <span>Nombre de chambre :</span>
-            <input type="text" name="update_email" value="<?php echo $res['NBRE_CHAMBRE']; ?>" class="box">
+            <input type="number" name="update_email" min="1" max="100" value="<?php echo $row['NBRE_CHAMBRE']; ?>" class="box">
              
-            <span>Date de depart</span>
-            <input type="text" name="update_adresse" value="<?php echo $res['ADRESSE']; ?>" class="box">
+            <span>Date de départ</span>
+            <input type="date" id="depart" type="depart" name="depart" class="box" required min="<?php echo date('Y-m-d'); ?>"value="<?php echo $row['DATE_SORTIE']; ?>" >
+            <p class="comments"><?php echo $error; ?></p>
+            
             <span><br></span>
             <input type="submit" value="Modifier Profil" name="update_profile" class="btn">
          </div>
