@@ -140,7 +140,7 @@
         clip: rect(top, offset of right clip from left side, offset of bottom from top, left);
 
         filter: blur(20px);
-        filter: url(blur.svg#blur);
+        filter: url(blur.svg#blur);*/
 
     
 
@@ -159,7 +159,7 @@
         width: 100px;
         height: 2px;
         background: #ffa500;
-        /margin: 0 auto;/
+        /*margin: 0 auto;*/
         margin-left: auto;
         margin-right: auto;
         margin-top: 100px;
@@ -170,7 +170,7 @@
         text-align: center;
         margin-bottom: 60px;
         margin-left: 115px;
-        /margin-top: 200px;/
+        /*margin-top: 200px;*/
     }
 
     h2 {
@@ -231,7 +231,7 @@
 
             include("../db_connexion.php") ;
             
-            $sql="sELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
+            $sql="SELECT R.ID_RES, U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE
             FROM reservation R
             JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
             JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
@@ -266,8 +266,8 @@
         echo "<td>" . $row["TYPE_ACTIVITE"] . "</td>";
         echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
         echo "<td>" . $row["DATE_SORTIE"] . "</td>";
-        echo "<td><a href='modify_res.php'><button value='modifier' onclick='modifierLigne(" . $row["ID_RES "] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-        echo "<td><a href='delete_res.php'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_RES "] . ")'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='modify_res.php'><button value='modifier' onclick='modifierLigne(" . $row["ID_UTILL "] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='delete_res.php'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_UTILL "] . ")'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
         echo "</tr>";
     }    
     echo"</thead>";
