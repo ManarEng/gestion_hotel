@@ -231,7 +231,7 @@
 
             include("../db_connexion.php") ;
             
-            $sql="SELECT R.ID_RES, U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE
+            $sql="sELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
             FROM reservation R
             JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
             JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
@@ -266,8 +266,8 @@
         echo "<td>" . $row["TYPE_ACTIVITE"] . "</td>";
         echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
         echo "<td>" . $row["DATE_SORTIE"] . "</td>";
-        echo "<td><a href='modify_res.php'><button value='modifier' onclick='modifierLigne(" . $row["ID_UTILL "] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-        echo "<td><a href='delete_res.php'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_UTILL "] . ")'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='modify_res.php?ID_RES=". $row["ID_RES"]."'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+        echo "<td><a href='delete_res.php?ID_RES=". $row["ID_RES"]."'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
         echo "</tr>";
     }    
     echo"</thead>";

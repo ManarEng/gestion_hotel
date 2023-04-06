@@ -8,14 +8,14 @@ include '../db_connexion.php';
 session_start();
 $user_id = $_SESSION['ID_UTILL'];
 
-if(!isset($user_id)){
-   header('location:/index.html');
+if (!isset($user_id)) {
+    header('location:/index.html');
 };
 
-if(isset($_GET['logout'])){
-   unset($user_id);
-   session_destroy();
-   header('location:/index.html');
+if (isset($_GET['logout'])) {
+    unset($user_id);
+    session_destroy();
+    header('location:/index.html');
 }
 
 ?>
@@ -40,65 +40,65 @@ if(isset($_GET['logout'])){
 
     <script src="/JS/scripts.js"></script>
     <style>
-        .fa-solid{
+        .fa-solid {
             font-size: 15px;
 
         }
     </style>
-     
+
 </head>
 
 <body>
     <header>
         <div class="">
-            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/Client/index.php">  HoteLUX<span class="orange">.</span></a></h1>
+            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/Client/index.php"> HoteLUX<span class="orange">.</span></a></h1>
             <nav style="margin-top:35px;">
                 <ul>
-                    <li><a href="/Client/index.php/#main" >Accueil</a></li>
+                    <li><a href="/Client/index.php/#main">Accueil</a></li>
                     <li><a href="/Client/index.php/#steps">A propos</a></li>
                     <li><a href="/Client/index.php/#possibilities">Services</a></li>
                     <li><a href="/index_contact.php">Contact</a></li>
                     <li><a href="">Réservation</a></li>
-                    <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
-                    
+                    <li> <a href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
+
 
                 </ul>
             </nav>
         </div>
     </header>
 
-   
 
 
-<div class="container">
 
-   <div class="profile">
-      
-   <?php
-                $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE ID_UTILL = '$user_id'") or die('query failed');
-                if(mysqli_num_rows($select) > 0){
-                    $fetch = mysqli_fetch_assoc($select);
-                }
-                if($fetch['IMAGE_UTIL'] == ''){
-                    echo '<img src="/Img/default-avatar.png">';
-                }else{
-                    echo '<img src="/PHP/uploads/'.$fetch['IMAGE_UTIL'].'">';
-                }
+    <div class="container">
+
+        <div class="profile">
+
+            <?php
+            $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE ID_UTILL = '$user_id'") or die('query failed');
+            if (mysqli_num_rows($select) > 0) {
+                $fetch = mysqli_fetch_assoc($select);
+            }
+            if ($fetch['IMAGE_UTIL'] == '') {
+                echo '<img src="/Img/default-avatar.png">';
+            } else {
+                echo '<img src="/PHP/uploads/' . $fetch['IMAGE_UTIL'] . '">';
+            }
             ?>
-            <h3><?php echo $fetch['LOGIN']; ?></h3> 
-            <a href="modifier_profil.php" class="btn">Mon profile</a>
+            <h3><?php echo $fetch['LOGIN']; ?></h3>
+            <a href="modifier_profil.php" class="btn">Mon profil</a>
             <a href="MesReservation.php" class="btn">Mes réservations</a>
             <a href="gestion_client.php?logout=<?php echo $user_id; ?>" class="delete-btn">Déconnexion</a>
             <!--<p>new <a href="login.php">login</a> or <a href="register.php">register</a></p>-->
-   </div>
+        </div>
 
-</div>
+    </div>
 
 
-  
-   
 
-<!--    <section id="contact">
+
+
+    <!--    <section id="contact">
         <div class="wrapper">
             <h3>Contactez-nous</h3>
             <p>Chez HoteLUX nous savons que héberger est une aventure humaine mais également un engagement financier
@@ -120,32 +120,33 @@ if(isset($_GET['logout'])){
         </div>
     </section> -->
 
-  
 
 
 
-    
+
+
 
 
 
     <footer>
-         
-    
-        
-         <div class="col-right">
+
+
+
+        <div class="col-right">
             <h3>Contact Info</h3>
             <p>06 10 30 40 56</p>
             <p>05 10 30 40 56</p>
             <p>hotelux@gmail.com</p>
-         </div>
-
-         <div>
-            <h1> <a href="/Client/index.php">HoteLUX<span class="orange">.</span></a></h1>
-            <p class="copyright">Copyright © Tous droits réservés.</div>
-            </p> 
         </div>
 
-         <div class="col-left">
+        <div>
+            <h1> <a href="/Client/index.php">HoteLUX<span class="orange">.</span></a></h1>
+            <p class="copyright">Copyright © Tous droits réservés.
+        </div>
+        </p>
+        </div>
+
+        <div class="col-left">
             <h3>Contact Info</h3>
             <p>123,XYZ Road, BSK 3 <br>Banglore, Karnataka, IN</p>
             <div class="social-icons">
@@ -157,23 +158,21 @@ if(isset($_GET['logout'])){
             </div>
 
 
-            
 
-            
 
-            
 
-         </div>
-        
-        
-     </footer>
 
-    
+
+
+        </div>
+
+
+    </footer>
+
+
 
 
 
 </body>
 
 </html>
-
-
