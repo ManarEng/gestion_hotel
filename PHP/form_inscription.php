@@ -75,9 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         if (!in_array($file_extension, $allowed_extensions)) {
             $imgError = "Télécharger une image valide.";
-            $isSuccess = false;
         }
-        // $isSuccess = true;
+
         // Store the image in the upload directory
         $upload_dir = 'uploads/';
         $filename = uniqid("IMG-", true) . '.' . $file_extension;
@@ -187,44 +186,44 @@ if ($isSuccess) {
             <div class="row">
                 <div class="col-lg-6">
                     <label for="firstname" class="form-label">Prénom <span class="blue">*</span></label>
-                    <input id="firstname" type="text" name="firstname" class="form-control" value="<?php echo $firstname; ?>">
+                    <input id="firstname" type="text" name="firstname" class="form-control" value="<?php echo $firstname; ?>" required>
                     <p class="comments"><?php echo $firstnameError; ?></p>
                 </div>
                 <div class="col-lg-6">
                     <label for="name" class="form-label">Nom <span class="blue">*</span></label>
-                    <input id="name" type="text" name="name" class="form-control" value="<?php echo $name; ?>">
+                    <input id="name" type="text" name="name" class="form-control" value="<?php echo $name; ?>" required>
                     <p class="comments"><?php echo $nameError; ?></p>
                 </div>
                 <div class="col-lg-6">
                     <label for="cin" class="form-label">CIN <span class="blue">*</span></label>
-                    <input type="text" id="cin" name="cin" class="form-control" value="<?php echo $cin; ?>">
+                    <input type="text" id="cin" name="cin" class="form-control" value="<?php echo $cin; ?>" required>
 
                 </div>
                 <div class="col-lg-6">
                     <label for="email" class="form-label">Email <span class="blue">*</span></label>
-                    <input id="email" type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                    <input id="email" type="text" name="email" class="form-control" value="<?php echo $email; ?>" required>
                     <p class="comments"><?php echo $emailError; ?></p>
                 </div>
                 <div class="col-lg-6">
                     <label for="phone" class="form-label">Téléphone<span class="blue">*</span></label>
-                    <input id="phone" type="text" name="phone" class="form-control" value="<?php echo $phone; ?>">
+                    <input id="phone" type="text" name="phone" class="form-control" value="<?php echo $phone; ?>" required>
                     <p class="comments"><?php echo $phoneError; ?></p>
                 </div>
                 <div class="col-lg-6">
                     <label for="adresse" class="form-label">Adresse <span class="blue">*</span></label>
-                    <textarea id="adresse" name="adresse" class="form-control" cols="3" rows="3"><?php echo $adresse; ?></textarea>
+                    <textarea id="adresse" name="adresse" class="form-control" cols="3" rows="3" required><?php echo $adresse; ?></textarea>
 
                 </div>
 
 
                 <div class="col-lg-6">
                     <label for="login" class="form-label">Login <span class="blue">*</span></label>
-                    <input type="text" id="login" name="login" class="form-control" value="<?php echo $login; ?>">
+                    <input type="text" id="login" name="login" class="form-control" value="<?php echo $login; ?>" required>
                     <p class="comments"><?php echo $loginError; ?></p>
                 </div>
                 <div class="col-lg-6">
                     <label for="mdp" class="form-label">Mot de passe <span class="blue">*</span></label>
-                    <input type="password" id="mdp" name="mdp" class="form-control">
+                    <input type="password" id="mdp" name="mdp" class="form-control" required>
                     <p class="comments"><?php echo $mdpError; ?></p>
                 </div>
                 <div class="col-lg-6">
@@ -234,7 +233,7 @@ if ($isSuccess) {
                 </div>
                 <div class="col-lg-6">
                     <label for="mdpp" class="form-label">Confirmer votre mot de passe <span class="blue">*</span></label>
-                    <input type="password" id="mdpp" name="mdpp" class="form-control">
+                    <input type="password" id="mdpp" name="mdpp" class="form-control" required>
                     <p class="comments"><?php echo $mdppError; ?></p>
                 </div>
 
