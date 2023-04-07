@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!preg_match("/^[+]?[1-9][0-9]{9,14}$/", $phone)) {
         $phoneError = "Le numéro de téléphone doit être au format international.";
-        $isSuccess = false;
+        $isSuccess = false; //pas necess qu'il commence par +
     }
     if (strlen($mdp) < 8) {
         $mdpError = "Mot de passe trop court";
