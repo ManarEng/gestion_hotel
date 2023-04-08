@@ -15,9 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prix = $_POST['field3'];
 
 
-
+    if ($type == 'Individuelle') {
+        $id_ch = 1;
+    } elseif ($type == 'Double') {
+        $id_ch = 2;
+    } elseif ($type == 'Triple') {
+        $id_ch = 3;
+    }
     // Update row in the database
-    $query = "UPDATE chambre SET TYPE='$type', DESCRIPTION='$description', PRIX='$prix' WHERE ID_CHAMBRE=$id";
+    $query = "UPDATE chambre SET ID_TYPE_CHAMBRE='$id_ch', DESCRIPTION='$description', PRIX='$prix' WHERE ID_CHAMBRE=$id";
     $result = mysqli_query($conn, $query);
 
     // Close database connection
