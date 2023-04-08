@@ -117,7 +117,7 @@ if (isset($_GET['ID_RES'])) {
                                         echo "Restaurant";
                                     } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
                                         echo "Spa";
-                                       }   elseif( $row['ID_TYPE_ACTIVITE'== 0]){
+                                    }   elseif( $row['ID_TYPE_ACTIVITE']== 0){
                                         echo "Aucune activité";
                                 
                                     } ?>
