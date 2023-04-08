@@ -24,6 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $type_ac = 2;
     } elseif ($activite == 'Spa') {
         $type_ac = 3;
+    }elseif($activite == 'Aucune activité'){
+        $type_ac = 0;
     }
     if ($chambre == 'individuelle') {
         $type_ch = 1;

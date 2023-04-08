@@ -109,15 +109,20 @@ if (isset($_GET['ID_RES'])) {
                                         echo "Restaurant";
                                     } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
                                         echo "Spa";
+                                    }elseif( $row['ID_TYPE_ACTIVITE'] == 0){
+                                        echo "Aucune activité";
                                     } ?>"><?php if ($row['ID_TYPE_ACTIVITE'] == 1) {
                                         echo "Piscine";
                                     } elseif ($row['ID_TYPE_ACTIVITE'] == 2) {
                                         echo "Restaurant";
                                     } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
                                         echo "Spa";
+                                    }   elseif( $row['ID_TYPE_ACTIVITE']== 0){
+                                        echo "Aucune activité";
+                                
                                     } ?>
                                     </option>
-                                             
+                                    <option <?php if ($activite == "Aucune activité") echo 'selected="selected"'; ?>>Aucune activité</option>  
                                     <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Piscine</option>
                                     <option <?php if ($activite == "Restaurant") echo 'selected="selected"'; ?>>Restaurant</option>
                                     <option <?php if ($activite == "Spa") echo 'selected="selected"'; ?>>Spa</option>

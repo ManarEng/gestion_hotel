@@ -204,8 +204,8 @@
         <li><a href="activite.php">Activités</a>
 
         </li>
-        <li><a href="res_admin.php"> Résérvations</a></li>
-        <li><a href="messagerie.php">Messagerie</a></li>
+        <li><a href="ResAdmin.php"> Résérvations</a></li>
+        <li><a href="MsgAdmin.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div>

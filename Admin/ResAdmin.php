@@ -140,7 +140,7 @@
         clip: rect(top, offset of right clip from left side, offset of bottom from top, left);
 
         filter: blur(20px);
-        filter: url(blur.svg#blur);
+        filter: url(blur.svg#blur);*/
 
     
 
@@ -159,7 +159,7 @@
         width: 100px;
         height: 2px;
         background: #ffa500;
-        /margin: 0 auto;/
+        /*margin: 0 auto;*/
         margin-left: auto;
         margin-right: auto;
         margin-top: 100px;
@@ -170,7 +170,7 @@
         text-align: center;
         margin-bottom: 60px;
         margin-left: 115px;
-        /margin-top: 200px;/
+        /*margin-top: 200px;*/
     }
 
     h2 {
@@ -230,8 +230,8 @@
             <?php
 
             include("../db_connexion.php") ;
-           
-            $sql="sELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
+            
+            $sql="SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
             FROM reservation R
             JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
             JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
@@ -259,7 +259,6 @@
     echo "</thead>";
     echo"<tbody>";
     while ($row = mysqli_fetch_assoc($resultat)) {
-        
         echo "<tr>";
         echo "<td>" . $row["NOM"] ." ".$row["PRENOM"]. "</td>";
         echo "<td>" . $row["TYPE_CHAMBRE"] . "</td>";
