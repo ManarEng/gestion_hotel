@@ -200,7 +200,7 @@ if (isset($_GET['id_util'])) {
         }
 
         label {
-            flex-basis: 30%;
+            flex-basis: 35%;
             font-weight: bold;
 
         }
@@ -288,13 +288,13 @@ if (isset($_GET['id_util'])) {
                 <textarea name="adresse" id="adresse"><?php echo $user['ADRESSE']; ?></textarea>
 
 
-
-                <label for="mdp">Nouveau Mot de Passe :</label>
-                <input type="password" name="mdp" id="mdp" />
-                <label for="mdpp">Confirmer le nouveau mot de passe :</label>
-                <input type="password" name="mdpp" id="mdpp" />
                 <label for="img">Modifier la photo :</label>
                 <input type="file" id="img" name="img">
+                <label for="mdp">Nouveau Mot de Passe :</label>
+                <input type="password" name="mdp" id="mdp" />
+                <label for="mdpp">Confirmer le mot de passe :</label>
+                <input type="password" name="mdpp" id="mdpp" />
+
 
 
 

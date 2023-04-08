@@ -222,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-family: Arial, sans-serif;
             font-size: 16px;
             color: #333;
-            max-width: 600px;
+            max-width: 620px;
             margin: 20px auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -234,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         label {
-            flex-basis: 30%;
+            flex-basis: 40%;
             font-weight: bold;
 
         }
@@ -320,16 +320,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="tel" name="tele" id="tele" />
             <label for="adresse">Addresse :</label>
             <textarea name="adresse" id="adresse"></textarea>
-
+            <label for="img">Photo :</label>
+            <input type="file" id="img" name="img">
             <label for="nom_util">Login :</label>
             <input type="text" name="nom_util" id="nom_util" />
 
             <label for="mdp">Mot de Passe :</label>
             <input type="password" name="mdp" id="mdp" />
-            <label for="mdpp">Confirmer votre mot de passe :</label>
+            <label for="mdpp">Confirmer le mot de passe :</label>
             <input type="password" name="mdpp" id="mdpp" />
-            <label for="img">Photo :</label>
-            <input type="file" id="img" name="img">
+
 
 
 

@@ -1,23 +1,26 @@
 <?php
+$error=$activite=$chambre='';
+$arrivee=$depart="";
 // Check if user ID is provided in the query string
 if (isset($_GET['ID_RES'])) {
-    $res_id = $_GET['ID_RES'];
+    $id_res = $_GET['ID_RES'];
     // Connect to the database
+    
     include("../db_connexion.php");
-
+   
     // Retrieve user information from the database
-    $query = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
+    $query = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES ,TC.ID_TYPE_CHAMBRE ,TA.ID_TYPE_ACTIVITE
     FROM reservation R
     JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
-    JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
+    JOIN chambre C ON R.ID_TYPE_CHAMBRE = C.ID_TYPE_CHAMBRE
     JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
-    JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE where ID_RES= '$res_id'";
+    JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE where ID_RES= '$id_res'";
     $result = mysqli_query($conn, $query);
-    $res = mysqli_fetch_assoc($result);
-
-    // Close database connection
-    mysqli_close($conn);
-}
+    $row = mysqli_fetch_assoc($result);
+      // Close database connection
+      mysqli_close($conn);
+    
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,26 +70,73 @@ if (isset($_GET['ID_RES'])) {
     
     
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="nv_res.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="ID_RES" value="<?php echo $row['ID_RES']; ?>" />
+    
+    
       <H1 style="font-size: 40px; color:black"> Modifier votre reservation <span style="color:#ff7a00"> :</span> </h1>
       <div class="flex">
+      
          <div class="inputBox">
+         
             <span>Type de chambre </span>
-            <input type="text" name="update_prenom" value="<?php echo $res['TYPE_CHAMBRE']; ?>" class="box">
- 
-            <span>Date d'arrivée</span>
-            <input type="text" name="update_cin" value="<?php echo $res['CIN']; ?>" class="box">
+            <select name="type_chambre" id="type_chambre" class="box">
+                    <option value="<?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
+                                        echo "Individuelle";
+                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
+                                        echo "double";
+                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
+                                        echo "Triple";
+                                    } ?>"><?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
+                                        echo "Individuelle";
+                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
+                                        echo "double";
+                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
+                                        echo "Triple";
+                                    } ?></option>
+                    <option <?php if ($chambre == "individuelle") echo 'selected="selected"'; ?>>individuelle</option>
+                                    <option <?php if ($chambre == "double") echo 'selected="selected"'; ?>>double</option>
+                                    <option <?php if ($chambre == "triple") echo 'selected="selected"'; ?>>triple</option>
 
+                </select>
+            <span>Date d'arrivée</span>
+            <input type="date" id="arrivee" name="arrivee" class="box" required min="<?php echo date('Y-m-d'); ?>" value="<?php echo $row['DATE_D_ENTREE']; ?>">
             <span>Activite</span>
-            <input type="text" name="update_username" value="<?php echo $res['LOGIN']; ?>" class="box">
+            <select id='activite' name='activite' class="box" required>
+            <option value="<?php if ($row['ID_TYPE_ACTIVITE'] == 1) {
+                                        echo "Piscine";
+                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 2) {
+                                        echo "Restaurant";
+                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
+                                        echo "Spa";
+                                    }elseif( $row['ID_TYPE_ACTIVITE'] == 0){
+                                        echo "Aucune activité";
+                                    } ?>"><?php if ($row['ID_TYPE_ACTIVITE'] == 1) {
+                                        echo "Piscine";
+                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 2) {
+                                        echo "Restaurant";
+                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
+                                        echo "Spa";
+                                    }   elseif( $row['ID_TYPE_ACTIVITE']== 0){
+                                        echo "Aucune activité";
+                                
+                                    } ?>
+                                    </option>
+                                    <option <?php if ($activite == "Aucune activité") echo 'selected="selected"'; ?>>Aucune activité</option>  
+                                    <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Piscine</option>
+                                    <option <?php if ($activite == "Restaurant") echo 'selected="selected"'; ?>>Restaurant</option>
+                                    <option <?php if ($activite == "Spa") echo 'selected="selected"'; ?>>Spa</option>
+            </select>
          
          </div>
          <div class="inputBox">
          <span>Nombre de chambre :</span>
-            <input type="text" name="update_email" value="<?php echo $res['NBRE_CHAMBRE']; ?>" class="box">
+            <input type="number" name="nbre" min="1" max="100" value="<?php echo $row['NBRE_CHAMBRE']; ?>" class="box">
              
-            <span>Date de depart</span>
-            <input type="text" name="update_adresse" value="<?php echo $res['ADRESSE']; ?>" class="box">
+            <span>Date de départ</span>
+            <input type="date" id="depart" type="depart" name="depart" class="box" required min="<?php echo date('Y-m-d'); ?>"value="<?php echo $row['DATE_SORTIE']; ?>" >
+   
+            
             <span><br></span>
             <input type="submit" value="Modifier Profil" name="update_profile" class="btn">
          </div>
@@ -94,11 +144,11 @@ if (isset($_GET['ID_RES'])) {
 
       </div>     
       <a href="../Client/MesReservation.php" class="back-btn"><i style="font-size:larger" class="fas fa-arrow-left"></i> </a>
-
+      </form>
       </div>
       
       
-   </form>
+   
 
 </div>
 
