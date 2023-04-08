@@ -222,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-family: Arial, sans-serif;
             font-size: 16px;
             color: #333;
-            max-width: 600px;
+            max-width: 620px;
             margin: 20px auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -234,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         label {
-            flex-basis: 30%;
+            flex-basis: 35%;
             font-weight: bold;
 
         }
@@ -310,8 +310,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             </select>
             <label for="field2">Description :</label>
-            <input type="text" name="field2" id="field2" />
 
+            <textarea name="field2" id="field2" rows="3"></textarea>
 
             <label for="field4">Prix (Dhs) :</label>
             <input type="text" name="field4" id="field4" />
