@@ -27,13 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $type_ac = 2;
     } elseif ($activite == 'Spa') {
         $type_ac = 3;
-<<<<<<< HEAD
-    }else{
-        $type_ac = 100;
-=======
     }elseif($activite == 'Aucune activité'){
         $type_ac = 0;
->>>>>>> 2ad00e0783271409901dbd78ca6dc425e0d18393
     }
     
     $arrivee = strtotime($_POST['arrivee']);
@@ -59,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Réservation</title>
     <meta charset="utf-8" />
@@ -140,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE'];?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo  $_SESSION['TELE'] ;?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
