@@ -102,7 +102,7 @@ session_start();
                     while ($item = $statement->fetch()) {
                         echo '<div class="col-md-6 col-lg-4">
                                 <div class="img-thumbnail">
-                                    <img src="/Img/image_chambres/' . $item['IMAGE'] . '" class="img-fluid" alt="...">
+                                    <img src="/Img/image_chambres/' . $item['IMAGE_CH'] . '" class="img-fluid" alt="...">
                                     <div class="price">' . number_format($item['PRIX'], 2, '.', ''). ' dh</div>
                                     <div class="caption">
                                         
