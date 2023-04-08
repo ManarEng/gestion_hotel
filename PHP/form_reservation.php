@@ -27,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $type_ac = 2;
     } elseif ($activite == 'Spa') {
         $type_ac = 3;
+    }elseif($activite == 'Aucune activité'){
+        $type_ac = 0;
     }
     
     $arrivee = strtotime($_POST['arrivee']);
@@ -154,11 +156,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 <div class="col-md-6">
    <label for="activite">Type d'activité <span class="blue"></span></label>
-   <select id='activite' name='activite' required>
-      <option >--choisir une activité--</option>
+   <select id='activite' name='activite' >
+      
+      <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Aucune activité</option>
       <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Piscine</option>
       <option <?php if ($activite == "Restaurant") echo 'selected="selected"'; ?>>Restaurant</option>
       <option <?php if ($activite == "Spa") echo 'selected="selected"'; ?>>Spa</option>
+      
    </select>
    <p class="comments"></p> 
 </div>
