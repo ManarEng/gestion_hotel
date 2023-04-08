@@ -11,99 +11,96 @@ session_start();
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Chambres et activités</title>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+<head>
+    <title>Chambres et activités</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 
-        <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel="stylesheet"> <!--this link is for the css of the hotelux-->
-        <!--this script is for social medio icons-->
-        <script src="https://kit.fontawesome.com/fe1484d902.js" crossorigin="anonymous"></script>
+    <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel="stylesheet"> <!--this link is for the css of the hotelux-->
+    <!--this script is for social medio icons-->
+    <script src="https://kit.fontawesome.com/fe1484d902.js" crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="/CSS/styles_chambres_activites.css">
+    <link rel="stylesheet" href="/CSS/styles_chambres_activites.css">
 
-    </head>
-    <body>
+</head>
+
+<body>
 
 
-        <header>
-            <div class="">
-                <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/index.html"> <b> HoteLUX</b><span class="orange">.</span></a></h1>
-                <nav style="margin-top:35px;">
-                    <ul>
-                        <li><a href="/index.html/#main" >Accueil</a></li>
-                        <li><a href="/index.html/#steps">A propos</a></li>
-                        <li><a href="/index.html/#possibilities">Services</a></li>
-                        <li><a href="/PHP/index_contact.php">Contact</a></li>
-                        <li><a href="">Réservation</a></li>
-                        <li><a href="/PHP/form_connexion.php">connexion</a></li>
-                       <!-- <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>-->
-    
-                    </ul>
-                </nav>
-                <!--<hr style="color: black; border-bottom: 1px solid; width: 100%;  ">-->
-            </div>
-        </header> 
+    <header>
+        <div class="">
+            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/index.html"> <b> HoteLUX</b><span class="orange">.</span></a></h1>
+            <nav style="margin-top:35px;">
+                <ul>
+                    <li><a href="/index.html/#main">Accueil</a></li>
+                    <li><a href="/index.html/#steps">A propos</a></li>
+                    <li><a href="/index.html/#possibilities">Services</a></li>
+                    <li><a href="/PHP/index_contact.php">Contact</a></li>
+                    <li><a href="">Réservation</a></li>
+                    <li><a href="/PHP/form_connexion.php">connexion</a></li>
+                    <!-- <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>-->
+
+                </ul>
+            </nav>
+            <!--<hr style="color: black; border-bottom: 1px solid; width: 100%;  ">-->
+        </div>
+    </header>
 
 
 
     <div class="body">
         <div class="container site">
-           
+
             <h1 class="text-logo">Chambres et prix </h1>
-            
+
             <?php
-				require ("../db_connexion_oop.php");
-			 
-                echo '<nav>
+            require("../db_connexion_oop.php");
+
+            echo '<nav>
                         <ul class="nav nav-pills" role="tablist">';
 
-                $db = Database::connect();
-                $statement = $db->query('SELECT * FROM type_chambre');
-                $categories = $statement->fetchAll();
-                foreach ($categories as $category) 
-                {
-                    if($category['ID_TYPE_CHAMBRE'] == '1')
-                       { echo '<li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab'. $category['ID_TYPE_CHAMBRE'] . '" role="tab">' . $category['TYPE_CHAMBRE'] . '</a></li>';
-                        /*$_SESSION['TYPE_CHAMBRE']= $category['TYPE_CHAMBRE'];*/
-                    }
-                    else
-                    {
-                        echo '<li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab'. $category['ID_TYPE_CHAMBRE'] . '" role="tab">' . $category['TYPE_CHAMBRE'] . '</a></li>';
-                        /*$_SESSION['TYPE_CHAMBRE']= $category['TYPE_CHAMBRE'];*/
-                    }
-                    
-                
+            $db = Database::connect();
+            $statement = $db->query('SELECT * FROM type_chambre');
+            $categories = $statement->fetchAll();
+            foreach ($categories as $category) {
+                if ($category['ID_TYPE_CHAMBRE'] == '1') {
+                    echo '<li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab' . $category['ID_TYPE_CHAMBRE'] . '" role="tab">' . $category['TYPE_CHAMBRE'] . '</a></li>';
+                    /*$_SESSION['TYPE_CHAMBRE']= $category['TYPE_CHAMBRE'];*/
+                } else {
+                    echo '<li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab' . $category['ID_TYPE_CHAMBRE'] . '" role="tab">' . $category['TYPE_CHAMBRE'] . '</a></li>';
+                    /*$_SESSION['TYPE_CHAMBRE']= $category['TYPE_CHAMBRE'];*/
                 }
-                
+            }
 
-                echo    '</ul>
+
+            echo    '</ul>
                       </nav>';
 
-                echo '<div class="tab-content">';
+            echo '<div class="tab-content">';
 
-                foreach ($categories as $category) {
-                    if($category['ID_TYPE_CHAMBRE'] == '1') {
-                        echo '<div class="tab-pane active" id="tab' . $category['ID_TYPE_CHAMBRE'] .'" role="tabpanel">';
-                    } else {
-                        echo '<div class="tab-pane" id="tab' . $category['ID_TYPE_CHAMBRE'] .'" role="tabpanel">';
-                    }
-                    
-                    echo '<div class="row">';
-                    
-                    $statement = $db->prepare('SELECT * FROM chambre WHERE chambre.ID_TYPE_CHAMBRE = ?');
-                    $statement->execute(array($category['ID_TYPE_CHAMBRE']));
-                    while ($item = $statement->fetch()) {
-                        echo '<div class="col-md-6 col-lg-4">
+            foreach ($categories as $category) {
+                if ($category['ID_TYPE_CHAMBRE'] == '1') {
+                    echo '<div class="tab-pane active" id="tab' . $category['ID_TYPE_CHAMBRE'] . '" role="tabpanel">';
+                } else {
+                    echo '<div class="tab-pane" id="tab' . $category['ID_TYPE_CHAMBRE'] . '" role="tabpanel">';
+                }
+
+                echo '<div class="row">';
+
+                $statement = $db->prepare('SELECT * FROM chambre WHERE chambre.ID_TYPE_CHAMBRE = ?');
+                $statement->execute(array($category['ID_TYPE_CHAMBRE']));
+                while ($item = $statement->fetch()) {
+                    echo '<div class="col-md-6 col-lg-4">
                                 <div class="img-thumbnail">
-                                    <img src="/Img/image_chambres/' . $item['IMAGE'] . '" class="img-fluid" alt="...">
-                                    <div class="price">' . number_format($item['PRIX'], 2, '.', ''). ' dh</div>
+                                    <img src="/Img/image_chambres/' . $item['IMAGE_CH'] . '" class="img-fluid" alt="...">
+                                    <div class="price">' . number_format($item['PRIX'], 2, '.', '') . ' dh</div>
                                     <div class="caption">
                                         
                                         <p>' . $item['DESCRIPTION'] . '</p>
@@ -112,35 +109,28 @@ session_start();
                                     </div>
                                 </div>
                             </div>';
-                    }
-                   
-                   echo    '</div>
-                        </div>';
-
-                    
-
-
-
-
-
                 }
-                //Database::disconnect();
-                echo  '</div>';
 
-                
-                
+                echo    '</div>
+                        </div>';
+            }
+            //Database::disconnect();
+            echo  '</div>';
+
+
+
             ?>
 
 
-<!--<div class="body">
+            <!--<div class="body">
         <div class="container site">
            
             <h1 class="text-logo">Activités et prix </h1>-->
-            
+
             <?php
-				//require 'db_connexion_oop.php';
-			 
-                /*echo '<nav>
+            //require 'db_connexion_oop.php';
+
+            /*echo '<nav>
                         <ul class="nav nav-pills" role="tablist">';
 
                 //$db = Database::connect();
@@ -194,149 +184,149 @@ session_start();
 
 
 
-<div class="body">
-        <div class="container site">
-           
-            <h1 class="text-logo">Activités et prix </h1>
-            
-            <nav>
-                <ul class="nav nav-pills" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabA" role="tab">Piscine</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tabB" role="tab">Restaurant</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tabC" role="tab">Spa</a>
-                    </li>
-                    
-                </ul>
-            </nav>
+            <div class="body">
+                <div class="container site">
 
-            <div class="tab-content">
+                    <h1 class="text-logo">Activités et prix </h1>
 
-                <div class="tab-pane active" id="tabA" role="tabpanel">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/piscine1.jpg" class="img-fluid" alt="...">
-                                <div class="price">A partir de 290 dh</div>
-                                <div class="caption">
-                                    
-                                  
-                                    
+                    <nav>
+                        <ul class="nav nav-pills" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabA" role="tab">Piscine</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tabB" role="tab">Restaurant</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" data-bs-toggle="pill" data-bs-target="#tabC" role="tab">Spa</a>
+                            </li>
+
+                        </ul>
+                    </nav>
+
+                    <div class="tab-content">
+
+                        <div class="tab-pane active" id="tabA" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/piscine1.jpg" class="img-fluid" alt="...">
+                                        <div class="price">A partir de 290 dh</div>
+                                        <div class="caption">
+
+
+
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/piscine2.jpg" class="img-fluid" alt="...">
+
+                                        <div class="caption">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/piscine3.jpg" class="img-fluid" alt="...">
+
+                                        <div class="caption">
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/piscine2.jpg" class="img-fluid" alt="...">
-                               
-                                <div class="caption">
-                                
-                                    
+
+                        <div class="tab-pane" id="tabB" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/resto1.jpg" class="img-fluid" alt="...">
+                                        <div class="price">A partir de 50 dh pour plat</div>
+                                        <div class="caption">
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/resto2.jpg" class="img-fluid" alt="...">
+                                        <div class="caption">
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/resto3.jpg" class="img-fluid" alt="...">
+                                        <div class="caption">
+
+                                            <p></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/piscine3.jpg" class="img-fluid" alt="...">
-                                
-                                <div class="caption">
-                                    
-                                    
-                                    
+
+                        <div class="tab-pane" id="tabC" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/spa1.jpg" class="img-fluid" alt="...">
+                                        <div class="caption">
+                                            <div class="price">A partir de 500dh</div>
+
+
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/spa2.jpg" class="img-fluid" alt="...">
+                                        <div class="caption">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="img-thumbnail">
+                                        <img src="/Img/image_activites/spa3.jpg" class="img-fluid" alt="...">
+                                        <div class="caption">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
                 </div>
-
-                <div class="tab-pane" id="tabB" role="tabpanel">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/resto1.jpg" class="img-fluid" alt="...">
-                                <div class="price">A partir de 50 dh pour plat</div>
-                                <div class="caption">       
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/resto2.jpg" class="img-fluid" alt="...">
-                                <div class="caption">
-                                    
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/resto3.jpg" class="img-fluid" alt="...">
-                                <div class="caption">
-                                    
-                                    <p></p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-
-                <div class="tab-pane" id="tabC" role="tabpanel">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/spa1.jpg" class="img-fluid" alt="...">
-                                <div class="caption">
-                                    <div class="price">A partir de 500dh</div>
-                                   
-                                   
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/spa2.jpg" class="img-fluid" alt="...">
-                                <div class="caption">
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="img-thumbnail">
-                                <img src="/Img/image_activites/spa3.jpg" class="img-fluid" alt="...">
-                                <div class="caption">
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                    </div>
-                </div>
-
-  
             </div>
-        </div>
-    </div>
-    <br> <br><br>
+            <br> <br><br>
 
 
 
 
 
 
-    
-<!--    <footer>
+
+            <!--    <footer>
          
          <div class="col-right">
             <h3>Contact Info</h3>
@@ -367,5 +357,6 @@ session_start();
         
         
      </footer>-->
-    </body>
+</body>
+
 </html>
