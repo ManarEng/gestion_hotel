@@ -94,15 +94,15 @@ if (isset($_GET['ID_RES'])) {
                                     } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
                                         echo "Triple";
                                     } ?></option>
-                    <option <?php if ($chambre == "individuelle") echo 'selected="selected"'; ?>>individuelle</option>
-                                    <option <?php if ($chambre == "double") echo 'selected="selected"'; ?>>double</option>
-                                    <option <?php if ($chambre == "triple") echo 'selected="selected"'; ?>>triple</option>
+                    <option >individuelle</option>
+                                    <option >double</option>
+                                    <option >triple</option>
 
                 </select>
             <span>Date d'arrivée</span>
             <input type="date" id="arrivee" name="arrivee" class="box" required min="<?php echo date('Y-m-d'); ?>" value="<?php echo $row['DATE_D_ENTREE']; ?>">
             <span>Activite</span>
-            <select id='activite' name='activite' class="box" required>
+            <select id='activite' name='activite' class="box" >
             <option value="<?php if ($row['ID_TYPE_ACTIVITE'] == 1) {
                                         echo "Piscine";
                                     } elseif ($row['ID_TYPE_ACTIVITE'] == 2) {
@@ -122,10 +122,10 @@ if (isset($_GET['ID_RES'])) {
                                 
                                     } ?>
                                     </option>
-                                    <option <?php if ($activite == "Aucune activité") echo 'selected="selected"'; ?>>Aucune activité</option>  
-                                    <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Piscine</option>
-                                    <option <?php if ($activite == "Restaurant") echo 'selected="selected"'; ?>>Restaurant</option>
-                                    <option <?php if ($activite == "Spa") echo 'selected="selected"'; ?>>Spa</option>
+                                    <option >Aucune activité</option>  
+                                    <option >Piscine</option>
+                                    <option>Restaurant</option>
+                                    <option >Spa</option>
             </select>
          
          </div>
