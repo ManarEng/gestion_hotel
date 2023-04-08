@@ -112,21 +112,15 @@ $user_id = $_SESSION['ID_UTILL'];
       <tr>
         <td><?php echo $row['TYPE_CHAMBRE']; ?></td>
         <td><?php echo $row['NBRE_CHAMBRE']; ?></td>
-        <td><?php echo $row['TYPE_ACTIVITE']; ?></td>
+        <td><?php if($row['TYPE_ACTIVITE']==100){ echo "sans actvite";} else { echo $row['TYPE_ACTIVITE'];} ?></td>
         <td ><?php echo $row['DATE_D_ENTREE']; ?></td>
         <td><?php echo $row['DATE_SORTIE']; ?></td>
         <td>
-           <a href='/Client/modifier_res.php?ID_RES=". $row["ID_RES"]."'>
-                 <img src='/Img/icons8-modify-50.png' alt='modifier' style='width: 25px; height: 25px;'>
-                </button>
-            </a>
+        <a href="modifier_res.php?ID_RES=<?php echo $row['ID_RES']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
+
         </td>
         <td>
-          <a href='/Client/supprimer_res.php?ID_RES=". $row["ID_RES"]."'>
-               
-                <img src='/Img/icons8-delete-trash-50.png' alt='Supprimer' style='width: 25px; height: 25px;'>
-               </button>
-          </a>
+        <a href="supprimer_res.php?ID_RES=<?php echo $row['ID_RES']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette reservation ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
         </td>
 
 

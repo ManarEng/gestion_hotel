@@ -231,7 +231,7 @@
 
             include("../db_connexion.php") ;
             
-            $sql="sELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
+            $sql="SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
             FROM reservation R
             JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
             JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
