@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $activite = $_POST['activite'];
     $nbre = $_POST['nbre'];
     $depart = $_POST['depart'];
-    $type_ac = $type_ch = null;
+    
 
     if ($activite == 'Piscine') {
         $type_ac = 1;
@@ -27,16 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }elseif($activite == 'Aucune activité'){
         $type_ac = 0;
     }
-    if ($chambre == 'individuelle') {
-        $type_ch = 1;
-    } elseif ($chambre == 'double') {
-        $type_ch = 2;
-    } elseif ($chambre == 'triple') {
-        $type_ch = 3;
+    if ($chambre_id == 1) {
+        $type_ch =' individuelle';
+    } elseif ($chambre_id == 2) {
+        $type_ch = 'double';
+    } elseif ($chambre_id == 3) {
+        $type_ch = 'triple';
     }
    
     // Update row in the database
-    $query = "UPDATE reservation SET ID_TYPE_CHAMBRE='$type_ch', ID_TYPE_ACTIVITE='$type_ac', DATE_D_ENTREE='$arrivee', DATE_SORTIE='$depart', NBRE_CHAMBRE='$nbre' WHERE ID_RES='$id_res'";
+    $query = "UPDATE reservation SET ID_CHAMBRE='$type_ch', ID_TYPE_ACTIVITE='$type_ac', DATE_D_ENTREE='$arrivee', DATE_SORTIE='$depart', NBRE_CHAMBRE='$nbre' WHERE ID_RES='$id_res'";
     $result = mysqli_query($conn, $query);
 
     // Check if query was successful
