@@ -145,7 +145,7 @@
             </article>
 
             <div class="clear"></div>
-            <a href="/PHP/index_chambres_activites.php" class="button-2">Plus d'infos</a>
+            <a href="/Client/index_chambres_activites.php" class="button-2">Plus d'infos</a>
         </div>
 
         </div>

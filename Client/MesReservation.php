@@ -112,7 +112,7 @@ $user_id = $_SESSION['ID_UTILL'];
       <tr>
         <td><?php echo $row['TYPE_CHAMBRE']; ?></td>
         <td><?php echo $row['NBRE_CHAMBRE']; ?></td>
-        <td><?php echo $row['TYPE_ACTIVITE']; ?></td>
+        <td><?php if($row['TYPE_ACTIVITE']==100){ echo "sans actvite";} else { echo $row['TYPE_ACTIVITE'];} ?></td>
         <td ><?php echo $row['DATE_D_ENTREE']; ?></td>
         <td><?php echo $row['DATE_SORTIE']; ?></td>
         <td>

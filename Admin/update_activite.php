@@ -12,10 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prix = $_POST['field2'];
     $disponibilite = $_POST['field3'];
 
-
+    if ($type == 'Piscine') {
+        $id_a = 1;
+    } elseif ($type == 'Restaurant') {
+        $id_a = 2;
+    } elseif ($type == 'Spa') {
+        $id_a = 3;
+    }
 
     // Update row in the database
-    $query = "UPDATE activite SET TYPE='$type', PRIX='$prix', ETAT='$disponibilite' WHERE ID_ACTIVITE=$id";
+    $query = "UPDATE activite SET ID_TYPE_ACTIVITE='$id_a', PRIX='$prix', ETAT='$disponibilite' WHERE ID_ACTIVITE=$id";
     $result = mysqli_query($conn, $query);
 
     // Close database connection

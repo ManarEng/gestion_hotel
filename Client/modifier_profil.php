@@ -130,8 +130,8 @@ if(isset($_POST['update_profile'])){
                     <li><a href="/Client/index.php/#main" >Accueil</a></li>
                     <li><a href="/Client/index.php/#steps">A propos</a></li>
                     <li><a href="/Client/index.php/#possibilities">Services</a></li>
-                    <li><a href="/PHP/index_contact.php">Contact</a></li>
-                    <li><a href="">Réservation</a></li>
+                    <li><a href="/Client/index_contact.php">Contact</a></li>
+                    <li><a href="/PHP/lien_reservation_header.php">Réservation</a></li>
                     <li><a href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
                     
 
@@ -170,7 +170,7 @@ if(isset($_POST['update_profile'])){
             <input type="text" name="update_prenom" value="<?php echo $fetch['PRENOM']; ?>" class="box">
 
             <span>Email :</span>
-            <input type="email" name="update_email" value="<?php echo $fetch['E_ MAIL']; ?>" class="box">
+            <input type="email" name="update_email" value="<?php echo $fetch['E_MAIL']; ?>" class="box">
 
 
             <span>Nom d'utilisateur :</span>
