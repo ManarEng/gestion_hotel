@@ -2,7 +2,7 @@
 session_start();
 $error = "";
 $isSuccess = false;
-$activite=$entree=$nbrec= "";
+$activite = $entree = $nbrec = "";
 
 if (isset($_SESSION['ID_CHAMBRE'])) {
     $chambre_id = $_SESSION['ID_CHAMBRE'];
@@ -14,26 +14,26 @@ include("../db_connexion.php");
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
+
     $entree = $_POST['arrivee'];
     $sortie = $_POST['depart'];
     $nbrec = $_POST['nbre'];
     $activite = $_POST['activite'];
     $type_ac = null;
-    
+
     if ($activite == 'Piscine') {
         $type_ac = 1;
     } elseif ($activite == 'Restaurant') {
         $type_ac = 2;
     } elseif ($activite == 'Spa') {
         $type_ac = 3;
-    }elseif($activite == 'Aucune activité'){
+    } elseif ($activite == 'Aucune activité') {
         $type_ac = 0;
     }
-    
+
     $arrivee = strtotime($_POST['arrivee']);
     $depart = strtotime($_POST['depart']);
-    
+
     if ($depart <= $arrivee) {
         $error = "La date de départ est antérieure à la date d'arrivée.";
     } elseif (empty($nbrec) || !is_numeric($nbrec) || $nbrec <= 0) {
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!--this script is for social medio icons-->
     <script src="https://kit.fontawesome.com/fe1484d902.js" crossorigin="anonymous"></script>
     <link href="/CSS/style_inscription.css" rel="stylesheet" type="text/css">
- 
+
 </head>
 
 <body>
@@ -77,31 +77,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     <header>
-    <div class="">
+        <div class="">
             <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/Client/index.php"> HoteLUX<span class="orange">.</span></a></h1>
             <nav style="margin-top:35px; ">
                 <ul>
-                   
-                    
-                    <li><a href="#main" >Accueil</a></li>
+
+
+                    <li><a href="#main">Accueil</a></li>
                     <li><a href="#steps">A propos</a></li>
-                     
+
                     <li><a href="#possibilities">Services</a></li>
                     <li><a href="/PHP/index_contact.php">Contact</a></li>
                     <li><a href="/php/lien_reservation_header.php">Réservation</a></li>
                     <!--<li><a href="/projet_hotel2 - Copie/index.html" >connexion</a></li>-->
                     <!--<li>  <a  href="javascript:myFunction();"> <i class="fa-solid fa-user"></i></a></li>
                     <div class="arrow-up" id="triangle"></div>-->
-                    <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
+                    <li> <a href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
                 </ul>
-                
+
                 <!--<div class="login-form" id="form">
                     <form action="">
                         <div class="bonjour" style="text-decoration: underline;">
                         <?php
-                            /*session_start();
-                            $login = $_SESSION['login']; /* allez voir trait_insc.php et faites les changement necessaire */ 
-                           // echo 'Bonjour <b>' . $login . '</b> ! <br>';
+                        /*session_start();
+                            $login = $_SESSION['login']; /* allez voir trait_insc.php et faites les changement necessaire */
+                        // echo 'Bonjour <b>' . $login . '</b> ! <br>';
                         ?></div> 
                         <br>
                         <a href="">Mon profile</a> <br>  <br>
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>-->
             </nav>
         </div>
-       
+
     </header>
 
 
@@ -124,63 +124,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1">
-                <form id="contact-form" method="post" >
+                <form id="contact-form" method="post">
                     <div class="row">
-                    <?php if (!empty($msg)) { ?>
-                   <div class="alert alert-<?php echo ($r === TRUE) ? 'success' : 'danger'; ?>"><?php echo $msg; ?></div>
-                    <?php } ?>
+                        <?php if (!empty($msg)) { ?>
+                            <div class="alert alert-<?php echo ($r === TRUE) ? 'success' : 'danger'; ?>"><?php echo $msg; ?></div>
+                        <?php } ?>
                         <div class="col-md-6">
                             <label for="user">Nom d'Utilisateur <span class="blue"></span></label>
-                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $_SESSION['LOGIN']; ?>" >
+                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $_SESSION['LOGIN']; ?>">
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo  $_SESSION['TELE'] ;?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE']; ?>">
+
+
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
-   <label for="arrivee">Date d'Arrivée <span class="blue">*</span></label>
-   <input type="date" id="arrivee" name="arrivee" class="form-control" required min="<?php echo date('Y-m-d'); ?>" value="<?php echo $entree; ?>">
-   <p class="comments"></p>
-</div>
-<div class="col-md-6">
-   <label for="depart">Date de Depart<span class="blue">*</span></label>
-   <input type="date" id="depart" type="depart" name="depart" class="form-control" required min="<?php echo date('Y-m-d'); ?>" >
-   <p class="comments"><?php echo $error; ?></p>
-</div>
-<div class="col-md-6">
-   <label for="nbre">Nombre de Chambre<span class="blue">*</span></label>
-   <input type="number" id="nbre" name="nbre" min="1" max="100" value="<?php echo $nbrec; ?>">
-   <p class="comments"></p>
-</div>
-<div class="col-md-6">
-   <label for="activite">Type d'activité <span class="blue"></span></label>
-   <select id='activite' name='activite' >
-      
-      <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Aucune activité</option>
-      <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Piscine</option>
-      <option <?php if ($activite == "Restaurant") echo 'selected="selected"'; ?>>Restaurant</option>
-      <option <?php if ($activite == "Spa") echo 'selected="selected"'; ?>>Spa</option>
-      
-   </select>
-   <p class="comments"></p> 
-</div>
+                            <label for="arrivee">Date d'Arrivée <span class="blue">*</span></label>
+                            <input type="date" id="arrivee" name="arrivee" class="form-control" required min="<?php echo date('Y-m-d'); ?>" value="<?php echo $entree; ?>">
+                            <p class="comments"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="depart">Date de Depart<span class="blue">*</span></label>
+                            <input type="date" id="depart" type="depart" name="depart" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
+                            <p class="comments"><?php echo $error; ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nbre">Nombre de Chambre<span class="blue">*</span></label>
+                            <input type="number" id="nbre" name="nbre" min="1" max="100" value="<?php echo $nbrec; ?>">
+                            <p class="comments"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="activite">Type d'activité <span class="blue"></span></label>
+                            <select id='activite' name='activite'>
 
-                        
-                        
-                      
+                                <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Aucune activité</option>
+                                <option <?php if ($activite == "Piscine") echo 'selected="selected"'; ?>>Piscine</option>
+                                <option <?php if ($activite == "Restaurant") echo 'selected="selected"'; ?>>Restaurant</option>
+                                <option <?php if ($activite == "Spa") echo 'selected="selected"'; ?>>Spa</option>
+
+                            </select>
+                            <p class="comments"></p>
+                        </div>
+
+
+
+
                         <div class="col-md-12">
                             <p class="blue"><strong>* Ces informations sont requises.</strong>
-        
+
                         </div>
                         <div class="col-md-12">
                             <input type="submit" class="button1" value="Envoyer">
                         </div>
-                       
+
 
                     </div>
-                    
+
 
 
 
