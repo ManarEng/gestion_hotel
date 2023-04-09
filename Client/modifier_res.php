@@ -12,7 +12,7 @@ if (isset($_GET['ID_RES'])) {
     $query = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES ,TC.ID_TYPE_CHAMBRE ,TA.ID_TYPE_ACTIVITE
     FROM reservation R
     JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
-    JOIN chambre C ON R.ID_TYPE_CHAMBRE = C.ID_TYPE_CHAMBRE
+    JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
     JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
     JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE where ID_RES= '$id_res'";
     $result = mysqli_query($conn, $query);
