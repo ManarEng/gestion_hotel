@@ -230,3 +230,7 @@
       width: 100%;
    }
 }
+.inputBox span {
+   font-weight: bold;
+   color: black;
+ }
