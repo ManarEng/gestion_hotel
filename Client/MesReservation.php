@@ -81,8 +81,7 @@ $user_id = $_SESSION['ID_UTILL'];
       if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_assoc($result);
       }
-   */
-        
+   */      
       $select = mysqli_query($conn, "SELECT * FROM `utilisateurs` WHERE ID_UTILL = '$user_id'") or die('query failed');
       if(mysqli_num_rows($select) > 0){
           $fetch = mysqli_fetch_assoc($select);
