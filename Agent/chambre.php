@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Admin</title>
+    <title>Agent</title>
 </head>
 <style>
     body {
@@ -195,7 +195,7 @@
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="profil.php">Profil</a></li>
-        <li><a href="utilisateurs.php"> Utilisateurs</a>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
         <li><a href="chambre.php"> Chambres</a>
@@ -205,13 +205,13 @@
 
         </li>
         <li><a href="ResAdmin.php"> Résérvations</a></li>
-        <li><a href="messagerie.php">Messagerie</a></li>
+
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div>
         <?php
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -236,7 +236,7 @@
             <div class="container">
                 <h2 class="title"> Chambres : </h2>
 
-                <a href="add_room.php" class="add-icon" title="Nouvelle chambre"><img src="../Img/icons8-add-new-50.png" alt="Ajouter une chambre" style="width: 25px; height: 25px;"></a>
+
                 <table class="styled-table">
                     <thead>
 
@@ -250,7 +250,7 @@
                             <td>Prix (Dhs)</td>
                             <td>Photo</td>
 
-                            <td></td>
+
 
 
                         </tr>
@@ -290,21 +290,7 @@
                                     ?></td>
 
 
-                                <script>
-                                    function confirmDelete() {
-                                        var result = confirm("Êtes-vous sûr de vouloir supprimer cette chambre ?");
-                                        if (result) {
-                                            // If the user confirms, redirect to the PHP script to delete the row
-                                            window.location.href = "delete.php?id_chambre=<?php echo $id_chambre; ?>";
-                                        }
-                                    }
-                                </script>
-                                <td>
-                                    <div style="display: flex; ">
-                                        <a href="modify_room.php?id_chambre=<?php echo $row['ID_CHAMBRE']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
-                                        <a href="delete_room.php?id_chambre=<?php echo $row['ID_CHAMBRE']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chambre ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
-                                    </div>
-                                </td>
+
 
 
                             </tr>

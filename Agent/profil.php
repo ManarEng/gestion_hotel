@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Admin</title>
+    <title>Agent</title>
 </head>
 <style>
     body {
@@ -163,17 +163,17 @@
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="profil.php">Profil</a></li>
-        <li><a href="../Admin/utilisateurs.php"> Utilisateurs</a>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
-        <li><a href="../Admin/chambre.php"> Chambres</a>
+        <li><a href="chambre.php"> Chambres</a>
 
         </li>
-        <li><a href="../Admin/activite.php"> Activités</a>
+        <li><a href="activite.php">Activités</a>
 
         </li>
-        <li><a href="ResAdmin.php">Résérvations</a></li>
-        <li><a href="MsgAdmin.php">Messagerie</a></li>
+        <li><a href="ResAdmin.php"> Résérvations</a></li>
+
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div class="container">
@@ -189,7 +189,7 @@
             $user_id = $_SESSION['ID_UTILL'];
 
             // Run a SELECT query to retrieve the user information
-            $sql =  "SELECT ID_UTILL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs WHERE ID_PROFIL = 1 AND ID_UTILL = $user_id";
+            $sql =  "SELECT ID_UTILL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs WHERE ID_PROFIL = 2 AND ID_UTILL = $user_id";
             $result = mysqli_query($conn, $sql); ?>
 
 

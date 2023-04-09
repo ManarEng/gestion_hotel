@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Admin</title>
+    <title>Agent</title>
 </head>
 <style>
     body {
@@ -195,7 +195,7 @@
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="profil.php">Profil</a></li>
-        <li><a href="utilisateurs.php"> Utilisateurs</a>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
         <li><a href="chambre.php"> Chambres</a>
@@ -205,13 +205,13 @@
 
         </li>
         <li><a href="ResAdmin.php"> Résérvations</a></li>
-        <li><a href="MsgAdmin.php">Messagerie</a></li>
+
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div>
         <?php
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -232,7 +232,7 @@
             <div class="container">
                 <h2 class="title"> Activités : </h2>
 
-                <a href="add_activite.php" title="Nouvelle Activité"><img src="../Img/icons8-add-new-50.png" alt="Ajouter une chambre" style="width: 25px; height: 25px;"></a>
+
                 <table class="styled-table">
                     <thead>
 
@@ -248,7 +248,7 @@
                             <td>Photo</td>
 
 
-                            <td></td>
+
 
                         </tr>
                     </thead>
@@ -275,21 +275,8 @@
                                         echo '<img src="../Img/image_activites/' . $row['IMAGE_ACT'] . '">';
                                     }
                                     ?></td>
-                                <script>
-                                    function confirmDelete() {
-                                        var result = confirm("Êtes-vous sûr de vouloir supprimer cette activité ?");
-                                        if (result) {
-                                            // If the user confirms, redirect to the PHP script to delete the row
-                                            window.location.href = "delete.php?id_activite=<?php echo $id_activite; ?>";
-                                        }
-                                    }
-                                </script>
-                                <td>
-                                    <div style="display: flex; ">
-                                        <a href="modify_activite.php?id_activite=<?php echo $row['ID_ACTIVITE']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
-                                        <a href="delete_activite.php?id_activite=<?php echo $row['ID_ACTIVITE']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette activité ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
-                                    </div>
-                                </td>
+
+
 
 
 
