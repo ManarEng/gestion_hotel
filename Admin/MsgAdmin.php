@@ -1,3 +1,7 @@
+<?php
+session_start();
+$id = $_SESSION['ID_UTILL'];
+?>
 <!DOCTYPE html>
 <html>
 
@@ -211,7 +215,7 @@
     <div>
         <?php
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1 and ID_UTILL=$id;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 

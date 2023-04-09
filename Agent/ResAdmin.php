@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Admin</title>
+    <title>Agent</title>
 </head>
 <style>
     body {
@@ -211,7 +211,7 @@
     <div>
         <?php
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -249,7 +249,7 @@
             if (mysqli_num_rows($resultat) == 0) {
                 echo "Aucune donnée trouvée.";
             } else {
-                echo " <h2 class=title> Reservations de vos clients : </h2>";
+                echo " <h2 class=title> Reservations  : </h2>";
                 // Afficher les données dans un tableau HTML
                 echo "<table class=styled-table>";
                 echo "<thead>";
