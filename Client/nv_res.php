@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Connect to the database
     include("../db_connexion.php");
 
-
+  
    
     // Get updated user information from the form
     $chambre = $_POST['type_chambre'];
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($chambre == 'triple') {
         $type_ch = 3;
     }
+   
     
 $chambre_query = "SELECT ID_CHAMBRE FROM chambre WHERE ID_TYPE_CHAMBRE = $type_ch";
 $chambre_result = mysqli_query($conn, $chambre_query);
@@ -42,10 +43,7 @@ $id_chambre = $chambre_row['ID_CHAMBRE'];
 // Update row in the database
 $query = "UPDATE reservation SET ID_CHAMBRE='$id_chambre', ID_TYPE_ACTIVITE='$type_ac', DATE_D_ENTREE='$arrivee', DATE_SORTIE='$depart', NBRE_CHAMBRE='$nbre' WHERE ID_RES='$id_res'";
     
-   
-    // Update row in the database
-   //$query = "UPDATE reservation SET ID_CHAMBRE='$chambre', ID_TYPE_ACTIVITE='$type_ac', DATE_D_ENTREE='$arrivee', DATE_SORTIE='$depart', NBRE_CHAMBRE='$nbre' WHERE ID_RES='$id_res'";
-  // $query = "UPDATE reservation AS r JOIN chambre AS c ON r.ID_CHAMBRE = c.ID_CHAMBRE SET C.ID_TYPE_CHAMBRE='$type_ch', r.ID_TYPE_ACTIVITE='$type_ac', r.DATE_D_ENTREE='$arrivee', r.DATE_SORTIE='$depart', r.NBRE_CHAMBRE='$nbre', c.ID_TYPE_CHAMBRE='$chambre' WHERE r.ID_RES='$id_res'";
+
 
 
    $result = mysqli_query($conn, $query);
