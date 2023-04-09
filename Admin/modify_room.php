@@ -208,6 +208,7 @@ if (isset($_GET['id_chambre'])) {
         input[type="email"],
         input[type="tel"],
         input[type="password"],
+        input[type="file"],
         textarea,
         select {
             padding: 15px;
@@ -296,6 +297,8 @@ if (isset($_GET['id_chambre'])) {
 
                 <label for="field3">Prix (Dhs) :</label>
                 <input type="text" name="field3" id="field3" value="<?php echo $row['PRIX']; ?>" />
+                <label for="img">Modifier la photo :</label>
+                <input type="file" id="img" name="img">
 
 
                 <input type="submit" value="Enregister" />

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Store the image in the upload directory
-        $upload_dir = 'agents/';
+        $upload_dir = '../PHP/uploads/';
         $filename = uniqid("IMG-", true) . '.' . $file_extension;
         $upload_path = $upload_dir . $filename;
         move_uploaded_file($file['tmp_name'], $upload_path);

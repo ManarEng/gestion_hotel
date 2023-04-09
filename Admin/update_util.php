@@ -16,24 +16,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cin = $_POST['cin'];
     $adresse = $_POST['adresse'];
     $file = $_FILES['img'];
-    if (isset($_FILES['img']) && !empty($_FILES['img']['name'])) {
-        // file upload and processing code goes here
-        $allowed_extensions = ['jpg', 'jpeg', 'png'];
-        $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $allowed_extensions = ['jpg', 'jpeg', 'png'];
+    $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    // Store the image in the upload directory
+    $upload_dir = '../PHP/uploads/';
+    $filename = uniqid("IMG-", true) . '.' . $file_extension;
+    $upload_path = $upload_dir . $filename;
+    // Check if file is an image
+    if (!empty($file)) {
+
         if (!in_array($file_extension, $allowed_extensions)) {
-            echo "Télécharger une image valide.";
+            $message[] = "Télécharger une image valide.";
+        } else {
+            // Store the URL in the database
+            $url =  $filename;
+            $image_update_query = mysqli_query($conn, "UPDATE `utilisateurs` SET IMAGE_UTIL = '$url' WHERE ID_UTILL = '$user_id'") or die('query failed');
+
+            if ($image_update_query) {
+                move_uploaded_file($file['tmp_name'], $upload_path);
+            }
         }
-
-        // Store the image in the upload directory
-        $upload_dir = 'clients/';
-        $filename = uniqid("IMG-", true) . '.' . $file_extension;
-        $upload_path = $upload_dir . $filename;
-        move_uploaded_file($file['tmp_name'], $upload_path);
-
-        // Store the URL in the database
-        $url =  $filename;
-    } else {
-        echo "Veuillez choisir une image à télécharger.";
     }
 
     //verification
@@ -44,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele',MDP='$mdp', CIN='$cin', ADRESSE='$adresse',IMAGE_UTIL='$url' WHERE ID_UTILL=$user_id";
         $result = mysqli_query($conn, $query);
     } else {
-        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele', CIN='$cin', ADRESSE='$adresse',IMAGE_UTIL='$url' WHERE ID_UTILL=$user_id";
+        $query = "UPDATE utilisateurs SET PRENOM='$prenom', NOM='$nom', E_MAIL='$email', TELE='$tele', CIN='$cin', ADRESSE='$adresse' WHERE ID_UTILL=$user_id";
         $result = mysqli_query($conn, $query);
     }
     // Close database connection
