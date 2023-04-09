@@ -345,6 +345,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             var tele = document.getElementById("tele").value;
             var mdp = document.getElementById("mdp").value;
             var mdpp = document.getElementById("mdpp").value;
+
             let lettersRegex = /^[A-Za-z]+$/;
             let teleRegex = /^[+]?[1-9][0-9]{9,14}$/;
             let regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -388,6 +389,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert("Les mots de passe ne sont pas identiques.");
                 return false;
             }
+
+
             alert("Ajout avec succès!"); // Display a validation message
             return true;
         }
