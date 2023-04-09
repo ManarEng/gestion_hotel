@@ -182,14 +182,14 @@
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
             <?php
-            //session_start();
+            session_start();
             // Establish a connection to the database
             include("../db_connexion.php");
             // Retrieve the user ID from the session
-            //$user_id = $_SESSION['user_id'];
+            $user_id = $_SESSION['ID_UTILL'];
 
             // Run a SELECT query to retrieve the user information
-            $sql =  "SELECT ID_UTILL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs WHERE ID_PROFIL = 1 "; //AND ID_UTILL = $user_id
+            $sql =  "SELECT ID_UTILL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs WHERE ID_PROFIL = 1 AND ID_UTILL = $user_id";
             $result = mysqli_query($conn, $sql); ?>
 
 
