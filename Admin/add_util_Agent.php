@@ -388,7 +388,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert("Les mots de passe ne sont pas identiques.");
                 return false;
             }
-            alert("Ajout avec succes!"); // Display a validation message
+            alert("Ajout avec succès!"); // Display a validation message
             return true;
         }
     </script>

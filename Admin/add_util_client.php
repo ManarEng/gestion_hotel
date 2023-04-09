@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Store the image in the upload directory
-        $upload_dir = 'clients/';
+        $upload_dir = '../PHP/uploads/';
         $filename = uniqid("IMG-", true) . '.' . $file_extension;
         $upload_path = $upload_dir . $filename;
         move_uploaded_file($file['tmp_name'], $upload_path);
@@ -388,7 +388,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert("Les mots de passe ne sont pas identiques.");
                 return false;
             }
-            alert("Ajout avec succes!"); // Display a validation message
+            alert("Ajout avec succès"); // Display a validation message
             return true;
         }
     </script>

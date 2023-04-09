@@ -308,9 +308,9 @@
                                 <td><?php echo $row['E_MAIL']; ?></td>
                                 <td><?php echo $row['TELE']; ?></td>
                                 <td><?php if ($row['IMAGE_UTIL'] == '') {
-                                        echo '<img src="../Img/default-avatar.png">';
+                                        echo '<img src="/Img/default-avatar.png">';
                                     } else {
-                                        echo '<img src="../Admin/clients/' . $row['IMAGE_UTIL'] . '">';
+                                        echo '<img src="../PHP/uploads/' . $row['IMAGE_UTIL'] . '">';
                                     }
                                     ?></td>
 

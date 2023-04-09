@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Store the image in the upload directory
-        $upload_dir = 'rooms/';
+        $upload_dir = '../Img/image_chambres/';
         $filename = uniqid("IMG-", true) . '.' . $file_extension;
         $upload_path = $upload_dir . $filename;
         move_uploaded_file($file['tmp_name'], $upload_path);
@@ -339,7 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
             }
-            alert("Chambre ajoutée avec succes!"); // Display a validation message
+            alert("Chambre ajoutée avec succès!"); // Display a validation message
             return true;
         }
     </script>

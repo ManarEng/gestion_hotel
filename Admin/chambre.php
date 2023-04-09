@@ -283,9 +283,9 @@
                                 <td><?php echo $row['ETAT']; ?></td>
                                 <td><?php echo $row['PRIX']; ?></td>
                                 <td><?php if ($row['IMAGE_CH'] == '') {
-                                        echo '<img src="../Img/default_room.png">';
+                                        echo '<img src="../Img/image_chambres/default_room.png">';
                                     } else {
-                                        echo '<img src="/Admin/rooms/' . $row['IMAGE_CH'] . '">';
+                                        echo '<img src="/Img/image_chambres/' . $row['IMAGE_CH'] . '">';
                                     }
                                     ?></td>
 
