@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+$id2 = $_SESSION['ID_UTILL'];
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -205,12 +211,14 @@
         </li>
         <li><a href="ResAdmin.php"> Résérvations</a></li>
 
-        <li><a href="deconnexion.php">Déconnexion</a></li>
+        <li><a href="../Admin/deconnexion.php">Déconnexion</a></li>
     </ul>
     <div class="container">
         <?php
+
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2;";
+
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2 and ID_UTILL=$id2;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
