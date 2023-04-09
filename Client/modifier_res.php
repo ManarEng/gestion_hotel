@@ -21,6 +21,7 @@ if (isset($_GET['ID_RES'])) {
       mysqli_close($conn);
     
     }
+  
 ?>
 <!DOCTYPE html>
 <html>
@@ -69,8 +70,8 @@ if (isset($_GET['ID_RES'])) {
     <div class="update-profile">
     
     
-
-    <form action="nv_res.php" method="post" enctype="multipart/form-data">
+    
+    <form action="nv_res.php" method="post" onsubmit=" return validateForm()" enctype="multipart/form-data">
     <input type="hidden" name="ID_RES" value="<?php echo $row['ID_RES']; ?>" />
     
     
@@ -210,4 +211,17 @@ inputTypeChambre.addEventListener("blur", function() {
 });
 
 
+</script>
+<script>
+  function validateForm() {
+    var arrivee = new Date(document.getElementById("arrivee").value);
+    var depart = new Date(document.getElementById("depart").value);
+
+    if (depart < arrivee) {
+      alert("La date de départ ne peut pas être antérieure à la date d'arrivée.");
+      return false;
+    }
+
+    return true;
+  }
 </script>
