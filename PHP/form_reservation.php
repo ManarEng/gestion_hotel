@@ -136,11 +136,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <<<<<<< HEAD <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE']; ?>">
-                                =======
-                                <input id="tele" type="text" name="tele" class="form-control" value="<?php echo  $_SESSION['TELE']; ?>">
-                                >>>>>>> a7ada19a4cc97426eb125fbf3ba0d5357d9a06b4
-                                <p class="comments"></p>
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE']; ?>">
+
+
+                            <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="arrivee">Date d'Arrivée <span class="blue">*</span></label>
