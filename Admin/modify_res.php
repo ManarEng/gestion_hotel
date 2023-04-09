@@ -1,15 +1,12 @@
 <?php
 
-
-
-
 // Récupérer l'ID de la réservation à modifier
 $id_rese  = $_GET['ID_RES'];
 
 include("../db_connexion.php");
 
 // Récupérer les données de la réservation à modifier
-$sql = "SELECT * FROM reservation WHERE ID_RES  = $id_rese ";
+$sql = "SELECT * FROM reservation WHERE ID_RES = $id_rese ";
 $result = mysqli_query($conn, $sql);
 $reservation = mysqli_fetch_assoc($result);
 
@@ -20,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date_sortie = $_POST['date_sortie'];
 
     // Mettre à jour la réservation dans la base de données
-    $sql = "UPDATE reservation SET date_entree = '$date_entree', date_sortie = '$date_sortie' WHERE id_rese  = $id_rese ";
+    $sql = "UPDATE reservation SET DATE_D_ENTREE = '$date_entree', DATE_SORTIE = '$date_sortie' WHERE ID_RES = $id_rese ";
     if (mysqli_query($conn, $sql)) {
         // Rediriger vers la page de liste des réservations
         header("Location: reservations.php");
@@ -42,11 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <h1>Modifier une réservation</h1>
     <form method="POST">
-    <input type="hidden" name="id" value="<?php echo $row['id_rese ']; ?>" />
+    <input type="hidden" name="id" value="<?php echo $row['ID_RES']; ?>" />
         <label for="date_entree">Date d'entrée:</label>
-        <input type="date" name="date_entree" value="<?php echo $reservation['date_entree']; ?>"><br><br>
+        <input type="date" name="date_entree" value="<?php echo $reservation['DATE_D_ENTREE']; ?>"><br><br>
         <label for="date_sortie">Date de sortie:</label>
-        <input type="date" name="date_sortie" value="<?php echo $reservation['date_sortie']; ?>"><br><br>
+        <input type="date" name="date_sortie" value="<?php echo $reservation['DATE_SORTIE']; ?>"><br><br>
         <input type="submit" value="Enregistrer les modifications">
     </form>
 </body>

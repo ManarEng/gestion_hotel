@@ -258,7 +258,7 @@ if (isset($_GET['id_chambre'])) {
         <li><a href="../Admin/activite.php"> Activités</a>
 
         </li>
-        <li><a href="res_admin.php">Résérvations</a></li>
+        <li><a href="ResAdmin.php">Résérvations</a></li>
         <li><a href="messagerie.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
