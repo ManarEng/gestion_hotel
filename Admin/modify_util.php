@@ -266,7 +266,7 @@ if (isset($_GET['id_util'])) {
         <fieldset>
             <legend>Modifier l'utilisateur</legend>
 
-            <form method="post" action="update_util.php" onsubmit="return validateForm()">
+            <form method="post" action="update_util.php" onsubmit="return validateForm()" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
 
                 <label for="prenom">Prénom :</label>

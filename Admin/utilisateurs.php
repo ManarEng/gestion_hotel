@@ -232,7 +232,7 @@
                                 <td><?php if ($row['IMAGE_UTIL'] == '') {
                                         echo '<img src="../Img/default-avatar.png">';
                                     } else {
-                                        echo '<img src="../Admin/agents/' . $row['IMAGE_UTIL'] . '">';
+                                        echo '<img src="../PHP/uploads/' . $row['IMAGE_UTIL'] . '">';
                                     }
                                     ?></td>
 
