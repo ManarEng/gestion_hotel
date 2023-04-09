@@ -208,6 +208,7 @@ if (isset($_GET['id_activite'])) {
         input[type="email"],
         input[type="tel"],
         input[type="password"],
+        input[type="file"],
         textarea,
         select {
             padding: 15px;
@@ -294,6 +295,8 @@ if (isset($_GET['id_activite'])) {
 
                 <label for="field3">Disponibilité :</label>
                 <input type="text" name="field3" id="field3" value="<?php echo $row['ETAT']; ?>" />
+                <label for="img">Modifier la photo :</label>
+                <input type="file" id="img" name="img">
 
                 <input type="submit" value="Enregister" />
             </form>
