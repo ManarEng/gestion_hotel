@@ -36,8 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($depart <= $arrivee) {
         $error = "La date de départ est antérieure à la date d'arrivée.";
-    } elseif (empty($nbrec) || !is_numeric($nbrec) || $nbrec <= 0) {
-        $error = "Le nombre de personnes doit être supérieur à zéro.";
+     } elseif (empty($nbrec) || !is_numeric($nbrec) || $nbrec <= 0) {
+        
+            $error = "Le nombre de personnes doit être supérieur à zéro.";
     } else {
         $sql = "INSERT INTO reservation VALUES('', '$_SESSION[ID_UTILL]', '$chambre_id', '$type_ac', '$entree', '$sortie', '$nbrec')";
         $r = $conn->query($sql);
@@ -153,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6">
                             <label for="nbre">Nombre de Chambre<span class="blue">*</span></label>
-                            <input type="number" id="nbre" name="nbre" min="1" max="100" value="<?php echo $nbrec; ?>">
+                            <input type="number" id="nbre" name="nbre" min="1"  max="100" value="<?php echo $nbrec; ?>"required>
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
