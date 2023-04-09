@@ -211,7 +211,7 @@ $id2 = $_SESSION['ID_UTILL'];
         </li>
         <li><a href="ResAdmin.php"> Résérvations</a></li>
 
-        <li><a href="../Admin/deconnexion.php">Déconnexion</a></li>
+        <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div class="container">
         <?php
