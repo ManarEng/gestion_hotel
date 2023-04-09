@@ -270,9 +270,9 @@
 
                                 <td><?php echo $row['ETAT']; ?></td>
                                 <td><?php if ($row['IMAGE_ACT'] == '') {
-                                        echo '<img src="../Img/default_ac.png">';
+                                        echo '<img src="../Img/image_activites/default_ac.png">';
                                     } else {
-                                        echo '<img src="/Admin/activity/' . $row['IMAGE_ACT'] . '">';
+                                        echo '<img src="../Img/image_activites/' . $row['IMAGE_ACT'] . '">';
                                     }
                                     ?></td>
                                 <script>

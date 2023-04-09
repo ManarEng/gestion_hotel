@@ -358,7 +358,7 @@ if (isset($_GET['id_util'])) {
                     return false;
                 }
             }
-            alert("Modification avec succes!"); // Display a validation message
+            alert("Modification avec succès!"); // Display a validation message
             return true;
         }
     </script>

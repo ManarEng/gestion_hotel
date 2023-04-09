@@ -318,7 +318,7 @@ if (isset($_GET['id_activite'])) {
 
 
             }
-            alert("Modification avec succes!"); // Display a validation message
+            alert("Modification avec succès!"); // Display a validation message
             return true;
         }
     </script>

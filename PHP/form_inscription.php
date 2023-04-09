@@ -69,24 +69,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $isSuccess = false;
     }
     // Check if file is an image
-    if (isset($_FILES['pic'])) {
+    if (isset($_FILES['pic']) && $_FILES['pic']['error'] == UPLOAD_ERR_OK) {
         $file = $_FILES['pic'];
         $allowed_extensions = ['jpg', 'jpeg', 'png'];
         $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         if (!in_array($file_extension, $allowed_extensions)) {
             $imgError = "Télécharger une image valide.";
+            $url = "";
+        } else {
+            // Store the image in the upload directory
+            $upload_dir = 'uploads/';
+            $filename = uniqid("IMG-", true) . '.' . $file_extension;
+            $upload_path = $upload_dir . $filename;
+            move_uploaded_file($file['tmp_name'], $upload_path);
+
+            // Store the URL in the database
+            $url =  $filename;
         }
-
-        // Store the image in the upload directory
-        $upload_dir = 'uploads/';
-        $filename = uniqid("IMG-", true) . '.' . $file_extension;
-        $upload_path = $upload_dir . $filename;
-        move_uploaded_file($file['tmp_name'], $upload_path);
-
-        // Store the URL in the database
-        $url =  $filename;
     } else {
-        $url = "default-avatar.png";
+        $url = "";
     }
 }
 if ($isSuccess) {
