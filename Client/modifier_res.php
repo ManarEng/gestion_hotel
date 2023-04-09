@@ -79,26 +79,19 @@ if (isset($_GET['ID_RES'])) {
       
          <div class="inputBox">
          
-            <span>Type de chambre </span>
-            <select name="type_chambre" id="type_chambre" class="box">
-                    <option value="<?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
-                                        echo "Individuelle";
+            <span >Type de chambre </span>
+            <input name="type_chambre" id="type_chambre" class="box"
+                     value="<?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
+                                        echo "individuelle";
                                     } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
                                         echo "double";
                                     } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
-                                        echo "Triple";
-                                    } ?>"><?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
-                                        echo "Individuelle";
-                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
-                                        echo "double";
-                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
-                                        echo "Triple";
-                                    } ?></option>
-                    <option >individuelle</option>
-                                    <option >double</option>
-                                    <option >triple</option>
+                                        echo "triple";
+                                    } ?>" readonly>
+  <span id="msg-type-chambre" style="display: none; color:red">si vous voulez changer le type de chambre veuillez supprimer cette reservation et réserver à nouveau</span>
+      
 
-                </select>
+                 
             <span>Date d'arrivée</span>
             <input type="date" id="arrivee" name="arrivee" class="box" required min="<?php echo date('Y-m-d'); ?>" value="<?php echo $row['DATE_D_ENTREE']; ?>">
             <span>Activite</span>
@@ -199,4 +192,22 @@ if (isset($_GET['ID_RES'])) {
 </body>
 
 </html>
+<script>
+// Sélectionnez l'élément input et le message
+var inputTypeChambre = document.getElementById("type_chambre");
+var msgTypeChambre = document.getElementById("msg-type-chambre");
 
+// Ajouter un écouteur d'événement focus sur l'input
+inputTypeChambre.addEventListener("focus", function() {
+  // Afficher le message
+  msgTypeChambre.style.display = "block";
+});
+
+// Ajouter un écouteur d'événement blur sur l'input
+inputTypeChambre.addEventListener("blur", function() {
+  // Cacher le message
+  msgTypeChambre.style.display = "none";
+});
+
+
+</script>
