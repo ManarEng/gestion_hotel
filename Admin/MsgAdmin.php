@@ -1,14 +1,13 @@
- 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Reservations</title>
+    <title>Admin</title>
 </head>
 <style>
     body {
         margin: 0;
-        background: #ddd;
+        /*background: #ddd;*/
     }
 
     table {
@@ -25,6 +24,7 @@
         border: 10px;
         margin-top: -10px;
         padding: 10px;
+        text-align: left;
     }
 
     .basic_box {
@@ -125,16 +125,16 @@
         display: block;
     }
 
-    
+    /*header*/
 
     header {
         position: fixed;
         height: 90px;
         width: 100%;
-        background-color: lightskyblue;}
+        background-color: lightskyblue;
         /*filter: blur(20px);
         backdrop-filter: blur(20px);
-        /background: transparent;/
+        /*background: transparent;*/
 
         height: 50px;
         width: 100%;
@@ -143,7 +143,7 @@
         filter: blur(20px);
         filter: url(blur.svg#blur);
 
-    
+    }
 
     #e1 {
         float: center;
@@ -160,18 +160,19 @@
         width: 100px;
         height: 2px;
         background: #ffa500;
-        /margin: 0 auto;/
-        margin-left: auto;
+        /*margin: 0 auto;*/
+        margin-left: 680px;
         margin-right: auto;
-        margin-top: 100px;
+
 
     }
 
     .heading {
         text-align: center;
-        margin-bottom: 60px;
+
         margin-left: 115px;
-        /margin-top: 200px;/
+        margin-top: 10px;
+
     }
 
     h2 {
@@ -182,116 +183,124 @@
 </style>
 
 <body>
-    <!--<header>
 
-        <h1 id="e1">Espace Administrateur</h1>
-        <h1 id="">HoteLUX<span class="orange" style="color: #ff7a00;">.</span></h1>
-
-
-    </header>-->
 
     <table style="width: 100%;">
         <tr>
-            <td id="td1" style="padding: 10px; font-size: 48px;"><b> HoteLUX</b><span style="color: #ffa500;">.</span></td>
+            <td id="td1" style="padding: 10px; font-size: 48px;"><a href="index_admin.php" style="text-decoration: none; color:inherit"><b> HoteLUX</b></a><span style="color: #ffa500;">.</span></td>
         </tr>
     </table>
 
 
-    <ul class="outer-menu">
+    <ul class="outer-menu" style="position: fixed;">
 
-        <li><a href="index_admin.php">Profil</a></li>
-        <li><a href="">Utilisateurs</a>
-            <!--<ul class="inner-menu">
-                <li><a href="">Les Clients</a></li>
-                <li><a href="">Les Agents De Réception</a></li>
-            </ul>-->
+        <li><a href="profil.php">Profil</a></li>
+        <li><a href="utilisateurs.php"> Utilisateurs</a>
+
         </li>
-        <li><a href=""> Chambres</a>
-            <!-- <ul class="inner-menu">
-                <li><a href="">Les Chambres</a></li>
-                <li><a href="">Ajouter Une Chambre</a></li>
-                <li><a href="">Supprimer Une Chambre</a></li>
-            </ul>-->
+        <li><a href="chambre.php"> Chambres</a>
+
         </li>
-        <li><a href="">Activités</a>
-            <!--<ul class="inner-menu">
-                <li><a href="">Les Activités</a></li>
-                <li><a href="">Ajouter Une Activité</a></li>
-                <li><a href="">Supprimer Une Activité</a></li>
-            </ul>-->
+        <li><a href="activite.php">Activités</a>
+
         </li>
-        <li><a href="ResAdmin.php">Résérvations</a></li>
-        <li><a href="MsgAdmin.php"> Messagerie</a></li>
-        <li><a href="../index.html">Déconnexion</a></li>
+        <li><a href="ResAdmin.php"> Résérvations</a></li>
+        <li><a href="MsgAdmin.php">Messagerie</a></li>
+        <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
-    <div class="container">
-        
+    <div>
+        <?php
+        include("../db_connexion.php");
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1;";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+
+
+        ?>
+
+        <div class="heading">
+            <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
+        </div>
+        <div class="divider"></div>
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-           
+            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
+
             <?php
-              include("../db_connexion.php") ;
-            $sql="select * from messagerie";
+            include("../db_connexion.php");
+            $sql = "select * from messagerie";
             $resultat = mysqli_query($conn, $sql);
 
-// Vérifier si des données ont été trouvées
-if (mysqli_num_rows($resultat) == 0) {
-    echo "Aucune donnée trouvée.";
-} else {
-    // Afficher les données dans un tableau HTML
-    echo "<table class=styled-table>";
-    echo "<thead>";
-    echo "<tr><th colspan=7><H2 >Messages de vos clients</H2></th></tr>";
-    echo "<tr><th> Nom et Prenom </th><th>E-Mail</th><th> Message</th><TH></TH><th></th></tr>";
-    echo "</thead>";
-    echo"<tbody>";
-    while ($row = mysqli_fetch_assoc($resultat)) {
-        echo "<tr>";
-        echo "<td>" . $row["NOM"] ." ". $row["PRENOM"]. "</td>";
-        echo "<td>" . $row["EMAIL"] . "</td>";
-      
-        $message = $row["MESSAGE"];
-        if (strlen($message) > 20) {
-            $message = substr($message, 0, 20) . '...';
-            echo "<td id=message onclick=\"this.innerHTML = '". $row["MESSAGE"] ."';\">" . $message . "</td>";
-        } else {
-            echo "<td>" . $message . "</td>";
-        }
-        echo "<td><a href='modify_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='modifier' onclick='modifierLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-        echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-        
-        echo "</tr>";
-    }
-    echo"</thead>";
-    echo "</table>";
-}
+            // Vérifier si des données ont été trouvées
+            if (mysqli_num_rows($resultat) == 0) {
+                echo "Aucune donnée trouvée.";
+            } else {
+                echo " <h2 class=title> Messages de vos clients : </h2>";
+                // Afficher les données dans un tableau HTML
+                echo "<table class=styled-table>";
+                echo "<thead>";
 
-// Fermer la connexion
-mysqli_close($conn);
+                echo "<tr><th> Nom et Prenom </th><th>E-Mail</th><th> Message</th><TH></TH><th></th></tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                while ($row = mysqli_fetch_assoc($resultat)) {
+                    echo "<tr>";
+                    echo "<td>" . $row["NOM"] . " " . $row["PRENOM"] . "</td>";
+                    echo "<td>" . $row["EMAIL"] . "</td>";
 
-?>
-    
+                    $message = $row["MESSAGE"];
+                    if (strlen($message) > 20) {
+                        $message = substr($message, 0, 20) . '...';
+                        echo "<td id=message onclick=\"this.innerHTML = '" . $row["MESSAGE"] . "';\">" . $message . "</td>";
+                    } else {
+                        echo "<td>" . $message . "</td>";
+                    }
+                    echo "<td><a href='modify_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='modifier' onclick='modifierLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+                    echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+
+                    echo "</tr>";
+                }
+                echo "</thead>";
+                echo "</table>";
+            }
+
+            // Fermer la connexion
+            mysqli_close($conn);
+
+            ?>
+
         </div>
 
         <style>
-            h2 {
-                 text-align: center;
-                 
-                 color:white;
-                 font-size: 30px;
-                  
-                }
+            .container {
+                margin: auto;
+                max-width: 750px;
+
+            }
+
+            .add-icon {
+
+                margin-bottom: 1px;
+            }
+
+            .title {
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                font-weight: bold;
+                color: black;
+
+            }
 
             .styled-table {
                 border-collapse: collapse;
-                margin: 25px 0;
-                font-size: 0.9em;
+                margin: 0 auto 25px auto;
+                font-size: 1.2em;
                 font-family: sans-serif;
-                min-width: 800px;
+                width: 100%;
                 box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
             }
 
             .styled-table thead tr {
-                background-color: #444;
+                background-color: grey;
                 color: #ffffff;
                 text-align: left;
             }
@@ -324,8 +333,20 @@ mysqli_close($conn);
             .styled-table tbody tr:hover {
                 background-color: #b3d9ff;
             }
-        </style>
 
+            .styled-table td:last-child {
+                text-align: center;
+            }
+
+            .styled-table td:last-child img {
+                margin-left: 10px;
+            }
+
+            img {
+                width: 150px;
+                height: 150px;
+            }
+        </style>
     </div>
 </body>
 
