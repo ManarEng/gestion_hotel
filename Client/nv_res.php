@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $activite = $_POST['activite'];
     $nbre = $_POST['nbre'];
     $depart = $_POST['depart'];
-    
 
     if ($activite == 'Piscine') {
         $type_ac = 1;
@@ -27,17 +26,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }elseif($activite == 'Aucune activité'){
         $type_ac = 0;
     }
-    if ($chambre_id == 1) {
-        $type_ch =' individuelle';
-    } elseif ($chambre_id == 2) {
-        $type_ch = 'double';
-    } elseif ($chambre_id == 3) {
-        $type_ch = 'triple';
+    if ($chambre == 'individuelle') {
+        $type_ch = 1;
+    } elseif ($chambre == 'double') {
+        $type_ch = 2;
+    } elseif ($chambre == 'triple') {
+        $type_ch = 3;
     }
+    
+$chambre_query = "SELECT ID_CHAMBRE FROM chambre WHERE ID_TYPE_CHAMBRE = $type_ch";
+$chambre_result = mysqli_query($conn, $chambre_query);
+$chambre_row = mysqli_fetch_assoc($chambre_result);
+$id_chambre = $chambre_row['ID_CHAMBRE'];
+
+// Update row in the database
+$query = "UPDATE reservation SET ID_CHAMBRE='$id_chambre', ID_TYPE_ACTIVITE='$type_ac', DATE_D_ENTREE='$arrivee', DATE_SORTIE='$depart', NBRE_CHAMBRE='$nbre' WHERE ID_RES='$id_res'";
+    
    
     // Update row in the database
-    $query = "UPDATE reservation SET ID_CHAMBRE='$type_ch', ID_TYPE_ACTIVITE='$type_ac', DATE_D_ENTREE='$arrivee', DATE_SORTIE='$depart', NBRE_CHAMBRE='$nbre' WHERE ID_RES='$id_res'";
-    $result = mysqli_query($conn, $query);
+   //$query = "UPDATE reservation SET ID_CHAMBRE='$chambre', ID_TYPE_ACTIVITE='$type_ac', DATE_D_ENTREE='$arrivee', DATE_SORTIE='$depart', NBRE_CHAMBRE='$nbre' WHERE ID_RES='$id_res'";
+  // $query = "UPDATE reservation AS r JOIN chambre AS c ON r.ID_CHAMBRE = c.ID_CHAMBRE SET C.ID_TYPE_CHAMBRE='$type_ch', r.ID_TYPE_ACTIVITE='$type_ac', r.DATE_D_ENTREE='$arrivee', r.DATE_SORTIE='$depart', r.NBRE_CHAMBRE='$nbre', c.ID_TYPE_CHAMBRE='$chambre' WHERE r.ID_RES='$id_res'";
+
+
+   $result = mysqli_query($conn, $query);
+
 
     // Check if query was successful
     if ($result) {
