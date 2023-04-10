@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // Insert new row into the database
-    $query = "INSERT INTO utilisateurs  VALUES ('','2', '$nom','$prenom' ,'$nom_util','$mdp','$cin','$adresse','$email','$tele','$url')";
+    $query = "INSERT INTO utilisateurs  VALUES ('','3', '$nom','$prenom' ,'$nom_util','$mdp','$cin','$adresse','$email','$tele','$url')";
     mysqli_query($conn, $query);
 
     // Close database connection
@@ -282,23 +282,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <ul class="outer-menu" style="position: fixed;">
 
-        <li><a href="../Admin/profil.php">Profil</a></li>
-        <li><a href="../Admin/utilisateurs.php"> Utilisateurs</a>
+        <li><a href="profil.php">Profil</a></li>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
-        <li><a href="../Admin/chambre.php"> Chambres</a>
+        <li><a href="chambre.php"> Chambres</a>
 
         </li>
-        <li><a href="../Admin/activite.php"> Activités</a>
+        <li><a href="activite.php">Activités</a>
 
         </li>
-        <li><a href="ResAdmin.php">Résérvations</a></li>
-        <li><a href="messagerie.php">Messagerie</a></li>
+        <li><a href="ResAdmin.php"> Résérvations</a></li>
+
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
 
     <fieldset>
-        <legend>Ajouter un agent: </legend>
+        <legend>Ajouter un client: </legend>
 
         <form method="post" action="" onsubmit="return validateForm()" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
@@ -345,7 +345,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             var tele = document.getElementById("tele").value;
             var mdp = document.getElementById("mdp").value;
             var mdpp = document.getElementById("mdpp").value;
-
             let lettersRegex = /^[A-Za-z]+$/;
             let teleRegex = /^[+]?[1-9][0-9]{9,14}$/;
             let regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -389,9 +388,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 alert("Les mots de passe ne sont pas identiques.");
                 return false;
             }
-
-
-            alert("Ajout avec succès!"); // Display a validation message
+            alert("Ajout avec succès"); // Display a validation message
             return true;
         }
     </script>

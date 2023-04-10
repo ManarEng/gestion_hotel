@@ -1,12 +1,12 @@
 <?php
 session_start();
-$id = $_SESSION['ID_UTILL'];
+$id2 = $_SESSION['ID_UTILL'];
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Admin</title>
+    <title>Agent</title>
 </head>
 <style>
     body {
@@ -31,14 +31,7 @@ $id = $_SESSION['ID_UTILL'];
         text-align: left;
     }
 
-    .basic_box {
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        margin: auto;
-        width: 600px;
-        padding: 50px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
-    }
+
 
     th {
         font-weight: bold;
@@ -80,27 +73,6 @@ $id = $_SESSION['ID_UTILL'];
         text-decoration: underline;
     }
 
-    /* Style the inner menu */
-    .inner-menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: none;
-        position: absolute;
-    }
-
-    .inner-menu li {
-        margin-right: 0;
-    }
-
-    /* Show the inner menu when the outer menu item is hovered 
-    .outer-menu li:hover .inner-menu {
-        display: inline-block;
-    }*/
-
-
-
-    /* Style the outer menu */
     .outer-menu {
         list-style: none;
         margin: 0;
@@ -111,23 +83,8 @@ $id = $_SESSION['ID_UTILL'];
         margin-bottom: 10px;
     }
 
-    /* Style the inner menu */
-    .inner-menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: none;
-    }
 
-    .inner-menu li {
-        size: 50px;
-        margin-bottom: 5px;
-    }
 
-    /* Show the inner menu when the outer menu item is hovered */
-    .outer-menu li:hover .inner-menu {
-        display: block;
-    }
 
     /*header*/
 
@@ -199,7 +156,7 @@ $id = $_SESSION['ID_UTILL'];
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="profil.php">Profil</a></li>
-        <li><a href="utilisateurs.php"> Utilisateurs</a>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
         <li><a href="chambre.php"> Chambres</a>
@@ -209,13 +166,13 @@ $id = $_SESSION['ID_UTILL'];
 
         </li>
         <li><a href="ResAdmin.php"> Résérvations</a></li>
-        <li><a href="MsgAdmin.php">Messagerie</a></li>
+
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div>
         <?php
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1 and ID_UTILL=$id;";
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2 and ID_UTILL=$id2;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -225,34 +182,40 @@ $id = $_SESSION['ID_UTILL'];
         <div class="heading">
             <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
         </div>
+
         <div class="divider"></div>
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-            <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
-            <?php
-            include("../db_connexion.php");
-            $sql = "SELECT ID_ACTIVITE,  PRIX, ETAT,IMAGE_ACT, ID_TYPE_ACTIVITE  FROM activite ";
-            $result = mysqli_query($conn, $sql);
-            ?>
+
             <div class="container">
-                <h2 class="title"> Activités : </h2>
+                <?php
+                include("../db_connexion.php");
+                $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=3";
+                $result = mysqli_query($conn, $sql);
+                ?>
+                <h2 class="title"> Clients : </h2>
 
-                <a href="add_activite.php" title="Nouvelle Activité"><img src="../Img/icons8-add-new-50.png" alt="Ajouter une chambre" style="width: 25px; height: 25px;"></a>
+                <a href="add_util_client.php" title="Nouveau Client"><img src="../Img/icons8-add-new-50.png" alt="Ajouter un utilisateur" style="width: 25px; height: 25px;"></a>
                 <table class="styled-table">
+
+
                     <thead>
-
-
 
 
 
                         <tr>
 
-                            <td>Type</td>
-                            <td>Prix(Dhs)</td>
-                            <td>Disponibilité</td>
+                            <td>Nom</td>
+                            <td>Prenom</td>
+                            <td>Nom d'utilisateur</td>
+
+                            <td>CIN</td>
+                            <td>Adresse</td>
+                            <td>Email</td>
+                            <td>Téléphone</td>
+
                             <td>Photo</td>
-
-
                             <td></td>
+
 
                         </tr>
                     </thead>
@@ -261,44 +224,37 @@ $id = $_SESSION['ID_UTILL'];
                         while ($row = mysqli_fetch_assoc($result)) { ?>
                             <tr>
 
-                                <td><?php if ($row['ID_TYPE_ACTIVITE'] == 1) {
-                                        echo "Piscine";
-                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 2) {
-                                        echo "Restaurant";
-                                    } elseif ($row['ID_TYPE_ACTIVITE'] == 3) {
-                                        echo "Spa";
-                                    } ?></td>
+                                <td><?php echo $row['NOM']; ?></td>
+                                <td><?php echo $row['PRENOM']; ?></td>
+                                <td><?php echo $row['LOGIN']; ?></td>
 
-                                <td><?php echo $row['PRIX']; ?></td>
-
-
-                                <td><?php echo $row['ETAT']; ?></td>
-                                <td><?php if ($row['IMAGE_ACT'] == '') {
-                                        echo '<img src="../Img/image_activites/default_ac.png">';
+                                <td><?php echo $row['CIN']; ?></td>
+                                <td><?php echo $row['ADRESSE']; ?></td>
+                                <td><?php echo $row['E_MAIL']; ?></td>
+                                <td><?php echo $row['TELE']; ?></td>
+                                <td><?php if ($row['IMAGE_UTIL'] == '') {
+                                        echo '<img src="/Img/default-avatar.png">';
                                     } else {
-                                        echo '<img src="../Img/image_activites/' . $row['IMAGE_ACT'] . '">';
+                                        echo '<img src="../PHP/uploads/' . $row['IMAGE_UTIL'] . '">';
                                     }
                                     ?></td>
+
+
                                 <script>
                                     function confirmDelete() {
-                                        var result = confirm("Êtes-vous sûr de vouloir supprimer cette activité ?");
+                                        var result = confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
                                         if (result) {
                                             // If the user confirms, redirect to the PHP script to delete the row
-                                            window.location.href = "delete.php?id_activite=<?php echo $id_activite; ?>";
+                                            window.location.href = "delete.php?id_util=<?php echo $id_util; ?>";
                                         }
                                     }
                                 </script>
                                 <td>
                                     <div style="display: flex; ">
-                                        <a href="modify_activite.php?id_activite=<?php echo $row['ID_ACTIVITE']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
-                                        <a href="delete_activite.php?id_activite=<?php echo $row['ID_ACTIVITE']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette activité ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
+                                        <a href="modify_util.php?id_util=<?php echo $row['ID_UTILL']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
+                                        <a href="delete_user.php?id_util=<?php echo $row['ID_UTILL']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
                                     </div>
                                 </td>
-
-
-
-
-
 
 
                             </tr>
@@ -310,13 +266,12 @@ $id = $_SESSION['ID_UTILL'];
 
             <style>
                 .container {
-                    margin: auto;
-                    max-width: 750px;
-
+                    margin-left: auto;
+                    max-width: 1000px;
+                    padding: 10px;
                 }
 
                 .add-icon {
-
                     margin-bottom: 1px;
                 }
 
@@ -325,12 +280,10 @@ $id = $_SESSION['ID_UTILL'];
                     text-transform: uppercase;
                     font-weight: bold;
                     color: black;
-
                 }
 
                 .styled-table {
                     border-collapse: collapse;
-                    margin: 0 auto 25px auto;
                     font-size: 1.2em;
                     font-family: sans-serif;
                     width: 100%;
@@ -341,15 +294,17 @@ $id = $_SESSION['ID_UTILL'];
                     background-color: grey;
                     color: #ffffff;
                     text-align: left;
+                    font-size: 0.9em;
                 }
 
                 .styled-table th,
                 .styled-table td {
-                    padding: 12px 15px;
+                    padding: 8px 10px;
                 }
 
                 .styled-table tbody tr {
                     border-bottom: 1px solid #dddddd;
+                    font-size: 0.9em;
                 }
 
                 .styled-table tbody tr:nth-of-type(even) {
@@ -361,7 +316,7 @@ $id = $_SESSION['ID_UTILL'];
                 }
 
                 .styled-table tbody td {
-                    font-size: 14px;
+                    font-size: 0.9em;
                 }
 
                 .styled-table tbody tr:last-of-type td {
@@ -377,12 +332,12 @@ $id = $_SESSION['ID_UTILL'];
                 }
 
                 .styled-table td:last-child img {
-                    margin-left: 10px;
+                    margin-left: 5px;
                 }
 
                 img {
-                    width: 150px;
-                    height: 150px;
+                    width: 50px;
+                    height: 50px;
                 }
             </style>
 

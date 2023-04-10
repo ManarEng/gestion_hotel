@@ -1,61 +1,27 @@
 <?php
-// Check if form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Check if user ID is provided in the query string
+if (isset($_GET['id_util'])) {
+    $user_id = $_GET['id_util'];
+
+
     // Connect to the database
     include("../db_connexion.php");
 
-    // Retrieve form data
-    $prenom = $_POST['prenom'];
-    $nom = $_POST['nom'];
-    $email = $_POST['email'];
-    $tele = $_POST['tele'];
-    $nom_util = $_POST['nom_util'];
-    $mdp = $_POST['mdp'];
-    $cin = $_POST['cin'];
-    $adresse = $_POST['adresse'];
-
-    // Check if file is an image
-    $file = $_FILES['img'];
-    if (isset($_FILES['img']) && !empty($_FILES['img']['name'])) {
-        // file upload and processing code goes here
-        $allowed_extensions = ['jpg', 'jpeg', 'png'];
-        $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        if (!in_array($file_extension, $allowed_extensions)) {
-            echo "Télécharger une image valide.";
-        }
-
-        // Store the image in the upload directory
-        $upload_dir = '../PHP/uploads/';
-        $filename = uniqid("IMG-", true) . '.' . $file_extension;
-        $upload_path = $upload_dir . $filename;
-        move_uploaded_file($file['tmp_name'], $upload_path);
-
-        // Store the URL in the database
-        $url =  $filename;
-    } else {
-        echo "Veuillez choisir une image à télécharger.";
-    }
-
-
-
-    // Insert new row into the database
-    $query = "INSERT INTO utilisateurs  VALUES ('','2', '$nom','$prenom' ,'$nom_util','$mdp','$cin','$adresse','$email','$tele','$url')";
-    mysqli_query($conn, $query);
+    // Retrieve user information from the database
+    $query = "SELECT * FROM utilisateurs WHERE ID_UTILL = $user_id";
+    $result = mysqli_query($conn, $query);
+    $user = mysqli_fetch_assoc($result);
 
     // Close database connection
     mysqli_close($conn);
-    header("Location: utilisateurs.php");
-    exit;
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Ajouter utilisateur</title>
+    <title>Modifier l'utilisateur</title>
     <style>
         /*style of admin index*/
         body {
@@ -293,50 +259,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         </li>
         <li><a href="ResAdmin.php">Résérvations</a></li>
-        <li><a href="messagerie.php">Messagerie</a></li>
+        <li><a href="MsgAdmin.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
+    <?php if (isset($user)) : ?>
+        <fieldset>
+            <legend>Modifier l'utilisateur</legend>
 
-    <fieldset>
-        <legend>Ajouter un agent: </legend>
+            <form method="post" action="update_util.php" onsubmit="return validateForm()" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
 
-        <form method="post" action="" onsubmit="return validateForm()" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
+                <label for="prenom">Prénom :</label>
+                <input type="text" name="prenom" id="prenom" value="<?php echo $user['PRENOM']; ?>" />
 
-            <label for="prenom">Prénom :</label>
-            <input type="text" name="prenom" id="prenom" />
-
-            <label for="nom">Nom :</label>
-            <input type="text" name="nom" id="nom" />
-            <label for="cin">CIN :</label>
-            <input type="text" name="cin" id="cin" />
-
-
-
-            <label for="email">Email :</label>
-            <input type="text" name="email" id="email" />
-
-            <label for="tele">Téléphone :</label>
-            <input type="tel" name="tele" id="tele" />
-            <label for="adresse">Addresse :</label>
-            <textarea name="adresse" id="adresse"></textarea>
-            <label for="img">Photo :</label>
-            <input type="file" id="img" name="img">
-            <label for="nom_util">Login :</label>
-            <input type="text" name="nom_util" id="nom_util" />
-
-            <label for="mdp">Mot de Passe :</label>
-            <input type="password" name="mdp" id="mdp" />
-            <label for="mdpp">Confirmer le mot de passe :</label>
-            <input type="password" name="mdpp" id="mdpp" />
+                <label for="nom">Nom :</label>
+                <input type="text" name="nom" id="nom" value="<?php echo $user['NOM']; ?>" />
+                <label for="cin">CIN :</label>
+                <input type="text" name="cin" id="cin" value="<?php echo $user['CIN']; ?>" />
 
 
 
+                <label for="email">Email :</label>
+                <input type="text" name="email" id="email" value="<?php echo $user['E_MAIL']; ?>" />
 
-            <input type="submit" value="Enregistrer" />
-        </form>
-    </fieldset>
+                <label for="tele">Téléphone :</label>
+                <input type="tel" name="tele" id="tele" value="<?php echo $user['TELE']; ?>" />
+                <label for="adresse">Addresse:</label>
+                <textarea name="adresse" id="adresse"><?php echo $user['ADRESSE']; ?></textarea>
 
+                <label for="img">Modifier la photo :</label>
+                <input type="file" id="img" name="img">
+
+                <label for="mdp">Nouveau Mot de Passe :</label>
+                <input type="password" name="mdp" id="mdp" />
+                <label for="mdpp">Confirmer le mot de passe :</label>
+                <input type="password" name="mdpp" id="mdpp" />
+
+
+
+
+                <input type="submit" value="Enregistrer" />
+            </form>
+        </fieldset>
+    <?php else : ?>
+        <p>Utilisateur n'existe pas.</p>
+    <?php endif; ?>
     <script>
         function validateForm() {
             var prenom = document.getElementById("prenom").value;
@@ -345,13 +312,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             var tele = document.getElementById("tele").value;
             var mdp = document.getElementById("mdp").value;
             var mdpp = document.getElementById("mdpp").value;
-
             let lettersRegex = /^[A-Za-z]+$/;
             let teleRegex = /^[+]?[1-9][0-9]{9,14}$/;
             let regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
             var emailRegex = /\S+@\S+\.\S+/;
-            const formInputs = document.querySelectorAll('input[type="text"], input[type="tel"], input[type="password"], textarea');
+            const formInputs = document.querySelectorAll('input[type="text"], input[type="tel"],  textarea');
 
             for (let input of formInputs) {
                 if (input.value.trim() === '') {
@@ -380,18 +346,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 return false;
             }
 
-            if (!regexPassword.test(mdp)) {
-                alert("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une miniscule et un chiffre.");
-                return false;
+            if (mdp.trim() !== '') {
+                if (!regexPassword.test(mdp)) {
+                    alert("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une miniscule et un chiffre.");
+                    return false;
+                }
+
+
+                if (mdp != mdpp) {
+                    alert("Les mots de passe ne sont pas identiques.");
+                    return false;
+                }
             }
-
-            if (mdp != mdpp) {
-                alert("Les mots de passe ne sont pas identiques.");
-                return false;
-            }
-
-
-            alert("Ajout avec succès!"); // Display a validation message
+            alert("Modification avec succès!"); // Display a validation message
             return true;
         }
     </script>

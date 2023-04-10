@@ -1,12 +1,12 @@
 <?php
 session_start();
-$id = $_SESSION['ID_UTILL'];
+$id2 = $_SESSION['ID_UTILL'];
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Admin</title>
+    <title>Agent</title>
 </head>
 <style>
     body {
@@ -209,13 +209,13 @@ $id = $_SESSION['ID_UTILL'];
 
         </li>
         <li><a href="ResAdmin.php"> Résérvations</a></li>
-        <li><a href="messagerie.php">Messagerie</a></li>
+        <li><a href="MsgAdmin.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div>
         <?php
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1 and ID_UTILL=$id;";
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2 and ID_UTILL=$id2;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -225,98 +225,62 @@ $id = $_SESSION['ID_UTILL'];
         <div class="heading">
             <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
         </div>
-
         <div class="divider"></div>
         <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 5%; font-size: 28px;"></p>
+
+
             <?php
+
             include("../db_connexion.php");
-            $sql = "SELECT  ID_CHAMBRE,  DESCRIPTION, ETAT, PRIX,IMAGE_CH, ID_TYPE_CHAMBRE FROM chambre ;";
 
-            $result = mysqli_query($conn, $sql);
+            $sql = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
+            FROM reservation R
+            JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
+            JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
+            JOIN type_chambre TC ON C.ID_TYPE_CHAMBRE = TC.ID_TYPE_CHAMBRE
+            JOIN type_activite TA ON R.ID_TYPE_ACTIVITE = TA.ID_TYPE_ACTIVITE";    //IL faut que j'ajoute where pour sortir ces informations de la session
+            $resultat = mysqli_query($conn, $sql);
 
+
+
+            if ($conn) {
+
+                $resultat = mysqli_query($conn, $sql);
+            }
+
+            // Vérifier si des données ont été trouvées
+            if (mysqli_num_rows($resultat) == 0) {
+                echo "Aucune donnée trouvée.";
+            } else {
+                echo " <h2 class=title> Reservations  : </h2>";
+                // Afficher les données dans un tableau HTML
+                echo "<table class=styled-table>";
+                echo "<thead>";
+
+                echo "<tr><th>Nom d'Utilisateur</th><th> type de chambre</th><th>Nombre de chambre</th><th> type d'activitée</th><th> date d'entrée</th><th>date de sortie</th><TH></TH><TH></TH></tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                while ($row = mysqli_fetch_assoc($resultat)) {
+                    echo "<tr>";
+                    echo "<td>" . $row["NOM"] . " " . $row["PRENOM"] . "</td>";
+                    echo "<td>" . $row["TYPE_CHAMBRE"] . "</td>";
+                    echo "<td>" . $row["NBRE_CHAMBRE"] . "</td>";
+                    echo "<td>" . $row["TYPE_ACTIVITE"] . "</td>";
+                    echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
+                    echo "<td>" . $row["DATE_SORTIE"] . "</td>";
+                    echo "<td><a href='modify_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+                    echo "<td><a href='delete_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+                    echo "</tr>";
+                }
+                echo "</thead>";
+                echo "</table>";
+            }
+
+            // Fermer la connexion
+            mysqli_close($conn);
             ?>
 
-            <div class="container">
-                <h2 class="title"> Chambres : </h2>
-
-                <a href="add_room.php" class="add-icon" title="Nouvelle chambre"><img src="../Img/icons8-add-new-50.png" alt="Ajouter une chambre" style="width: 25px; height: 25px;"></a>
-                <table class="styled-table">
-                    <thead>
-
-
-
-                        <tr>
-
-                            <td>Type</td>
-                            <td>Description</td>
-                            <td>Disponibilité</td>
-                            <td>Prix (Dhs)</td>
-                            <td>Photo</td>
-
-                            <td></td>
-
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $message = htmlspecialchars($row['DESCRIPTION']); ?>
-                            <tr>
-
-                                <td><?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
-                                        echo "Individuelle";
-                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
-                                        echo "Double";
-                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
-                                        echo "Triple";
-                                    }
-                                    ?></td>
-                                <?php
-                                $message = htmlspecialchars($row['DESCRIPTION']);
-                                if (strlen($message) > 20) {
-                                    $messageShort = substr($message, 0, 20) . '...';
-                                    echo "<td onclick=\"this.innerHTML = '" . $message . "';\"><span title='" . $message . "'>" . $messageShort . "</span></td>";
-                                } else {
-                                    echo "<td onclick=\"\"><span title='" . $message . "'>" . $message . "</span></td>";
-                                }
-                                ?>
-
-
-                                <td><?php echo $row['ETAT']; ?></td>
-                                <td><?php echo $row['PRIX']; ?></td>
-                                <td><?php if ($row['IMAGE_CH'] == '') {
-                                        echo '<img src="../Img/image_chambres/default_room.png">';
-                                    } else {
-                                        echo '<img src="/Img/image_chambres/' . $row['IMAGE_CH'] . '">';
-                                    }
-                                    ?></td>
-
-
-                                <script>
-                                    function confirmDelete() {
-                                        var result = confirm("Êtes-vous sûr de vouloir supprimer cette chambre ?");
-                                        if (result) {
-                                            // If the user confirms, redirect to the PHP script to delete the row
-                                            window.location.href = "delete.php?id_chambre=<?php echo $id_chambre; ?>";
-                                        }
-                                    }
-                                </script>
-                                <td>
-                                    <div style="display: flex; ">
-                                        <a href="modify_room.php?id_chambre=<?php echo $row['ID_CHAMBRE']; ?>" title="Modifier"><img src="../Img/icons8-modify-50.png" alt="Modifier" style="width: 25px ;height:25px " /></a>
-                                        <a href="delete_room.php?id_chambre=<?php echo $row['ID_CHAMBRE']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chambre ?')" title="Supprimer"><img src="../Img/icons8-delete-trash-50.png" alt="Supprimer" style="width: 25px ;height:25px " /></a>
-                                    </div>
-                                </td>
-
-
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-
-            </div>
         </div>
 
         <style>
