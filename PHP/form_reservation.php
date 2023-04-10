@@ -1,4 +1,6 @@
 <?php
+session_set_cookie_params(0);
+
 session_start();
 $error = "";
 $isSuccess = false;
@@ -137,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE']; ?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo "+212633456723"; ?>">
 
 
                             <p class="comments"></p>

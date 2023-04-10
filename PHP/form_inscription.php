@@ -1,4 +1,6 @@
 <?php
+session_set_cookie_params(0);
+
 session_start();
 include("../db_connexion.php");
 $firstname = $name = $email = $phone = $adresse = $cin = $login = $mdp = $mdpp = $url = "";

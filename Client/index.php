@@ -48,7 +48,7 @@
                     <li><a href="#steps">A propos</a></li>
                      
                     <li><a href="#possibilities">Services</a></li>
-                    <li><a href="/PHP/index_contact.php">Contact</a></li>
+                    <li><a href="/Client/index_contact.php">Contact</a></li>
                     <li><a href="/php/lien_reservation_header.php">Réservation</a></li>
                     <!--<li><a href="/projet_hotel2 - Copie/index.html" >connexion</a></li>-->
                     <!--<li>  <a  href="javascript:myFunction();"> <i class="fa-solid fa-user"></i></a></li>

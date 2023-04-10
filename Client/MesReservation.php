@@ -44,7 +44,7 @@ $user_id = $_SESSION['ID_UTILL'];
                     <li><a href="/Client/index.php/#main" >Accueil</a></li>
                     <li><a href="/Client/index.php/#steps">A propos</a></li>
                     <li><a href="/Client/index.php/#possibilities">Services</a></li>
-                    <li><a href="/index_contact.php">Contact</a></li>
+                    <li><a href="/Client/index_contact.php">Contact</a></li>
                     <li><a href="../Client/index_chambres_activites.php">Réservation</a></li>
                     <li>  <a  href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
                     
