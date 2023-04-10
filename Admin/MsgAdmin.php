@@ -239,7 +239,7 @@
                 echo "<table class=styled-table>";
                 echo "<thead>";
 
-                echo "<tr><th> Nom et Prenom </th><th>E-Mail</th><th> Message</th><TH></TH><th></th></tr>";
+                echo "<tr><th> Nom et Prenom </th><th>E-Mail</th><th> Message</th><TH></TH></tr>";
                 echo "</thead>";
                 echo "<tbody>";
                 while ($row = mysqli_fetch_assoc($resultat)) {
@@ -254,8 +254,7 @@
                     } else {
                         echo "<td>" . $message . "</td>";
                     }
-                    echo "<td><a href='modify_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='modifier' onclick='modifierLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-                    echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><button value='supprimer' onclick='supprimerLigne(" . $row["ID_MESSAGE"] . ")'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+                    echo "<td><a href='delete_msg.php?ID_RES=" . $row["ID_MESSAGE"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')\" ></a></td>";
 
                     echo "</tr>";
                 }

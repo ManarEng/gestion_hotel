@@ -254,7 +254,7 @@
                 echo "<table class=styled-table>";
                 echo "<thead>";
 
-                echo "<tr><th>Nom d'Utilisateur</th><th> type de chambre</th><th>Nombre de chambre</th><th> type d'activitée</th><th> date d'entrée</th><th>date de sortie</th><TH></TH><TH></TH></tr>";
+                echo "<tr><th>Nom et Prénom</th><th> type de chambre</th><th>Nombre de chambre</th><th> type d'activitée</th><th> date d'arrivée </th><th>date de départ</th><TH></TH><TH></TH></tr>";
                 echo "</thead>";
                 echo "<tbody>";
                 while ($row = mysqli_fetch_assoc($resultat)) {
@@ -265,8 +265,8 @@
                     echo "<td>" . $row["TYPE_ACTIVITE"] . "</td>";
                     echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
                     echo "<td>" . $row["DATE_SORTIE"] . "</td>";
-                    echo "<td><a href='modify_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-                    echo "<td><a href='delete_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+                    echo "<td><a href='modify_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></a></td>";
+                    echo "<td><a href='delete_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')\" ></a></td>";
                     echo "</tr>";
                 }
                 echo "</thead>";
