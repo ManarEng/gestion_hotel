@@ -53,6 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_close($conn);
 
     // Redirect to user profile page
-    header("Location: ../Admin/utilisateurs.php?id=$user_id");
+    header("Location: utilisateurs.php?id=$user_id");
     exit;
 }
