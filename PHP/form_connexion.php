@@ -70,7 +70,7 @@
             <p>forget password? <a href="#">click here</a></p>-->
             <p></p>
             <p>Vous n'avez pas encore un compte? <a href="/PHP/form_inscription.php">Inscription</a>
-            <a href="/index.html" style="margin-left:150px;" ><i class="fa-solid fa-rotate-left"></i></a>
+           <a href="/index.html" style="margin-left:150px;" ><i class="fa-solid fa-rotate-left"></i></a>
             </p>
 
         </form>
