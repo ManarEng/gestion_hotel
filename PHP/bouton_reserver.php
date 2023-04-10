@@ -25,6 +25,10 @@ if(isset($_GET['ID_CHAMBRE'])) {
 }
 
 // rediriger l'utilisateur vers la page de réservation
-header('Location: /PHP/form_reservation.php');
+if(isset($_SESSION['ID_UTILL'])){
+    header('location:/PHP/form_reservation.php');
+}else{
+    header('location:/PHP/form_connexion.php');
+}
 exit;
 ?>
