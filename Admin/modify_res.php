@@ -268,7 +268,7 @@
         <fieldset>
             <legend>Modifier votre profil</legend>
 
-            <form method="post" action="update_res.php"  enctype="multipart/form-data">
+            <form method="post" action="update_res.php" onsubmit=" return validateForm()" enctype="multipart/form-data">
                 <input type="hidden" name="ID_RES" value="<?php echo $row['ID_RES']; ?>" />
 
                 <label for="prenom">Nom et Prénom :</label>
@@ -327,3 +327,16 @@
 </body>
 
 </html>
+<script>
+  function validateForm() {
+    var arrivee = new Date(document.getElementById("arrivee").value);
+    var depart = new Date(document.getElementById("depart").value);
+
+    if (depart < arrivee) {
+      alert("La date de départ ne peut pas être antérieure à la date d'arrivée.");
+      return false;
+    }
+
+    return true;
+  }
+</script>
