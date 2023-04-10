@@ -130,53 +130,7 @@ session_start();
             <?php
             //require 'db_connexion_oop.php';
 
-            /*echo '<nav>
-                        <ul class="nav nav-pills" role="tablist">';
-
-                //$db = Database::connect();
-                $statement = $db->query('SELECT * FROM type_activite');
-                $categories = $statement->fetchAll();
-                foreach ($categories as $category) 
-                {
-                    if($category['ID_TYPE_ACTIVITE'] == '1')
-                        echo '<li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab'. $category['ID_TYPE_ACTIVITE'] . '" role="tab">' . $category['TYPE_ACTIVITE'] . '</a></li>';
-                    else
-                    echo '<li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="pill" data-bs-target="#tab'. $category['ID_TYPE_ACTIVITE'] . '" role="tab">' . $category['TYPE_ACTIVITE'] . '</a></li>';
-                }
-
-                echo    '</ul>
-                      </nav>';
-
-                echo '<div class="tab-content">';
-
-                foreach ($categories as $category) {
-                    if($category['ID_TYPE_ACTIVITE'] == '1') {
-                        echo '<div class="tab-pane active" id="tab' . $category['ID_TYPE_ACTIVITE'] .'" role="tabpanel">';
-                    } else {
-                        echo '<div class="tab-pane" id="tab' . $category['ID_TYPE_ACTIVITE'] .'" role="tabpanel">';
-                    }
-                    
-                    echo '<div class="row">';
-                    
-                    $statement = $db->prepare('SELECT * FROM activite WHERE activite.ID_TYPE_ACTIVITE = ?');
-                    $statement->execute(array($category['ID_TYPE_ACTIVITE']));
-                    while ($item = $statement->fetch()) {
-                        echo '<div class="col-md-6 col-lg-4">
-                                <div class="img-thumbnail">
-                                    <img src="/Img/image_activites/' . $item['IMAGE_ACT'] . '" class="img-fluid" alt="...">
-                                    <div class="price"> A partir de ' . number_format($item['PRIX'], 2, '.', ''). ' dh</div>
-                                    <div class="caption">
-                                        
-                                    </div>
-                                </div>
-                            </div>';
-                    }
-                   
-                   echo    '</div>
-                        </div>';
-                }
-                Database::disconnect();
-                echo  '</div>';*/
+             
             ?>
 
 
