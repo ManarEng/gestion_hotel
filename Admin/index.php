@@ -283,15 +283,15 @@ $id = $_SESSION['ID_UTILL'];
             // First column with the agents image and link
             echo '<td style="padding: 10px;">';
             echo '<a href="utilisateurs.php" style="text-decoration:none;">';
-            echo '<img src="../Img/agent.jpeg" width="250" height="200" alt="Number of Rooms">';
+            echo '<img src="../Img/agent.jpeg" width="250" height="200" alt="Number of agents">';
             echo '<div style="color: black; font-size: 20px;">'  . '<b>' . $count4 . '</b>' . ' ' . ' Agents'  . '</div>';
             echo '</a>';
             echo '</td>';
 
             // Second column with the clients image and link
             echo '<td style="padding: 10px;">';
-            echo '<a href="utilisateurs.php" style="text-decoration:none;">';
-            echo '<img src="../Img/client.jpeg" width="250" height="200" alt="Number of Activities">';
+            echo '<a href="utilisateurs.php#ancre" style="text-decoration:none;">';
+            echo '<img src="../Img/client.jpeg" width="250" height="200" alt="Number of clients">';
             echo '<div style="color: black; font-size: 20px;">' . '<b>' . $count3 . '</b>' . ' ' . ' Clients' .  '</div>';
             echo '</a>';
             echo '</td>';
