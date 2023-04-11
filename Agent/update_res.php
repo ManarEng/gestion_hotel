@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $activite = $_POST['activite'];
     $nbre = $_POST['nbre'];
     $depart = $_POST['depart'];
+    $prix=$_POST['prix'];
 
     if ($activite == 'Piscine') {
         $type_ac = 1;
@@ -38,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $chambre_query = "SELECT ID_CHAMBRE FROM chambre WHERE ID_TYPE_CHAMBRE = $type_ch";
 $chambre_result = mysqli_query($conn, $chambre_query);
 $chambre_row = mysqli_fetch_assoc($chambre_result);
+
 $id_chambre = $chambre_row['ID_CHAMBRE'];
 
 // Update row in the database

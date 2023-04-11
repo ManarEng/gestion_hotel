@@ -125,7 +125,7 @@ if (isset($_GET['ID_RES'])) {
          </div>
          <div class="inputBox">
          <span>Prix de chambre (DH) </span>
-         <input type="text" name="nbre" min="1" max="100" value="<?php echo $row['PRIX']; ?>" class="box" readonly>
+         <input type="text" name="prix" min="1" max="100" value="<?php echo $row['PRIX']; ?>" class="box" readonly>
             <span>Date de départ</span>
             <input type="date" id="depart" type="depart" name="depart" class="box" required min="<?php echo date('Y-m-d'); ?>"value="<?php echo $row['DATE_SORTIE']; ?>" >
          <span>Nombre de chambre :</span>
