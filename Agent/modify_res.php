@@ -268,7 +268,7 @@
         <fieldset>
             <legend>Modifier votre réservation </legend>
 
-            <form method="post" action="update_res.php" onsubmit=" return validateForm()" enctype="multipart/form-data">
+            <form method="post" action="/Agent/update_res.php" onsubmit=" return validateForm()" enctype="multipart/form-data">
                 <input type="hidden" name="ID_RES" value="<?php echo $row['ID_RES']; ?>" />
 
                 <label for="prenom">Nom et Prénom :</label>

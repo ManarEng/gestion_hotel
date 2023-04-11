@@ -61,7 +61,7 @@ $user_id = $_SESSION['ID_UTILL'];
 
    <div class="profile" >
       <?php 
-      $query =  "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES
+      $query =  "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES ,C.PRIX
       FROM reservation R
       JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
       JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
@@ -99,6 +99,7 @@ $user_id = $_SESSION['ID_UTILL'];
   <thead>
     <tr>
       <th>Type de chambre</th>
+      <th>Prix de chambre (DH)</th>
       <th>Nombre de chambre</th>
       <th>Activité</th>
       <th>Date d'arrivée</th>
@@ -110,6 +111,7 @@ $user_id = $_SESSION['ID_UTILL'];
     <?php foreach ($result as $row): ?>
       <tr>
         <td><?php echo $row['TYPE_CHAMBRE']; ?></td>
+        <td><?php echo $row['PRIX']; ?></td>
         <td><?php echo $row['NBRE_CHAMBRE']; ?></td>
         <td><?php if($row['TYPE_ACTIVITE']==100){ echo "sans actvite";} else { echo $row['TYPE_ACTIVITE'];} ?></td>
         <td ><?php echo $row['DATE_D_ENTREE']; ?></td>
@@ -127,6 +129,7 @@ $user_id = $_SESSION['ID_UTILL'];
     <?php endforeach; ?>
   </tbody>
 </table>
+<a href="../Client/gestion_client.php" class="back-btn"><i style="font-size:larger" class="fas fa-arrow-left"></i> </a>
 
    </div>
 

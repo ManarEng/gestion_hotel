@@ -251,7 +251,7 @@ $id = $_SESSION['ID_UTILL'];
 
             // Vérifier si des données ont été trouvées
             if (mysqli_num_rows($resultat) == 0) {
-                echo "Aucune donnée trouvée.";
+                echo "Aucune réservation trouvée.";
             } else {
                 echo " <h2 class=title> Reservations de vos clients : </h2>";
                 // Afficher les données dans un tableau HTML
@@ -269,8 +269,8 @@ $id = $_SESSION['ID_UTILL'];
                     echo "<td>" . $row["TYPE_ACTIVITE"] . "</td>";
                     echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
                     echo "<td>" . $row["DATE_SORTIE"] . "</td>";
-                    echo "<td><a href='modify_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></a></td>";
-                    echo "<td><a href='delete_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')\" ></a></td>";
+                    echo "<td><a href='modify_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\" title=\"modifier\"></a></td>";
+                    echo "<td><a href='delete_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" title=\"supprimer\";\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')\" ></a></td>";
                     echo "</tr>";
                 }
                 echo "</thead>";

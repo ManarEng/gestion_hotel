@@ -1,8 +1,5 @@
 <?php
-    $conn = new mysqli("localhost", "root", "", "hotelux");
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include('../db_connexion.php');
 
     // Vérifier si le paramètre ID_MESSAGE a été fourni dans l'URL
     if (isset($_GET["ID_MESSAGE"])) {

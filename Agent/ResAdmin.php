@@ -1,12 +1,12 @@
 <?php
 session_start();
-$id2 = $_SESSION['ID_UTILL'];
+$id = $_SESSION['ID_UTILL'];
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Agent</title>
+    <title>Admin</title>
 </head>
 <style>
     body {
@@ -209,13 +209,13 @@ $id2 = $_SESSION['ID_UTILL'];
 
         </li>
         <li><a href="ResAdmin.php"> Résérvations</a></li>
-
+        <li><a href="MsgAdmin.php">Messagerie</a></li>
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div>
         <?php
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2 and ID_UTILL=$id2;";
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=2 and ID_UTILL=$id;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -251,14 +251,14 @@ $id2 = $_SESSION['ID_UTILL'];
 
             // Vérifier si des données ont été trouvées
             if (mysqli_num_rows($resultat) == 0) {
-                echo "Aucune donnée trouvée.";
+                echo "Aucune réservation trouvée.";
             } else {
-                echo " <h2 class=title> Reservations  : </h2>";
+                echo " <h2 class=title> Reservations de vos clients : </h2>";
                 // Afficher les données dans un tableau HTML
                 echo "<table class=styled-table>";
                 echo "<thead>";
 
-                echo "<tr><th>Nom d'Utilisateur</th><th> type de chambre</th><th>Nombre de chambre</th><th> type d'activitée</th><th> date d'entrée</th><th>date de sortie</th><TH></TH><TH></TH></tr>";
+                echo "<tr><th>Nom et Prénom</th><th> type de chambre</th><th>Nombre de chambre</th><th> type d'activitée</th><th> date d'arrivée </th><th>date de départ</th><TH></TH><TH></TH></tr>";
                 echo "</thead>";
                 echo "<tbody>";
                 while ($row = mysqli_fetch_assoc($resultat)) {
@@ -269,8 +269,8 @@ $id2 = $_SESSION['ID_UTILL'];
                     echo "<td>" . $row["TYPE_ACTIVITE"] . "</td>";
                     echo "<td>" . $row["DATE_D_ENTREE"] . "</td>";
                     echo "<td>" . $row["DATE_SORTIE"] . "</td>";
-                    echo "<td><a href='modify_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\"></button></a></td>";
-                    echo "<td><a href='delete_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\"></button></a></td>";
+                    echo "<td><a href='/Agent/modify_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-modify-50.png\" alt=\"modifier\" style=\"width: 25px; height: 25px;\" title=\"modifier\"></a></td>";
+                    echo "<td><a href='/Agent/delete_res.php?ID_RES=" . $row["ID_RES"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" title=\"supprimer\";\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')\" ></a></td>";
                     echo "</tr>";
                 }
                 echo "</thead>";
