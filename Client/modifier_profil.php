@@ -51,7 +51,7 @@ if (isset($_POST['update_profile'])) {
    $filename = uniqid("IMG-", true) . '.' . $file_extension;
    $upload_path = $upload_dir . $filename;
    // Check if file is an image
-   if (!empty($file)) {
+   if (isset($_FILES['pic']) && $_FILES['pic']['error'] == UPLOAD_ERR_OK) {
 
       if (!in_array($file_extension, $allowed_extensions)) {
          $message[] = "Télécharger une image valide.";
