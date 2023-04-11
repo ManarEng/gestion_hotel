@@ -209,7 +209,7 @@ if ($isSuccess) {
                 </div>
                 <div class="col-lg-6">
                     <label for="phone" class="form-label">Téléphone<span class="blue">*</span></label>
-                    <input id="phone" type="text" name="phone" class="form-control" value="<?php echo $phone; ?>" required>
+                    <input id="phone" type="text" name="phone" class="form-control" value="<?php echo $phone; ?>" required placeholder="exp:+212696107564">
                     <p class="comments"><?php echo $phoneError; ?></p>
                 </div>
                 <div class="col-lg-6">
