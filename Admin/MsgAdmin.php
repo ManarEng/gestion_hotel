@@ -243,7 +243,7 @@ $id = $_SESSION['ID_UTILL'];
                 echo "<table class=styled-table>";
                 echo "<thead>";
 
-                echo "<tr><th> Nom et Prenom </th><th>E-Mail</th><th> Message</th><TH></TH></tr>";
+                echo "<tr><td> Nom et Prenom </td><td>E-Mail</td><td> Message</td><Td></Td></tr>";
                 echo "</thead>";
                 echo "<tbody>";
                 while ($row = mysqli_fetch_assoc($resultat)) {
