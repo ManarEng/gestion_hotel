@@ -124,8 +124,8 @@ if (isset($_GET['ID_RES'])) {
          
          </div>
          <div class="inputBox">
-         <span>Prix de chambre :</span>
-         <input type="text" name="nbre" min="1" max="100" value="<?php echo $row['PRIX'].' DH'; ?>" class="box" readonly>
+         <span>Prix de chambre (DH) </span>
+         <input type="text" name="nbre" min="1" max="100" value="<?php echo $row['PRIX']; ?>" class="box" readonly>
             <span>Date de départ</span>
             <input type="date" id="depart" type="depart" name="depart" class="box" required min="<?php echo date('Y-m-d'); ?>"value="<?php echo $row['DATE_SORTIE']; ?>" >
          <span>Nombre de chambre :</span>
@@ -141,7 +141,7 @@ if (isset($_GET['ID_RES'])) {
          
 
       </div>  
-      <input type="submit" value="Modifier Profil" name="update_profile" class="btn">   <br><br>
+      <input type="submit" value="Modifier votre réservation" name="update_profile" class="btn">   <br><br>
       <a href="../Client/MesReservation.php" class="back-btn"><i style="font-size:larger" class="fas fa-arrow-left"></i> </a>
       </form>
       </div>
