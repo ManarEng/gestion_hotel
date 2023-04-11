@@ -238,7 +238,7 @@ $id = $_SESSION['ID_UTILL'];
             if (mysqli_num_rows($resultat) == 0) {
                 echo "Aucun message trouvée.";
             } else {
-                echo " <h2 class=title> Messages de vos clients : </h2>";
+                echo " <h2 class=title> Messagerie : </h2>";
                 // Afficher les données dans un tableau HTML
                 echo "<table class=styled-table>";
                 echo "<thead>";
