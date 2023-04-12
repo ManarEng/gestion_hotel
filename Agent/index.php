@@ -1,8 +1,9 @@
 <?php
 session_start();
-
 $id2 = $_SESSION['ID_UTILL'];
-
+if (!isset($id2)) {
+    header("Location: ../index.html");
+}
 ?>
 <!DOCTYPE html>
 <html>
