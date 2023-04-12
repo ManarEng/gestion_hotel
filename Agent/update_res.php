@@ -54,7 +54,7 @@ $query = "UPDATE reservation SET ID_CHAMBRE='$id_chambre', ID_TYPE_ACTIVITE='$ty
     // Check if query was successful
     if ($result) {
         // Redirect to the reservation page
-        header("Location: ResAdmin.php");
+        header("Location: /Agent/ResAdmin.php");
         exit;
     } else {
         // If there was an error, display the error message
@@ -63,4 +63,3 @@ $query = "UPDATE reservation SET ID_CHAMBRE='$id_chambre', ID_TYPE_ACTIVITE='$ty
     
 
 }
-?>

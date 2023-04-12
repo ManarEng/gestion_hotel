@@ -199,7 +199,7 @@ $id = $_SESSION['ID_UTILL'];
     <ul class="outer-menu" style="position: fixed;">
 
         <li><a href="profil.php">Profil</a></li>
-        <li><a href="utilisateurs.php"> Utilisateurs</a>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
         <li><a href="chambre.php"> Chambres</a>
@@ -209,7 +209,7 @@ $id = $_SESSION['ID_UTILL'];
 
         </li>
         <li><a href="ResAdmin.php"> Résérvations</a></li>
-        <li><a href="MsgAdmin.php">Messagerie</a></li>
+
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <div>
@@ -258,7 +258,7 @@ $id = $_SESSION['ID_UTILL'];
                 echo "<table class=styled-table>";
                 echo "<thead>";
 
-                echo "<tr><th>Nom et Prénom</th><th> type de chambre</th><th>Nombre de chambre</th><th> type d'activitée</th><th> date d'arrivée </th><th>date de départ</th><TH></TH><TH></TH></tr>";
+                echo "<tr><td>Nom et Prénom</td><td> type de chambre</td><td>Nombre de chambre</td><td> type d'activitée</td><td> date d'arrivée </td><td>date de départ</td><Td></Td><Td></Td></tr>";
                 echo "</thead>";
                 echo "<tbody>";
                 while ($row = mysqli_fetch_assoc($resultat)) {
