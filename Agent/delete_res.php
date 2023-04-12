@@ -17,7 +17,7 @@ $sql = "DELETE FROM reservation WHERE ID_RES = $id_res";
 
 if (mysqli_query($conn, $sql)) {
     // If the query was successful, redirect back to the main page
-    header("Location: ResAdmin.php");
+    header("Location: /Agent/ResAdmin.php");
 } else {
     // If there was an error, display the error message
     echo "Erreur de suppression: " . mysqli_error($conn);

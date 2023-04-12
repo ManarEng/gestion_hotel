@@ -21,7 +21,7 @@ if (isset($_GET['ID_RES'])) {
 <html>
 
 <head>
-    <title>Modifier le profil</title>
+    <title>Modifier reservation</title>
     <style>
         /*style of admin index*/
         body {
@@ -248,18 +248,18 @@ if (isset($_GET['ID_RES'])) {
 
     <ul class="outer-menu" style="position: fixed;">
 
-        <li><a href="../Admin/profil.php">Profil</a></li>
-        <li><a href="../Admin/utilisateurs.php"> Utilisateurs</a>
+        <li><a href="profil.php">Profil</a></li>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
-        <li><a href="../Admin/chambre.php"> Chambres</a>
+        <li><a href="chambre.php"> Chambres</a>
 
         </li>
-        <li><a href="../Admin/activite.php"> Activités</a>
+        <li><a href="activite.php">Activités</a>
 
         </li>
-        <li><a href="ResAdmin.php">Résérvations</a></li>
-        <li><a href="MsgAdmin.php">Messagerie</a></li>
+        <li><a href="ResAdmin.php"> Résérvations</a></li>
+
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <?php if (isset($row)) : ?>
