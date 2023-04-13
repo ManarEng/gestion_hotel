@@ -57,153 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title>Ajouter utilisateur</title>
     <style>
-        /*style of admin index*/
-        body {
-            margin: 0;
-            /*background: #ddd;*/
-        }
-
-        table {
-            font-size: 22px;
-        }
-
-        td {
-            text-align: center;
-        }
-
-        #td1 {
-            text-align: left;
-            background-color: lightseagreen;
-            color: white;
-            border: 10px;
-            margin-top: -10px;
-            padding: 10px;
-        }
-
-        .basic_box {
-            border: 1px solid #ccc;
-            border-radius: 15px;
-            margin: auto;
-            width: 600px;
-            padding: 50px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
-        }
-
-        th {
-            font-weight: bold;
-            padding-left: 15px;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 15%;
-            font-size: 24px;
-            background-color: lightseagreen;
-            text-decoration: none;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-        }
-
-        li {
-            color: white;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
-
-        li a.active {
-            background-color: #e6b800;
-            color: white;
-        }
-
-        li a:hover:not(.active) {
-            background-color: #ffa500;
-            color: white;
-            text-decoration: underline;
-        }
-
-
-
-
-
-
-        /* Style the outer menu */
-        .outer-menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .outer-menu li {
-            margin-bottom: 10px;
-        }
-
-
-
-        /*header*/
-
-        header {
-            position: fixed;
-            height: 90px;
-            width: 100%;
-            background-color: lightskyblue;
-            /*filter: blur(20px);
-        backdrop-filter: blur(20px);
-        /*background: transparent;*/
-
-            height: 50px;
-            width: 100%;
-            clip: rect(top, offset of right clip from left side, offset of bottom from top, left);
-
-            filter: blur(20px);
-            filter: url(blur.svg#blur);
-
-        }
-
-        #e1 {
-            float: center;
-            margin-top: 32px;
-
-        }
-
-        header h1 {
-            float: right;
-            margin-top: 32px;
-        }
-
-        .divider {
-            width: 100px;
-            height: 2px;
-            background: #ffa500;
-
-            margin-left: 680px;
-            margin-right: auto;
-
-
-        }
-
-        .heading {
-            text-align: center;
-
-            margin-left: 115px;
-            margin-top: 10px;
-        }
-
-        h2 {
-            text-transform: uppercase;
-            font-weight: bold;
-            color: black;
-        }
-
-        /*end of style index  */
-
         form {
             display: flex;
             flex-wrap: wrap;
@@ -271,127 +124,105 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
+<?php
+include("../PHP/header_ag.php")
+?>
 
-<body>
-    <table style="width: 100%;">
-        <tr>
-            <td id="td1" style="padding: 10px; font-size: 48px;"><a href="index.php" style="text-decoration: none; color:inherit"><b> HoteLUX</b></a><span style="color: #ffa500;">.</span></td>
-        </tr>
-    </table>
+<fieldset>
+    <legend>Ajouter un client: </legend>
 
+    <form method="post" action="" onsubmit="return validateForm()" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
 
-    <ul class="outer-menu" style="position: fixed;">
+        <label for="prenom">Prénom :</label>
+        <input type="text" name="prenom" id="prenom" />
 
-        <li><a href="profil.php">Profil</a></li>
-        <li><a href="utilisateurs.php"> Clients</a>
-
-        </li>
-        <li><a href="chambre.php"> Chambres</a>
-
-        </li>
-        <li><a href="activite.php">Activités</a>
-
-        </li>
-        <li><a href="ResAdmin.php"> Résérvations</a></li>
-
-        <li><a href="deconnexion.php">Déconnexion</a></li>
-    </ul>
-
-    <fieldset>
-        <legend>Ajouter un client: </legend>
-
-        <form method="post" action="" onsubmit="return validateForm()" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?php echo $user['ID_UTILL']; ?>" />
-
-            <label for="prenom">Prénom :</label>
-            <input type="text" name="prenom" id="prenom" />
-
-            <label for="nom">Nom :</label>
-            <input type="text" name="nom" id="nom" />
-            <label for="cin">CIN :</label>
-            <input type="text" name="cin" id="cin" />
+        <label for="nom">Nom :</label>
+        <input type="text" name="nom" id="nom" />
+        <label for="cin">CIN :</label>
+        <input type="text" name="cin" id="cin" />
 
 
 
-            <label for="email">Email :</label>
-            <input type="text" name="email" id="email" />
+        <label for="email">Email :</label>
+        <input type="text" name="email" id="email" />
 
-            <label for="tele">Téléphone :</label>
-            <input type="tel" name="tele" id="tele" />
-            <label for="adresse">Addresse :</label>
-            <textarea name="adresse" id="adresse"></textarea>
-            <label for="img">Photo :</label>
-            <input type="file" id="img" name="img">
-            <label for="nom_util">Login :</label>
-            <input type="text" name="nom_util" id="nom_util" />
+        <label for="tele">Téléphone :</label>
+        <input type="tel" name="tele" id="tele" />
+        <label for="adresse">Addresse :</label>
+        <textarea name="adresse" id="adresse"></textarea>
+        <label for="img">Photo :</label>
+        <input type="file" id="img" name="img">
+        <label for="nom_util">Login :</label>
+        <input type="text" name="nom_util" id="nom_util" />
 
-            <label for="mdp">Mot de Passe :</label>
-            <input type="password" name="mdp" id="mdp" />
-            <label for="mdpp">Confirmer le mot de passe :</label>
-            <input type="password" name="mdpp" id="mdpp" />
+        <label for="mdp">Mot de Passe :</label>
+        <input type="password" name="mdp" id="mdp" />
+        <label for="mdpp">Confirmer le mot de passe :</label>
+        <input type="password" name="mdpp" id="mdpp" />
 
 
 
 
-            <input type="submit" value="Enregistrer" />
-        </form>
-    </fieldset>
+        <input type="submit" value="Enregistrer" />
+    </form>
+</fieldset>
 
-    <script>
-        function validateForm() {
-            var prenom = document.getElementById("prenom").value;
-            var nom = document.getElementById("nom").value;
-            var email = document.getElementById("email").value;
-            var tele = document.getElementById("tele").value;
-            var mdp = document.getElementById("mdp").value;
-            var mdpp = document.getElementById("mdpp").value;
-            let lettersRegex = /^[A-Za-z]+$/;
-            let teleRegex = /^[+]?[1-9][0-9]{9,14}$/;
-            let regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+<script>
+    function validateForm() {
+        var prenom = document.getElementById("prenom").value;
+        var nom = document.getElementById("nom").value;
+        var email = document.getElementById("email").value;
+        var tele = document.getElementById("tele").value;
+        var mdp = document.getElementById("mdp").value;
+        var mdpp = document.getElementById("mdpp").value;
+        let lettersRegex = /^[A-Za-z]+$/;
+        let teleRegex = /^[+]?[1-9][0-9]{9,14}$/;
+        let regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-            var emailRegex = /\S+@\S+\.\S+/;
-            const formInputs = document.querySelectorAll('input[type="text"], input[type="tel"], input[type="password"], textarea');
+        var emailRegex = /\S+@\S+\.\S+/;
+        const formInputs = document.querySelectorAll('input[type="text"], input[type="tel"], input[type="password"], textarea');
 
-            for (let input of formInputs) {
-                if (input.value.trim() === '') {
-                    alert("Veuillez remplir tous les champs");
-                    return false;
-                }
-            }
-
-            if ((!lettersRegex.test(prenom))) {
-                alert("Le prénom doit contenir seulement des lettres.");
+        for (let input of formInputs) {
+            if (input.value.trim() === '') {
+                alert("Veuillez remplir tous les champs");
                 return false;
             }
-
-            if (!lettersRegex.test(nom)) {
-                alert("Le nom doit contenir seulement des lettres.");
-                return false;
-            }
-
-            if (!emailRegex.test(email)) {
-                alert("L'email n'est pas valide.");
-                return false;
-            }
-
-            if (!teleRegex.test(tele)) {
-                alert("Le téléphone doit être au format international.");
-                return false;
-            }
-
-            if (!regexPassword.test(mdp)) {
-                alert("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une miniscule et un chiffre.");
-                return false;
-            }
-
-            if (mdp != mdpp) {
-                alert("Les mots de passe ne sont pas identiques.");
-                return false;
-            }
-            alert("Ajout avec succès"); // Display a validation message
-            return true;
         }
-    </script>
+
+        if ((!lettersRegex.test(prenom))) {
+            alert("Le prénom doit contenir seulement des lettres.");
+            return false;
+        }
+
+        if (!lettersRegex.test(nom)) {
+            alert("Le nom doit contenir seulement des lettres.");
+            return false;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert("L'email n'est pas valide.");
+            return false;
+        }
+
+        if (!teleRegex.test(tele)) {
+            alert("Le téléphone doit être au format international.");
+            return false;
+        }
+
+        if (!regexPassword.test(mdp)) {
+            alert("Le mot de passe doit contenir au moins 8 caractères, une majuscule, une miniscule et un chiffre.");
+            return false;
+        }
+
+        if (mdp != mdpp) {
+            alert("Les mots de passe ne sont pas identiques.");
+            return false;
+        }
+        alert("Ajout avec succès"); // Display a validation message
+        return true;
+    }
+</script>
 
 </body>
 
