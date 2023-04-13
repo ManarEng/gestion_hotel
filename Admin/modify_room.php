@@ -23,152 +23,6 @@ if (isset($_GET['id_chambre'])) {
 <head>
     <title>Modifier chambre</title>
     <style>
-        /*style of admin index*/
-        body {
-            margin: 0;
-            /*background: #ddd;*/
-        }
-
-        table {
-            font-size: 22px;
-        }
-
-        td {
-            text-align: center;
-        }
-
-        #td1 {
-            text-align: left;
-            background-color: lightseagreen;
-            color: white;
-            border: 10px;
-            margin-top: -10px;
-            padding: 10px;
-        }
-
-        .basic_box {
-            border: 1px solid #ccc;
-            border-radius: 15px;
-            margin: auto;
-            width: 600px;
-            padding: 50px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
-        }
-
-        th {
-            font-weight: bold;
-            padding-left: 15px;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 15%;
-            font-size: 24px;
-            background-color: lightseagreen;
-            text-decoration: none;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-        }
-
-        li {
-            color: white;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
-
-        li a.active {
-            background-color: #e6b800;
-            color: white;
-        }
-
-        li a:hover:not(.active) {
-            background-color: #ffa500;
-            color: white;
-            text-decoration: underline;
-        }
-
-
-
-
-
-
-        /* Style the outer menu */
-        .outer-menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .outer-menu li {
-            margin-bottom: 10px;
-        }
-
-
-
-        /*header*/
-
-        header {
-            position: fixed;
-            height: 90px;
-            width: 100%;
-            background-color: lightskyblue;
-            /*filter: blur(20px);
-        backdrop-filter: blur(20px);
-        /*background: transparent;*/
-
-            height: 50px;
-            width: 100%;
-            clip: rect(top, offset of right clip from left side, offset of bottom from top, left);
-
-            filter: blur(20px);
-            filter: url(blur.svg#blur);
-
-        }
-
-        #e1 {
-            float: center;
-            margin-top: 32px;
-
-        }
-
-        header h1 {
-            float: right;
-            margin-top: 32px;
-        }
-
-        .divider {
-            width: 100px;
-            height: 2px;
-            background: #ffa500;
-
-            margin-left: 680px;
-            margin-right: auto;
-
-
-        }
-
-        .heading {
-            text-align: center;
-
-            margin-left: 115px;
-            margin-top: 10px;
-        }
-
-        h2 {
-            text-transform: uppercase;
-            font-weight: bold;
-            color: black;
-        }
-
-        /*end of style index  */
         form {
             display: flex;
             flex-wrap: wrap;
@@ -238,96 +92,75 @@ if (isset($_GET['id_chambre'])) {
     </style>
 </head>
 
-<body>
-    <table style="width: 100%;">
-        <tr>
-            <td id="td1" style="padding: 10px; font-size: 48px;"><a href="index.php" style="text-decoration: none; color:inherit"><b> HoteLUX</b></a><span style="color: #ffa500;">.</span></td>
-        </tr>
-    </table>
+<?php
+include("../PHP/header.php")
+?>
+<?php if (isset($row)) : ?>
+    <fieldset>
+        <legend>Modifier chambre</legend>
 
+        <form method="post" action="update_chambre.php" onsubmit="return validateForm()" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?php echo $row['ID_CHAMBRE']; ?>" />
 
-    <ul class="outer-menu" style="position: fixed;">
-
-        <li><a href="../Admin/profil.php">Profil</a></li>
-        <li><a href="../Admin/utilisateurs.php"> Utilisateurs</a>
-
-        </li>
-        <li><a href="../Admin/chambre.php"> Chambres</a>
-
-        </li>
-        <li><a href="../Admin/activite.php"> Activités</a>
-
-        </li>
-        <li><a href="ResAdmin.php">Résérvations</a></li>
-        <li><a href="MsgAdmin.php">Messagerie</a></li>
-        <li><a href="deconnexion.php">Déconnexion</a></li>
-    </ul>
-    <?php if (isset($row)) : ?>
-        <fieldset>
-            <legend>Modifier chambre</legend>
-
-            <form method="post" action="update_chambre.php" onsubmit="return validateForm()" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?php echo $row['ID_CHAMBRE']; ?>" />
-
-                <label for="field1">Type :</label>
-                <select name="field1" id="field1">
-                    <option value="<?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
-                                        echo "Individuelle";
-                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
-                                        echo "Double";
-                                    } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
-                                        echo "Triple";
-                                    } ?>"><?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
+            <label for="field1">Type :</label>
+            <select name="field1" id="field1">
+                <option value="<?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
+                                    echo "Individuelle";
+                                } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
+                                    echo "Double";
+                                } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
+                                    echo "Triple";
+                                } ?>"><?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
                                                 echo "Individuelle";
                                             } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
                                                 echo "Double";
                                             } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
                                                 echo "Triple";
                                             } ?></option>
-                    <option>Individuelle</option>
-                    <option>Double</option>
-                    <option>Triple</option>
+                <option>Individuelle</option>
+                <option>Double</option>
+                <option>Triple</option>
 
-                </select>
-
-
-
-                <label for="field2">Description :</label>
-                <textarea name="field2" id="field2" rows="6"><?php echo $row['DESCRIPTION']; ?></textarea>
-
-                <label for="field3">Prix (Dhs) :</label>
-                <input type="text" name="field3" id="field3" value="<?php echo $row['PRIX']; ?>" />
-                <label for="img">Modifier la photo :</label>
-                <input type="file" id="img" name="img">
+            </select>
 
 
-                <input type="submit" value="Enregister" />
-            </form>
-        </fieldset>
-    <?php else : ?>
-        <p>Chambre inexistante.</p>
-    <?php endif; ?>
-    <script>
-        function validateForm() {
-            const formInputs = document.querySelectorAll('input[type="text"], textarea');
 
-            for (let input of formInputs) {
-                if (input.value.trim() === '') {
-                    alert("Veuillez remplir tous les champs");
-                    return false;
-                }
-            }
-            var prix = document.getElementById("field3").value;
-            if (isNaN(prix)) {
-                alert("Le prix doit être un nombre ! ");
+            <label for="field2">Description :</label>
+            <textarea name="field2" id="field2" rows="6"><?php echo $row['DESCRIPTION']; ?></textarea>
+
+            <label for="field3">Prix (Dhs) :</label>
+            <input type="text" name="field3" id="field3" value="<?php echo $row['PRIX']; ?>" />
+            <label for="img">Modifier la photo :</label>
+            <input type="file" id="img" name="img">
+
+
+            <input type="submit" value="Enregister" />
+        </form>
+    </fieldset>
+<?php else : ?>
+    <p>Chambre inexistante.</p>
+<?php endif; ?>
+<script>
+    function validateForm() {
+        const formInputs = document.querySelectorAll('input[type="text"], textarea');
+
+        for (let input of formInputs) {
+            if (input.value.trim() === '') {
+                alert("Veuillez remplir tous les champs");
                 return false;
-
-
             }
-            alert("Modification avec succès!"); // Display a validation message
-            return true;
         }
-    </script>
+        var prix = document.getElementById("field3").value;
+        if (isNaN(prix)) {
+            alert("Le prix doit être un nombre ! ");
+            return false;
+
+
+        }
+        alert("Modification avec succès!"); // Display a validation message
+        return true;
+    }
+</script>
 </body>
 
 </html>
