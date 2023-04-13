@@ -38,16 +38,16 @@ session_start();
 
     <header>
         <div class="">
-            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/Client/index.php"> <b> HoteLUX</b><span class="orange">.</span></a></h1>
+            <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"> <a href="/index.html"> <b> HoteLUX</b><span class="orange">.</span></a></h1>
             <nav style="margin-top:35px;">
                 <ul>
-                    <li><a href="/Client/index.php/#main">Accueil</a></li>
-                    <li><a href="/Client/index.php/#steps">A propos</a></li>
-                    <li><a href="/Client/index.php/#possibilities">Services</a></li>
-                    <li><a href="/Client/index_contact.php">Contact</a></li>
+                    <li><a href="/index.html/#main">Accueil</a></li>
+                    <li><a href="/index.html/#steps">A propos</a></li>
+                    <li><a href="/index.html/#possibilities">Services</a></li>
+                    <li><a href="/PHP/index_contact.php">Contact</a></li>
                     <li><a href="/PHP/lien_reservation_header.php">Réservation</a></li>
-                    <!--<li><a href="/PHP/form_connexion.php">connexion</a></li>-->
-                    <li> <a href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="/PHP/form_connexion.php">connexion</a></li>
+                   <!-- <li> <a href="/Client/gestion_client.php"> <i class="fa-solid fa-user"></i></a></li>-->
 
                 </ul>
             </nav>

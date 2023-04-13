@@ -142,12 +142,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php } ?>
                         <div class="col-md-6">
                             <label for="user">Nom d'Utilisateur <span class="blue"></span></label>
-                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $_SESSION['LOGIN']; ?>">
+                            <input id="user" type="text" name="user" class="form-control" value="<?php echo $_SESSION['LOGIN']; ?>" readonly>
                             <p class="comments"></p>
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE'] ; ?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE'] ; ?>" readonly>
 
 
                             <p class="comments"></p>
