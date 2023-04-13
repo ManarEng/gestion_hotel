@@ -2,7 +2,7 @@
 if (isset($_GET['ID_RES'])) {
     include("../db_connexion.php");
     $id_res = $_GET['ID_RES'];
-    $sql = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES ,TC.ID_TYPE_CHAMBRE ,TA.ID_TYPE_ACTIVITE
+    $sql = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES ,TC.ID_TYPE_CHAMBRE ,TA.ID_TYPE_ACTIVITE,C.PRIX
     FROM reservation R
     JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
     JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
@@ -248,31 +248,31 @@ if (isset($_GET['ID_RES'])) {
 
     <ul class="outer-menu" style="position: fixed;">
 
-        <li><a href="../Admin/profil.php">Profil</a></li>
-        <li><a href="../Admin/utilisateurs.php"> Utilisateurs</a>
+        <li><a href="profil.php">Profil</a></li>
+        <li><a href="utilisateurs.php"> Clients</a>
 
         </li>
-        <li><a href="../Admin/chambre.php"> Chambres</a>
+        <li><a href="chambre.php"> Chambres</a>
 
         </li>
-        <li><a href="../Admin/activite.php"> Activités</a>
+        <li><a href="activite.php">Activités</a>
 
         </li>
-        <li><a href="ResAdmin.php">Résérvations</a></li>
-        <li><a href="MsgAdmin.php">Messagerie</a></li>
+        <li><a href="ResAdmin.php"> Résérvations</a></li>
+
         <li><a href="deconnexion.php">Déconnexion</a></li>
     </ul>
     <?php if (isset($row)) : ?>
         <fieldset>
             <legend>Modifier votre réservation </legend>
 
-            <form method="post" action="update_res.php" onsubmit=" return validateForm()" enctype="multipart/form-data">
+            <form method="post" action="/Agent/update_res.php" onsubmit=" return validateForm()" enctype="multipart/form-data">
                 <input type="hidden" name="ID_RES" value="<?php echo $row['ID_RES']; ?>" />
 
                 <label for="prenom">Nom et Prénom :</label>
                 <input type="text" name="prenom" id="prenom" value="<?php echo $row['NOM'] . " " . $row['PRENOM']; ?>" readonly />
 
-                <label for="type_chambre">Type de chambre :</label>
+                <label for="type_chambre">Type de chambre:</label>
                 <input type="text" name="type_chambre" id="type_chambre" value="<?php if ($row['ID_TYPE_CHAMBRE'] == 1) {
                                                                                     echo "individuelle";
                                                                                 } elseif ($row['ID_TYPE_CHAMBRE'] == 2) {
@@ -280,7 +280,7 @@ if (isset($_GET['ID_RES'])) {
                                                                                 } elseif ($row['ID_TYPE_CHAMBRE'] == 3) {
                                                                                     echo "triple";
                                                                                 } ?>" readonly>
-                <label for="nbre">Nombre de chambre :</label>
+                <label for="nbre">Nombre de chambre:</label>
                 <input type="number" name="nbre" min="1" max="100" value="<?php echo $row['NBRE_CHAMBRE']; ?>" class="box">
 
                 <label for="activite">Type d'activité :</label>

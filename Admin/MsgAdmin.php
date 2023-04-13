@@ -215,7 +215,7 @@ $id = $_SESSION['ID_UTILL'];
     <div>
         <?php
         include("../db_connexion.php");
-        $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1 and ID_UTILL=$id;";
+        $query = "SELECT NOM,PRENOM FROM utilisateurs where  ID_UTILL=$id;";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -236,14 +236,14 @@ $id = $_SESSION['ID_UTILL'];
 
             // Vérifier si des données ont été trouvées
             if (mysqli_num_rows($resultat) == 0) {
-                echo "Aucune donnée trouvée.";
+                echo "Aucun message trouvée.";
             } else {
-                echo " <h2 class=title> Messages de vos clients : </h2>";
+                echo " <h2 class=title> Messagerie : </h2>";
                 // Afficher les données dans un tableau HTML
                 echo "<table class=styled-table>";
                 echo "<thead>";
 
-                echo "<tr><th> Nom et Prenom </th><th>E-Mail</th><th> Message</th><TH></TH></tr>";
+                echo "<tr><td> Nom et Prenom </td><td>E-Mail</td><td> Message</td><Td></Td></tr>";
                 echo "</thead>";
                 echo "<tbody>";
                 while ($row = mysqli_fetch_assoc($resultat)) {
@@ -258,7 +258,7 @@ $id = $_SESSION['ID_UTILL'];
                     } else {
                         echo "<td>" . $message . "</td>";
                     }
-                    echo "<td><a href='delete_msg.php?ID_RES=" . $row["ID_MESSAGE"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')\" ></a></td>";
+                    echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" title=\"supprimer\";\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')\" ></a></td>";
 
                     echo "</tr>";
                 }

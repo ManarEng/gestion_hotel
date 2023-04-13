@@ -164,11 +164,11 @@ if ($isSuccess) {
             <h1 style="text-align: left; margin-left: 10px; margin-top:11px ;"><b> HoteLUX</b><span class="orange">.</span></h1>
             <nav style="margin-top:35px;">
                 <ul>
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="../index.html">A propos</a></li>
-                    <li><a href="../index.html">Services</a></li>
-                    <li><a href="/contact_code/index.php">Contact</a></li>
-                    <li><a href="">Réservation</a></li>
+                    <li><a href="../index.html#main">Accueil</a></li>
+                    <li><a href="../index.html#steps">A propos</a></li>
+                    <li><a href="../index.html#possibilities">Services</a></li>
+                    <li><a href="../PHP/index_contact.php">Contact</a></li>
+                    <li><a href="../PHP/lien_reservation_header.php">Réservation</a></li>
                     <li><a href="../PHP/form_connexion.php">connexion</a></li>
 
                 </ul>
@@ -210,7 +210,7 @@ if ($isSuccess) {
                 </div>
                 <div class="col-lg-6">
                     <label for="phone" class="form-label">Téléphone<span class="blue">*</span></label>
-                    <input id="phone" type="text" name="phone" class="form-control" value="<?php echo $phone; ?>" required>
+                    <input id="phone" type="text" name="phone" class="form-control" value="<?php echo $phone; ?>" required placeholder="exp:+212696107564">
                     <p class="comments"><?php echo $phoneError; ?></p>
                 </div>
                 <div class="col-lg-6">

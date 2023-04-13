@@ -9,7 +9,7 @@ if (isset($_GET['ID_RES'])) {
     include("../db_connexion.php");
    
     // Retrieve user information from the database
-    $query = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES ,TC.ID_TYPE_CHAMBRE ,TA.ID_TYPE_ACTIVITE
+    $query = "SELECT U.NOM,U.IMAGE_UTIL,U.LOGIN ,U.PRENOM, TC.TYPE_CHAMBRE, TA.TYPE_ACTIVITE, R.NBRE_CHAMBRE, R.DATE_D_ENTREE, R.DATE_SORTIE,R.ID_RES ,TC.ID_TYPE_CHAMBRE ,TA.ID_TYPE_ACTIVITE,C.PRIX
     FROM reservation R
     JOIN utilisateurs U ON R.ID_UTILL = U.ID_UTILL
     JOIN chambre C ON R.ID_CHAMBRE = C.ID_CHAMBRE
@@ -124,19 +124,24 @@ if (isset($_GET['ID_RES'])) {
          
          </div>
          <div class="inputBox">
+         <span>Prix de chambre (DH) </span>
+         <input type="text" name="prix" min="1" max="100" value="<?php echo $row['PRIX']; ?>" class="box" readonly>
+            <span>Date de départ</span>
+            <input type="date" id="depart" type="depart" name="depart" class="box" required min="<?php echo date('Y-m-d'); ?>"value="<?php echo $row['DATE_SORTIE']; ?>" >
          <span>Nombre de chambre :</span>
             <input type="number" name="nbre" min="1" max="100" value="<?php echo $row['NBRE_CHAMBRE']; ?>" class="box">
              
-            <span>Date de départ</span>
-            <input type="date" id="depart" type="depart" name="depart" class="box" required min="<?php echo date('Y-m-d'); ?>"value="<?php echo $row['DATE_SORTIE']; ?>" >
+           
    
             
-            <span><br></span>
-            <input type="submit" value="Modifier Profil" name="update_profile" class="btn">
+           
+            
+           
          </div>
          
 
-      </div>     
+      </div>  
+      <input type="submit" value="Modifier votre réservation" name="update_profile" class="btn">   <br><br>
       <a href="../Client/MesReservation.php" class="back-btn"><i style="font-size:larger" class="fas fa-arrow-left"></i> </a>
       </form>
       </div>
