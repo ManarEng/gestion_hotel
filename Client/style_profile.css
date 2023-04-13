@@ -9,6 +9,7 @@
    --white:#fff;
    --light-bg:#eee;
    --box-shadow:0 5px 10px rgba(0,0,0,.1);
+   --green: green;
 }
 
 
@@ -60,7 +61,7 @@
    border-radius: 5px;
    padding:10px;
    text-align: center;
-   background-color: var(--red);
+   background-color: var(--dark-red);
    color:var(--white);
    font-size: 20px;
 }

@@ -209,13 +209,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     include ("../db_connexion.php");
 
+if($isSuccess)
+{
+    $message = mysqli_real_escape_string($conn, $message);
+    $requete = "INSERT INTO messagerie VALUES('','$email','$name','$firstname','$phone','$message')";
+    $resultat = mysqli_query($conn,$requete);
+    mysqli_close($conn);
+}
 
-    if($isSuccess)
-    {
-        $requete = "INSERT INTO messagerie VALUES('','$email','$name','$firstname','$phone','$message')";
-        $resultat = mysqli_query($conn,$requete);
-        mysqli_close($conn);
-    }
 
 ?>
 

@@ -93,8 +93,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 if ($isSuccess) {
+    $hashed_password = password_hash($mdp, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO utilisateurs VALUES ('','3', '$name', '$firstname', '$login', '$mdp', '$cin', '$adresse', '$email', '$phone','$url')";
+    $sql = "INSERT INTO utilisateurs VALUES ('','3', '$name', '$firstname', '$login', '$hashed_password', '$cin', '$adresse', '$email', '$phone','$url')";
     mysqli_query($conn, $sql);
     $query = "SELECT * FROM utilisateurs WHERE LOGIN ='$login'";
     $result = mysqli_query($conn, $query);
