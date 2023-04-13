@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+//$_SESSION['PRIX'] = $_GET['PRIX'];
 
 ?>
 
@@ -97,6 +97,7 @@ session_start();
                 $statement = $db->prepare('SELECT * FROM chambre WHERE chambre.ID_TYPE_CHAMBRE = ?');
                 $statement->execute(array($category['ID_TYPE_CHAMBRE']));
                 while ($item = $statement->fetch()) {
+
                     echo '<div class="col-md-6 col-lg-4">
                                 <div class="img-thumbnail">
                                     <img src="/Img/image_chambres/' . $item['IMAGE_CH'] . '" class="img-fluid" alt="...">
@@ -105,7 +106,9 @@ session_start();
                                         
                                         <p>' . $item['DESCRIPTION'] . '</p>
                                        
-                                        <a href="/PHP/bouton_reserver.php?ID_CHAMBRE=' . $item['ID_CHAMBRE'] . '" class="btn btn-order" role="button"> Réserver</a>
+                                        <a href="/PHP/bouton_reserver.php?ID_CHAMBRE=' . $item['ID_CHAMBRE'] . '&PRIX=' . $item['PRIX'] . '" class="btn btn-order" role="button"> Réserver</a>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>';

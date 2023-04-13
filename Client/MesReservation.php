@@ -111,7 +111,7 @@ $user_id = $_SESSION['ID_UTILL'];
                     <?php foreach ($result as $row) : ?>
                         <tr>
                             <td><?php echo $row['TYPE_CHAMBRE']; ?></td>
-                            <td><?php echo $row['PRIX']; ?></td>
+                            <td><?php echo $_SESSION['PRIX'] ; ?></td>
                             <td><?php echo $row['NBRE_CHAMBRE']; ?></td>
                             <td><?php if ($row['TYPE_ACTIVITE'] == 100) {
                                     echo "sans actvite";

@@ -69,6 +69,16 @@
             $emailText .= "Phone: $phone\n";
         }
 
+        if(!ctype_alpha($firstname))
+        {
+            $firstnameError="Veuillez saisir un prénom valide";
+            $isSuccess = false;
+        }
+        if(!ctype_alpha($name))
+        {
+            $nameError="Veuillez saisir un nom valide";
+            $isSuccess = false;
+        }
         
     
     if($isSuccess) 

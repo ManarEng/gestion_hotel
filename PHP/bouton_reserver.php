@@ -25,6 +25,10 @@ session_start();
 if(isset($_GET['ID_CHAMBRE'])) {
     $_SESSION['ID_CHAMBRE'] = $_GET['ID_CHAMBRE'];
 }
+if(isset($_GET['PRIX'])) {
+    $_SESSION['PRIX'] = $_GET['PRIX'];
+}
+
 
 // rediriger l'utilisateur vers la page de réservation
 if(isset($_SESSION['ID_UTILL'])){

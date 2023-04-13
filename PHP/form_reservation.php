@@ -6,6 +6,14 @@ $error = "";
 $isSuccess = false;
 $activite = $entree = $nbrec = "";
 
+
+if (isset($_SESSION['PRIX'])) {
+    $PRIX =$_SESSION['PRIX'];
+} else {
+    die("erreur session PRIX!");
+}
+
+
 if (isset($_SESSION['ID_CHAMBRE'])) {
     $chambre_id = $_SESSION['ID_CHAMBRE'];
 } else {
@@ -139,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6">
                             <label for="tele">Téléphone<span class="blue"></span></label>
-                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo "+212633456723"; ?>">
+                            <input id="tele" type="text" name="tele" class="form-control" value="<?php echo $_SESSION['TELE'] ; ?>">
 
 
                             <p class="comments"></p>
