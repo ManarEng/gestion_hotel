@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-include ("../db_connexion.php");
+include("../db_connexion.php");
 
 // Récupération des informations de connexion de l'utilisateur
 $user = $_POST['username'];
@@ -27,7 +27,7 @@ $result = mysqli_query($conn, $sql);
     echo " <p> Nom d'utilisateur ou mot de passe incorrect. </p>";
 }
 */
-if(mysqli_num_rows($result) > 0){
+if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $_SESSION['ID_UTILL'] = $row['ID_UTILL'];
     $_SESSION['LOGIN'] = $row['LOGIN'];
@@ -47,9 +47,7 @@ if(mysqli_num_rows($result) > 0){
     /*echo '<script >';
     echo ' alert("JavaScript Alert Box by PHP")';  //not showing an alert box.
     echo '</script>';*/
-    
-    
- }
+}
 
 mysqli_close($conn); // Fermer la connexion à la base de données
 
