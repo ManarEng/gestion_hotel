@@ -26,7 +26,7 @@ include("../PHP/header.php")
     </div>
 
         <div class="divider"></div>
-        <div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
+        <div style="margin-left: 23%; padding: 1px 16px; height: 1000px;">
             <p style="margin-left: 10%; margin-top: 3%; font-size: 28px;"></p>
 
         <div class="container">
