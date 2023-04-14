@@ -8,10 +8,13 @@ $id = $_SESSION['ID_UTILL'];
 <head>
     <title>Admin</title>
 </head>
+
+<body>
+
+
 <?php
 include("../PHP/header.php")
 ?>
-<div>
     <?php
     include("../db_connexion.php");
     $query = "SELECT NOM,PRENOM FROM utilisateurs where ID_PROFIL=1 and ID_UTILL=$id;";
@@ -25,9 +28,9 @@ include("../PHP/header.php")
         <h2>Bienvenue <?php echo $row['NOM'] . ' ' . $row['PRENOM']; ?></h2>
     </div>
 
-        <div class="divider"></div>
-        <div style="margin-left: 23%; padding: 1px 16px; height: 1000px;">
-            <p style="margin-left: 10%; margin-top: 3%; font-size: 28px;"></p>
+    <div class="divider"></div>
+    <div style="margin-left: 23%; padding: 1px 16px; height: 1000px;">
+        <p style="margin-left: 10%; margin-top: 3%; font-size: 28px;"></p>
 
         <div class="container">
             <?php
@@ -106,20 +109,16 @@ include("../PHP/header.php")
             </table>
 
         </div>
-
-        <div class="divider"></div>
-        <div style="margin-left: 23%; padding: 1px 16px; height: 1000px;">
-            <p style="margin-left: 10%; margin-top: 3%; font-size: 28px;"></p>
-
-            <div class="container">
-                <?php
-                include("../db_connexion.php");
-                $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=2";
-                $result = mysqli_query($conn, $sql);
-                ?>
-                <h2 class="title"> Agents : </h2>
-
-                <a href="add_util_Agent.php" title="Nouveau Agent"><img src="../Img/icons8-add-new-50.png" alt="Ajouter un utilisateur" style="width: 25px; height: 25px;"></a>
+        <br>
+        <div class="container">
+            <?php
+            include("../db_connexion.php");
+            $sql = "SELECT ID_UTILL, ID_PROFIL, NOM, PRENOM, LOGIN, MDP, CIN, ADRESSE, E_MAIL, TELE, IMAGE_UTIL FROM utilisateurs where ID_PROFIL=3";
+            $result = mysqli_query($conn, $sql);
+            ?>
+            <h2 class="title"> Clients : </h2>
+            <div id="ancre">
+                <a href="add_util_client.php" title="Nouveau Client"><img src="../Img/icons8-add-new-50.png" alt="Ajouter un utilisateur" style="width: 25px; height: 25px;"></a>
                 <table class="styled-table">
 
 
@@ -267,6 +266,6 @@ include("../PHP/header.php")
         </style>
 
     </div>
-    </body>
+</body>
 
 </html>

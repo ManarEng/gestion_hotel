@@ -42,7 +42,7 @@ include("../PHP/header.php")
             echo "<table class=styled-table>";
             echo "<thead>";
 
-            echo "<tr><td> Nom et Prenom </td><td>E-Mail</td><td> Message</td><Td></Td></tr>";
+            echo "<tr><td> Nom et Prénom </td><td>E-Mail</td><td>Message</td><Td></Td></tr>";
             echo "</thead>";
             echo "<tbody>";
             while ($row = mysqli_fetch_assoc($resultat)) {
