@@ -57,7 +57,7 @@ include("../PHP/header.php")
                 } else {
                     echo "<td>" . $message . "</td>";
                 }
-                echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" title=\"supprimer\";\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')\" ></a></td>";
+                echo "<td><a href='delete_msg.php?ID_MESSAGE=" . $row["ID_MESSAGE"] . "'><img src=\"\Img\icons8-delete-trash-50.png\" alt=\"Supprimer\" style=\"width: 25px; height: 25px;\" title=\"supprimer\";\" onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer ce message ?')\" ></a></td>";
 
                 echo "</tr>";
             }

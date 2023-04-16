@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (isset($_SESSION['PRIX'])) {
+    $PRIX =$_SESSION['PRIX'];
+}
 if (isset($_GET['ID_RES'])) {
     include("../db_connexion.php");
     $id_res = $_GET['ID_RES'];

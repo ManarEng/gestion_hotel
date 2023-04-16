@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION['PRIX'])) {
+    $PRIX =$_SESSION['PRIX'];
+}
 $id = $_SESSION['ID_UTILL'];
 ?>
 <!DOCTYPE html>
